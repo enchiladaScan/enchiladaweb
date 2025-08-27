@@ -50,7 +50,7 @@ use_theme: false
       }
 
       /* Reader centrado */
-      .reader{ display:block; width:100%; margin:0; padding:0; }
+      .reader{ display:block; width:100%; margin:0; padding:0;transition: max-width 0.3s ease-in-out; }
       .reader .page{
         width:min(100vw, var(--pageW));  /* Ancho visual máximo de cada página */
         margin:0 auto;                   /* Centrado real */
@@ -59,6 +59,13 @@ use_theme: false
         display:block; width:100%; height:auto; max-width:100%;
       }
 
+/* encuadres para zoom */
+      .reader.zoom-100 { max-width: 100%; }
+      .reader.zoom-80 { max-width: 80%; margin-left: auto; margin-right: auto; }
+      .reader.zoom-60 { max-width: 60%; margin-left: auto; margin-right: auto; }
+      .reader.zoom-200 { max-width: 200%; }
+
+      
       /* Barra de navegación fija */
       .nav-fixed{
         position:fixed; left:0; right:0; z-index:10000; height:var(--navH);
@@ -126,6 +133,16 @@ use_theme: false
         <a class="btn dark" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/') | relative_url }}">Siguiente →</a>
       {%- endif -%}
 
+
+  <!-- Botones de enncuadre -->
+      <a class="btn btn-zoom" data-zoom="1.0">Pantalla Completa</a>
+      <a  class="btn btn-zoom" data-zoom="0.8">Ajuste Medio</a>
+      <a  class="btn btn-zoom" data-zoom="0.6">Ajuste Pequeño</a>
+      <a  class="btn btn-zoom" data-zoom="2.0">Enfoque Fuerte</a>
+
+
+
+      
       <a class="btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}" id="btnBack">← Regresar al post</a>
     </div>
     <!-- ========================================================== -->
@@ -152,6 +169,39 @@ use_theme: false
           e.preventDefault();
           history.back();
         }
+      });
+    })();
+
+
+ /* --------------------------------------- */
+       /* intento de encuadre bamio de zoom */
+    (function () {
+      const reader = document.getElementById('reader');
+      if (!reader) return;
+
+      const zoomButtons = document.querySelectorAll('.btn-zoom');
+      if (!zoomButtons) return;
+
+      // Establecer el zoom predeterminado al cargar la página
+      reader.classList.add('zoom-100');
+
+      zoomButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const zoomLevel = parseFloat(e.target.dataset.zoom);
+          
+          reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60', 'zoom-200');
+
+          if (zoomLevel === 1.0) {
+            reader.classList.add('zoom-100');
+          } else if (zoomLevel === 0.8) {
+            reader.classList.add('zoom-80');
+          } else if (zoomLevel === 0.6) {
+            reader.classList.add('zoom-60');
+          } else if (zoomLevel === 2.0) {
+            reader.classList.add('zoom-200');
+          }
+        });
       });
     })();
     </script>
