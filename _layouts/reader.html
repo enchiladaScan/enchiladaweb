@@ -52,15 +52,15 @@ use_theme: false
       /* Reader centrado */
       .reader{
         display:block;
-        width:100%; /* Asegura que el contenedor del lector ocupe el ancho disponible */
-        margin:0 auto; /* Centra el contenedor del lector */
+        width:100%; 
+        margin:0 auto; 
         padding:0;
-        transition: max-width 0.3s ease-in-out; /* Animación para un cambio suave */
-        overflow-x: auto; /* Permite desplazamiento horizontal cuando el contenido es más grande */
+        transition: max-width 0.3s ease-in-out; 
+        overflow-x: auto;
       }
       .reader .page{
-        width:100%; /* Las páginas ocupan el 100% del ancho de su padre (.reader) */
-        margin:0 auto;                   /* Centrado real de cada página */
+        width:100%; 
+        margin:0 auto;                 
       }
       .reader .page img{
         display:block; width:100%; height:auto; max-width:100%;
@@ -70,7 +70,6 @@ use_theme: false
       .reader.zoom-100 { max-width: 100%; }
       .reader.zoom-80 { max-width: 80%; }
       .reader.zoom-60 { max-width: 60%; }
-      .reader.zoom-200 { max-width: 200%; } /* Permite que el lector sea más grande que el viewport */
 
       /* Barra de navegación fija */
       .nav-fixed{
@@ -175,7 +174,7 @@ use_theme: false
       });
     })();
 
-    /* Lógica para el cambio de zoom */
+    /* JS para el cambio de zoom */
     (function () {
       const reader = document.getElementById('reader');
       if (!reader) return;
@@ -192,7 +191,7 @@ use_theme: false
           const zoomLevel = parseFloat(e.target.dataset.zoom);
           
           // Elimina cualquier clase de zoom existente
-          reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60', 'zoom-200');
+          reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60');
 
           // Aplica la clase de zoom basada en el botón clicado
           if (zoomLevel === 1.0) {
@@ -201,9 +200,7 @@ use_theme: false
             reader.classList.add('zoom-80');
           } else if (zoomLevel === 0.6) {
             reader.classList.add('zoom-60');
-          } else if (zoomLevel === 2.0) {
-            reader.classList.add('zoom-200');
-          }
+          } 
         });
       });
     })();
@@ -452,8 +449,8 @@ use_theme: false
         overflow-x: auto; /* Permite desplazamiento horizontal cuando el contenido es más grande */
       }
       .reader .page{
-        width:100%; /* Las páginas ocupan el 100% del ancho de su padre (.reader) */
-        margin:0 auto;                   /* Centrado real de cada página */
+        width:100%; 
+        margin:0 auto;                  
       }
       .reader .page img{
         display:block; width:100%; height:auto; max-width:100%;
@@ -463,7 +460,6 @@ use_theme: false
       .reader.zoom-100 { max-width: 100%; }
       .reader.zoom-80 { max-width: 80%; }
       .reader.zoom-60 { max-width: 60%; }
-      .reader.zoom-200 { max-width: 200%; } /* Permite que el lector sea más grande que el viewport */
 
       /* Barra de navegación fija */
       .nav-fixed{
@@ -568,7 +564,7 @@ use_theme: false
       });
     })();
 
-    /* Lógica para el cambio de zoom */
+    /* prueva de cambio de zoom */
     (function () {
       const reader = document.getElementById('reader');
       if (!reader) return;
