@@ -50,22 +50,28 @@ use_theme: false
       }
 
       /* Reader centrado */
-      .reader{ display:block; width:100%; margin:0; padding:0;transition: max-width 0.3s ease-in-out; }
+      .reader{
+        display:block;
+        width:100%; /* Asegura que el contenedor del lector ocupe el ancho disponible */
+        margin:0 auto; /* Centra el contenedor del lector */
+        padding:0;
+        transition: max-width 0.3s ease-in-out; /* Animación para un cambio suave */
+        overflow-x: auto; /* Permite desplazamiento horizontal cuando el contenido es más grande */
+      }
       .reader .page{
-        width:min(100vw, var(--pageW));  /* Ancho visual máximo de cada página */
-        margin:0 auto;                   /* Centrado real */
+        width:100%; /* Las páginas ocupan el 100% del ancho de su padre (.reader) */
+        margin:0 auto;                   /* Centrado real de cada página */
       }
       .reader .page img{
         display:block; width:100%; height:auto; max-width:100%;
       }
 
-/* encuadres para zoom */
+      /* Clases de zoom para el contenedor del lector */
       .reader.zoom-100 { max-width: 100%; }
-      .reader.zoom-80 { max-width: 80%; margin-left: auto; margin-right: auto; }
-      .reader.zoom-60 { max-width: 60%; margin-left: auto; margin-right: auto; }
-      .reader.zoom-200 { max-width: 200%; }
+      .reader.zoom-80 { max-width: 80%; }
+      .reader.zoom-60 { max-width: 60%; }
+      .reader.zoom-200 { max-width: 200%; } /* Permite que el lector sea más grande que el viewport */
 
-      
       /* Barra de navegación fija */
       .nav-fixed{
         position:fixed; left:0; right:0; z-index:10000; height:var(--navH);
@@ -80,6 +86,7 @@ use_theme: false
       .btn{ display:inline-block; padding:8px 14px; border-radius:10px; text-decoration:none;
             border:1px solid #bbb; background:#fff; color:#111; font-weight:600; }
       .btn.dark{ background:#222; color:#fff; border-color:#444; }
+      .btn-zoom { background: #3a3a3a; color: #fff; border-color: #555; }
 
       .back{ display:none; } /* ya lo reemplaza la barra fija */
       .error{ color:#ffb3b3; font-weight:600; margin:8px 0; }
@@ -133,16 +140,12 @@ use_theme: false
         <a class="btn dark" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/') | relative_url }}">Siguiente →</a>
       {%- endif -%}
 
-
-  <!-- Botones de enncuadre -->
-      <a class="btn btn-zoom" data-zoom="1.0">Pantalla Completa</a>
+      <!-- Botones de encuadre -->
+      <a  class="btn btn-zoom" data-zoom="1.0">Pantalla Completa</a>
       <a  class="btn btn-zoom" data-zoom="0.8">Ajuste Medio</a>
       <a  class="btn btn-zoom" data-zoom="0.6">Ajuste Pequeño</a>
       <a  class="btn btn-zoom" data-zoom="2.0">Enfoque Fuerte</a>
 
-
-
-      
       <a class="btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}" id="btnBack">← Regresar al post</a>
     </div>
     <!-- ========================================================== -->
@@ -172,9 +175,7 @@ use_theme: false
       });
     })();
 
-
- /* --------------------------------------- */
-       /* intento de encuadre bamio de zoom */
+    /* Lógica para el cambio de zoom */
     (function () {
       const reader = document.getElementById('reader');
       if (!reader) return;
@@ -190,8 +191,403 @@ use_theme: false
           e.preventDefault();
           const zoomLevel = parseFloat(e.target.dataset.zoom);
           
+          // Elimina cualquier clase de zoom existente
           reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60', 'zoom-200');
 
+          // Aplica la clase de zoom basada en el botón clicado
+          if (zoomLevel === 1.0) {
+            reader.classList.add('zoom-100');
+          } else if (zoomLevel === 0.8) {
+            reader.classList.add('zoom-80');
+          } else if (zoomLevel === 0.6) {
+            reader.classList.add('zoom-60');
+          } else if (zoomLevel === 2.0) {
+            reader.classList.add('zoom-200');
+          }
+        });
+      });
+    })();
+    </script>
+
+<script>
+(async () => {
+  const BASE = '{{ site.baseurl }}';
+  const RAW  = ('{{ page.images_json }}' || '').trim();
+
+  // Si prefieres la barra ARRIBA:
+  // document.body.classList.remove('has-nav-bottom'); document.body.classList.add('has-nav-top');
+  // document.getElementById('navReader').classList.remove('bottom'); document.getElementById('navReader').classList.add('top');
+
+  // URL del JSON (absoluta o relativa al sitio)
+  const JSON_URL = /^https?:\/\//i.test(RAW)
+    ? RAW
+    : (BASE + (RAW.startsWith('/') ? RAW : '/' + RAW));
+
+  const mount   = document.getElementById('reader');
+  const pagerEl = document.getElementById('pager');
+
+  const withBase = (u) => /^https?:\/\//i.test(u) ? u : (BASE + (u.startsWith('/') ? u : '/' + u));
+
+  function normalizeGoogleUrl(u){
+    if (!u) return '';
+    u = u.replace(
+      /^https:\/\/drive\.google\.com\/uc\?export=(?:view|download)&id=([^&]+).*$/i,
+      'https://drive.usercontent.google.com/uc?id=$1&export=download'
+    );
+    u = u.replace(/(drive\.usercontent\.google\.com\/uc\?[^#]*?)export=view/i, '$1export=download');
+    return u;
+  }
+
+  function extractDriveId(u){
+    if (!u) return '';
+    let m = u.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+    if (m) return m[1];
+    m = u.match(/\/file\/d\/([a-zA-Z0-9_-]{10,})/);
+    if (m) return m[1];
+    m = u.match(/\/open\?id=([a-zA-Z0-9_-]{10,})/);
+    if (m) return m[1];
+    return '';
+  }
+
+  /* ========= Candidatos: CDN de imágenes (thumbnail) + view fallback ========= */
+  function candidatesFrom(p){
+    const tries = [];
+    const u0 = normalizeGoogleUrl(String(p.url || ''));
+    const id = p.id || extractDriveId(u0);
+
+    if (id) {
+      // PRIORIDAD: thumbnail grande (redirige a lh3.googleusercontent.com)
+      tries.push(`https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w2560`);
+      // ÚLTIMO recurso: vista web
+      tries.push(`https://drive.google.com/uc?export=view&id=${encodeURIComponent(id)}`);
+    } else if (u0) {
+      // Si el JSON trae URL absoluta, úsala como último intento
+      tries.push(u0);
+    }
+    return [...new Set(tries)];
+  }
+  /* ========================================================================= */
+
+  try {
+    const res = await fetch(JSON_URL, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    // Acepta array simple o {pages:[...]}
+    const pages = Array.isArray(data)
+      ? data.map(u => ({ url: u }))
+      : (Array.isArray(data.pages) ? data.pages : []);
+
+    if (!pages.length) throw new Error('JSON vacío o formato no soportado');
+
+    // Orden por número si existe en name/url (los sin número al final)
+    pages.sort((a, b) => {
+      const A = parseInt((String(a.name || a.url || '').match(/(\d+)/) || [, '999999'])[1], 10);
+      const B = parseInt((String(b.name || b.url || '').match(/(\d+)/) || [, '999999'])[1], 10);
+      return A - B;
+    });
+
+    // Render
+    const items = pages.map((p, i) => {
+      const fig = document.createElement('figure');
+      fig.className = 'page';
+
+      const img = document.createElement('img');
+      img.alt = `Página ${i + 1}`;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.referrerPolicy = 'no-referrer';
+      img.sizes = '100vw';
+
+      fig.appendChild(img);
+      return { fig, img, tries: candidatesFrom(p), index: i };
+    });
+
+    const frag = document.createDocumentFragment();
+    items.forEach(it => frag.appendChild(it.fig));
+    mount.textContent = '';
+    mount.appendChild(frag);
+
+    pagerEl.textContent = `Pag ${items.length ? 1 : 0} / ${items.length}`;
+
+    // Contador dinámico
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        const vis = entries.filter(e => e.isIntersecting)
+                           .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (vis) {
+          const idx = items.findIndex(x => x.fig === vis.target);
+          if (idx >= 0) pagerEl.textContent = `Pag ${idx + 1} / ${items.length}`;
+        }
+      }, { root: null, rootMargin: '0px 0px -40% 0px', threshold: [0.2, 0.4, 0.6] });
+      items.forEach(it => io.observe(it.fig));
+    }
+
+    /* ====== Descarga con concurrencia MUY limitada + backoff ====== */
+    const CONCURRENCY = 2;
+    const INTERVAL_MS = 120;
+    const RETRIES = 2;
+
+    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+    function jitter(ms){ return ms + Math.floor(Math.random()*80); }
+
+    async function trySetSrc(img, url){
+      for (let attempt = 0; attempt <= RETRIES; attempt++){
+        const ok = await new Promise(res => {
+          let done = false;
+          const onload = ()=>{ if(!done){ done = true; img.onload = img.onerror = null; res(true); } };
+          const onerror = ()=>{ if(!done){ done = true; img.onload = img.onerror = null; res(false); } };
+          img.onload = onload;
+          img.onerror = onerror;
+          img.src = url;
+        });
+        if (ok) return true;
+        await sleep(jitter(200 * (attempt+1) * (attempt+1))); // 200ms, 800ms…
+      }
+      return false;
+    }
+
+    async function loadOne(it){
+      const all = it.tries.slice(); // [thumbnail, view, (u0)]
+      if (!all.length) return;
+
+      const thumb = withBase(all.shift());
+      const thumbOK = await trySetSrc(it.img, thumb);
+      if (thumbOK) return;
+
+      // Cadena de fallbacks
+      while (all.length){
+        const next = withBase(all.shift());
+        const ok = await trySetSrc(it.img, next);
+        if (ok) return;
+        await sleep(jitter(120));
+      }
+
+      const warn = document.createElement('div');
+      warn.className = 'error';
+      warn.textContent = `⚠️ No se pudo cargar la página ${it.index + 1}`;
+      it.fig.insertBefore(warn, it.fig.firstChild);
+    }
+
+    let cursor = 0;
+    async function worker(){
+      while (true) {
+        const i = cursor++;
+        if (i >= items.length) break;
+        await loadOne(items[i]);
+        if (INTERVAL_MS) await sleep(INTERVAL_MS);
+      }
+    }
+    await Promise.all(Array.from({length: CONCURRENCY}, worker));
+    /* ============================================================= */
+
+  } catch (err) {
+    const mount = document.getElementById('reader');
+    const pagerEl = document.getElementById('pager');
+    if (mount) mount.innerHTML = `<p class="error">No se pudieron cargar las imágenes. ${err.message}</p>`;
+    if (pagerEl) pagerEl.textContent = 'Pag 0 / 0';
+  }
+})();
+</script>
+  </body>
+</html>
+---
+# Layout LECTOR: página completa (clona la base de default.html)
+use_theme: false
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page.title | escape }}</title>
+
+    {% if page.use_main_css %}
+      <!-- Usa relative_url para respetar baseurl -->
+      <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
+    {% endif %}
+
+    <!-- Mejora conexión con Google Drive -->
+    <link rel="preconnect" href="https://drive.usercontent.google.com">
+    <link rel="dns-prefetch" href="https://drive.usercontent.google.com">
+    <link rel="preconnect" href="https://lh3.googleusercontent.com">
+    <link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
+
+    <style>
+      /* Reset + fondo para evitar marco blanco */
+      html, body { height:100%; margin:0; padding:0; background:#0e1220; }
+
+      /* Oculta el masthead del tema solo en el reader */
+      .wrapper-masthead{display:none;}
+
+      :root{ --navH:56px; --pageW: 1400px; } /* Ajusta --pageW (1200/1600px, etc.) */
+
+      /* Quita límites del tema y padding */
+      #main, .container{
+        max-width:none !important;
+        width:100% !important;
+        padding-left:0 !important;
+        padding-right:0 !important;
+      }
+
+      /* Hero (título grande) */
+      .reader-hero{ text-align:center; padding:24px 12px 8px; color:#e8eeff; }
+      .reader-title{ margin:0; font-weight:800; line-height:1.1; font-size:clamp(28px,4.5vw,48px); }
+      .reader-sub{ margin-top:6px; opacity:.85; font-size:clamp(16px,2.4vw,22px); }
+
+      /* Contador flotante */
+      #pager{
+        position:fixed; top:12px; right:16px; z-index:9999;
+        background:rgba(0,0,0,.6); color:#fff; padding:4px 8px; border-radius:6px; font-size:14px;
+      }
+
+      /* Reader centrado */
+      .reader{
+        display:block;
+        width:100%; /* Asegura que el contenedor del lector ocupe el ancho disponible */
+        margin:0 auto; /* Centra el contenedor del lector */
+        padding:0;
+        transition: max-width 0.3s ease-in-out; /* Animación para un cambio suave */
+        overflow-x: auto; /* Permite desplazamiento horizontal cuando el contenido es más grande */
+      }
+      .reader .page{
+        width:100%; /* Las páginas ocupan el 100% del ancho de su padre (.reader) */
+        margin:0 auto;                   /* Centrado real de cada página */
+      }
+      .reader .page img{
+        display:block; width:100%; height:auto; max-width:100%;
+      }
+
+      /* Clases de zoom para el contenedor del lector */
+      .reader.zoom-100 { max-width: 100%; }
+      .reader.zoom-80 { max-width: 80%; }
+      .reader.zoom-60 { max-width: 60%; }
+      .reader.zoom-200 { max-width: 200%; } /* Permite que el lector sea más grande que el viewport */
+
+      /* Barra de navegación fija */
+      .nav-fixed{
+        position:fixed; left:0; right:0; z-index:10000; height:var(--navH);
+        display:flex; gap:12px; justify-content:center; align-items:center;
+        padding:8px 12px; background:rgba(30,30,30,.75); backdrop-filter:blur(6px);
+      }
+      .nav-fixed.bottom{ bottom:0; }
+      body.has-nav-bottom{ padding-bottom:var(--navH); }
+      .nav-fixed.top{ top:0; }
+      body.has-nav-top{ padding-top:var(--navH); }
+
+      .btn{ display:inline-block; padding:8px 14px; border-radius:10px; text-decoration:none;
+            border:1px solid #bbb; background:#fff; color:#111; font-weight:600; }
+      .btn.dark{ background:#222; color:#fff; border-color:#444; }
+      .btn-zoom { background: #3a3a3a; color: #fff; border-color: #555; }
+
+      .back{ display:none; } /* ya lo reemplaza la barra fija */
+      .error{ color:#ffb3b3; font-weight:600; margin:8px 0; }
+    </style>
+  </head>
+
+  <!-- Usa has-nav-bottom (barra fija abajo) o has-nav-top (arriba) -->
+  <body class="has-nav-bottom{% if page.use_main_css %} theme{% endif %}">
+
+    <!-- Contenido del lector -->
+    <div id="main" role="main" class="container">
+      <header class="reader-hero">
+        <h1 class="reader-title">{{ page.manga | default: page.title | default: "Manga" }}</h1>
+        <div class="reader-sub">
+          Capítulo {{ page.capitulo_label | default: page.capitulo | default: "?" }}
+        </div>
+        <div id="pager" class="pager">Pag 0 / 0</div>
+      </header>
+
+      <div id="reader" class="reader"></div>
+
+      <!-- Link original oculto (la barra fija ya lo incluye) -->
+      <a class="back" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}">← Regresar al post</a>
+    </div>
+
+    <!-- Footer del tema -->
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          {% include svg-icons.html %}
+        </footer>
+      </div>
+    </div>
+
+    <!-- ===== Barra de navegación fija (con fallback robusto) ===== -->
+    {% assign prev_num = page.capitulo | minus: 1 %}
+    {% assign next_num = page.capitulo | plus: 1 %}
+
+    <div class="nav-fixed bottom" id="navReader">
+      {%- if page.prev_href -%}
+        <a class="btn dark" href="{{ page.prev_href | relative_url }}">← Anterior</a>
+      {%- elsif page.capitulo and page.capitulo > 1 -%}
+        <a class="btn dark" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/') | relative_url }}">← Anterior</a>
+      {%- else -%}
+        <span></span>
+      {%- endif -%}
+
+      {%- if page.next_href -%}
+        <a class="btn dark" href="{{ page.next_href | relative_url }}">Siguiente →</a>
+      {%- elsif page.es_ultimo != true and page.capitulo -%}
+        <a class="btn dark" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/') | relative_url }}">Siguiente →</a>
+      {%- endif -%}
+
+      <!-- Botones de encuadre -->
+      <a href="#" class="btn btn-zoom" data-zoom="1.0">Pantalla Completa</a>
+      <a href="#" class="btn btn-zoom" data-zoom="0.8">Ajuste Medio</a>
+      <a href="#" class="btn btn-zoom" data-zoom="0.6">Ajuste Pequeño</a>
+      <a href="#" class="btn btn-zoom" data-zoom="2.0">Enfoque Fuerte</a>
+
+      <a class="btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}" id="btnBack">← Regresar al post</a>
+    </div>
+    <!-- ========================================================== -->
+
+    {% include analytics.html %}
+
+    <script>
+    (function () {
+      // Back robusto: mismo origen -> ir al referrer; si hay historial -> history.back()
+      const a = document.getElementById('btnBack');
+      if (!a) return;
+      try {
+        const ref = document.referrer;
+        if (ref) {
+          const u = new URL(ref, location.href);
+          if (u.origin === location.origin) {
+            a.href = u.href;
+            a.textContent = 'Regresar';
+          }
+        }
+      } catch (e) {}
+      a.addEventListener('click', function (e) {
+        if (history.length > 1) {
+          e.preventDefault();
+          history.back();
+        }
+      });
+    })();
+
+    /* Lógica para el cambio de zoom */
+    (function () {
+      const reader = document.getElementById('reader');
+      if (!reader) return;
+
+      const zoomButtons = document.querySelectorAll('.btn-zoom');
+      if (!zoomButtons) return;
+
+      // Establecer el zoom predeterminado al cargar la página
+      reader.classList.add('zoom-100');
+
+      zoomButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const zoomLevel = parseFloat(e.target.dataset.zoom);
+          
+          // Elimina cualquier clase de zoom existente
+          reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60', 'zoom-200');
+
+          // Aplica la clase de zoom basada en el botón clicado
           if (zoomLevel === 1.0) {
             reader.classList.add('zoom-100');
           } else if (zoomLevel === 0.8) {
