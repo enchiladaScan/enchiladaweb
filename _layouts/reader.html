@@ -84,8 +84,7 @@ use_theme: false
 
       .btn{ display:inline-block; padding:8px 14px; border-radius:10px; text-decoration:none;
             border:1px solid #bbb; background:#fff; color:#111; font-weight:600; }
-      .btn.dark{ background:#222; color:#fff; border-color:#444; }
-      .btn-zoom { background: #3a3a3a; color: #fff; border-color: #555; }
+      .btn.nav-zoom { background: #3a3a3a; color: #fff; border-color: #555; }
 
       .back{ display:none; } /* ya lo reemplaza la barra fija */
       .error{ color:#ffb3b3; font-weight:600; margin:8px 0; }
@@ -108,7 +107,10 @@ use_theme: false
       <div id="reader" class="reader"></div>
 
       <!-- Link original oculto (la barra fija ya lo incluye) -->
-      <a class="back" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}">← Regresar al post</a>
+      <a class="back" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}"><img class="ico" src="{{ '/assets/icons/regresar.png' | relative_url }}" alt=""
+            onerror="this.closest('.ico-btn').classList.add('no-icon')">
+        <span class="label">← Regresar al post</span>
+      </a>
     </div>
 
     <!-- Footer del tema -->
@@ -126,23 +128,35 @@ use_theme: false
 
     <div class="nav-fixed bottom" id="navReader">
       {%- if page.prev_href -%}
-        <a class="btn dark" href="{{ page.prev_href | relative_url }}">← Anterior</a>
+        <a class="btn nav-zoom" href="{{ page.prev_href | relative_url }}"><img class="ico" src="{{ '/assets/icons/anterior.png' | relative_url }}" alt=""
+            onerror="this.closest('.ico-btn').classList.add('no-icon')">
+        <span class="label">← Anterior</span>
+      </a>
       {%- elsif page.capitulo and page.capitulo > 1 -%}
-        <a class="btn dark" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/') | relative_url }}">← Anterior</a>
+        <a class="btn nav-zoom" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/') | relative_url }}"><img class="ico" src="{{ '/assets/icons/anterior.png' | relative_url }}" alt=""
+            onerror="this.closest('.ico-btn').classList.add('no-icon')">
+        <span class="label">← Anterior</span>
+      </a>
       {%- else -%}
         <span></span>
       {%- endif -%}
 
       {%- if page.next_href -%}
-        <a class="btn dark" href="{{ page.next_href | relative_url }}">Siguiente →</a>
+        <a class="btn nav-zoom" href="{{ page.next_href | relative_url }}">Siguiente →</a>
       {%- elsif page.es_ultimo != true and page.capitulo -%}
-        <a class="btn dark" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/') | relative_url }}">Siguiente →</a>
+        <a class="btn nav-zoom" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/') | relative_url }}">Siguiente →</a>
       {%- endif -%}
 
       <!-- Botones de encuadre -->
-      <a  class="btn btn-zoom" data-zoom="1.0">Pantalla Completa</a>
-      <a  class="btn btn-zoom" data-zoom="0.8">Ajuste Medio</a>
-      <a  class="btn btn-zoom" data-zoom="0.6">Ajuste Pequeño</a>
+      <a  class="btn nav-zoom" data-zoom="1.0"><img class="ico" src="{{ '/assets/icons/fullscreen.png' | relative_url }}" alt=""
+            onerror="this.closest('.ico-btn').classList.add('no-icon')">
+        <span class="label">Pantalla Completa</span></a>
+      <a  class="btn nav-zoom" data-zoom="0.8"><img class="ico" src="{{ '/assets/icons/zoom_in.png' | relative_url }}" alt=""
+            onerror="this.closest('.ico-btn').classList.add('no-icon')">
+        <span class="label">Zoom +</span></a>
+      <a  class="btn nav-zoom" data-zoom="0.6"><img class="ico" src="{{ '/assets/icons/zoom_out.png' | relative_url }}" alt=""
+            onerror="this.closest('.ico-btn').classList.add('no-icon')">
+        <span class="label">Zoom -</span></a>
 
        <a class="btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}" id="btnBack">← Regresar al post</a>
     </div>
