@@ -175,60 +175,96 @@ use_theme: false
     {% include analytics.html %}
 
     <script>
-      //termine tomando el backup xD
-    (function () {
-      // Back robusto: mismo origen -> ir al referrer; si hay historial -> history.back()
-      const a = document.getElementById('btnBack');
-      if (!a) return;
-      try {
-        const ref = document.referrer;
-        if (ref) {
-          const u = new URL(ref, location.href);
-          if (u.origin === location.origin) {
-            a.href = u.href;
-            a.textContent = 'Regresar';
+      (function () {
+        const a = document.getElementById('btnBack');
+        if (!a) return;
+
+        const BASE = '{{ site.baseurl }}';
+        const mangaFallback = "{% if page.manga_slug %}{{ '/' | append: page.manga_slug | append: '/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}";
+
+        function withBase(u){
+          if (!u) return '';
+          if (/^https?:\/\//i.test(u)) return u;
+          return BASE + (u.startsWith('/') ? u : '/' + u);
+        }
+
+        // 1) ¿Vino con ?from=
+        const qs = new URLSearchParams(location.search);
+        const from = (qs.get('from') || '').trim();
+
+        if (from) {
+          a.href = withBase(from);
+          a.dataset.fm = a.href;
+        } else {
+          // 2) ¿Referrer mismo origen?
+          try {
+            const ref = document.referrer;
+            if (ref) {
+              const u = new URL(ref, location.href);
+              if (u.origin === location.origin) {
+                a.href = u.href;
+                a.dataset.fm = u.href;
+              }
+            }
+          } catch (e) {}
+        }
+
+        // 3) Último fallback si no hay nada:
+        if (!a.getAttribute('href') || a.getAttribute('href') === '#') {
+          a.href = mangaFallback;
+        }
+
+        // history.back() sólo si hay historial y NO tenemos ?from=
+        a.addEventListener('click', function (e) {
+          const hasFrom = !!from;
+          if (!hasFrom && history.length > 1) {
+            e.preventDefault();
+            history.back();
           }
-        }
-      } catch (e) {}
-      a.addEventListener('click', function (e) {
-        if (history.length > 1) {
-          e.preventDefault();
-          history.back();
-        }
-      });
-    })();
-
-    /* JS para el cambio de zoom */
-    (function () {
-      const reader = document.getElementById('reader');
-      if (!reader) return;
-
-      const zoomButtons = document.querySelectorAll('.btn-zoom');
-      if (!zoomButtons) return;
-
-      // Establecer el zoom predeterminado al cargar la página
-      reader.classList.add('zoom-100');
-
-      zoomButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const zoomLevel = parseFloat(e.target.dataset.zoom);
-          
-          // Elimina cualquier clase de zoom existente
-          reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60');
-
-          // Aplica la clase de zoom basada en el botón clicado
-          if (zoomLevel === 1.0) {
-            reader.classList.add('zoom-100');
-          } else if (zoomLevel === 0.8) {
-            reader.classList.add('zoom-80');
-          } else if (zoomLevel === 0.6) {
-            reader.classList.add('zoom-60');
-          } 
         });
-      });
-    })();
+      })();
     </script>
+
+
+    <script>
+      /* JS para el cambio de zoom */
+      (function () {
+        const reader = document.getElementById('reader');
+        if (!reader) return;
+
+        // Selecciona los botones correctos: llevan clase .nav-zoom y traen data-zoom
+        const zoomButtons = document.querySelectorAll('.nav-zoom[data-zoom]');
+        if (!zoomButtons.length) return;
+
+        // Estado inicial
+        const classes = ['zoom-100','zoom-80','zoom-60'];
+        function setZoomClass(cls){
+          reader.classList.remove(...classes);
+          reader.classList.add(cls);
+        }
+        setZoomClass('zoom-100');
+
+        // Marca visual opcional
+        function setActive(btn){
+          zoomButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+
+        zoomButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const zoomLevel = parseFloat(e.currentTarget.dataset.zoom);
+
+            if (zoomLevel >= 1.0)       setZoomClass('zoom-100');
+            else if (zoomLevel >= 0.8)  setZoomClass('zoom-80');
+            else                        setZoomClass('zoom-60');
+
+            setActive(btn);
+          });
+        });
+      })();
+      </script>
+
 
     <!-- ===== Lector de imágenes desde JSON ===== -->
 <script>
