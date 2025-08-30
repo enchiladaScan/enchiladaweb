@@ -292,11 +292,18 @@ html, body {
   .ui-theme .manga-meta{ max-width:none; }
 }
 
-/* Botones con icono: tamaño y layout */
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; user-select: none; }
-.ico-btn .ico { width: 22px; height: 22px; display: block; object-fit: contain; }
+/* Botón base + cursor */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;text-decoration:none;
+     border:1px solid #bbb;background:#fff;color:#111;font-weight:600;cursor:pointer;user-select:none;}
+.btn.nav-zoom{background:#3a3a3a;color:#fff;border-color:#555;}
 
-/* Texto solo si falla el icono */
-.ico-btn .label { display: none; }
-.ico-btn.no-icon .label { display: inline; }
-.ico-btn.no-icon .ico { display: none; }
+/* Iconos: tamaño fijo y que no se estiren */
+.ico-btn .ico{width:22px;height:22px;display:block;object-fit:contain}
+
+/* Texto solo si NO hay icono */
+.ico-btn .label{display:none}
+.ico-btn.no-icon .label{display:inline}
+.ico-btn.no-icon .ico{display:none}
+
+/* La versión oculta del back del tema sigue oculta */
+.back{display:none}

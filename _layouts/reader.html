@@ -91,7 +91,7 @@ use_theme: false
 
       <div id="reader" class="reader"></div>
 
-      <!-- Link original oculto (la barra fija ya lo incluye) -->
+      <!-- Link original oculto -->
       <a class="back" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}"><img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
             onerror="this.closest('.ico-btn').classList.add('no-icon')">
         <span class="label">← Regresar al post</span>
@@ -113,56 +113,60 @@ use_theme: false
 
     <div class="nav-fixed bottom" id="navReader">
       {%- if page.prev_href -%}
-      <a class="btn nav-zoom ico-btn" href="{{ page.prev_href | relative_url }}">
-        <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
-            onerror="this.closest('a').classList.add('no-icon')">
-        <span class="label">← Anterior</span>
-      </a>
+      <!-- Anterior -->
+      {%- if page.prev_href -%}
+        <a class="btn nav-zoom ico-btn" href="{{ page.prev_href | relative_url }}">
+          <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
+              onerror="this.remove();this.closest('a').classList.add('no-icon')">
+          <span class="label">← Anterior</span>
+        </a>
       {%- elsif page.capitulo and page.capitulo > 1 -%}
         <a class="btn nav-zoom ico-btn" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/') | relative_url }}">
           <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
-              onerror="this.closest('a').classList.add('no-icon')">
+              onerror="this.remove();this.closest('a').classList.add('no-icon')">
           <span class="label">← Anterior</span>
         </a>
       {%- else -%}
         <span></span>
       {%- endif -%}
 
+      <!-- Siguiente -->
       {%- if page.next_href -%}
         <a class="btn nav-zoom ico-btn" href="{{ page.next_href | relative_url }}">
           <img class="ico" src="{{ '/assets/img/icons/siguiente.png' | relative_url }}" alt=""
-              onerror="this.closest('a').classList.add('no-icon')">
+              onerror="this.remove();this.closest('a').classList.add('no-icon')">
           <span class="label">Siguiente →</span>
         </a>
       {%- elsif page.es_ultimo != true and page.capitulo -%}
         <a class="btn nav-zoom ico-btn" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/') | relative_url }}">
           <img class="ico" src="{{ '/assets/img/icons/siguiente.png' | relative_url }}" alt=""
-              onerror="this.closest('a').classList.add('no-icon')">
+              onerror="this.remove();this.closest('a').classList.add('no-icon')">
           <span class="label">Siguiente →</span>
         </a>
       {%- endif -%}
 
-      <!-- Botones de encuadre -->
+      <!-- Zoom -->
       <a class="btn nav-zoom ico-btn" data-zoom="1.0">
         <img class="ico" src="{{ '/assets/img/icons/fullscreen.png' | relative_url }}" alt=""
-            onerror="this.closest('a').classList.add('no-icon')">
+            onerror="this.remove();this.closest('a').classList.add('no-icon')">
         <span class="label">Pantalla Completa</span>
       </a>
       <a class="btn nav-zoom ico-btn" data-zoom="0.8">
         <img class="ico" src="{{ '/assets/img/icons/zoom_in.png' | relative_url }}" alt=""
-            onerror="this.closest('a').classList.add('no-icon')">
+            onerror="this.remove();this.closest('a').classList.add('no-icon')">
         <span class="label">Zoom +</span>
       </a>
       <a class="btn nav-zoom ico-btn" data-zoom="0.6">
         <img class="ico" src="{{ '/assets/img/icons/zoom_out.png' | relative_url }}" alt=""
-            onerror="this.closest('a').classList.add('no-icon')">
+            onerror="this.remove();this.closest('a').classList.add('no-icon')">
         <span class="label">Zoom -</span>
       </a>
 
-      <a class="back ico-btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}">
+      <!-- Regresar visible en la barra fija -->
+      <a class="btn ico-btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}" id="btnBack">
         <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
-            onerror="this.closest('a').classList.add('no-icon')">
-        <span class="label">← Regresar al post</span>
+            onerror="this.remove();this.closest('a').classList.add('no-icon')">
+        <span class="label">← Regresar</span>
       </a>
     </div>
     <!-- ========================================================== -->
