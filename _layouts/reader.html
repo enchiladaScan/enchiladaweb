@@ -175,6 +175,7 @@ use_theme: false
     {% include analytics.html %}
 
     <script>
+    /* JS para el botón regresar robusto */
     (function () {
       const a = document.getElementById('btnBack');
       if (!a) return;
@@ -194,6 +195,36 @@ use_theme: false
           e.preventDefault();
           history.back();
         }
+      });
+    })();
+    /* JS para el cambio de zoom */
+    (function () {
+      const reader = document.getElementById('reader');
+      if (!reader) return;
+
+      const zoomButtons = document.querySelectorAll('.btn-zoom');
+      if (!zoomButtons) return;
+
+      // Establecer el zoom predeterminado al cargar la página
+      reader.classList.add('zoom-100');
+
+      zoomButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const zoomLevel = parseFloat(e.target.dataset.zoom);
+          
+          // Elimina cualquier clase de zoom existente
+          reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60');
+
+          // Aplica la clase de zoom basada en el botón clicado
+          if (zoomLevel === 1.0) {
+            reader.classList.add('zoom-100');
+          } else if (zoomLevel === 0.8) {
+            reader.classList.add('zoom-80');
+          } else if (zoomLevel === 0.6) {
+            reader.classList.add('zoom-60');
+          } 
+        });
       });
     })();
     </script>
