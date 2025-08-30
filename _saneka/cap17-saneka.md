@@ -12,11 +12,13 @@ redirect_from:
   - /cap17-saneka/
 use_main_css: true
 prev_href: /saneka/cap16/
+post_url: /2025/08/05/saneka
 ---
 <script>
 /*
-No es un escript, es una nota, si es el final solo usa el prev y el es_ultimo en true, asi no se genera el boton de siguiente
+No es un script, es una nota, si es el cap final solo usa el prev_href y el es_ultimo en true, asi no se genera el boton de siguiente
 prev_href: /saneka/capX/
+Si deja de ser el cap final añade esto:
 next_href: /saneka/capY/
 */
 </script>

@@ -13,4 +13,5 @@ redirect_from:
 use_main_css: true
 prev_href: /saneka/cap12/
 next_href: /saneka/cap13-5/
+post_url: /2025/08/05/saneka
 ---

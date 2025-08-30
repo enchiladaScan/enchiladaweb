@@ -11,6 +11,7 @@ images_json: assets/mangas/saneka/cap3/images.json
 redirect_from:
   - /cap3-saneka/
 use_main_css: true
-prev_href: /saneka/cap2/        # navegación manual para evitar romper el ciclo, pues al ser decimal no entra en los enteros.
+prev_href: /saneka/cap2/
 next_href: /saneka/cap4/
+post_url: /2025/08/05/saneka
 ---
