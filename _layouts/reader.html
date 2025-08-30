@@ -175,21 +175,21 @@ use_theme: false
     {% include analytics.html %}
 
     <script>
-    /* JS para el botón regresar robusto */
+      //termine tomando el backup xD
     (function () {
+      // Back robusto: mismo origen -> ir al referrer; si hay historial -> history.back()
       const a = document.getElementById('btnBack');
       if (!a) return;
-
-      // Si hay referrer mismo origen, usarlo
       try {
         const ref = document.referrer;
         if (ref) {
           const u = new URL(ref, location.href);
-          if (u.origin === location.origin) a.href = u.href;
+          if (u.origin === location.origin) {
+            a.href = u.href;
+            a.textContent = 'Regresar';
+          }
         }
       } catch (e) {}
-
-      // En el click, si hay historial, vuelve sin navegar
       a.addEventListener('click', function (e) {
         if (history.length > 1) {
           e.preventDefault();
@@ -197,6 +197,7 @@ use_theme: false
         }
       });
     })();
+
     /* JS para el cambio de zoom */
     (function () {
       const reader = document.getElementById('reader');
