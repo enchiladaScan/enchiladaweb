@@ -1,11 +1,15 @@
 ---
-layout: reader            
-title: "Ririsa — Capítulo 2" 
-series: "ririsa"          # slug/identificador de la serie
-chapter: 2                # número de capítulo
-images_json: "/ririsa/cap2/images.json"  
-permalink: "/ririsa/cap2/"   # opcional, útil para URLs limpias
-prev: "/ririsa/cap1/"        # opcional para navegación
-next: "/ririsa/cap3/"        # opcional para navegación
-use_theme: false             # ⚠️ importante para que el theme NO toque el reader
+layout: reader
+title: "Ririsa - Capítulo 2"
+manga: "ririsa"
+manga_slug: "ririsa"
+capitulo: 2
+es_ultimo: true
+permalink: /ririsa/cap2/
+return_to: /ririsa/
+images_json: assets/mangas/ririsa/cap2/images.json
+redirect_from:
+  - /cap1/ririsa/
+post_url: /2025/08/04/ririsa
+use_main_css: true
 ---

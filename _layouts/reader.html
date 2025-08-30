@@ -176,102 +176,57 @@ use_theme: false
 
     <!-- ===== Lógica para el botón "Regresar" y ?from= ===== -->
     <script>
-    (function () {
-      const BASE = '{{ site.baseurl }}';
-      const mangaSlug = "{{ page.manga_slug | default: '' }}";
-      const explicitPost = "{{ page.post_url | default: page.return_to | default: '' }}";
-      const mangaIndexFallback = mangaSlug ? ("{{ '/' | relative_url }}" + (mangaSlug.startsWith('/')? mangaSlug.slice(1): mangaSlug) + "/") : "{{ '/' | relative_url }}";
+      (function () {
+        const a = document.getElementById('btnBack');
+        if (!a) return;
 
-      // clave por manga (evita mezclar si tienes varias pestañas de mangas distintos)
-      const KEY = mangaSlug ? `readerFrom:${mangaSlug}` : 'readerFrom';
+        const BASE = '{{ site.baseurl }}';
+        const explicitPost = "{{ page.post_url | default: page.return_to | default: '' }}".trim();
 
-      const $back = document.getElementById('btnBack');
-      const $nav = document.getElementById('navReader');
+        function withBase(u){
+          if (!u) return '';
+          if (/^https?:\/\//i.test(u)) return u;
+          return BASE + (u.startsWith('/') ? u : '/' + u);
+        }
 
-      function withBase(u){
-        if (!u) return '';
-        if (/^https?:\/\//i.test(u)) return u;
-        return BASE + (u.startsWith('/') ? u : '/' + u);
-      }
-      function getQS(name){
-        const v = new URLSearchParams(location.search).get(name);
-        return v ? v.trim() : '';
-      }
-      function setQS(href, key, value){
-        try{
-          const u = new URL(href, location.href);
-          u.searchParams.set(key, value);
-          return u.pathname + (u.search || '') + (u.hash || '');
-        }catch(e){ return href; }
-      }
-      function looksLikeReaderPath(path){
-        // evita tomar otro capítulo como "post"
-        // ej: /manga-x/cap123/
-        return /\/cap\d+\/?$/.test(path);
-      }
+        // 1) Si el capítulo trae post_url, úsalo SIEMPRE
+        if (explicitPost) {
+          const target = withBase(explicitPost);
+          a.href = target;
+          a.dataset.fm = target;
+          a.addEventListener('click', function(e){
+            e.preventDefault();
+            location.href = target;   // no uses history.back()
+          });
+          return; // listo
+        }
 
-      // 1) Determinar el origen PRIORITARIO
-      let origin = getQS('from');          // a) viene explícito
-      if (!origin && sessionStorage.getItem(KEY)) {
-        origin = sessionStorage.getItem(KEY); // b) ya guardado en esta sesión
-      }
-      if (!origin) {
-        // c) si hay un post definido en front-matter, úsalo
-        if (explicitPost) origin = withBase(explicitPost);
-      }
-      if (!origin) {
-        // d) como último recurso, usa el referrer si NO es otro capítulo
-        try{
-          if (document.referrer) {
-            const ru = new URL(document.referrer);
-            if (ru.origin === location.origin && !looksLikeReaderPath(ru.pathname)) {
-              origin = ru.pathname + ru.search + ru.hash;
+        // 2) Si no hay post_url, intenta referrer del mismo origen
+        try {
+          const ref = document.referrer;
+          if (ref) {
+            const u = new URL(ref, location.href);
+            if (u.origin === location.origin) {
+              a.href = u.href;
+              a.dataset.fm = u.href;
+              a.addEventListener('click', function(e){
+                e.preventDefault();
+                location.href = u.href;
+              });
+              return;
             }
           }
-        }catch(e){}
-      }
-      if (!origin) {
-        // e) ultra-fallback: índice del manga o home
-        origin = mangaIndexFallback;
-      }
+        } catch (e) {}
 
-      // Normaliza y guarda UNA VEZ por sesión
-      origin = withBase(origin);
-      sessionStorage.setItem(KEY, origin);
-
-      // 2) Botón "Regresar": SIEMPRE manda al post original guardado
-      if ($back) {
-        $back.href = origin;
-        $back.dataset.fm = origin;
-        $back.addEventListener('click', function(e){
-          // siempre navega al post original (no uses history.back aquí)
+        // 3) Último fallback: índice del manga o home
+        const mangaFallback = "{% if page.manga_slug %}{{ '/' | append: page.manga_slug | append: '/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}";
+        a.href = mangaFallback;
+        a.dataset.fm = mangaFallback;
+        a.addEventListener('click', function(e){
           e.preventDefault();
-          location.href = origin;
+          location.href = mangaFallback;
         });
-      }
-
-      // 3) Propagar ?from= al navegar entre capítulos (Anterior/Siguiente)
-      if ($nav) {
-        // Busca <a> con href a /cap... y que NO son botones de zoom (no tienen data-zoom)
-        const chapterLinks = Array.from($nav.querySelectorAll('a[href]'))
-          .filter(a => !a.dataset.zoom && /\/cap\d+\/?(\?|#|$)/.test(a.getAttribute('href') || ''));
-
-        chapterLinks.forEach(a => {
-          const href = a.getAttribute('href');
-          // si origin es absoluto, pásalo relativo al sitio para evitar cross-origin en el query
-          let fromQS = origin;
-          try {
-            const ou = new URL(origin, location.href);
-            if (ou.origin === location.origin) {
-              fromQS = ou.pathname + (ou.search || '') + (ou.hash || '');
-            }
-          } catch(e){}
-
-          const newHref = setQS(href, 'from', fromQS);
-          a.setAttribute('href', newHref);
-        });
-      }
-    })();
+      })();
     </script>
 
     <script>
