@@ -67,8 +67,8 @@ use_theme: false
       .error{ color:#ffb3b3; font-weight:600; margin:8px 0; }
 
       .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;text-decoration:none;
-        border:1px solid #bbb;background:#fff;color:#111;font-weight:600;cursor:pointer;user-select:none}
-      .btn.nav-zoom{background:#3a3a3a;color:#fff;border-color:#555}
+        border:1px solid #f0f0f0;background:#fff;color:#7f00ff;font-weight:600;cursor:pointer;user-select:none}
+      .btn.nav-zoom{background:#b8b8b8;color:#fff;border-color:#555}
       .ico-btn .ico{width:22px;height:22px;display:block;object-fit:contain}
       .ico-btn .label{display:none}
       .ico-btn.no-icon .label{display:inline}
@@ -111,6 +111,7 @@ use_theme: false
     <!-- ===== Barra de navegación fija (con fallback robusto) ===== -->
     {% assign prev_num = page.capitulo | minus: 1 %}
     {% assign next_num = page.capitulo | plus: 1 %}
+    {% assign fm = page.post_url | default: page.return_to %} <!-- obtiene el origen para "regresar" -->
 
     <div class="nav-fixed bottom" id="navReader">
 
@@ -159,37 +160,43 @@ use_theme: false
             onerror="this.remove();this.closest('a').classList.add('no-icon')">
         <span class="label">Zoom -</span>
       </a>
-
-      <a class="btn ico-btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}" id="btnBack">
+      <!-- Botón Regresar (robusto) -->
+      <a class="btn ico-btn"
+        id="btnBack"
+        href="{% if fm %}{{ fm | relative_url }}{% else %}{{ '/' | append: page.manga_slug | append: '/' | relative_url }}{% endif %}"
+        data-fm="{% if fm %}{{ fm | relative_url }}{% endif %}">
         <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
             onerror="this.remove();this.closest('a').classList.add('no-icon')">
-        <span class="label">← Regresar</span>
+        <span class="label">← Regresar al post</span>
       </a>
-
     </div>
     <!-- ========================================================== -->
 
     {% include analytics.html %}
 
-  <script>
-  (function () {
-    const reader = document.getElementById('reader');
-    if (!reader) return;
-    const zoomButtons = document.querySelectorAll('.nav-zoom[data-zoom]');
-    if (!zoomButtons.length) return;
-    reader.classList.add('zoom-100');
-    zoomButtons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const z = parseFloat(btn.dataset.zoom);
-        reader.classList.remove('zoom-100','zoom-80','zoom-60');
-        if (z === 1.0) reader.classList.add('zoom-100');
-        else if (z === 0.8) reader.classList.add('zoom-80');
-        else if (z === 0.6) reader.classList.add('zoom-60');
+    <script>
+    (function () {
+      const a = document.getElementById('btnBack');
+      if (!a) return;
+
+      // Si hay referrer mismo origen, usarlo
+      try {
+        const ref = document.referrer;
+        if (ref) {
+          const u = new URL(ref, location.href);
+          if (u.origin === location.origin) a.href = u.href;
+        }
+      } catch (e) {}
+
+      // En el click, si hay historial, vuelve sin navegar
+      a.addEventListener('click', function (e) {
+        if (history.length > 1) {
+          e.preventDefault();
+          history.back();
+        }
       });
-    });
-  })();
-  </script>
+    })();
+    </script>
 
     <!-- ===== Lector de imágenes desde JSON ===== -->
 <script>
