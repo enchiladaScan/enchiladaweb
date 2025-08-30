@@ -292,7 +292,11 @@ html, body {
   .ui-theme .manga-meta{ max-width:none; }
 }
 
-/* Comportamiento icono → texto */
-.ico-btn .label { display: none; }             /* ocultar texto por defecto */
-.ico-btn.no-icon .label { display: inline; }   /* mostrar texto si falla icono */
-.ico-btn.no-icon .ico { display: none; }       /* ocultar <img> roto */
+/* Botones con icono: tamaño y layout */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; user-select: none; }
+.ico-btn .ico { width: 22px; height: 22px; display: block; object-fit: contain; }
+
+/* Texto solo si falla el icono */
+.ico-btn .label { display: none; }
+.ico-btn.no-icon .label { display: inline; }
+.ico-btn.no-icon .ico { display: none; }
