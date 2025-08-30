@@ -22,15 +22,12 @@ use_theme: false
     <link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
 
     <style>
-      /* Reset + fondo para evitar marco blanco */
       html, body { height:100%; margin:0; padding:0; background:#0e1220; }
 
-      /* Oculta el masthead del tema solo en el reader */
       .wrapper-masthead{display:none;}
 
-      :root{ --navH:56px; --pageW: 1400px; } /* Ajusta --pageW (1200/1600px, etc.) */
+      :root{ --navH:56px; --pageW: 1400px; }
 
-      /* Quita límites del tema y padding */
       #main, .container{
         max-width:none !important;
         width:100% !important;
@@ -38,40 +35,24 @@ use_theme: false
         padding-right:0 !important;
       }
 
-      /* Hero (título grande) */
       .reader-hero{ text-align:center; padding:24px 12px 8px; color:#e8eeff; }
       .reader-title{ margin:0; font-weight:800; line-height:1.1; font-size:clamp(28px,4.5vw,48px); }
       .reader-sub{ margin-top:6px; opacity:.85; font-size:clamp(16px,2.4vw,22px); }
 
-      /* Contador flotante */
       #pager{
         position:fixed; top:12px; right:16px; z-index:9999;
         background:rgba(0,0,0,.6); color:#fff; padding:4px 8px; border-radius:6px; font-size:14px;
       }
 
-      /* Reader centrado */
-      .reader{
-        display:block;
-        width:100%; 
-        margin:0 auto; 
-        padding:0;
-        transition: max-width 0.3s ease-in-out; 
-        overflow-x: auto;
-      }
-      .reader .page{
-        width:100%; 
-        margin:0 auto;                 
-      }
-      .reader .page img{
-        display:block; width:100%; height:auto; max-width:100%;
-      }
+      .reader{ display:block; width:100%; margin:0 auto; padding:0;
+        transition: max-width 0.3s ease-in-out; overflow-x: auto; }
+      .reader .page{ width:100%; margin:0 auto; }
+      .reader .page img{ display:block; width:100%; height:auto; max-width:100%; }
 
-      /* Clases de zoom para el contenedor del lector */
       .reader.zoom-100 { max-width: 100%; }
       .reader.zoom-80 { max-width: 80%; }
       .reader.zoom-60 { max-width: 60%; }
 
-      /* Barra de navegación fija */
       .nav-fixed{
         position:fixed; left:0; right:0; z-index:10000; height:var(--navH);
         display:flex; gap:12px; justify-content:center; align-items:center;
@@ -86,8 +67,12 @@ use_theme: false
             border:1px solid #bbb; background:#fff; color:#111; font-weight:600; }
       .btn.nav-zoom { background: #3a3a3a; color: #fff; border-color: #555; }
 
-      .back{ display:none; } /* ya lo reemplaza la barra fija */
+      .back{ display:none; }
       .error{ color:#ffb3b3; font-weight:600; margin:8px 0; }
+
+      .ico-btn .label { display:none; }
+      .ico-btn.no-icon .label { display:inline; }
+      .ico-btn.no-icon .ico { display:none; }
     </style>
   </head>
 
@@ -128,95 +113,83 @@ use_theme: false
 
     <div class="nav-fixed bottom" id="navReader">
       {%- if page.prev_href -%}
-        <a class="btn nav-zoom" href="{{ page.prev_href | relative_url }}"><img class="ico" src="{{ '/assets/icons/anterior.png' | relative_url }}" alt=""
-            onerror="this.closest('.ico-btn').classList.add('no-icon')">
+      <a class="btn nav-zoom ico-btn" href="{{ page.prev_href | relative_url }}">
+        <img class="ico" src="{{ '/assets/icons/anterior.png' | relative_url }}" alt=""
+            onerror="this.closest('a').classList.add('no-icon')">
         <span class="label">← Anterior</span>
       </a>
       {%- elsif page.capitulo and page.capitulo > 1 -%}
-        <a class="btn nav-zoom" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/') | relative_url }}"><img class="ico" src="{{ '/assets/icons/anterior.png' | relative_url }}" alt=""
-            onerror="this.closest('.ico-btn').classList.add('no-icon')">
-        <span class="label">← Anterior</span>
-      </a>
+        <a class="btn nav-zoom ico-btn" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/') | relative_url }}">
+          <img class="ico" src="{{ '/assets/icons/anterior.png' | relative_url }}" alt=""
+              onerror="this.closest('a').classList.add('no-icon')">
+          <span class="label">← Anterior</span>
+        </a>
       {%- else -%}
         <span></span>
       {%- endif -%}
 
       {%- if page.next_href -%}
-        <a class="btn nav-zoom" href="{{ page.next_href | relative_url }}">Siguiente →</a>
+        <a class="btn nav-zoom ico-btn" href="{{ page.next_href | relative_url }}">
+          <img class="ico" src="{{ '/assets/icons/siguiente.png' | relative_url }}" alt=""
+              onerror="this.closest('a').classList.add('no-icon')">
+          <span class="label">Siguiente →</span>
+        </a>
       {%- elsif page.es_ultimo != true and page.capitulo -%}
-        <a class="btn nav-zoom" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/') | relative_url }}">Siguiente →</a>
+        <a class="btn nav-zoom ico-btn" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/') | relative_url }}">
+          <img class="ico" src="{{ '/assets/icons/siguiente.png' | relative_url }}" alt=""
+              onerror="this.closest('a').classList.add('no-icon')">
+          <span class="label">Siguiente →</span>
+        </a>
       {%- endif -%}
 
       <!-- Botones de encuadre -->
-      <a  class="btn nav-zoom" data-zoom="1.0"><img class="ico" src="{{ '/assets/icons/fullscreen.png' | relative_url }}" alt=""
-            onerror="this.closest('.ico-btn').classList.add('no-icon')">
-        <span class="label">Pantalla Completa</span></a>
-      <a  class="btn nav-zoom" data-zoom="0.8"><img class="ico" src="{{ '/assets/icons/zoom_in.png' | relative_url }}" alt=""
-            onerror="this.closest('.ico-btn').classList.add('no-icon')">
-        <span class="label">Zoom +</span></a>
-      <a  class="btn nav-zoom" data-zoom="0.6"><img class="ico" src="{{ '/assets/icons/zoom_out.png' | relative_url }}" alt=""
-            onerror="this.closest('.ico-btn').classList.add('no-icon')">
-        <span class="label">Zoom -</span></a>
+      <a class="btn nav-zoom ico-btn" data-zoom="1.0">
+        <img class="ico" src="{{ '/assets/icons/fullscreen.png' | relative_url }}" alt=""
+            onerror="this.closest('a').classList.add('no-icon')">
+        <span class="label">Pantalla Completa</span>
+      </a>
+      <a class="btn nav-zoom ico-btn" data-zoom="0.8">
+        <img class="ico" src="{{ '/assets/icons/zoom_in.png' | relative_url }}" alt=""
+            onerror="this.closest('a').classList.add('no-icon')">
+        <span class="label">Zoom +</span>
+      </a>
+      <a class="btn nav-zoom ico-btn" data-zoom="0.6">
+        <img class="ico" src="{{ '/assets/icons/zoom_out.png' | relative_url }}" alt=""
+            onerror="this.closest('a').classList.add('no-icon')">
+        <span class="label">Zoom -</span>
+      </a>
 
-       <a class="btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}" id="btnBack">← Regresar al post</a>
+      <a class="back ico-btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}">
+        <img class="ico" src="{{ '/assets/icons/regresar.png' | relative_url }}" alt=""
+            onerror="this.closest('a').classList.add('no-icon')">
+        <span class="label">← Regresar al post</span>
+      </a>
     </div>
     <!-- ========================================================== -->
 
     {% include analytics.html %}
 
     <script>
-    (function () {
-      // Back robusto: mismo origen -> ir al referrer; si hay historial -> history.back()
-      const a = document.getElementById('btnBack');
-      if (!a) return;
-      try {
-        const ref = document.referrer;
-        if (ref) {
-          const u = new URL(ref, location.href);
-          if (u.origin === location.origin) {
-            a.href = u.href;
-            a.textContent = 'Regresar';
-          }
-        }
-      } catch (e) {}
-      a.addEventListener('click', function (e) {
-        if (history.length > 1) {
-          e.preventDefault();
-          history.back();
-        }
-      });
-    })();
+      (function () {
+        const reader = document.getElementById('reader');
+        if (!reader) return;
 
-    /* JS para el cambio de zoom */
-    (function () {
-      const reader = document.getElementById('reader');
-      if (!reader) return;
+        const zoomButtons = document.querySelectorAll('.nav-zoom[data-zoom]');
+        if (!zoomButtons.length) return;
 
-      const zoomButtons = document.querySelectorAll('.btn-zoom');
-      if (!zoomButtons) return;
+        reader.classList.add('zoom-100');
 
-      // Establecer el zoom predeterminado al cargar la página
-      reader.classList.add('zoom-100');
-
-      zoomButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const zoomLevel = parseFloat(e.target.dataset.zoom);
-          
-          // Elimina cualquier clase de zoom existente
-          reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60');
-
-          // Aplica la clase de zoom basada en el botón clicado
-          if (zoomLevel === 1.0) {
-            reader.classList.add('zoom-100');
-          } else if (zoomLevel === 0.8) {
-            reader.classList.add('zoom-80');
-          } else if (zoomLevel === 0.6) {
-            reader.classList.add('zoom-60');
-          } 
+        zoomButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const zoomLevel = parseFloat(btn.dataset.zoom);
+            reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60');
+            if (zoomLevel === 1.0) reader.classList.add('zoom-100');
+            else if (zoomLevel === 0.8) reader.classList.add('zoom-80');
+            else if (zoomLevel === 0.6) reader.classList.add('zoom-60');
+          });
         });
-      });
-    })();
+      })();
     </script>
 
 <script>

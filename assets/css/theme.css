@@ -291,3 +291,8 @@ html, body {
   .ui-theme .manga-hero{ grid-template-columns:1fr; }
   .ui-theme .manga-meta{ max-width:none; }
 }
+
+/* Comportamiento icono → texto */
+.ico-btn .label { display: none; }             /* ocultar texto por defecto */
+.ico-btn.no-icon .label { display: inline; }   /* mostrar texto si falla icono */
+.ico-btn.no-icon .ico { display: none; }       /* ocultar <img> roto */
