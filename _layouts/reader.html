@@ -63,16 +63,17 @@ use_theme: false
       .nav-fixed.top{ top:0; }
       body.has-nav-top{ padding-top:var(--navH); }
 
-      .btn{ display:inline-block; padding:8px 14px; border-radius:10px; text-decoration:none;
-            border:1px solid #bbb; background:#fff; color:#111; font-weight:600; }
-      .btn.nav-zoom { background: #3a3a3a; color: #fff; border-color: #555; }
-
       .back{ display:none; }
       .error{ color:#ffb3b3; font-weight:600; margin:8px 0; }
 
-      .ico-btn .label { display:none; }
-      .ico-btn.no-icon .label { display:inline; }
-      .ico-btn.no-icon .ico { display:none; }
+      .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;text-decoration:none;
+        border:1px solid #bbb;background:#fff;color:#111;font-weight:600;cursor:pointer;user-select:none}
+      .btn.nav-zoom{background:#3a3a3a;color:#fff;border-color:#555}
+      .ico-btn .ico{width:22px;height:22px;display:block;object-fit:contain}
+      .ico-btn .label{display:none}
+      .ico-btn.no-icon .label{display:inline}
+      .ico-btn.no-icon .ico{display:none}
+
     </style>
   </head>
 
@@ -112,8 +113,7 @@ use_theme: false
     {% assign next_num = page.capitulo | plus: 1 %}
 
     <div class="nav-fixed bottom" id="navReader">
-      {%- if page.prev_href -%}
-      <!-- Anterior -->
+
       {%- if page.prev_href -%}
         <a class="btn nav-zoom ico-btn" href="{{ page.prev_href | relative_url }}">
           <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
@@ -130,7 +130,6 @@ use_theme: false
         <span></span>
       {%- endif -%}
 
-      <!-- Siguiente -->
       {%- if page.next_href -%}
         <a class="btn nav-zoom ico-btn" href="{{ page.next_href | relative_url }}">
           <img class="ico" src="{{ '/assets/img/icons/siguiente.png' | relative_url }}" alt=""
@@ -144,8 +143,7 @@ use_theme: false
           <span class="label">Siguiente →</span>
         </a>
       {%- endif -%}
-
-      <!-- Zoom -->
+      <!-- Botones de zoom -->
       <a class="btn nav-zoom ico-btn" data-zoom="1.0">
         <img class="ico" src="{{ '/assets/img/icons/fullscreen.png' | relative_url }}" alt=""
             onerror="this.remove();this.closest('a').classList.add('no-icon')">
@@ -162,40 +160,38 @@ use_theme: false
         <span class="label">Zoom -</span>
       </a>
 
-      <!-- Regresar visible en la barra fija -->
       <a class="btn ico-btn" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}" id="btnBack">
         <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
             onerror="this.remove();this.closest('a').classList.add('no-icon')">
         <span class="label">← Regresar</span>
       </a>
+
     </div>
     <!-- ========================================================== -->
 
     {% include analytics.html %}
 
-    <script>
-      (function () {
-        const reader = document.getElementById('reader');
-        if (!reader) return;
+  <script>
+  (function () {
+    const reader = document.getElementById('reader');
+    if (!reader) return;
+    const zoomButtons = document.querySelectorAll('.nav-zoom[data-zoom]');
+    if (!zoomButtons.length) return;
+    reader.classList.add('zoom-100');
+    zoomButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const z = parseFloat(btn.dataset.zoom);
+        reader.classList.remove('zoom-100','zoom-80','zoom-60');
+        if (z === 1.0) reader.classList.add('zoom-100');
+        else if (z === 0.8) reader.classList.add('zoom-80');
+        else if (z === 0.6) reader.classList.add('zoom-60');
+      });
+    });
+  })();
+  </script>
 
-        const zoomButtons = document.querySelectorAll('.nav-zoom[data-zoom]');
-        if (!zoomButtons.length) return;
-
-        reader.classList.add('zoom-100');
-
-        zoomButtons.forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const zoomLevel = parseFloat(btn.dataset.zoom);
-            reader.classList.remove('zoom-100', 'zoom-80', 'zoom-60');
-            if (zoomLevel === 1.0) reader.classList.add('zoom-100');
-            else if (zoomLevel === 0.8) reader.classList.add('zoom-80');
-            else if (zoomLevel === 0.6) reader.classList.add('zoom-60');
-          });
-        });
-      })();
-    </script>
-
+    <!-- ===== Lector de imágenes desde JSON ===== -->
 <script>
 (async () => {
   const BASE = '{{ site.baseurl }}';
