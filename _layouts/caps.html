@@ -32,6 +32,8 @@ layout: default
           </li>
         {% endfor %}
       </ul>
+      {% else %}
+        <p class="no-links">No hay capitulos disponibles por el momento.</p>
     </section>
     {% endif %}
 
@@ -43,6 +45,25 @@ layout: default
           <li data-cap="{{ l.cap }}"><a href="{{ l.url }}">{{ l.nombre }}</a></li>
         {% endfor %}
       </ul>
+      {% else %}
+        <p class="no-links">No haylinks de descargas disponibles por el momento.</p>
+    </section>
+    {% endif %}
+
+    {% if page.links_extras %}
+    <section id="links-de-extras" class="ui-block">
+      <h3>Extras</h3>
+      <ul id="extrasList" class="manga-extras">
+        {% for e in page.links_extras %}
+          <li data-extra="{{ e.cap | default: forloop.index }}">
+            <a href="{{ e.url }}" target="_blank" rel="noopener">
+              {{ e.nombre }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <p class="no-links">No hay capitulos extras disponibles por el momento.</p>
     </section>
     {% endif %}
 
