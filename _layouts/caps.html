@@ -33,37 +33,36 @@ layout: default
         {% endfor %}
       </ul>
     </section>
-    {% endif %}
+    {% endif %} 
+    /* No modifique los caps pues estos se procuraran mostrarse y subirse siempre */
 
-    {% if page.links_descarga %}
     <section id="links-de-descarga" class="ui-block">
       <h3>Links de descarga</h3>
-      <ul id="downloadsList" class="manga-dl">
-        {% for l in page.links_descarga %}
-          <li data-cap="{{ l.cap }}"><a href="{{ l.url }}">{{ l.nombre }}</a></li>
-        {% endfor %}
-      </ul>
+      {% if page.links_descarga and page.links_descarga.size > 0 %}
+        <ul id="downloadsList" class="manga-dl">
+          {% for l in page.links_descarga %}
+            <li data-cap="{{ l.cap }}"><a href="{{ l.url }}">{{ l.nombre }}</a></li>
+          {% endfor %}
+        </ul>
       {% else %}
-        <p class="no-links">No hay links de descargas disponibles por el momento.</p>
+        <p class="no-links">No hay descargas disponibles por el momento.</p>
+      {% endif %}
     </section>
-    {% endif %}
 
-    {% if page.links_extras %}
     <section id="links-de-extras" class="ui-block">
-      <h3>Extras</h3>
-      <ul id="extrasList" class="manga-extras">
-        {% for e in page.links_extras %}
-          <li data-extra="{{ e.cap | default: forloop.index }}">
-            <a href="{{ e.url }}" target="_blank" rel="noopener">
-              {{ e.nombre }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
+      <h3>Capítulos extras</h3>
+      {% if page.links_extras and page.links_extras.size > 0 %}
+        <ul id="extrasList" class="manga-extras">
+          {% for e in page.links_extras %}
+            <li data-extra="{{ e.cap | default: forloop.index }}">
+              <a href="{{ e.url }}">{{ e.nombre }}</a>
+            </li>
+          {% endfor %}
+        </ul>
       {% else %}
-        <p class="no-links">No hay capitulos extras disponibles por el momento.</p>
+        <p class="no-links">No hay capítulos extras disponibles por el momento.</p>
+      {% endif %}
     </section>
-    {% endif %}
 
   </main>
 </div>
