@@ -10,7 +10,7 @@ layout: default
     <div class="manga-hero ui-block">
       <div class="manga-cover">
         <img
-          src="{{ page.portada | default: '/assets/img/placeholder-cover.png' | relative_url }}"
+          src="{{ page.portada | default: '{{ site.baseurl }}/assets/img/placeholder-cover.png' | relative_url }}"
           alt="Portada de {{ page.title }}"
           onerror="this.onerror=null;this.src='{{ /assets/img/placeholder-cover.png | relative_url }}';">
         <a class="btn-back" href="{{ site.baseurl }}/">Volver al inicio</a>
