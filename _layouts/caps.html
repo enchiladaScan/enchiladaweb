@@ -3,15 +3,12 @@ layout: default
 ---
 
 {% include header_caps.html %}
-<<<<<<< HEAD
 <!-- Contenido principal -->
-<!-- falso positivo en VSCode en linea 16 (el onerror) -->
-=======
-<!-- FALSO POSITIVO A ERROR, SI FUNCIONA -->
->>>>>>> 262a74cb66d74cc5c441095766c95eb76726be4c
+ <!-- LINEA 16, FALSO POSITIVO EN VSCode -->
 <div class="ui-theme">
   <main class="container">
-        <div class="manga-hero ui-block">
+
+    <div class="manga-hero ui-block">
       <div class="manga-cover">
         <img
           src="{{ page.portada | default: '/assets/img/placeholder-cover.png' | relative_url }}"
@@ -19,7 +16,6 @@ layout: default
           onerror="this.onerror=null; this.src='{{ '/assets/img/placeholder-cover.png' | relative_url }}'">
         <a class="btn-back" href="{{ site.baseurl }}/">Volver al inicio</a>
       </div>
-    </div>
 
       {% include manga_ficha.html %}
     </div>  {# <-- cerramos manga-hero aquí, como en la versión buena #}
