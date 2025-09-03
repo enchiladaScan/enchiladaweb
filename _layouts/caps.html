@@ -1,9 +1,10 @@
 ---
-layout: default
+layout: default 
 ---
 
 {% include header_caps.html %}
-
+<!-- Contenido principal -->
+<!-- falso positivo en VSCode en linea 16 (el onerror) -->
 <div class="ui-theme">
   <main class="container">
 
@@ -11,12 +12,13 @@ layout: default
       <div class="manga-cover">
         <img
           src="{{ page.portada | default: '/assets/img/placeholder-cover.png' | relative_url }}"
-          alt="Portada de {{ page.title }}">
+          alt="Portada de {{ page.title }}"
+          onerror="this.onerror=null; this.src='{{ '/assets/img/placeholder-cover.png' | relative_url }}'">
         <a class="btn-back" href="{{ site.baseurl }}/">Volver al inicio</a>
       </div>
 
       {% include manga_ficha.html %}
-    </div>
+    </div>  {# <-- cerramos manga-hero aquí, como en la versión buena #}
 
     <article class="reader-content">
       {{ content }}
@@ -33,7 +35,7 @@ layout: default
         {% endfor %}
       </ul>
     </section>
-    {% endif %} 
+    {% endif %}
 
     <section id="links-de-descarga" class="ui-block">
       <h3>Links de descarga</h3>
