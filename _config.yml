@@ -33,6 +33,9 @@ collections:
   "100novias":            # clave entre comillas por empezar con número
     output: true
     permalink: /100novias/:name/
+  "komi":
+    output: true
+    permalink: /komi/:name/
 
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
