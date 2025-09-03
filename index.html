@@ -40,8 +40,9 @@ header_kind: home
 
 <script>
 (async function(){
-  const BASE = '{{ site.baseurl }}'; // <-- importante en repos de proyecto
+  const BASE = '{{ site.baseurl }}';                         // usa baseurl
   const CATALOG_URL = '{{ "/catalogo.json" | relative_url }}';
+  const PLACEHOLDER = '/assets/img/placeholder-cover.png';   // ruta del placeholder
 
   const SECTIONS = [
     { key: 'activos',    el: 'grid-activos',    titleEmpty: 'No hay series activas por el momento.' },
@@ -54,7 +55,6 @@ header_kind: home
     if (!res.ok) throw new Error('No se pudo cargar catalogo.json');
     const data = await res.json();
 
-    // Soporta formato plano (items[]) y el viejo agrupado (activos/joints/finalizados)
     let items = [];
     if (Array.isArray(data.items)) {
       items = data.items.map(m => normalizeItem(m));
@@ -62,7 +62,7 @@ header_kind: home
       items = []
         .concat((data.activos||[]).map(m => normalizeItem(m, 'activos')))
         .concat((data.joints||[]).map(m => normalizeItem(m, 'joints')))
-        .concat((data.finalizados||[]).map(m => normalizeItem(m, 'terminados'))); // mapea finalizados -> terminados
+        .concat((data.finalizados||[]).map(m => normalizeItem(m, 'terminados'))); // finalizados -> terminados
     }
 
     for (const sec of SECTIONS) {
@@ -79,22 +79,20 @@ header_kind: home
 
   // --- helpers ---
   function normalizeItem(m, fallbackSection) {
-    const portadaRaw = m.portada || m.cover || '/assets/img/placeholder-cover.png';
-    const hrefRaw    = m.post_url || m.url || '#';
-    const seccion    = (m.seccion || fallbackSection || '').toLowerCase();
+    const portada = m.portada || m.cover || PLACEHOLDER;     // si viene vacío, ya cae al placeholder
+    const href    = m.post_url || m.url || '#';
+    const seccion = (m.seccion || fallbackSection || '').toLowerCase();
     return {
       title:  m.title || m.mangaId || '—',
-      href:   hrefRaw,
-      portada: portadaRaw,
+      href, portada, seccion,
       tags:   Array.isArray(m.tags) ? m.tags : [],
-      latest: m.latest || '—',
-      seccion
+      latest: m.latest || '—'
     };
   }
 
   function withBase(u){
     if (!u) return '#';
-    if (/^https?:\/\//i.test(u)) return u;
+    if (/^https?:\/\//i.test(u)) return u; // absoluta
     if (u[0] !== '/') u = '/' + u;
     return (BASE || '') + u;
   }
@@ -114,19 +112,28 @@ header_kind: home
       card.className = 'card';
       card.href = withBase(m.href);
       card.setAttribute('data-title', m.title);
-      card.setAttribute('data-tags', m.tags.join(' '));
+      card.setAttribute('data-tags', (m.tags||[]).join(' '));
+
+      const imgSrc = withBase(m.portada);
+      const imgPh  = withBase(PLACEHOLDER);
+
       card.innerHTML = `
         <div class="card-cover">
-          <img src="${withBase(m.portada)}" alt="${escapeHtml(m.title)}" loading="lazy">
+          <img src="${imgSrc}" alt="${escapeHtml(m.title)}" loading="lazy">
         </div>
         <div class="card-body">
           <h3 class="card-title">${escapeHtml(m.title)}</h3>
           <div class="chips">
-            ${m.tags.slice(0,6).map(t=>`<span class="chip">${escapeHtml(t)}</span>`).join('')}
+            ${(m.tags||[]).slice(0,6).map(t=>`<span class="chip">${escapeHtml(t)}</span>`).join('')}
           </div>
           <div class="meta">Último: ${escapeHtml(m.latest)}</div>
         </div>
       `;
+
+      // si falla la imagen, reemplaza por el placeholder
+      const img = card.querySelector('img');
+      img.addEventListener('error', () => { img.src = imgPh; });
+
       fr.appendChild(card);
     }
     $grid.appendChild(fr);
