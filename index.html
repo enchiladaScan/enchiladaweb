@@ -7,41 +7,142 @@ header_kind: home
 <div class="ui-theme">
   <main class="container">
 
+    <!-- ===== ACTIVOS ===== -->
     <div class="section-title">
       <span class="bar"></span>
-      <h2>Nuestros proyectos activos</h2>
+      <h2>Activos</h2>
     </div>
+    <div class="grid" id="grid-activos"></div>
 
-    <!-- Evita where_exp: concat de listas -->
-    {% assign posts_caps  = site.posts | where: "layout", "caps"  %}
-    {% assign posts_post  = site.posts | where: "layout", "post"  %}
-    {% assign posts_manga = site.posts | where: "layout", "manga" %}
-    {% assign posts_list  = posts_caps | concat: posts_post | concat: posts_manga %}
-
-    <div class="grid">
-      {% for post in posts_list %}
-        {% assign cover_candidate = post.cover | default: post.image | default: post.portada %}
-        {% if cover_candidate == nil or cover_candidate == '' %}
-          {% assign cover_candidate = '/assets/img/placeholder-cover.png' %}
-        {% endif %}
-
-        <a class="card"
-           href="{{ post.url | relative_url }}"
-           data-title="{{ post.title | escape }}"
-           data-tags="{{ post.tags | join: ' ' | escape }}">
-          <div class="card-cover">
-            <img src="{{ cover_candidate | relative_url }}" alt="{{ post.title | escape }}">
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">{{ post.title }}</h3>
-            <div class="chips">
-              {% for t in post.tags limit:6 %}<span class="chip">{{ t }}</span>{% endfor %}
-            </div>
-            <div class="meta">{{ post.date | date: "%Y-%m-%d" }}</div>
-          </div>
-        </a>
-      {% endfor %}
+    <!-- ===== JOINTS ===== -->
+    <div class="section-title">
+      <span class="bar"></span>
+      <h2>Joints</h2>
     </div>
+    <div class="grid" id="grid-joints"></div>
+
+    <!-- ===== TERMINADOS ===== -->
+    <div class="section-title">
+      <span class="bar"></span>
+      <h2>Terminados</h2>
+    </div>
+    <div class="grid" id="grid-terminados"></div>
+
+    <!-- ===== NOTICIAS (placeholder) ===== -->
+    <div class="section-title">
+      <span class="bar"></span>
+      <h2>Noticias</h2>
+    </div>
+    <p class="muted">Próximamente: esta sección leerá publicaciones desde X/Twitter.</p>
 
   </main>
 </div>
+
+<script>
+(async function(){
+  // Ruta del catálogo (funciona igual en GitHub Pages)
+  const CATALOG_URL = '{{ "/catalogo.json" | relative_url }}';
+
+  // Contenedores por sección
+  const SECTIONS = [
+    { key: 'activos',    el: 'grid-activos',    titleEmpty: 'No hay series activas por el momento.' },
+    { key: 'joints',     el: 'grid-joints',     titleEmpty: 'No hay JOINTS por el momento.' },
+    { key: 'terminados', el: 'grid-terminados', titleEmpty: 'No hay series terminadas por el momento.' }
+  ];
+
+  try {
+    const res = await fetch(CATALOG_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error('No se pudo cargar catalogo.json');
+    const data = await res.json();
+
+    // NORMALIZACIÓN: soporta formato plano recomendado (items[]) y el viejo agrupado (activos/joints/finalizados)
+    let items = [];
+    if (Array.isArray(data.items)) {
+      // Formato plano con "seccion"
+      items = data.items.map(m => normalizeItem(m));
+    } else {
+      // Formato agrupado (compat con el actual)
+      // NOTA: tu JSON usa "finalizados" (no "terminados")
+      items = []
+        .concat((data.activos||[]).map(m => normalizeItem(m, 'activos')))
+        .concat((data.joints||[]).map(m => normalizeItem(m, 'joints')))
+        .concat((data.finalizados||[]).map(m => normalizeItem(m, 'terminados'))); // mapea finalizados -> terminados
+    }
+
+    // Render por sección
+    for (const sec of SECTIONS) {
+      const list = items.filter(m => m.seccion === sec.key);
+      renderSection(sec.el, list, sec.titleEmpty);
+    }
+  } catch (err) {
+    console.error(err);
+    // Mensajes de error amigables si el fetch falla
+    for (const sec of SECTIONS) {
+      const el = document.getElementById(sec.el);
+      if (el) el.insertAdjacentHTML('beforebegin', `<p class="no-links">No se pudo cargar el catálogo.</p>`);
+    }
+  }
+
+  // --- helpers ---
+  function normalizeItem(m, fallbackSection) {
+    // Portada
+    let portada = m.portada || m.cover || '/assets/img/placeholder-cover.png';
+    if (portada && !portada.startsWith('/')) portada = '/' + portada;
+
+    // URL: prioriza post_url (ficha con fecha), luego url
+    const href = m.post_url || m.url || '#';
+
+    // Sección: usa m.seccion o la de fallback (para formato agrupado)
+    const seccion = (m.seccion || fallbackSection || '').toLowerCase();
+
+    return {
+      title: m.title || m.mangaId || '—',
+      href,
+      portada,
+      tags: Array.isArray(m.tags) ? m.tags : [],
+      latest: m.latest || '—',
+      seccion
+    };
+  }
+
+  function renderSection(containerId, items, emptyMsg) {
+    const $grid = document.getElementById(containerId);
+    if (!$grid) return;
+
+    if (!items.length) {
+      $grid.insertAdjacentHTML('beforebegin', `<p class="no-links">${escapeHtml(emptyMsg)}</p>`);
+      return;
+    }
+
+    const fr = document.createDocumentFragment();
+    for (const m of items) {
+      const card = document.createElement('a');
+      card.className = 'card';
+      card.href = m.href;
+      card.setAttribute('data-title', m.title);
+      card.setAttribute('data-tags', m.tags.join(' '));
+
+      card.innerHTML = `
+        <div class="card-cover">
+          <img src="${m.portada}" alt="${escapeHtml(m.title)}" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">${escapeHtml(m.title)}</h3>
+          <div class="chips">
+            ${m.tags.slice(0,6).map(t=>`<span class="chip">${escapeHtml(t)}</span>`).join('')}
+          </div>
+          <div class="meta">Último: ${escapeHtml(m.latest)}</div>
+        </div>
+      `;
+      fr.appendChild(card);
+    }
+    $grid.appendChild(fr);
+  }
+
+  function escapeHtml(s){
+    return String(s||'').replace(/[&<>"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+})();
+</script>

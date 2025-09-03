@@ -1,32 +1,40 @@
 {
-  "activos": [
+  "items": [
     {
       "mangaId": "ririsa",
       "title": "Ririsa",
-      "url": "/ririsa/",
-      "portada": "assets/img/ririsa-cover.jpg",
+      "post_url": "/2025/08/04/ririsa",
+      "portada": "/assets/img/ririsa-cover.jpg",
       "tags": ["romance", "comedia"],
-      "latest": "cap2"
-    }
-  ],
-  "joints": [
+      "latest": "cap2",
+      "seccion": "activos"
+    },
     {
       "mangaId": "100novias",
       "title": "Las 100 Novias",
-      "url": "/100-novias/",
-      "portada": "assets/img/100n-cover.jpg",
+      "post_url": "/2025/08/04/100-novias",
+      "portada": "/assets/img/100n-cover.jpg",
       "tags": ["comedia", "romance"],
-      "latest": "cap168"
-    }
-  ],
-  "finalizados": [
+      "latest": "cap168",
+      "seccion": "joints"
+    },
     {
       "mangaId": "saneka",
       "title": "My Marriage with Saneka",
-      "url": "/saneka/",
-      "portada": "assets/img/saneka-cover.jpg",
+      "post_url": "/2025/08/04/saneka",
+      "portada": "/assets/img/saneka-cover.jpg",
       "tags": ["romance", "comedia"],
-      "latest": "Capitulo 17"
+      "latest": "Capítulo 17",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "komi",
+      "title": "Komi Can't Communicate",
+      "post_url": "/2025/09/03/komi",
+      "portada": "/assets/img/komi-cover.jpg",
+      "tags": ["Comedia","Escolar","Slice of life"],
+      "latest": "Capítulo 500.10",
+      "seccion": "terminados"
     }
   ]
 }
