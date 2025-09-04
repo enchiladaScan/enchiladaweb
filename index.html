@@ -28,15 +28,22 @@ header_kind: home
     </div>
     <div class="grid" id="grid-terminados"></div>
 
-    <!-- ===== NOTICIAS (placeholder) ===== -->
+    <!-- ===== NOTICIAS (placeholder) ===== (test)-->
     <div class="section-title">
       <span class="bar"></span>
-      <h2>Noticias</h2>
+      <h2>Ultimos tweets</h2>
     </div>
     <p class="muted">Próximamente: esta sección leerá publicaciones desde X/Twitter.</p>
-    <iframe src="/pruebaPAG.github.io/assets/tweets/index.html"
-        width="100%" height="600" style="border:none;">
-    </iframe>
+    <div class="viewport" id="viewport" title="Pasa el puntero para pausar">
+      <div class="scroller" id="scroller">
+        <div class="tape" id="tapeA"></div>
+        <div class="tape" id="tapeB"></div>
+      </div>
+    </div>
+      <!-- Script oficial de X (imprescindible) -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <!-- Lógica -->
+    <script src="app.js"></script>
   </main>
 </div>
 

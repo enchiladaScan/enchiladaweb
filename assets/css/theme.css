@@ -307,3 +307,69 @@ html, body {
 
 /* La versión oculta del back del tema sigue oculta */
 .back{display:none}
+
+/* ========================================================= */
+/* ====== ESTILOS PROPIOS PARA EL MARQUEE DE TWITTER ======= */
+/* ========================================================= */
+
+/* Variables y colores base para el marquee */
+:root{
+  --bg:#0f0a13;      /* Fondo del marquee */
+  --fg:#e9e9ee;      /* Texto principal */
+  --gap:24px;        /* Separación entre tarjetas y filas */
+  --tweet-w:360px;   /* Ancho de cada tweet */
+}
+
+/* Ajuste general de caja */
+*{ box-sizing:border-box; }
+
+
+/* Vista principal donde corre el marquee */
+.viewport{
+  min-height:50vh;           /* Al menos media pantalla */
+  overflow-x:hidden;         /* Oculta horizontalmente */
+  overflow-y:visible;        /* Muestra la altura completa de los tweets */
+  padding:12px 0 18px;
+}
+
+/* Contenedor de las pistas (A + B) */
+.scroller{
+  display:flex; 
+  gap:var(--gap); 
+  align-items:flex-start;
+  width:max-content;          /* Necesario para overflow real */
+}
+
+/* Cada pista (fila de tweets) */
+.tape{
+  display:flex; 
+  gap:var(--gap); 
+  align-items:flex-start;
+  flex:0 0 auto;              /* No se encoge */
+}
+
+/* Tarjeta que contiene cada tweet */
+.card{
+  background:#0f111b; 
+  border:1px solid #242634;
+  border-radius:18px; 
+  padding:10px;
+  box-shadow:0 6px 22px rgba(0,0,0,.25);
+}
+
+/* Punto de montaje del embed de Twitter */
+.mount{ 
+  width:var(--tweet-w); 
+  margin:0 auto; 
+}
+
+/* Mensajes de error en caso de fallo */
+.err{ 
+  color:#ffb4b4; 
+  font:13px/1.35 ui-monospace,monospace; 
+}
+
+/* Ajustes responsivos para pantallas pequeñas */
+@media (max-width:600px){
+  :root{ --tweet-w:320px; --gap:16px; }
+}
