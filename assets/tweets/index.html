@@ -2,72 +2,87 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Noticias en Twitter — Marquee</title>
+  <title>Carrusel Infinito de Tweets</title>
   <style>
-    :root{
-      --bg:#0f0a13;
-      --fg:#e9e9ee;
-      --gap:24px;        /* separación entre tarjetas y entre pistas */
-      --tweet-w:360px;   /* ancho de cada embed */
-    }
-    *{box-sizing:border-box}
-    body{ margin:0; background:var(--bg); color:var(--fg);
-          font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    header{ padding:18px 20px 6px; text-align:center; }
-    h1{ margin:0; font-weight:800; letter-spacing:2px; }
-
-    /* La zona visible ocupa media página */
-    /* El alto se adapta al contenido (tweet) */
-.viewport{
-  min-height:50vh;           /* como mínimo media página */
-  overflow-x:hidden;         /* seguimos ocultando solo a los lados */
-  overflow-y:visible;        /* deja ver el alto completo del tweet */
-  padding:12px 0 18px;
-}
-
-
-    /* Contenedor horizontal de las dos pistas (A+B) */
-    .scroller{
-      display:flex; gap:var(--gap); align-items:flex-start;
-      width:max-content;           /* ¡clave para que haya overflow real! */
+    body {
+      font-family: 'Rubik Mono One', sans-serif; 
+      background: hsl(303, 62%, 63%);
+      margin: 200px;
+      padding: 100px;
+      color: #ffffff;
+      font-size: 20px;
     }
 
-    /* Cada pista es una fila de tarjetas; no debe encogerse */
-    .tape{
-      display:flex; gap:var(--gap); align-items:flex-start;
-      flex:0 0 auto;               /* sin shrink */
+    h1 {
+      text-align: center;
+      margin-top: 20px;
     }
 
-    /* Tarjeta (no impone alto; el iframe decide) */
-    .card{
-      background:#0f111b; border:1px solid #242634;
-      border-radius:18px; padding:10px;
-      box-shadow:0 6px 22px rgba(0,0,0,.25);
+    .carousel-container {
+      overflow: hidden;
+      width: 100%;
+      padding: 20px 0;
     }
-    .mount{ width:var(--tweet-w); margin:0 auto; }
-    .err{ color:#ffb4b4; font:13px/1.35 ui-monospace,monospace; }
 
-    @media (max-width:600px){
-      :root{ --tweet-w:320px; --gap:16px; }
+    .tweet-carousel {
+      display: flex;
+      gap: 20px;
+      animation: scroll-left 20s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .tweet-carousel blockquote {
+      min-width: 200px;
+      transform: scale(1);
+      transform-origin: top left;
     }
   </style>
 </head>
-<body>
-  <header>
-    <h1>NOTICIAS EN TWITTER</h1>
-  </header>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-  <div class="viewport" id="viewport" title="Pasa el puntero para pausar">
-    <div class="scroller" id="scroller">
-      <div class="tape" id="tapeA"></div>
-      <div class="tape" id="tapeB"></div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+
+<body>
+  <h1>Noticias en Twitter</h1>
+
+  <div class="carousel-container">
+    <div class="tweet-carousel" id="tweetCarousel">
+      <!-- Tweet 1 -->
+      <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Buenas a todos queridos seguidores <br>Les informamos que está semana estamos de celebración, porque es el Aniversario del Scan <br>Gracias a todos por acompañarnos por todo esté año en nuestros proyectos <br>Gracias a <a href="https://twitter.com/young_xshy?ref_src=twsrc%5Etfw">@young_xshy</a> por nuestro banner especial <a href="https://t.co/e4zuP4r8OQ">pic.twitter.com/e4zuP4r8OQ</a></p>&mdash; Enchilada Nos Sekai (@EnchiladaScan) <a href="https://twitter.com/EnchiladaScan/status/1922360240223420822?ref_src=twsrc%5Etfw">May 13, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+      <!-- Tweet 2 -->
+      <blockquote class="twitter-tweet"><p lang="es" dir="ltr">¡5 de ASADA!<br><br>- Jumbo Girl <a href="https://t.co/eLhAkE2niA">pic.twitter.com/eLhAkE2niA</a></p>&mdash; Enchilada Nos Sekai (@EnchiladaScan) <a href="https://twitter.com/EnchiladaScan/status/1956536620863094988?ref_src=twsrc%5Etfw">August 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+      <!-- Tweet 3 -->
+      <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Presentamos el equipo renovado para cada manga del Scan con los nuevos miembros <br>Empezamos con las 100 novias <br>Los capítulos saldrán miércoles o jueves a manos de <a href="https://twitter.com/Shinjinshi00?ref_src=twsrc%5Etfw">@Shinjinshi00</a> y <a href="https://twitter.com/zarconxd?ref_src=twsrc%5Etfw">@zarconxd</a> <a href="https://t.co/ln3jzfSvPi">pic.twitter.com/ln3jzfSvPi</a></p>&mdash; Enchilada Nos Sekai (@EnchiladaScan) <a href="https://twitter.com/EnchiladaScan/status/1924630336001970189?ref_src=twsrc%5Etfw">May 20, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+      <!-- Tweet 4 -->
+      <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Recuerden amigos <br>Ririsa megami y las 100 novias nos pueden leer primero por esas redes <a href="https://t.co/MVy1PSnsBt">pic.twitter.com/MVy1PSnsBt</a></p>&mdash; Enchilada Nos Sekai (@EnchiladaScan) <a href="https://twitter.com/EnchiladaScan/status/1939847595670839427?ref_src=twsrc%5Etfw">July 1, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+      <!-- Duplicados para efecto infinito -->
+      <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Buenas a todos queridos seguidores <br>Les informamos que está semana estamos de celebración, porque es el Aniversario del Scan <br>Gracias a todos por acompañarnos por todo esté año en nuestros proyectos <br>Gracias a <a href="https://twitter.com/young_xshy?ref_src=twsrc%5Etfw">@young_xshy</a> por nuestro banner especial <a href="https://t.co/e4zuP4r8OQ">pic.twitter.com/e4zuP4r8OQ</a></p>&mdash; Enchilada Nos Sekai (@EnchiladaScan) <a href="https://twitter.com/EnchiladaScan/status/1922360240223420822?ref_src=twsrc%5Etfw">May 13, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+      <blockquote class="twitter-tweet"><p lang="es" dir="ltr">¡5 de ASADA!<br><br>- Jumbo Girl <a href="https://t.co/eLhAkE2niA">pic.twitter.com/eLhAkE2niA</a></p>&mdash; Enchilada Nos Sekai (@EnchiladaScan) <a href="https://twitter.com/EnchiladaScan/status/1956536620863094988?ref_src=twsrc%5Etfw">August 16, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+      <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Presentamos el equipo renovado para cada manga del Scan con los nuevos miembros <br>Empezamos con las 100 novias <br>Los capítulos saldrán miércoles o jueves a manos de <a href="https://twitter.com/Shinjinshi00?ref_src=twsrc%5Etfw">@Shinjinshi00</a> y <a href="https://twitter.com/zarconxd?ref_src=twsrc%5Etfw">@zarconxd</a> <a href="https://t.co/ln3jzfSvPi">pic.twitter.com/ln3jzfSvPi</a></p>&mdash; Enchilada Nos Sekai (@EnchiladaScan) <a href="https://twitter.com/EnchiladaScan/status/1924630336001970189?ref_src=twsrc%5Etfw">May 20, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+      <blockquote class="twitter-tweet"><p lang="es" dir="ltr">Recuerden amigos <br>Ririsa megami y las 100 novias nos pueden leer primero por esas redes <a href="https://t.co/MVy1PSnsBt">pic.twitter.com/MVy1PSnsBt</a></p>&mdash; Enchilada Nos Sekai (@EnchiladaScan) <a href="https://twitter.com/EnchiladaScan/status/1939847595670839427?ref_src=twsrc%5Etfw">July 1, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
     </div>
   </div>
 
-  <!-- Script oficial de X (imprescindible) -->
+  <!-- Script de Twitter -->
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  <!-- Lógica -->
-  <script src="app.js"></script>
 </body>
 </html>
