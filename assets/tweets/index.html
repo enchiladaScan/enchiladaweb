@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Noticias en Twitter — Marquee</title>
+  <style>
+    :root{
+      --bg:#0f0a13;
+      --fg:#e9e9ee;
+      --gap:24px;        /* separación entre tarjetas y entre pistas */
+      --tweet-w:360px;   /* ancho de cada embed */
+    }
+    *{box-sizing:border-box}
+    body{ margin:0; background:var(--bg); color:var(--fg);
+          font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    header{ padding:18px 20px 6px; text-align:center; }
+    h1{ margin:0; font-weight:800; letter-spacing:2px; }
+
+    /* La zona visible ocupa media página */
+    /* El alto se adapta al contenido (tweet) */
+.viewport{
+  min-height:50vh;           /* como mínimo media página */
+  overflow-x:hidden;         /* seguimos ocultando solo a los lados */
+  overflow-y:visible;        /* deja ver el alto completo del tweet */
+  padding:12px 0 18px;
+}
+
+
+    /* Contenedor horizontal de las dos pistas (A+B) */
+    .scroller{
+      display:flex; gap:var(--gap); align-items:flex-start;
+      width:max-content;           /* ¡clave para que haya overflow real! */
+    }
+
+    /* Cada pista es una fila de tarjetas; no debe encogerse */
+    .tape{
+      display:flex; gap:var(--gap); align-items:flex-start;
+      flex:0 0 auto;               /* sin shrink */
+    }
+
+    /* Tarjeta (no impone alto; el iframe decide) */
+    .card{
+      background:#0f111b; border:1px solid #242634;
+      border-radius:18px; padding:10px;
+      box-shadow:0 6px 22px rgba(0,0,0,.25);
+    }
+    .mount{ width:var(--tweet-w); margin:0 auto; }
+    .err{ color:#ffb4b4; font:13px/1.35 ui-monospace,monospace; }
+
+    @media (max-width:600px){
+      :root{ --tweet-w:320px; --gap:16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NOTICIAS EN TWITTER</h1>
+  </header>
+
+  <div class="viewport" id="viewport" title="Pasa el puntero para pausar">
+    <div class="scroller" id="scroller">
+      <div class="tape" id="tapeA"></div>
+      <div class="tape" id="tapeB"></div>
+    </div>
+  </div>
+
+  <!-- Script oficial de X (imprescindible) -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <!-- Lógica -->
+  <script src="app.js"></script>
+</body>
+</html>
