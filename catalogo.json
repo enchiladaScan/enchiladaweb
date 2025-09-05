@@ -1,0 +1,85 @@
+{
+  "items": [
+    {
+      "mangaId": "ririsa",
+      "title": "Ririsa",
+      "post_url": "/2025/08/04/ririsa",
+      "portada": "/assets/img/ririsa-cover.jpg",
+      "tags": ["romance", "comedia"],
+      "latest": "cap2",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "100novias",
+      "title": "Las 100 Novias",
+      "post_url": "/2025/08/04/100-novias",
+      "portada": "/assets/img/100n-cover.jpg",
+      "tags": ["comedia", "romance"],
+      "latest": "cap168",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "saneka",
+      "title": "My Marriage with Saneka",
+      "post_url": "/2025/08/05/saneka",
+      "portada": "/assets/img/saneka-cover.jpg",
+      "tags": ["romance", "comedia"],
+      "latest": "Capítulo 17",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "megami",
+      "title": "Megami no cafe terrace",
+      "post_url": "/2025/08/05/megami-no-cafe",
+      "portada": "/assets/img/megami-cover.jpg",
+      "tags": ["Comedia", "Romance", "Recuentos de la vida"],
+      "latest": "Cap 1",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "dream-jumbo-girl",
+      "title": "Dream Jumbo Girl",
+      "post_url": "/2025/08/05/dream-jumbo",
+      "portada": "/assets/img/dream-jumbo-cover.jpg",
+      "tags": ["Comedia", "Romance", "Deportes"],
+      "latest": "Cap 1",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "komi",
+      "title": "Komi Can't Communicate",
+      "post_url": "/2025/09/03/komi",
+      "portada": "/assets/img/komi-cover.png",
+      "tags": ["Comedia","Escolar","Slice of life"],
+      "latest": "Capítulo 500.10",
+      "seccion": "terminados"
+    },
+    {
+      "mangaId": "kanokari",
+      "title": "Kanojo, Okarishimasu",
+      "post_url": "/2025/09/03/kanokari",
+      "portada": "/assets/img/kanokari-cover.jpg",
+      "tags": ["Comedia","Romance","Escolar"],
+      "latest": "Capítulo X",
+      "seccion": "joints"
+    },
+    {
+      "mangaId": "medalist",
+      "title": "Medalist",
+      "post_url": "/2025/08/05/medalist",
+      "portada": "/assets/img/medalist-cover.jpg",
+      "tags": ["Drama", "Deportes", "Psicológico"],
+      "latest": "Cap 1",
+      "seccion": "joints"
+    },
+    {
+      "mangaId": "marchen-crown",
+      "title": "Marchen Crown",
+      "post_url": "/2025/08/05/marchen-crown",
+      "portada": "/assets/img/marchen-cover.jpg",
+      "tags": ["Aventura", "Fantasia", "Accion"],
+      "latest": "Cap 1",
+      "seccion": "joints"
+    }
+  ]
+}
