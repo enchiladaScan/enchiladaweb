@@ -13,7 +13,7 @@ kramdown:
 # Páginas bonitas (/ruta/ en vez de .html)
 permalink: pretty
 
-# Tema que está usando tu Actions (según tu log)
+# Tema que está usando Actions
 theme: jekyll-theme-primer
 
 # Plugins soportados por GitHub Pages (opcional)
@@ -24,6 +24,7 @@ plugins:
 
 # --- Collections para tus carpetas de series ---
 collections:
+#activos
   saneka:
     output: true
     permalink: /saneka/:name/
@@ -33,12 +34,34 @@ collections:
   "100novias":            # clave entre comillas por empezar con número
     output: true
     permalink: /100novias/:name/
-  "komi":
+  megami:
+    output: true
+    permalink: /megami-no-cafe/:name/
+  dream-jumbo-girl:
+    output: true
+    permalink: /dream-jumbo/:name/
+#joints
+  medalist:
+    output: true
+    permalink: /medalist/:name/
+  marchen-crown:
+    output: true
+    permalink: /marchen-crown/:name/
+  kanokari:
+    output: true
+    permalink: /kanokari/:name/
+#terminados
+  komi:
     output: true
     permalink: /komi/:name/
+  #falta oshi no ko de crear en _posts
+  oshi-no-ko:
+    output: true
+    permalink: /oshi-no-ko/:name/
 
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
+#activos
   - scope:
       path: "_saneka"
       type: saneka
@@ -54,8 +77,45 @@ defaults:
       type: "100novias"
     values:
       layout: caps
+  - scope:
+    path: "_megami"
+    type: megami
+    values:
+      layout: caps
+  - scope:
+    path: "_dream-jumbo"
+    type: dream
+    values:
+      layout: caps
+#joints
+  - scope: 
+    path: "_kanokari"
+    type: kanokari
+    values:
+      layout: caps
+  - scope:
+    path: "_medalist"
+    type: medalist
+    values:
+      layout: caps
+  - scope:
+    path: "_marchen-crown"
+    type: marchen-crown
+    values:
+      layout: caps
+#terminados
+  - scope:
+    path: "_komi"
+    type: komi
+    values:
+      layout: caps
+  - scope:
+    path: "_oshi-no-ko"
+    type: oshi-no-ko
+    values:
+      layout: caps
 
-# --- Archivos/carpetas a excluir del build (amplía si te hace falta) ---
+# --- Archivos/carpetas a excluir del build (amplía si hace falta) ---
 exclude:
   - node_modules
   - vendor
@@ -63,6 +123,6 @@ exclude:
   - checklist.txt
   - guia_rapida.txt
 
-# --- Incluir explícitamente assets si lo necesitas (normalmente no hace falta) ---
+# --- Incluir explícitamente assets si lo necesita ---
 include:
   - assets

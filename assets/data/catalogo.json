@@ -21,10 +21,28 @@
     {
       "mangaId": "saneka",
       "title": "My Marriage with Saneka",
-      "post_url": "/2025/08/04/saneka",
+      "post_url": "/2025/08/05/saneka",
       "portada": "/assets/img/saneka-cover.jpg",
       "tags": ["romance", "comedia"],
       "latest": "Capítulo 17",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "megami",
+      "title": "Megami no cafe terrace",
+      "post_url": "/2025/08/05/megami-no-cafe",
+      "portada": "/assets/img/megami-cover.jpg",
+      "tags": ["Comedia", "Romance", "Recuentos de la vida"],
+      "latest": "Cap 1",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "dream-jumbo-girl",
+      "title": "Dream Jumbo Girl",
+      "post_url": "/2025/08/05/dream-jumbo",
+      "portada": "/assets/img/dream-jumbo-cover.jpg",
+      "tags": ["Comedia", "Romance", "Deportes"],
+      "latest": "Cap 1",
       "seccion": "activos"
     },
     {
@@ -46,15 +64,6 @@
       "seccion": "joints"
     },
     {
-      "mangaId": "dream-jumbo-girl",
-      "title": "Dream Jumbo Girl",
-      "post_url": "/2025/08/05/dream-jumbo",
-      "portada": "/assets/img/dream-jumbo-cover.jpg",
-      "tags": ["Comedia", "Romance", "Deportes"],
-      "latest": "Cap 1",
-      "seccion": "activos"
-    },
-    {
       "mangaId": "medalist",
       "title": "Medalist",
       "post_url": "/2025/08/05/medalist",
@@ -71,15 +80,6 @@
       "tags": ["Aventura", "Fantasia", "Accion"],
       "latest": "Cap 1",
       "seccion": "joints"
-    },
-    {
-      "mangaId": "megami",
-      "title": "Megami no cafe terrace",
-      "post_url": "/2025/08/05/medalist",
-      "portada": "/assets/img/megami-cover.jpg",
-      "tags": ["Comedia", "Romance", "Recuentos de la vida"],
-      "latest": "Cap 1",
-      "seccion": "activos"
     }
   ]
 }

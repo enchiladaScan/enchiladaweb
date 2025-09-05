@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Ririsa - Capítulo 1"
+title: "2.5 Jigen no Ririsa - Capítulo 1"
 manga: "ririsa"
 manga_slug: "ririsa"
 capitulo: 1
