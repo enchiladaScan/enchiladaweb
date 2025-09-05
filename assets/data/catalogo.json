@@ -31,7 +31,7 @@
       "mangaId": "komi",
       "title": "Komi Can't Communicate",
       "post_url": "/2025/09/03/komi",
-      "portada": "/assets/img/komi-cover.jpg",
+      "portada": "/assets/img/komi-cover.png",
       "tags": ["Comedia","Escolar","Slice of life"],
       "latest": "Capítulo 500.10",
       "seccion": "terminados"
@@ -44,6 +44,42 @@
       "tags": ["Comedia","Romance","Escolar"],
       "latest": "Capítulo X",
       "seccion": "joints"
+    },
+    {
+      "mangaId": "dream-jumbo-girl",
+      "title": "Dream Jumbo Girl",
+      "post_url": "/2025/08/05/dream-jumbo",
+      "portada": "/assets/img/dream-jumbo-cover.jpg",
+      "tags": ["Comedia", "Romance", "Deportes"],
+      "latest": "Cap 1",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "medalist",
+      "title": "Medalist",
+      "post_url": "/2025/08/05/medalist",
+      "portada": "/assets/img/medalist-cover.jpg",
+      "tags": ["Drama", "Deportes", "Psicológico"],
+      "latest": "Cap 1",
+      "seccion": "joints"
+    },
+    {
+      "mangaId": "marchen-crown",
+      "title": "Marchen Crown",
+      "post_url": "/2025/08/05/marchen-crown",
+      "portada": "/assets/img/marchen-cover.jpg",
+      "tags": ["Aventura", "Fantasia", "Accion"],
+      "latest": "Cap 1",
+      "seccion": "joints"
+    },
+    {
+      "mangaId": "megami",
+      "title": "Megami no cafe terrace",
+      "post_url": "/2025/08/05/medalist",
+      "portada": "/assets/img/megami-cover.jpg",
+      "tags": ["Comedia", "Romance", "Recuentos de la vida"],
+      "latest": "Cap 1",
+      "seccion": "activos"
     }
   ]
 }
