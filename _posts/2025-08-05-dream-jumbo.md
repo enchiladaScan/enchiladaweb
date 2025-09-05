@@ -20,9 +20,14 @@ use_theme: true
 ---
 
 Ver capítulos aquí:
-<ul>
-  {% assign caps = site['dream-jumbo-girl'] | sort: 'capitulo' %}
-  {% for c in caps %}
-    <li><a href="{{ site.baseurl }}{{ c.url }}">{{ c.title }}</a></li>
-  {% endfor %}
-</ul>
+    <ul>
+    {% assign caps = site.dream-jumbo %}
+    {% if caps %}
+        {% assign caps = caps | sort: 'capitulo' %}
+        {% for c in caps %}
+        <li><a href="{{ site.baseurl }}{{ c.url }}">{{ c.title }}</a></li>
+        {% endfor %}
+    {% else %}
+        <li class="no-links">Aún no hay capítulos de este manga.</li>
+    {% endif %}
+    </ul>
