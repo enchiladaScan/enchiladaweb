@@ -8,7 +8,7 @@ const TWEET_URLS = [
 ];
 
 /* 2) Parámetros fijos (sin controles) */
-const SPEED = 80;            // px/s, siempre 80
+const SPEED = 45;            // px/s, velocidad
 const THEME = "dark";        // oscuro fijo
 const SHOW_REPLIES = false;  // conversation:"none" si false
 
@@ -147,5 +147,5 @@ function startMarquee(){
 /* 7) Init */
 (async ()=>{
   await buildTapeA($("#tapeA"), TWEET_URLS); // espera a 'rendered' de todos los tweets
-  startMarquee();                             // arranca bucle infinito a 80 px/s
+  startMarquee();                             // arranca bucle infinito a la velocidad dada en "SPEED" px/s
 })();
