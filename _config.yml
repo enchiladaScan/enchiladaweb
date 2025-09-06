@@ -71,44 +71,36 @@ defaults:
     values:
       layout: caps
   - scope:
-      path: "mangas/_100novias"
       type: "100novias"
     values:
       layout: caps
   - scope:
-      path: "mangas/_megami"
       type: megami
     values:
       layout: caps
   - scope:
-      path: "mangas/_dream-jumbo"
       type: dream
     values:
       layout: caps
 # joints
   - scope:
-      path: "mangas/_kanokari"
       type: kanokari
     values:
       layout: caps
   - scope:
-      path: "mangas/_medalist"
       type: medalist
     values:
       layout: caps
   - scope:
-      path: "mangas/_marchen-crown"
       type: marchen-crown
     values:
       layout: caps
 # terminados
   - scope:
-      path: "mangas/_komi"
       type: komi
     values:
       layout: caps
   - scope:
-      path: "mangas/_oshi-no-ko"
       type: oshi-no-ko
     values:
       layout: caps
