@@ -12,5 +12,5 @@ redirect_from:
   - /cap1-saneka/
 use_theme: false   # <- No añade la clase ui-theme al <body>
 next_href: /saneka/cap2/
-post_url: /2025/08/05/saneka
+
 ---

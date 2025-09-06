@@ -10,6 +10,5 @@ return_to: /ririsa/
 images_json: assets/mangas/ririsa/cap1/images.json
 redirect_from:
   - /cap1/ririsa/
-post_url: /2025/08/04/ririsa
 use_main_css: true
 ---
