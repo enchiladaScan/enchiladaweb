@@ -1,6 +1,7 @@
 ---
 layout: default
 permalink: /debug/collections/
+header_kind: home
 ---
 <h2>Estado de colecciones</h2>
 

@@ -3,6 +3,7 @@ layout: page
 title: APP Enchilada
 permalink: /app.html
 use_main_css: true
+header_kind: home
 ---
 
 Por el momento no esta disponible, mantente al pendiente en el twiter del scan para saber su lanzamiento.
