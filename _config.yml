@@ -63,54 +63,54 @@ collections:
 defaults:
 #activos
   - scope:
-      path: "_saneka"
+      path: "mangas/_saneka"
       type: saneka
     values:
       layout: caps
   - scope:
-      path: "_ririsa"
+      path: "mangas/_ririsa"
       type: ririsa
     values:
       layout: caps
   - scope:
-      path: "_100novias"
+      path: "mangas/_100novias"
       type: "100novias"
     values:
       layout: caps
   - scope:
-    path: "_megami"
+    path: "mangas/_megami"
     type: megami
     values:
       layout: caps
   - scope:
-    path: "_dream-jumbo"
+    path: "mangas/_dream-jumbo"
     type: dream
     values:
       layout: caps
 #joints
   - scope: 
-    path: "_kanokari"
+    path: "mangas/_kanokari"
     type: kanokari
     values:
       layout: caps
   - scope:
-    path: "_medalist"
+    path: "mangas/_medalist"
     type: medalist
     values:
       layout: caps
   - scope:
-    path: "_marchen-crown"
+    path: "mangas/_marchen-crown"
     type: marchen-crown
     values:
       layout: caps
 #terminados
   - scope:
-    path: "_komi"
+    path: "mangas/_komi"
     type: komi
     values:
       layout: caps
   - scope:
-    path: "_oshi-no-ko"
+    path: "mangas/_oshi-no-ko"
     type: oshi-no-ko
     values:
       layout: caps

@@ -23,13 +23,13 @@ links_extras:
 
 Ver capítulos aquí:
 <ul>
-  {% assign caps = site.komi %}
-  {% if caps %}
-    {% assign caps = caps | sort: 'capitulo' %}
-    {% for c in caps %}
-      <li><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>
-    {% endfor %}
+  {% assign caps = site.komi | where_exp:"c","c.capitulo" %}
+  {% if caps.size > 0 %}
+      {% assign caps = caps | sort: 'capitulo' %}
+      {% for c in caps %}
+          <li><a href="{{ site.baseurl }}{{ c.url }}">{{ c.title }}</a></li>
+      {% endfor %}
   {% else %}
-    <li class="no-links">Aún no hay capítulos de este manga.</li>
+      <li class="no-links">Aún no hay capítulos de este manga.</li>
   {% endif %}
 </ul>

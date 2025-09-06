@@ -16,17 +16,19 @@ links_descarga:
     { nombre: "Cap 1 (Drive)", url: "#" } 
 show_links_en_ficha: false 
 use_theme: true
+redirect_from:
+  - /ririsa/
 ---
 
 Ver capítulos aquí:
     <ul>
-    {% assign caps = site.ririsa %}
-    {% if caps %}
-        {% assign caps = caps | sort: 'capitulo' %}
-        {% for c in caps %}
-        <li><a href="{{ site.baseurl }}{{ c.url }}">{{ c.title }}</a></li>
-        {% endfor %}
-    {% else %}
-        <li class="no-links">Aún no hay capítulos de este manga.</li>
-    {% endif %}
+        {% assign caps = site.ririsa | where_exp:"c","c.capitulo" %} 
+        {% if caps.size > 0 %}
+            {% assign caps = caps | sort: 'capitulo' %}
+            {% for c in caps %}
+                <li><a href="{{ site.baseurl }}{{ c.url }}">{{ c.title }}</a></li>
+            {% endfor %}
+        {% else %}
+            <li class="no-links">Aún no hay capítulos de este manga.</li>
+        {% endif %}
     </ul>
