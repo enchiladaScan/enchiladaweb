@@ -61,14 +61,12 @@ collections:
 
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
-# activos
+# activos (cambios en saneka y ririsa para que no fallen, test)
   - scope:
-      path: "mangas/_saneka"
       type: saneka
     values:
       layout: caps
   - scope:
-      path: "mangas/_ririsa"
       type: ririsa
     values:
       layout: caps
