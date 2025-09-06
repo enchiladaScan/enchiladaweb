@@ -61,7 +61,7 @@ collections:
 
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
-#activos
+# activos
   - scope:
       path: "mangas/_saneka"
       type: saneka
@@ -78,44 +78,44 @@ defaults:
     values:
       layout: caps
   - scope:
-    path: "mangas/_megami"
-    type: megami
+      path: "mangas/_megami"
+      type: megami
     values:
       layout: caps
   - scope:
-    path: "mangas/_dream-jumbo"
-    type: dream
+      path: "mangas/_dream-jumbo"
+      type: dream
     values:
       layout: caps
-#joints
-  - scope: 
-    path: "mangas/_kanokari"
-    type: kanokari
+# joints
+  - scope:
+      path: "mangas/_kanokari"
+      type: kanokari
     values:
       layout: caps
   - scope:
-    path: "mangas/_medalist"
-    type: medalist
+      path: "mangas/_medalist"
+      type: medalist
     values:
       layout: caps
   - scope:
-    path: "mangas/_marchen-crown"
-    type: marchen-crown
+      path: "mangas/_marchen-crown"
+      type: marchen-crown
     values:
       layout: caps
-#terminados
+# terminados
   - scope:
-    path: "mangas/_komi"
-    type: komi
+      path: "mangas/_komi"
+      type: komi
     values:
       layout: caps
   - scope:
-    path: "mangas/_oshi-no-ko"
-    type: oshi-no-ko
+      path: "mangas/_oshi-no-ko"
+      type: oshi-no-ko
     values:
       layout: caps
 
-# --- Archivos/carpetas a excluir del build (amplía si hace falta) ---
+# --- Archivos/carpetas a excluir del build (se amplía si hace falta) ---
 exclude:
   - node_modules
   - vendor
