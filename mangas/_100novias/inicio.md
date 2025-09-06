@@ -16,6 +16,8 @@ links_descarga:
   - { nombre: "Pack Caps 006–010 (Drive)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
+redirect_from:
+  - /100novias/
 ---
 
 Ver capítulos aquí:
