@@ -10,7 +10,10 @@ html, body {
 .ui-theme, .ui-theme .container {
   background: transparent;
 }
-
+/* Texto de error 404 y demás */
+.extras-page {
+  color: white;
+}
 
 /* ===== Variables: se definen dentro de .ui-theme para que NO “sangren” al reader ===== */
 .ui-theme{

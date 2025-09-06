@@ -17,6 +17,8 @@ links_descarga:
   - { nombre: "Pack 1–5 (MEGA)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
+redirect_from:
+  - /medalist/
 ---
 
 Ver capítulos aquí:
