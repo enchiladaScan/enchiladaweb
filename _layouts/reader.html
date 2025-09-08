@@ -161,9 +161,11 @@ use_theme: false
         <span class="label">Zoom -</span>
       </a>
       <!-- Botón Regresar (robusto) -->
+       <!-- Si el capítulo tiene post_url o return_to, lo usa. Si no, intenta referrer del mismo origen. Si no, índice del manga o home -->
+        <!--href="{% if fm %}{{ fm | relative_url }}{% else %}{{ '/' | append: page.manga_slug | append: '/' | relative_url }}{% endif %}" -->
       <a class="btn ico-btn"
         id="btnBack"
-        href="{% if fm %}{{ fm | relative_url }}{% else %}{{ '/' | append: page.manga_slug | append: '/' | relative_url }}{% endif %}"
+        href="{{ page.return_to | relative_url }}"
         data-fm="{% if fm %}{{ fm | relative_url }}{% endif %}">
         <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
             onerror="this.remove();this.closest('a').classList.add('no-icon')">
