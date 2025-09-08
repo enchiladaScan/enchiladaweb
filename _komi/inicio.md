@@ -20,16 +20,3 @@ links_extras:
   # - { nombre: "Extra 1 – Bocetos", url: "#" }
   # - { nombre: "Extra 2 – Ilustraciones", url: "/ririsa/extras/extra-2" }
 ---
-
-Ver capítulos aquí:
-<ul>
-  {% assign caps = site.komi | where_exp:"c","c.capitulo" %}
-  {% if caps.size > 0 %}
-      {% assign caps = caps | sort: 'capitulo' %}
-      {% for c in caps %}
-          <li><a href="{{ site.baseurl }}{{ c.url }}">{{ c.title }}</a></li>
-      {% endfor %}
-  {% else %}
-      <li class="no-links">Aún no hay capítulos de este manga.</li>
-  {% endif %}
-</ul>

@@ -20,16 +20,3 @@ use_theme: true
 redirect_from:
   - /medalist/
 ---
-
-Ver capítulos aquí:
-    <ul>
-    {% assign caps = site.medalist %}
-    {% if caps %}
-        {% assign caps = caps | sort: 'capitulo' %}
-        {% for c in caps %}
-        <li><a href="{{ site.baseurl }}{{ c.url }}">{{ c.title }}</a></li>
-        {% endfor %}
-    {% else %}
-        <li class="no-links">Aún no hay capítulos de este manga.</li>
-    {% endif %}
-    </ul>

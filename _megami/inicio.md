@@ -18,16 +18,3 @@ links_descarga:
 show_links_en_ficha: false
 use_theme: true
 ---
-
-Ver capítulos aquí:
-<ul>
-  {% assign caps = site.megami %}
-  {% if caps %}
-    {% assign caps = caps | sort: 'capitulo' %}
-    {% for c in caps %}
-      <li><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>
-    {% endfor %}
-  {% else %}
-    <li class="no-links">Aún no hay capítulos de este manga.</li>
-  {% endif %}
-</ul>
