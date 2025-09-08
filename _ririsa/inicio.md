@@ -19,7 +19,8 @@ use_theme: true
 redirect_from:
   - /ririsa/
 ---
-
+<script>
+/*
 Ver capítulos aquí:
 <ul>
     {% assign caps = site.ririsa | where_exp:"c","c.capitulo" %} 
@@ -32,3 +33,5 @@ Ver capítulos aquí:
         <li class="no-links">Aún no hay capítulos de este manga.</li>
     {% endif %}
 </ul>
+*/
+</script>
