@@ -163,7 +163,7 @@ use_theme: false
       <!-- Botón Regresar (robusto) -->
       <a class="btn ico-btn"
         id="btnBack"
-        href="{% if fm %}{{ fm | relative_url }}{% else %}{{ '/' | append: page.manga_slug | append: '/' | relative_url }}{% endif %}"
+        href="{% if fm %}{{ fm | relative_url }}{% else %}{{ '/' | append: page.collection | append: '/inicio' | relative_url }}{% endif %}"
         data-fm="{% if fm %}{{ fm | relative_url }}{% endif %}">
         <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
             onerror="this.remove();this.closest('a').classList.add('no-icon')">
