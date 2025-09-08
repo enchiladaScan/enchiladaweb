@@ -12,8 +12,8 @@ estado: "En publicación"
 anio: 2019 
 editorial: "Shonen Jump+" 
 links_descarga:
-    { nombre: "Cap 1 (MEGA)", url: "#" }
-    { nombre: "Cap 1 (Drive)", url: "#" } 
+    - { nombre: "Cap 1 (MEGA)", url: "#" }
+    - { nombre: "Cap 1 (Drive)", url: "#" } 
 show_links_en_ficha: false 
 use_theme: true
 redirect_from:
