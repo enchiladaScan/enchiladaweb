@@ -190,7 +190,7 @@ use_theme: false
           return BASE + (u.startsWith('/') ? u : '/' + u);
         }
 
-        // 1) Si el capítulo trae post_url, úsalo SIEMPRE
+        // 1) Si el capítulo trae post_url
         if (explicitPost) {
           const target = withBase(explicitPost);
           a.href = target;
@@ -199,7 +199,7 @@ use_theme: false
             e.preventDefault();
             location.href = target;   // no uses history.back()
           });
-          return; // listo
+          return;
         }
 
         /* test de referrer desactivado por ahora

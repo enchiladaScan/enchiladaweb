@@ -16,7 +16,7 @@ links_descarga:
   # - { nombre: "Cap 1 (Drive)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
-links_extras:
+#links_extras:
   # - { nombre: "Extra 1 – Bocetos", url: "#" }
   # - { nombre: "Extra 2 – Ilustraciones", url: "/ririsa/extras/extra-2" }
 ---
