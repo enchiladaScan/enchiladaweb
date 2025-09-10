@@ -1,0 +1,16 @@
+---
+layout: reader
+title: "Megami no cafe - Capítulo 202"
+manga: "Megami no cafe"
+manga_slug: "megami-no-cafe"
+capitulo: 202
+es_ultimo: false
+permalink: /megami-no-cafe/cap202/
+return_to: /megami-no-cafe/
+images_json: assets/mangas/megami-no-cafe/cap202/images.json
+redirect_from:
+  - /cap202-megami-no-cafe/
+use_main_css: true
+prev_href: /megami-no-cafe/cap201/
+next_href: /megami-no-cafe/cap203/
+---
