@@ -114,23 +114,26 @@ use_theme: false
     {% assign fm = page.post_url | default: page.return_to %} <!-- obtiene el origen para "regresar" -->
 
     <div class="nav-fixed bottom" id="navReader">
-
-      {%- if page.prev_href -%}
-        <a class="btn nav-zoom ico-btn" href="{{ page.prev_href | relative_url }}">
-          <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
-              onerror="this.remove();this.closest('a').classList.add('no-icon')">
-          <span class="label">← Anterior</span>
-        </a>
-      {%- elsif page.capitulo and page.capitulo > 1 -%}
-        <a class="btn nav-zoom ico-btn" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/') | relative_url }}">
-          <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
-              onerror="this.remove();this.closest('a').classList.add('no-icon')">
-          <span class="label">← Anterior</span>
-        </a>
-      {%- else -%}
-        <span></span>
-      {%- endif -%}
-
+      <!-- Botón Anterior -->
+      {%- unless page.es_primero -%}
+        {%- if page.prev_href -%}
+          <a class="btn nav-zoom ico-btn" href="{{ page.prev_href | relative_url }}">
+            <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
+                onerror="this.remove();this.closest('a').classList.add('no-icon')">
+            <span class="label">← Anterior</span>
+          </a>
+        {%- elsif page.capitulo and page.capitulo > 1 -%}
+          <a class="btn nav-zoom ico-btn" 
+            href="{{ '/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/' | relative_url }}">
+            <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
+                onerror="this.remove();this.closest('a').classList.add('no-icon')">
+            <span class="label">← Anterior</span>
+          </a>
+        {%- else -%}
+          <span></span>
+        {%- endif -%}
+      {%- endunless -%}
+      <!-- Botón Siguiente -->
       {%- if page.next_href -%}
         <a class="btn nav-zoom ico-btn" href="{{ page.next_href | relative_url }}">
           <img class="ico" src="{{ '/assets/img/icons/siguiente.png' | relative_url }}" alt=""
@@ -160,14 +163,13 @@ use_theme: false
             onerror="this.remove();this.closest('a').classList.add('no-icon')">
         <span class="label">Zoom -</span>
       </a>
-      <!-- Botón Regresar dinámico -->
+      <!-- Botón Regresar robusto -->
       <a class="btn ico-btn"
-        href="{{ '/' | append: page.collection | append: '/inicio/' | relative_url }}">
+        href="{% if page.manga_slug %}{{ '/' | append: page.manga_slug | append: '/inicio/' | relative_url }}{% else %}{{ '/' | append: page.collection | append: '/inicio/' | relative_url }}{% endif %}">
         <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
               onerror="this.remove();this.closest('a').classList.add('no-icon')">
         <span class="label">← Regresar al post</span>
-      </a>
-      
+      </a>  
     </div>
     <!-- ========================================================== -->
 

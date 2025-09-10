@@ -22,7 +22,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
 
-# --- Collections para tus carpetas de series ---
+# --- Collections para las carpetas de series ---
 collections:
 #activos
   saneka:
@@ -54,7 +54,6 @@ collections:
   komi:
     output: true
     permalink: /komi/:name/
-  #falta oshi no ko de crear en _posts
   oshi-no-ko:
     output: true
     permalink: /oshi-no-ko/:name/
