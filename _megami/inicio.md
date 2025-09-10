@@ -15,6 +15,9 @@ links_descarga:
   - { nombre: "Cap 1 (MEGA)", url: "#" }
   - { nombre: "Cap 1 (Drive)", url: "#" }
   - { nombre: "Pack 1–5 (MEGA)", url: "#" }
+links_extras:
+  - { nombre: "Extra 1 – BLU-RAY", url: "/megami-no-cafe/extra1/" }
+  # - { nombre: "Extra 2 – Ilustraciones", url: "/ririsa/extras/extra-2" }
 show_links_en_ficha: false
 use_theme: true
 ---
