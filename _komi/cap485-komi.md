@@ -13,5 +13,5 @@ redirect_from:
   - /cap485-komi/
 use_main_css: true
 prev_href: /komi/cap484/
-next_href: /komi/cap486/
+next_href: /komi/cap488/
 ---
