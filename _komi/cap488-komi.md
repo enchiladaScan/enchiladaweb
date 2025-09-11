@@ -12,6 +12,6 @@ images_json: assets/mangas/komi/cap488/images.json
 redirect_from:
   - /cap488-komi/
 use_main_css: true
-prev_href: /komi/cap487/
+prev_href: /komi/cap485/
 next_href: /komi/cap489/
 ---
