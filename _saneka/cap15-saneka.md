@@ -1,9 +1,10 @@
 ---
 layout: reader
-title: "Saneka - Capítulo 15"
+title: "Capítulo 15"
 manga: "Saneka"
 manga_slug: "saneka"
 capitulo: 15
+es_primero: false
 es_ultimo: false
 permalink: /saneka/cap15/
 return_to: /saneka/

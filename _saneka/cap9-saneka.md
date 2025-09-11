@@ -1,9 +1,10 @@
 ---
 layout: reader
-title: "Saneka - Capítulo 9"
+title: "Capítulo 9"
 manga: "Saneka"
 manga_slug: "saneka"
 capitulo: 9
+es_primero: false
 es_ultimo: false
 permalink: /saneka/cap9/
 return_to: /saneka/

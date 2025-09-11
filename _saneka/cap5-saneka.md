@@ -1,9 +1,10 @@
 ---
 layout: reader
-title: "Saneka - Capítulo 5"
+title: "Capítulo 5"
 manga: "Saneka"
 manga_slug: "saneka"
 capitulo: 5
+es_primero: false
 es_ultimo: false
 permalink: /saneka/cap5/
 return_to: /saneka/
@@ -13,5 +14,4 @@ redirect_from:
 use_main_css: true
 prev_href: /saneka/cap4/
 next_href: /saneka/cap6/
-
 ---
