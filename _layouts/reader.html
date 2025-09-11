@@ -73,7 +73,6 @@ use_theme: false
       .ico-btn .label{display:none}
       .ico-btn.no-icon .label{display:inline}
       .ico-btn.no-icon .ico{display:none}
-
     </style>
   </head>
 
@@ -93,7 +92,8 @@ use_theme: false
       <div id="reader" class="reader"></div>
 
       <!-- Link original oculto -->
-      <a class="back" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}"><img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
+      <a class="back" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}">
+        <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
             onerror="this.closest('.ico-btn').classList.add('no-icon')">
         <span class="label">← Regresar al post</span>
       </a>
@@ -111,7 +111,7 @@ use_theme: false
     <!-- ===== Barra de navegación fija (con fallback robusto) ===== -->
     {% assign prev_num = page.capitulo | minus: 1 %}
     {% assign next_num = page.capitulo | plus: 1 %}
-    {% assign fm = page.post_url | default: page.return_to %} <!-- obtiene el origen para "regresar" -->
+    {% assign fm = page.post_url | default: page.return_to %}
 
     <div class="nav-fixed bottom" id="navReader">
       <!-- Botón Anterior -->
@@ -141,7 +141,7 @@ use_theme: false
           <span class="label">Siguiente →</span>
         </a>
       {%- elsif page.es_ultimo != true and page.capitulo -%}
-        <a class="btn nav-zoom ico-btn" href="{{ ('/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/') | relative_url }}">
+        <a class="btn nav-zoom ico-btn" href="{{ '/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/' | relative_url }}">
           <img class="ico" src="{{ '/assets/img/icons/siguiente.png' | relative_url }}" alt=""
               onerror="this.remove();this.closest('a').classList.add('no-icon')">
           <span class="label">Siguiente →</span>
@@ -174,64 +174,7 @@ use_theme: false
     <!-- ========================================================== -->
 
     {% include analytics.html %}
-
-    <!-- ===== Lógica para el botón "Regresar" y ?from= ===== -->
-    <script>
-      (function () {
-        const a = document.getElementById('btnBack');
-        if (!a) return;
-
-        const BASE = '{{ site.baseurl }}';
-        const explicitPost = "{{ page.post_url | default: page.return_to | default: '' }}".trim();
-
-        function withBase(u){
-          if (!u) return '';
-          if (/^https?:\/\//i.test(u)) return u;
-          return BASE + (u.startsWith('/') ? u : '/' + u);
-        }
-
-        // 1) Si el capítulo trae post_url
-        if (explicitPost) {
-          const target = withBase(explicitPost);
-          a.href = target;
-          a.dataset.fm = target;
-          a.addEventListener('click', function(e){
-            e.preventDefault();
-            location.href = target;   // no uses history.back()
-          });
-          return;
-        }
-
-        /* test de referrer desactivado por ahora
-        // 2) Si no hay post_url, intenta referrer del mismo origen
-        try {
-          const ref = document.referrer;
-          if (ref) {
-            const u = new URL(ref, location.href);
-            if (u.origin === location.origin) {
-              a.href = u.href;
-              a.dataset.fm = u.href;
-              a.addEventListener('click', function(e){
-                e.preventDefault();
-                location.href = u.href;
-              });
-              return;
-            }
-          }
-        } catch (e) {}
-         */
-
-        // 3) Último fallback: índice del manga o home
-        const mangaFallback = "{% if page.manga_slug %}{{ '/' | append: page.manga_slug | append: '/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}";
-        a.href = mangaFallback;
-        a.dataset.fm = mangaFallback;
-        a.addEventListener('click', function(e){
-          e.preventDefault();
-          location.href = mangaFallback;
-        });
-      })();
-    </script>
-
+    <!-- ===== JS para el cambio de zoom ===== -->
     <script>
       /* JS para el cambio de zoom */
       (function () {
@@ -270,7 +213,7 @@ use_theme: false
         });
       })();
       </script>
-
+    <!-- ======================================== -->
 
     <!-- ===== Lector de imágenes desde JSON ===== -->
 <script>
@@ -278,11 +221,6 @@ use_theme: false
   const BASE = '{{ site.baseurl }}';
   const RAW  = ('{{ page.images_json }}' || '').trim();
 
-  // Si prefieres la barra ARRIBA:
-  // document.body.classList.remove('has-nav-bottom'); document.body.classList.add('has-nav-top');
-  // document.getElementById('navReader').classList.remove('bottom'); document.getElementById('navReader').classList.add('top');
-
-  // URL del JSON (absoluta o relativa al sitio)
   const JSON_URL = /^https?:\/\//i.test(RAW)
     ? RAW
     : (BASE + (RAW.startsWith('/') ? RAW : '/' + RAW));
@@ -313,7 +251,6 @@ use_theme: false
     return '';
   }
 
-  /* ========= Candidatos: CDN de imágenes (thumbnail) + view fallback ========= */
   function candidatesFrom(p){
     const tries = [];
     const u0 = normalizeGoogleUrl(String(p.url || ''));
@@ -330,29 +267,21 @@ use_theme: false
     }
     return [...new Set(tries)];
   }
-  /* ========================================================================= */
 
   try {
     const res = await fetch(JSON_URL, { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
 
-    // Acepta array simple o {pages:[...]}
-    const pages = Array.isArray(data)
+    // ✅ Usar el orden exacto del JSON, sin sort
+    const pagesOrdered = Array.isArray(data)
       ? data.map(u => ({ url: u }))
       : (Array.isArray(data.pages) ? data.pages : []);
 
-    if (!pages.length) throw new Error('JSON vacío o formato no soportado');
-
-    // Orden por número si existe en name/url (los sin número al final)
-    pages.sort((a, b) => {
-      const A = parseInt((String(a.name || a.url || '').match(/(\d+)/) || [, '999999'])[1], 10);
-      const B = parseInt((String(b.name || b.url || '').match(/(\d+)/) || [, '999999'])[1], 10);
-      return A - B;
-    });
+    if (!pagesOrdered.length) throw new Error('JSON vacío o formato no soportado');
 
     // Render
-    const items = pages.map((p, i) => {
+    const items = pagesOrdered.map((p, i) => {
       const fig = document.createElement('figure');
       fig.className = 'page';
 
@@ -374,7 +303,7 @@ use_theme: false
 
     pagerEl.textContent = `Pag ${items.length ? 1 : 0} / ${items.length}`;
 
-    // Contador dinámico
+    // contador de páginas visible
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
         const vis = entries.filter(e => e.isIntersecting)
@@ -387,7 +316,6 @@ use_theme: false
       items.forEach(it => io.observe(it.fig));
     }
 
-    /* ====== Descarga con concurrencia MUY limitada + backoff ====== */
     const CONCURRENCY = 2;
     const INTERVAL_MS = 120;
     const RETRIES = 2;
@@ -406,20 +334,19 @@ use_theme: false
           img.src = url;
         });
         if (ok) return true;
-        await sleep(jitter(200 * (attempt+1) * (attempt+1))); // 200ms, 800ms…
+        await sleep(jitter(200 * (attempt+1) * (attempt+1)));
       }
       return false;
     }
 
     async function loadOne(it){
-      const all = it.tries.slice(); // [thumbnail, view, (u0)]
+      const all = it.tries.slice();
       if (!all.length) return;
 
       const thumb = withBase(all.shift());
       const thumbOK = await trySetSrc(it.img, thumb);
       if (thumbOK) return;
 
-      // Cadena de fallbacks
       while (all.length){
         const next = withBase(all.shift());
         const ok = await trySetSrc(it.img, next);
@@ -443,7 +370,6 @@ use_theme: false
       }
     }
     await Promise.all(Array.from({length: CONCURRENCY}, worker));
-    /* ============================================================= */
 
   } catch (err) {
     const mount = document.getElementById('reader');
