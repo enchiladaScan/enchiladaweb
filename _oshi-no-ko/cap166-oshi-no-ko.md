@@ -13,5 +13,5 @@ redirect_from:
   - /cap166-oshi-no-ko/
 use_main_css: true
 prev_href: /oshi-no-ko/cap165/
-next_href: /oshi-no-ko/cap167/
+next_href: /oshi-no-ko/cap166-5/
 ---
