@@ -9,7 +9,7 @@ header_kind: home
 
   <!-- Activos -->
   <h3>Activos</h3>
-  {% assign activos = site.data.catalogo.items | where: "seccion", "activos" %}
+  {% assign activos = site.catalogo.items | where: "seccion", "activos" %}
   {% for m in activos %}
     <details>
       <summary>{{ m.title }} ({{ site[m.mangaId] | size }})</summary>
@@ -27,7 +27,7 @@ header_kind: home
 
   <!-- Joints -->
   <h3>Joints</h3>
-  {% assign joints = site.data.catalogo.items | where: "seccion", "joints" %}
+  {% assign joints = site.catalogo.items | where: "seccion", "joints" %}
   {% for m in joints %}
     <details>
       <summary>{{ m.title }} ({{ site[m.mangaId] | size }})</summary>
@@ -45,7 +45,7 @@ header_kind: home
 
   <!-- Terminados -->
   <h3>Terminados</h3>
-  {% assign terminados = site.data.catalogo.items | where: "seccion", "terminados" %}
+  {% assign terminados = site.catalogo.items | where: "seccion", "terminados" %}
   {% for m in terminados %}
     <details>
       <summary>{{ m.title }} ({{ site[m.mangaId] | size }})</summary>
