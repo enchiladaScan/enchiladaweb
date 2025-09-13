@@ -1,4 +1,0 @@
-Checklist rápido:
-1. Crear nuevo post en _posts.
-2. Subir imágenes a assets/img.
-3. Commit & Push.

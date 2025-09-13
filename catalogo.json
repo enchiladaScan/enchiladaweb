@@ -64,15 +64,6 @@
       "seccion": "terminados"
     },
     {
-      "mangaId": "kanokari",
-      "title": "Kanojo, Okarishimasu",
-      "post_url": "/kanokari/inicio",
-      "portada": "/assets/img/kanokari-cover.jpg",
-      "tags": ["Comedia","Romance","Escolar"],
-      "latest": "Capítulo X",
-      "seccion": "joints"
-    },
-    {
       "mangaId": "medalist",
       "title": "Medalist",
       "post_url": "/medalist/inicio",

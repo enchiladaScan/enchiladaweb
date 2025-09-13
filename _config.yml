@@ -47,9 +47,6 @@ collections:
   marchen-crown:
     output: true
     permalink: /marchen-crown/:name/
-  kanokari:
-    output: true
-    permalink: /kanokari/:name/
 #terminados
   komi:
     output: true
@@ -82,10 +79,6 @@ defaults:
     values:
       layout: caps
 # joints
-  - scope:
-      type: kanokari
-    values:
-      layout: caps
   - scope:
       type: medalist
     values:
