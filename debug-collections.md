@@ -9,15 +9,17 @@ header_kind: home
 
   {% assign all = site.collections | where_exp: "c", "c.label != 'posts'" %}
   {% for coll in all %}
-    <h3>{{ coll.label }} ({{ site[coll.label] | size }})</h3>
-    {% if site[coll.label].size > 0 %}
-      <ul>
-        {% for d in site[coll.label] %}
-          <li>{{ d.path }} → {{ d.url }}</li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p style="color: red;">⚠ No hay documentos en esta colección.</p>
-    {% endif %}
+    <details>
+      <summary>{{ coll.label }} ({{ site[coll.label] | size }})</summary>
+      {% if site[coll.label].size > 0 %}
+        <ul>
+          {% for d in site[coll.label] %}
+            <li>{{ d.path }} → {{ d.url }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p style="color: red;">⚠ No hay documentos en esta colección.</p>
+      {% endif %}
+    </details>
   {% endfor %}
 </div>
