@@ -1,0 +1,18 @@
+MANGAS QUE FALTAN POR SUBIR A LA NUBE:
+    - Activos:
+        - Ririsa
+        - 100 novias
+        - Dream jumbo girl
+    - Joints:
+        - Marchen Crown
+        - Medalist
+
+FALTANTES DE BAJAR/CREAR .md Y .json:
+    - Activos:
+        - Ririsa
+        - 100 novias
+        - Dream jumbo girl
+        - Megami (verificar el extra)
+    - Joints:
+        - Marchen Crown
+        - Medalist
