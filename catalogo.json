@@ -6,7 +6,7 @@
       "post_url": "/ririsa/inicio",
       "portada": "/assets/img/ririsa-cover.jpg",
       "tags": ["romance", "comedia"],
-      "latest": "cap2",
+      "latest": "Capítulo ?",
       "seccion": "activos"
     },
     {
@@ -15,7 +15,7 @@
       "post_url": "/100novias/inicio",
       "portada": "/assets/img/100n-cover.jpg",
       "tags": ["comedia", "romance"],
-      "latest": "cap168",
+      "latest": "Capítulo ?",
       "seccion": "activos"
     },
     {
@@ -24,7 +24,7 @@
       "post_url": "/saneka/inicio",
       "portada": "/assets/img/saneka-cover.jpg",
       "tags": ["romance", "comedia"],
-      "latest": "Capítulo 17",
+      "latest": "Capítulo 18",
       "seccion": "activos"
     },
     {
@@ -33,7 +33,7 @@
       "post_url": "/megami-no-cafe/inicio",
       "portada": "/assets/img/megami-cover.jpg",
       "tags": ["Comedia", "Romance", "Recuentos de la vida"],
-      "latest": "Cap 1",
+      "latest": "Capítulo 208",
       "seccion": "activos"
     },
     {
@@ -42,7 +42,7 @@
       "post_url": "/dream-jumbo/inicio",
       "portada": "/assets/img/dream-jumbo-cover.jpg",
       "tags": ["Comedia", "Romance", "Deportes"],
-      "latest": "Cap 1",
+      "latest": "Capítulo ?",
       "seccion": "activos"
     },
     {
@@ -60,7 +60,7 @@
       "post_url": "/oshi-no-ko/inicio",
       "portada": "/assets/img/oshi-no-ko-cover.jpg",
       "tags": ["Seinen","Drama","Suspense"],
-      "latest": "Capítulo SEPA",
+      "latest": "Capítulo 166.5",
       "seccion": "terminados"
     },
     {
@@ -69,7 +69,7 @@
       "post_url": "/medalist/inicio",
       "portada": "/assets/img/medalist-cover.jpg",
       "tags": ["Drama", "Deportes", "Psicológico"],
-      "latest": "Cap 1",
+      "latest": "Capítulo ?",
       "seccion": "joints"
     },
     {
@@ -78,7 +78,7 @@
       "post_url": "/marchen-crown/inicio",
       "portada": "/assets/img/marchen-crown-cover.jpg",
       "tags": ["Aventura", "Fantasia", "Accion"],
-      "latest": "Cap 1",
+      "latest": "Capítulo 18",
       "seccion": "joints"
     }
   ]

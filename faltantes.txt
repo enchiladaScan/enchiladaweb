@@ -18,4 +18,3 @@ FALTANTES DE BAJAR Y CREAR .md Y .json:
 PORTADAS FALTANTES:
     - Dream jumbo 
     - Medalist
-    - Megami 
