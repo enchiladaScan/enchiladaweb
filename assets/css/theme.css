@@ -190,6 +190,12 @@ html, body {
   transform: translateY(-1px);
 }
 
+.scan-logo img {
+  height: 45px;
+  width: auto; 
+  vertical-align: middle;
+}
+
 /* Buscador centrado */
 .scan-search {
   display: grid;
