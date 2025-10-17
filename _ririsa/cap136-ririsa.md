@@ -12,6 +12,6 @@ images_json: assets/mangas/ririsa/cap136/images.json
 redirect_from:
   - /cap136-ririsa/
 use_main_css: true
-prev_href: /ririsa/cap135/
+prev_href: /ririsa/cap135-5/
 next_href: /ririsa/cap137/
 ---
