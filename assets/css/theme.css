@@ -57,11 +57,13 @@ html, body {
 .ui-theme .section-title .bar{ width:6px; height:26px; background:var(--brand); border-radius:6px; }
 .ui-theme .section-title h2{ margin:0; font-size:32px; letter-spacing:.2px; }
 
-/* Grilla y tarjetas */
+/* Grilla y tarjetas MANEJA LA VISTA DE PANTALLA*/
 .ui-theme .grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
 @media (max-width:1100px){ .ui-theme .grid{ grid-template-columns:repeat(3,1fr);} }
 @media (max-width:780px){ .ui-theme .grid{ grid-template-columns:repeat(2,1fr);} }
+/*
 @media (max-width:520px){ .ui-theme .grid{ grid-template-columns:1fr;} }
+*/
 
 .ui-theme .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--ring); display:flex; flex-direction:column; text-decoration:none; color:inherit; }
 .ui-theme .card-cover{ aspect-ratio:3/4; background:#0d1320; overflow:hidden; }
@@ -387,28 +389,4 @@ html, body {
 /* Ajustes responsivos para pantallas pequeñas */
 @media (max-width:600px){
   :root{ --tweet-w:320px; --gap:16px; }
-}
-
-/* ===== ESTILOS PARA VISTA DE TELÉFONO ===== */
-@media (max-width: 768px) {
-
-  /* --- Grid de 2 columnas para las portadas --- */
-  .grid {
-    grid-template-columns: repeat(2, 1fr); /* Forzamos 2 columnas */
-    grid-gap: 15px; /* Reducimos un poco el espacio entre ellas */
-  }
-
-  /* --- Hacemos los cuadros (tarjetas) un poco más pequeños --- */
-  /* Ajustamos el padding y la letra de las tarjetas DENTRO del grid */
-  .grid .card {
-    padding: 10px;
-  }
-
-  .grid .card .card-title {
-    font-size: 1em; /* Letra del título un poco más pequeña */
-  }
-
-  .grid .card .chips {
-    display: none; /* Ocultamos los tags para ganar espacio */
-  }
 }
