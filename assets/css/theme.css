@@ -186,7 +186,7 @@ html, body {
   align-items: center;
   gap: 16px;
 }
-
+/* pasado, era esto:
 .scan-logo {
   justify-self: start;
   display: inline-block;
@@ -200,13 +200,21 @@ html, body {
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
   transition: box-shadow .2s ease, transform .12s ease, border-color .2s ease;
 }
-/* Esto deja el logo sin efecto hover, en teoria.
+
 .scan-logo:hover {
   border-color: var(--scan-ring);
   box-shadow: 0 0 0 4px rgba(139,92,246,.18);
   transform: translateY(-1px);
 }
   */
+  .scan-logo {
+  background: transparent !important; /* Sin fondo */
+  border: none !important;           /* Sin borde */
+  box-shadow: none !important;        /* Sin sombra */
+  padding: 0 !important;              /* Sin espaciado interno */
+  border-radius: 0 !important;        /* Sin esquinas redondeadas */
+}
+
 .scan-logo img {
   height: 45px;
   width: auto; 
