@@ -392,23 +392,23 @@ html, body {
 /* ===== ESTILOS PARA VISTA DE TELÉFONO ===== */
 @media (max-width: 768px) {
 
-  /* --- Grid de 2 columnas para las tarjetas --- */
-  .card-grid {
-    /* Forzamos a que siempre haya 2 columnas, cada una ocupando la mitad del espacio */
-    grid-template-columns: repeat(2, 1fr);
-
-    /* Reducimos un poco la separación entre tarjetas para que quepan mejor */
-    grid-gap: 12px;
+  /* --- Grid de 2 columnas para las portadas --- */
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* Forzamos 2 columnas */
+    grid-gap: 15px; /* Reducimos un poco el espacio entre ellas */
   }
 
-  /* --- Hacemos los cuadros (tarjetas) un poco más compactos --- */
-  .card-grid .card {
-    padding: 12px; /* Reducimos el espacio interno */
-    font-size: 0.9em; /*letra un poco más pequeña */
+  /* --- Hacemos los cuadros (tarjetas) un poco más pequeños --- */
+  /* Ajustamos el padding y la letra de las tarjetas DENTRO del grid */
+  .grid .card {
+    padding: 10px;
   }
 
-  /* Ajustamos el texto dentro de las tarjetas */
-  .card-grid .card h3 {
-    font-size: 1.1em;
+  .grid .card .card-title {
+    font-size: 1em; /* Letra del título un poco más pequeña */
+  }
+
+  .grid .card .chips {
+    display: none; /* Ocultamos los tags para ganar espacio */
   }
 }
