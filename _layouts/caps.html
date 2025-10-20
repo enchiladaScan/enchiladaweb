@@ -5,9 +5,14 @@ layout: default
 {% include header_caps.html %}
 
 {% assign collection_name = page.series %}
-{% assign all_items = site[collection_name] %}
-{% assign chapters = all_items | where_exp: "item", "item.type != 'extra'" | sort: 'capitulo' %}
-{% assign extras = all_items | where_exp: "item", "item.type == 'extra'" %}
+{% assign chapters = "" | split: "" %}  {% assign extras = "" | split: "" %}
+{% if collection_name %}
+  {% assign all_items = site[collection_name] %}
+  {% if all_items %}
+    {% assign chapters = all_items | where_exp: "item", "item.type != 'extra'" | sort: 'capitulo' %}
+    {% assign extras = all_items | where_exp: "item", "item.type == 'extra'" %}
+  {% endif %}
+{% endif %}
 
 <div class="ui-theme">
   <main class="container">
