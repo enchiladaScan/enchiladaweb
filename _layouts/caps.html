@@ -38,21 +38,6 @@ layout: default
         </ul>
       </section>
     </article>
-    
-<!-- se repite el bloque de capítulos, lo comento
-    {% if page.capitulos %}
-    <section class="ui-block">
-      <h2>Ver capítulos aquí:</h2>
-      <ul id="chaptersList">
-        {% for cap in page.capitulos %}
-          <li data-cap="{{ cap.numero }}">
-            <a href="{{ cap.url | relative_url }}">{{ cap.titulo | default: 'Capítulo ' | append: cap.numero }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </section>
-    {% endif %}
-    -->
 
     <section id="links-de-descarga" class="ui-block">
       <h3>Links de descarga</h3>

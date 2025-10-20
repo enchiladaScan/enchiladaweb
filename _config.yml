@@ -1,7 +1,6 @@
 # --- Identidad del sitio ---
 title: "pruebaPAG"
 description: "Pagina de pruebas"
-# URL pública del usuario y base del proyecto (¡importante para rutas!)
 url: "https://zotexd.github.io"
 baseurl: "/pruebaPAG.github.io"
 
@@ -104,6 +103,7 @@ exclude:
   - README.md
   - checklist.txt
   - guia_rapida.txt
+  - faltantes.txt
 
 # --- Incluir explícitamente assets si lo necesita ---
 include:

@@ -1,6 +1,6 @@
 MANGAS QUE FALTAN POR SUBIR A LA NUBE:
     - Activos:
-        - Ririsa
+        - Ririsa (vol14-23 subidos)
         - 100 novias
         - Dream jumbo girl
     - Joints:
@@ -8,7 +8,7 @@ MANGAS QUE FALTAN POR SUBIR A LA NUBE:
 
 FALTANTES DE BAJAR Y CREAR .md Y .json:
     - Activos:
-        - Ririsa
+        - Ririsa (vol14-23 subidos, flata extras)
         - 100 novias
         - Dream jumbo girl
         - Megami (verificar el extra)
