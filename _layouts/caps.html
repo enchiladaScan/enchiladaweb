@@ -23,13 +23,10 @@ layout: default
     <article class="reader-content">
       <section class="ui-block">
         <h2>Ver capítulos aquí:</h2>
+        
         <ul id="chaptersList">
-          {% assign collection_name = page.series %}
-          {% assign caps = site[collection_name] | where_exp:"c","c.capitulo" %}
-
-          {% if caps.size > 0 %}
-            {% assign caps = caps | sort: 'capitulo' %}
-            {% for c in caps %}
+          {% if chapters.size > 0 %}
+            {% for c in chapters %}
               <li><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>
             {% endfor %}
           {% else %}
@@ -66,6 +63,18 @@ layout: default
         <p class="no-links">No hay capítulos extras disponibles por el momento.</p>
       {% endif %}
     </section>
+    
+
+    {% if extras.size > 0 %}
+    <section class="ui-block">
+      <h3>Capítulos extras</h3>
+      <ul id="extrasList" class="manga-extras">
+        {% for e in extras %}
+          <li><a href="{{ e.url | relative_url }}">{{ e.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
 
   </main>
 </div>
