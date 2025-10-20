@@ -1,7 +1,7 @@
 ---
 layout: reader
 title: "Capítulo 105"
-manga: "RIRISA"
+manga: "2.5D"
 manga_slug: "ririsa"
 capitulo: 105
 es_primero: true
