@@ -11,9 +11,8 @@ generos: ["Harem","Comedia Romántica","Ecchi"]
 estado: "En publicación" 
 anio: 2019 
 editorial: "Shonen Jump+" 
-links_descarga:
-    - { nombre: "Cap 1 (MEGA)", url: "#" }
-    - { nombre: "Cap 1 (Drive)", url: "#" } 
+links_extras:
+  - { nombre: "Extra VOL 22", url: "/ririsa/extra-vol-22/" }
 show_links_en_ficha: false 
 use_theme: true
 redirect_from:
