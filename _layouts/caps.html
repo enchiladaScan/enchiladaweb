@@ -3,8 +3,7 @@ layout: default
 ---
 
 {% include header_caps.html %}
-<!-- Contenido principal -->
- <!-- LINEA 16, FALSO POSITIVO EN VSCode -->
+
 <div class="ui-theme">
   <main class="container">
 
@@ -16,25 +15,21 @@ layout: default
           onerror="this.onerror=null; this.src='{{ '/assets/img/placeholder-cover.png' | relative_url }}'">
         <a class="btn-back" href="{{ site.baseurl }}/">Volver al inicio</a>
       </div>
-
       {% include manga_ficha.html %}
     </div>
 
-    <article class="reader-content">
-      <section class="ui-block">
-        <h2>Ver capítulos aquí:</h2>
-        
-        <ul id="chaptersList">
-          {% if chapters.size > 0 %}
-            {% for c in chapters %}
-              <li><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>
-            {% endfor %}
-          {% else %}
-            <li class="no-links">Aún no hay capítulos de este manga.</li>
-          {% endif %}
-        </ul>
-      </section>
-    </article>
+    <section class="ui-block">
+      <h2>Ver capítulos aquí:</h2>
+      <ul id="chaptersList">
+        {% if chapters.size > 0 %}
+          {% for c in chapters %}
+            <li><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>
+          {% endfor %}
+        {% else %}
+          <li class="no-links">Aún no hay capítulos de este manga.</li>
+        {% endif %}
+      </ul>
+    </section>
 
     <section id="links-de-descarga" class="ui-block">
       <h3>Links de descarga</h3>
@@ -48,22 +43,6 @@ layout: default
         <p class="no-links">No hay descargas disponibles por el momento.</p>
       {% endif %}
     </section>
-
-    <section id="links-de-extras" class="ui-block">
-      <h3>Capítulos extras</h3>
-      {% if page.links_extras and page.links_extras.size > 0 %}
-        <ul id="extrasList" class="manga-extras">
-          {% for e in page.links_extras %}
-            <li data-extra="{{ e.cap | default: forloop.index }}">
-              <a href="{{ e.url }}">{{ e.nombre }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="no-links">No hay capítulos extras disponibles por el momento.</p>
-      {% endif %}
-    </section>
-    
 
     {% if extras.size > 0 %}
     <section class="ui-block">
