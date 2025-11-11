@@ -9,8 +9,8 @@ layout: default
 {% if collection_name %}
   {% assign all_items = site[collection_name] %}
   {% if all_items %}
-    {% assign chapters = all_items | where_exp: "item", "item.type != 'extra'" | sort: 'capitulo' %}
-    {% assign extras = all_items | where_exp: "item", "item.type == 'extra'" %}
+    {% assign chapters = all_items | where_exp: "item", "item.type != 'extra'" | where_exp: "item", "item.capitulo" | sort: 'capitulo' %}
+    {% assign extras = all_items | where_exp: "item", "item.type == 'extra'" | where_exp: "item", "item.capitulo" | sort: 'capitulo' %}
   {% endif %}
 {% endif %}
 
