@@ -186,27 +186,7 @@ html, body {
   align-items: center;
   gap: 16px;
 }
-/* pasado, era esto:
-.scan-logo {
-  justify-self: start;
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid var(--scan-ring-ghost);
-  color: var(--scan-fg);
-  text-decoration: none;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
-  transition: box-shadow .2s ease, transform .12s ease, border-color .2s ease;
-}
 
-.scan-logo:hover {
-  border-color: var(--scan-ring);
-  box-shadow: 0 0 0 4px rgba(139,92,246,.18);
-  transform: translateY(-1px);
-}
-  */
   .scan-logo {
   background: transparent !important; /* Sin fondo */
   border: none !important;           /* Sin borde */
@@ -366,9 +346,9 @@ html, body {
 
 /* Vista principal donde corre el marquee */
 .viewport{
-  min-height:50vh;           /* Al menos media pantalla */
-  overflow-x:hidden;         /* Oculta horizontalmente */
-  overflow-y:visible;        /* Muestra la altura completa de los tweets */
+  min-height:50vh;        
+  overflow-x:hidden;       
+  overflow-y:visible;    
   padding:12px 0 18px;
 }
 
@@ -385,7 +365,7 @@ html, body {
   display:flex; 
   gap:var(--gap); 
   align-items:flex-start;
-  flex:0 0 auto;              /* No se encoge */
+  flex:0 0 auto;          
 }
 
 /* Tarjeta que contiene cada tweet */
@@ -412,4 +392,47 @@ html, body {
 /* Ajustes responsivos para pantallas pequeñas */
 @media (max-width:600px){
   :root{ --tweet-w:320px; --gap:16px; }
+}
+
+/* ============================================== */
+/* ==     Estilo de Lista de Capítulos          == */
+/* ============================================== */
+
+
+#chaptersList,
+#extrasList {
+  list-style: none; 
+  padding-left: 0;
+  margin-top: 16px;
+}
+
+#chaptersList li,
+#extrasList li {
+  position: relative; 
+  padding-left: 22px;
+  margin-bottom: 8px;
+}
+
+
+#chaptersList li::before,
+#extrasList li::before {
+  content: "\2022";    /* El carácter de la viñeta (•) */
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.2em;   
+  color: var(--brand); /* Color morado para la viñeta */
+}
+
+
+#chaptersList li a,
+#extrasList li a {
+  color: var(--brand); /* El mismo color morado para el link */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#chaptersList li a:hover,
+#extrasList li a:hover {
+  text-decoration: underline;
 }
