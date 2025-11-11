@@ -30,9 +30,9 @@ html, body {
   --muted: #9aa4b2;
   --line: #1f2937;
 
-  --brand: #c026d3;
-  --brand-700: #a21caf;
-  --chip: #2a0f3a;
+  --brand: #00bcd4;
+  --brand-700: #0097a7;
+  --chip: #3c0d23;
 
   --ring: 0 0 0 1px rgba(255,255,255,.06) inset, 0 10px 30px rgba(0,0,0,.35);
   --radius-xl: 18px;
@@ -454,19 +454,21 @@ html, body {
 }
 
 .sort-button {
-  background: var(--surface); /* Un color de fondo del tema */
-  color: var(--text);
-  border: 1px solid var(--line);
-  padding: 6px 12px;
-  border-radius: 8px;
+  background: transparent;
+  color: var(--brand);              /* 2. Texto morado (usa la variable de tu tema) */
+  border: 1px solid var(--brand-700, var(--brand)); /* 3. Borde morado */
+  padding: .55rem .9rem;            /* 4. Mismo padding que "Volver al inicio" */
+  border-radius: 999px;             /* 5. Esquinas súper redondeadas (píldora) */
   cursor: pointer;
   font-size: 0.9em;
   font-weight: 600;
   white-space: nowrap;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: all 0.2s ease; /* Transición suave */
 }
 
+/* Al pasar el ratón, se rellena (es un buen feedback) */
 .sort-button:hover {
-  background-color: var(--brand); 
+  background-color: var(--brand);
   border-color: var(--brand);
+  color: #fff; /* El texto se vuelve blanco para que contraste */
 }
