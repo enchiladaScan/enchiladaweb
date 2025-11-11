@@ -123,8 +123,21 @@ html, body {
 .ui-theme .search-form input { padding:.5rem .75rem; border-radius:.5rem; border:1px solid rgba(255,255,255,.1); }
 
 .ui-theme .btn-back {
-  display:inline-block; padding:.55rem .9rem; border-radius:999px; text-decoration:none;
-  border:1px solid rgba(175, 82, 222, .35);
+  background: transparent;
+  color: var(--brand);
+  border: 1px solid var(--brand-700, var(--brand)); 
+  padding: .55rem .9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.ui-theme .btn-back:hover {
+  background-color: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
 }
 
 .ui-theme .manga-hero {
@@ -455,10 +468,10 @@ html, body {
 
 .sort-button {
   background: transparent;
-  color: var(--brand);              /* 2. Texto morado (usa la variable de tu tema) */
-  border: 1px solid var(--brand-700, var(--brand)); /* 3. Borde morado */
-  padding: .55rem .9rem;            /* 4. Mismo padding que "Volver al inicio" */
-  border-radius: 999px;             /* 5. Esquinas súper redondeadas (píldora) */
+  color: var(--brand);
+  border: 1px solid var(--brand-700, var(--brand));
+  padding: .55rem .9rem;
+  border-radius: 999px;
   cursor: pointer;
   font-size: 0.9em;
   font-weight: 600;
@@ -466,7 +479,6 @@ html, body {
   transition: all 0.2s ease; /* Transición suave */
 }
 
-/* Al pasar el ratón, se rellena (es un buen feedback) */
 .sort-button:hover {
   background-color: var(--brand);
   border-color: var(--brand);
