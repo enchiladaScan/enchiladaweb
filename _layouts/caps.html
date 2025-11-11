@@ -13,6 +13,7 @@ layout: default
     {% assign extras = all_items | where_exp: "item", "item.type == 'extra'" | where_exp: "item", "item.capitulo" | sort: 'capitulo' %}
   {% endif %}
 {% endif %}
+{% assign min_items_to_sort = 10 %}
 
 <div class="ui-theme">
   <main class="container">
@@ -28,8 +29,12 @@ layout: default
       {% include manga_ficha.html %}
     </div>
 
-    <section class="ui-block">
+    <div class="list-header">
       <h2>Ver capítulos aquí:</h2>
+      {% if chapters.size > min_items_to_sort %}
+        <button id="sortButton" class="sort-button">Orden: Descendente</button>
+      {% endif %}
+    </div>
       <ul id="chaptersList">
         {% if chapters.size > 0 %}
           {% for c in chapters %}
@@ -81,3 +86,36 @@ layout: default
 
   </main>
 </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var sortBtn = document.getElementById('sortButton');
+  
+  // Lista de IDs de todas las listas que queremos invertir
+  var listIds = ['chaptersList', 'downloadsList', 'extrasList'];
+  var isReversed = false; // Estado inicial (Jekyll ordena A-Z)
+
+  // Función para invertir una lista
+  function reverseList(listId) {
+    var list = document.getElementById(listId);
+    if (list) {
+      var items = Array.from(list.querySelectorAll('li'));
+      items.reverse();
+      list.innerHTML = ''; // Limpia la lista
+      items.forEach(function(item) {
+        list.appendChild(item); // Vuelve a añadir los items en el nuevo orden
+      });
+    }
+  }
+
+  sortBtn.addEventListener('click', function() {
+    // Invertimos todas las listas
+    listIds.forEach(reverseList);
+    
+    // Actualizamos el estado y el texto del botón
+    isReversed = !isReversed;
+    sortBtn.textContent = isReversed ? 'Orden: Ascendente' : 'Orden: Descendente';
+  });
+});
+</script>

@@ -413,7 +413,6 @@ html, body {
 
 #chaptersList li a,
 #extrasList li a {
-  /* 1. La magia: Flexbox para crear las 2 columnas */
   display: flex;
   justify-content: space-between; /* Alinea un item a la izq y otro a la der */
   align-items: center;
@@ -438,4 +437,36 @@ html, body {
   color: var(--muted);
   white-space: nowrap;
   padding-left: 16px; 
+}
+
+/* == Estilo titulo y boton de orden (ascendente-descendente) == */
+/*para layouts/caps.html*/
+.list-header {
+  display: flex;
+  justify-content: space-between; /* Pone el título a la izq y el botón a la der */
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.list-header h2,
+.list-header h3 {
+  margin: 0;
+}
+
+.sort-button {
+  background: var(--surface); /* Un color de fondo del tema */
+  color: var(--text);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.sort-button:hover {
+  background-color: var(--brand); 
+  border-color: var(--brand);
 }
