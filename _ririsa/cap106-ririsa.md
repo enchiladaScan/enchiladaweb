@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 106"
+title: "El deseo del corazón."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 106

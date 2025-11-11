@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 105"
+title: "Día de San Valentín de los otakus."
 manga: "2.5D"
 manga_slug: "ririsa"
 capitulo: 105

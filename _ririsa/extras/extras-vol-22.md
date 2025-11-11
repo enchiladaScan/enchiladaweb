@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Extra VOL 22"
+title: "Extra VOL 22: ¡No te estoy seduciendo,tonto!"
 manga: "2.5 Dimensional Seduction (Ririsa)"
 manga_slug: "ririsa"
 capitulo: "1"

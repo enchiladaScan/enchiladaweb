@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 112.5"
+title: "Bonus: La penitencia de Marina."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 112.5

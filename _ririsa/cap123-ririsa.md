@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 123"
+title: "La respuesta aquí y ahora."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 123
@@ -13,5 +13,5 @@ redirect_from:
   - /cap123-ririsa/
 use_main_css: true
 prev_href: /ririsa/cap122/
-next_href: /ririsa/cap124/
+next_href: /ririsa/cap129/
 ---

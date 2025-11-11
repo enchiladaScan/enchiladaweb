@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 120"
+title: "Cielo."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 120

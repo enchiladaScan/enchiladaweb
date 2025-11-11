@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 112"
+title: "Primavera."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 112

@@ -1,6 +1,8 @@
 MANGAS QUE FALTAN POR SUBIR A LA NUBE:
     - Activos:
         - Ririsa (vol14-23 subidos)
+        verificar vol 16 de ririsa (no aparece del 124 al 128.5)
+        cambiar nombres de titula a cada cap, me quede en el 130.
         - 100 novias
         - Dream jumbo girl
     - Joints:

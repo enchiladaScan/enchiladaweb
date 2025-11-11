@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 116"
+title: "Los verdaderos colores del club de manga."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 116

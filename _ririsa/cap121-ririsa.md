@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 121"
+title: "El inframundo."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 121

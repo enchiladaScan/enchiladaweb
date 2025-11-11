@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 113"
+title: "Jornada a puertas abiertas de clubes."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 113

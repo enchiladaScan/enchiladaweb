@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 107"
+title: "El muro."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 107

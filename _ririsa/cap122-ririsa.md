@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 122"
+title: "Fuego infernal."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 122

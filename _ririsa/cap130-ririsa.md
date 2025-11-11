@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 130"
+title: "La proxima reina celestial."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 130

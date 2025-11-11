@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 119"
+title: "Bakiel."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 119

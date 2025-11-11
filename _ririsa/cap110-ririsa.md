@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 110"
+title: "Primeras señales de la primavera."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 110

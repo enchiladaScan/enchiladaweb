@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 117"
+title: "Genes y decisiones."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 117

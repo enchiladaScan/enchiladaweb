@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 118"
+title: "Truco de costura."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 118

@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 115"
+title: "¿Una otaku productiva?"
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 115

@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 109"
+title: "Sobre hielo fino en 0.5D (Parte 2)."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 109

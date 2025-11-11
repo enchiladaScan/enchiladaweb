@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 114"
+title: "Las alas de la libertad."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 114
