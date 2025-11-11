@@ -33,7 +33,12 @@ layout: default
       <ul id="chaptersList">
         {% if chapters.size > 0 %}
           {% for c in chapters %}
-            <li><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>
+            <li>
+              <a href="{{ c.url | relative_url }}">
+                <span class="cap-title">{{ c.title }}</span>
+                <span class="cap-number">Cap. {{ c.capitulo }}</span>
+              </a>
+            </li>
           {% endfor %}
         {% else %}
           <li class="no-links">Aún no hay capítulos de este manga.</li>
@@ -59,7 +64,12 @@ layout: default
       <h3>Capítulos extras</h3>
       <ul id="extrasList" class="manga-extras">
         {% for e in extras %}
-          <li><a href="{{ e.url | relative_url }}">{{ e.title }}</a></li>
+          <li>
+            <a href="{{ e.url | relative_url }}">
+              <span class="cap-title">{{ e.title }}</span>
+              <span class="cap-number">Extra</span> {# O puedes poner {{ e.capitulo }} si prefieres #}
+            </a>
+          </li>
         {% endfor %}
       </ul>
     </section>

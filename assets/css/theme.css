@@ -394,45 +394,47 @@ html, body {
   :root{ --tweet-w:320px; --gap:16px; }
 }
 
-/* ============================================== */
-/* ==     Estilo de Lista de Capítulos          == */
-/* ============================================== */
-
+/* == Estilo de Lista de Capítulos  == */
 
 #chaptersList,
 #extrasList {
-  list-style: none; 
+  list-style: none; /* Sin viñetas */
   padding-left: 0;
   margin-top: 16px;
+  border-top: 1px solid var(--line); /* Línea superior para empezar */
 }
 
 #chaptersList li,
 #extrasList li {
-  position: relative; 
-  padding-left: 22px;
-  margin-bottom: 8px;
+  margin-bottom: 0;
+  padding-left: 0;
 }
-
-
-#chaptersList li::before,
-#extrasList li::before {
-  content: "\2022";    /* El carácter de la viñeta (•) */
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 1.2em;   
-  color: var(--brand); /* Color morado para la viñeta */
-}
-
 
 #chaptersList li a,
 #extrasList li a {
-  color: var(--brand); /* El mismo color morado para el link */
+  /* 1. La magia: Flexbox para crear las 2 columnas */
+  display: flex;
+  justify-content: space-between; /* Alinea un item a la izq y otro a la der */
+  align-items: center;
+  color: var(--text);
   text-decoration: none;
-  font-weight: 600;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--line);
 }
 
 #chaptersList li a:hover,
 #extrasList li a:hover {
-  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.03);
+  color: #fff;
+}
+
+.cap-title {
+  font-weight: 600;
+}
+
+.cap-number {
+  font-size: 0.9em;
+  color: var(--muted);
+  white-space: nowrap;
+  padding-left: 16px; 
 }
