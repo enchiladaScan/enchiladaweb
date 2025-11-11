@@ -12,9 +12,9 @@ estado: "En publicación"
 anio: 2023
 editorial: "Jump Comics+"
 links_descarga:
-  - { nombre: "Cap 1 (MEGA)",  url: "#" }
-  - { nombre: "Cap 1 (Drive)", url: "#" }
-  - { nombre: "Pack 1–5 (MEGA)", url: "#" }
+  - { nombre: "Capítulo 1", server: "MEGA", url: "#" }
+  - { nombre: "Capítulo 1", server: "Drive", url: "#" }
+  - { nombre: "Pack 1–5", server: "MEGA", url: "#" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:

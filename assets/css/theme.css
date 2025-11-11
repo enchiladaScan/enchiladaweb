@@ -397,7 +397,8 @@ html, body {
 /* == Estilo de Lista de Capítulos  == */
 
 #chaptersList,
-#extrasList {
+#extrasList,
+#downloadsList {
   list-style: none; /* Sin viñetas */
   padding-left: 0;
   margin-top: 16px;

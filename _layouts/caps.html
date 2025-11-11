@@ -51,7 +51,11 @@ layout: default
       {% if page.links_descarga and page.links_descarga.size > 0 %}
         <ul id="downloadsList" class="manga-dl">
           {% for l in page.links_descarga %}
-            <li data-cap="{{ l.cap }}"><a href="{{ l.url }}">{{ l.nombre }}</a></li>
+            <li>
+              <a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">
+                <span class="cap-title">{{ l.nombre }}</span>
+                <span class="cap-number">{{ l.server }}</span> </a>
+            </li>
           {% endfor %}
         </ul>
       {% else %}
