@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 111"
+title: "La tentacion de la dimensión 2.5."
 manga: "RIRISA"
 manga_slug: "ririsa"
 capitulo: 111
