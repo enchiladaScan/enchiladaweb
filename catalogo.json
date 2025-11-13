@@ -46,19 +46,10 @@
       "seccion": "activos"
     },
     {
-      "mangaId": "dream-jumbo-girl",
-      "title": "Dream Jumbo Girl",
-      "post_url": "/dream-jumbo/inicio",
-      "portada": "/assets/img/dream-jumbo-cover.webp",
-      "tags": ["Comedia", "Romance", "Deportes"],
-      "latest": "Capítulo ?",
-      "seccion": "activos"
-    },
-    {
       "mangaId": "witchriv",
       "title": "Witchriv",
       "post_url": "/witchriv/inicio",
-      "portada": "/assets/img/witchriv-cover.png",
+      "portada": "/assets/img/witchriv-cover.jpg",
       "tags": ["Fantasía", "Magia", "Shonen", "Drama"],
       "latest": "Capítulo ?",
       "seccion": "activos"
@@ -70,6 +61,15 @@
       "portada": "/assets/img/oshi-no-ko-cover.jpg",
       "tags": ["Seinen","Drama","Suspense"],
       "latest": "Capítulo 166.5",
+      "seccion": "terminados"
+    },
+    {
+      "mangaId": "komi",
+      "title": "Komi Can't Communicate",
+      "post_url": "/komi/inicio",
+      "portada": "/assets/img/komi.png",
+      "tags": ["Comedia","Escolar","Slice of life"],
+      "latest": "Capítulo 500.10",
       "seccion": "terminados"
     },
     {
