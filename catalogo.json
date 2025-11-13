@@ -19,15 +19,6 @@
       "seccion": "activos"
     },
     {
-      "mangaId": "saneka",
-      "title": "My Marriage with Saneka",
-      "post_url": "/saneka/inicio",
-      "portada": "/assets/img/saneka-cover.jpg",
-      "tags": ["romance", "comedia"],
-      "latest": "Capítulo 18",
-      "seccion": "activos"
-    },
-    {
       "mangaId": "megami",
       "title": "Megami no cafe terrace",
       "post_url": "/megami-no-cafe/inicio",
@@ -46,13 +37,31 @@
       "seccion": "activos"
     },
     {
-      "mangaId": "komi",
-      "title": "Komi Can't Communicate",
-      "post_url": "/komi/inicio",
-      "portada": "/assets/img/komi-cover.png",
-      "tags": ["Comedia","Escolar","Slice of life"],
-      "latest": "Capítulo 500.10",
-      "seccion": "terminados"
+      "mangaId": "goldship",
+      "title": "Uma Musume: Pisupisu☆Supisupi Golshi-chan",
+      "post_url": "/goldship/inicio",
+      "portada": "/assets/img/goldship-cover.webp",
+      "tags": ["Comedia", "Slice of Life", "Spin-off"],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "dream-jumbo-girl",
+      "title": "Dream Jumbo Girl",
+      "post_url": "/dream-jumbo/inicio",
+      "portada": "/assets/img/dream-jumbo-cover.webp",
+      "tags": ["Comedia", "Romance", "Deportes"],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "witchriv",
+      "title": "Witchriv",
+      "post_url": "/witchriv/inicio",
+      "portada": "/assets/img/witchriv-cover.png",
+      "tags": ["Fantasía", "Magia", "Shonen", "Drama"],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
     },
     {
       "mangaId": "oshi-no-ko",
@@ -61,6 +70,15 @@
       "portada": "/assets/img/oshi-no-ko-cover.jpg",
       "tags": ["Seinen","Drama","Suspense"],
       "latest": "Capítulo 166.5",
+      "seccion": "terminados"
+    },
+    {
+      "mangaId": "saneka",
+      "title": "My Marriage with Saneka",
+      "post_url": "/saneka/inicio",
+      "portada": "/assets/img/saneka-cover.jpg",
+      "tags": ["romance", "comedia"],
+      "latest": "Capítulo 18",
       "seccion": "terminados"
     },
     {
