@@ -24,9 +24,12 @@ plugins:
 # --- Collections para las carpetas de series ---
 collections:
 #activos
-  saneka:
+  witchriv:
     output: true
-    permalink: /saneka/:name/
+    permalink: /witchriv/:name/
+  goldship:
+    output: true
+    permalink: /goldship/:name/
   ririsa:
     output: true
     permalink: /ririsa/:name/
@@ -47,6 +50,9 @@ collections:
     output: true
     permalink: /marchen-crown/:name/
 #terminados
+  saneka:
+    output: true
+    permalink: /saneka/:name/
   komi:
     output: true
     permalink: /komi/:name/
@@ -58,7 +64,11 @@ collections:
 defaults:
 # activos (cambios en saneka y ririsa para que no fallen, test)
   - scope:
-      type: saneka
+      type: witchriv
+    values:
+      layout: caps
+  - scope:
+      type: goldship
     values:
       layout: caps
   - scope:
@@ -87,6 +97,10 @@ defaults:
     values:
       layout: caps
 # terminados
+  - scope:
+      type: saneka
+    values:
+      layout: caps
   - scope:
       type: komi
     values:
