@@ -28,36 +28,32 @@ header_kind: home
     </div>
     <div class="grid" id="grid-terminados"></div>
 
-    <h2>Últimos tweets</h2>
-</div>
-<div class="viewport" id="viewport" title="Pasa el puntero para pausar">
-  <div class="scroller" id="scroller">
-    <div class="tape" id="tapeA"></div>
-    <div class="viewport" id="viewport" title="Pasa el puntero para pausar">
+    <div class="section-title">
+      <span class="bar"></span>
       <h2>Últimos tweets</h2>
-
-      <div class="viewport" id="viewport" title="Pasa el puntero para pausar">
-        <div class="scroller" id="scroller">
-          <div class="tape" id="tapeA"></div>
-          <div class="tape" id="tapeB"></div>
-        </div>
-      </div>
-
-      <script>
-        // Jekyll genera la lista real desde el archivo .yml
-        window.TWEET_DATA = [
-          {% for url in site.data.tweets limit: 10 %}
-        "{{ url }}"{% unless forloop.last %}, {% endunless %}
-        {% endfor %}
-      ];
-      </script>
-
-      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-      <script src="{{ '/assets/tw/app.js' | relative_url }}"></script>
-      </main>
     </div>
-    </main>
-  </div>
+
+    <div class="viewport" id="viewport" title="Pasa el puntero para pausar">
+      <div class="scroller" id="scroller">
+        <div class="tape" id="tapeA"></div>
+        <div class="tape" id="tapeB"></div>
+      </div>
+    </div>
+
+    <script>
+      // Jekyll extrae los datos de _data/tweets.yml
+      window.TWEET_DATA = [
+        {% if site.data.tweets %}
+      {% for url in site.data.tweets limit: 10 %}
+      "{{ url }}"{% unless forloop.last %}, {% endunless %}
+      {% endfor %}
+      {% endif %}
+      ];
+    </script>
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script src="{{ '/assets/tw/app.js' | relative_url }}"></script>
+  </main>
 </div>
 
 <script>

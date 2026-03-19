@@ -2,7 +2,7 @@ name: Actualizar Tweets Automáticamente
 on:
   schedule:
     - cron: '0 */6 * * *' # Se ejecuta cada 6 horas
-  workflow_dispatch: # Permite que tú lo ejecutes manualmente para probar
+  workflow_dispatch: # Permite ejecutar manualmente para probar
 
 jobs:
   build:
