@@ -4,8 +4,7 @@ import os
 
 # Configuración
 BEARER_TOKEN = os.getenv("TWITTER_BEARER_TOKEN")
-USER_ID = "1463321605333155845" # Este es el ID real de EnchiladaScan
-
+USER_ID = "1463321605333155845" # El ID numérico de @EnchiladaScan
 def get_tweets():
     url = f"https://api.twitter.com/2/users/{USER_ID}/tweets?max_results=10&tweet.fields=id"
     headers = {"Authorization": f"Bearer {BEARER_TOKEN}"}
