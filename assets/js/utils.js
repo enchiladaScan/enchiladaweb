@@ -20,11 +20,7 @@ export function sortByName(a, b) {
   return a.name?.localeCompare?.(b.name, undefined, { numeric: true, sensitivity: "base" }) ?? 0;
 }
 
-/**
- * Normaliza tu images.json:
- * - Si es arreglo simple: ["https://...","https://..."] => { pages:[{url,name?}] }
- * - Si es extendido: {pages:[{id/name/w/h}]} lo deja igual
- */
+/** Normaliza images.json */
 export function normalizeChapterJson(data) {
   if (Array.isArray(data)) {
     const pages = data.map((url) => {

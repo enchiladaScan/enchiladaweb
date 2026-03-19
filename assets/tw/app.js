@@ -1,11 +1,8 @@
-/* 1) URLs (x.com o twitter.com) con /status/ID */
-const TWEET_URLS = [
-  "https://x.com/EnchiladaScan/status/1959973771118256339",
-  "https://x.com/EnchiladaScan/status/1960805837930201088",
-  "https://x.com/EnchiladaScan/status/1960517127749951931",
-  "https://x.com/EnchiladaScan/status/1955144854968672577"
-  // ...más URLs válidas
-];
+/* 1) RECUPERAMOS LOS DATOS DESDE EL HTML (JEKYLL) */
+// Si por alguna razón la lista falla, usamos una por defecto para que no de error
+const TWEET_URLS = window.TWEET_DATA && window.TWEET_DATA.length > 0
+  ? window.TWEET_DATA
+  : ["https://x.com/EnchiladaScan/status/1959973771118256339"];
 
 /* 2) Parámetros fijos (sin controles) */
 const SPEED = 45;            // px/s, velocidad
@@ -15,7 +12,7 @@ const SHOW_REPLIES = false;  // conversation:"none" si false
 /* 3) Helpers */
 const $ = (s) => document.querySelector(s);
 const ROOT = document.documentElement;
-const getCSSnum = (name, fallback=0) => {
+const getCSSnum = (name, fallback = 0) => {
   const v = parseFloat(getComputedStyle(ROOT).getPropertyValue(name));
   return Number.isFinite(v) ? v : fallback;
 };
@@ -25,39 +22,39 @@ const TWEET_W = getCSSnum("--tweet-w", 360);
 const normalize = (u) => String(u).replace(/^https?:\/\/x\.com/i, "https://twitter.com");
 const extractId = (u) => (normalize(u).match(/status\/(\d+)/) || [])[1] || null;
 
-function waitForTwttr(){
-  return new Promise(res=>{
+function waitForTwttr() {
+  return new Promise(res => {
     if (window.twttr && twttr.widgets) return res();
-    const iv=setInterval(()=>{ if(window.twttr&&twttr.widgets){clearInterval(iv);res();}},50);
+    const iv = setInterval(() => { if (window.twttr && twttr.widgets) { clearInterval(iv); res(); } }, 50);
   });
 }
 
-function makeCard(){
-  const card=document.createElement("div"); card.className="card";
-  const mount=document.createElement("div"); mount.className="mount";
+function makeCard() {
+  const card = document.createElement("div"); card.className = "card";
+  const mount = document.createElement("div"); mount.className = "mount";
   card.appendChild(mount);
-  return {card,mount};
+  return { card, mount };
 }
 
-function showError(mount,url,msg){
+function showError(mount, url, msg) {
   mount.innerHTML = `<div class="err">❗ ${msg}<br><small>${url}</small></div>`;
 }
 
 /* 4) Renderiza pista A y espera 'rendered' de cada widget */
-async function buildTapeA(tapeEl, urls){
+async function buildTapeA(tapeEl, urls) {
   const mounts = [];
-  for(const url of urls){
-    const {card,mount}=makeCard();
+  for (const url of urls) {
+    const { card, mount } = makeCard();
     tapeEl.appendChild(card);
-    mounts.push({mount,url});
+    mounts.push({ mount, url });
   }
 
   await waitForTwttr();
 
-  await Promise.all(mounts.map(({mount,url}) => new Promise(async (resolve)=>{
+  await Promise.all(mounts.map(({ mount, url }) => new Promise(async (resolve) => {
     const id = extractId(url);
-    if(!id){ showError(mount,url,"URL inválida (falta /status/ID)"); return resolve(); }
-    try{
+    if (!id) { showError(mount, url, "URL inválida (falta /status/ID)"); return resolve(); }
+    try {
       const widget = await twttr.widgets.createTweet(id, mount, {
         theme: THEME,
         width: TWEET_W,
@@ -68,16 +65,16 @@ async function buildTapeA(tapeEl, urls){
       });
       // Espera a que ese widget termine de ajustar su altura
       let safety = setTimeout(resolve, 2000);
-      function onRendered(ev){
-        if (ev.target === widget){
+      function onRendered(ev) {
+        if (ev.target === widget) {
           clearTimeout(safety);
           twttr.events.unbind("rendered", onRendered);
           resolve();
         }
       }
       twttr.events.bind("rendered", onRendered);
-    }catch(e){
-      showError(mount,url,"No se pudo embeber (¿borrado/privado?)");
+    } catch (e) {
+      showError(mount, url, "No se pudo embeber (¿borrado/privado?)");
       console.error("Embed fail:", url, e);
       resolve();
     }
@@ -85,7 +82,7 @@ async function buildTapeA(tapeEl, urls){
 }
 
 /* 5) Duplica A hasta overflow real y arma B */
-function ensureOverflow(viewport, scroller, tapeA, tapeB){
+function ensureOverflow(viewport, scroller, tapeA, tapeB) {
   // espejo inicial
   tapeB.innerHTML = tapeA.innerHTML;
 
@@ -93,7 +90,7 @@ function ensureOverflow(viewport, scroller, tapeA, tapeB){
   const target = viewport.clientWidth * 1.6;
 
   // duplica A dentro de A hasta exceder el objetivo
-  while (scroller.scrollWidth <= target){
+  while (scroller.scrollWidth <= target) {
     const clones = Array.from(tapeA.children).map(n => n.cloneNode(true));
     tapeA.append(...clones);
     tapeB.innerHTML = tapeA.innerHTML; // B siempre espejo de A
@@ -101,7 +98,7 @@ function ensureOverflow(viewport, scroller, tapeA, tapeB){
 }
 
 /* 6) Marquee con desplazamiento modular por tiempo + pausa en hover */
-function startMarquee(){
+function startMarquee() {
   const viewport = $("#viewport");
   const scroller = $("#scroller");
   const tapeA = $("#tapeA");
@@ -113,12 +110,12 @@ function startMarquee(){
   let start = performance.now();
   let segment = tapeA.scrollWidth + GAP;
 
-  function step(now){
-    if (!paused && segment > 0){
-      const t = (now - start)/1000;      // segundos
+  function step(now) {
+    if (!paused && segment > 0) {
+      const t = (now - start) / 1000;      // segundos
       const x = (SPEED * t) % segment;   // desplazamiento modular
       viewport.scrollLeft = x;
-    } else if (paused){
+    } else if (paused) {
       // reanudar sin salto
       start = now - (viewport.scrollLeft / SPEED) * 1000;
     }
@@ -127,25 +124,25 @@ function startMarquee(){
   requestAnimationFrame(step);
 
   // pausa en hover
-  viewport.addEventListener("mouseenter", ()=> paused = true);
-  viewport.addEventListener("mouseleave", ()=> paused = false);
+  viewport.addEventListener("mouseenter", () => paused = true);
+  viewport.addEventListener("mouseleave", () => paused = false);
 
   // Si cambia el tamaño de ventana, reasegura overflow sin reiniciar todo
   let to;
-  window.addEventListener("resize", ()=>{
+  window.addEventListener("resize", () => {
     clearTimeout(to);
-    to = setTimeout(()=>{
+    to = setTimeout(() => {
       ensureOverflow(viewport, scroller, tapeA, tapeB);
       segment = tapeA.scrollWidth + GAP;
       // ancla el tiempo actual para evitar “saltos”
       const now = performance.now();
       start = now - (viewport.scrollLeft / SPEED) * 1000;
     }, 150);
-  }, {passive:true});
+  }, { passive: true });
 }
 
 /* 7) Init */
-(async ()=>{
+(async () => {
   await buildTapeA($("#tapeA"), TWEET_URLS); // espera a 'rendered' de todos los tweets
   startMarquee();                             // arranca bucle infinito a la velocidad dada en "SPEED" px/s
 })();
