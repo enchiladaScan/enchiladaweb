@@ -42,9 +42,6 @@ collections:
   dream-jumbo-girl:
     output: true
     permalink: /dream-jumbo/:name/
-  heisei-haizanhei:
-    output: true
-    permalink: /heisei-haizanhei/:name
   ore-no-ichizu-jama:
     output: true
     permalink: /ore-no-ichizu-jama/:name
@@ -57,6 +54,9 @@ collections:
   idolatry:
     output: true
     permalink: /idolatry/:name
+  inori-no-nai:
+    output: true
+    permalink: /inori-no-nai/:name
 
 #joints
   medalist:
@@ -65,6 +65,9 @@ collections:
   marchen-crown:
     output: true
     permalink: /marchen-crown/:name/
+  heisei-haizanhei:
+    output: true
+    permalink: /heisei-haizanhei/:name
 #terminados
   saneka:
     output: true

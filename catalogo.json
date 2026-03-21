@@ -81,7 +81,7 @@
       "mangaId": "shiori-experience",
       "title": "Shiori Experience: Jimi na Watashi to Hen na Ojisan",
       "post_url": "/shiori-experience/inicio",
-      "portada": "/assets/img/shiori-experience-cover.jpg",
+      "portada": "/assets/img/shiori-experience-cover.webp",
       "tags": [
         "Música",
         "Comedia",
@@ -92,24 +92,10 @@
       "seccion": "activos"
     },
     {
-      "mangaId": "heisei-haizanhei",
-      "title": "Heisei Haizanhei Sumire-chan",
-      "post_url": "/heisei-haizanhei/inicio",
-      "portada": "/assets/img/heisei-haizanhei-cover.jpg",
-      "tags": [
-        "Comedia",
-        "Ecchi",
-        "Recuentos de la vida",
-        "Seinen"
-      ],
-      "latest": "Capítulo ?",
-      "seccion": "activos"
-    },
-    {
       "mangaId": "hatori-to-furuta",
       "title": "Hatori to Furuta no Hijōjō Sahanshi",
       "post_url": "/hatori-to-furuta/inicio",
-      "portada": "/assets/img/hatori-to-furuta-cover.jpg",
+      "portada": "/assets/img/hatori-to-furuta-cover.webp",
       "tags": [
         "Comedia",
         "Sobrenatural",
@@ -123,7 +109,7 @@
       "mangaId": "ore-no-ichizu-jama",
       "title": "Ore no Ichizu wo Jama Suru Aitsu",
       "post_url": "/ore-no-ichizu-jama/inicio",
-      "portada": "/assets/img/ore-no-ichizu-jama-cover.jpg",
+      "portada": "/assets/img/ichizu-cover.jpg",
       "tags": [
         "Comedia",
         "Romance",
@@ -137,7 +123,7 @@
       "mangaId": "idolatry",
       "title": "Idolatry",
       "post_url": "/idolatry/inicio",
-      "portada": "/assets/img/idolatry-cover.jpg",
+      "portada": "/assets/img/idolatry-cover.png",
       "tags": [
         "Música",
         "Acción",
@@ -148,24 +134,10 @@
       "seccion": "activos"
     },
     {
-      "mangaId": "takagi-san",
-      "title": "Karakai Jōzu no Takagi-san (Spin-off)",
-      "post_url": "/takagi-san/inicio",
-      "portada": "/assets/img/takagi-san-cover.jpg",
-      "tags": [
-        "Comedia",
-        "Romance",
-        "Recuentos de la vida",
-        "Shonen"
-      ],
-      "latest": "Capítulo ?",
-      "seccion": "activos"
-    },
-    {
       "mangaId": "nitamono-doushi",
       "title": "Nitamono Doushi ((Not) Same Blue Youth)",
       "post_url": "/nitamono-doushi/inicio",
-      "portada": "/assets/img/nitamono-doushi-cover.jpg",
+      "portada": "/assets/img/nitamono-doushi-cover.webp",
       "tags": [
         "Romance",
         "Recuentos de la vida",
@@ -237,6 +209,20 @@
         "Accion"
       ],
       "latest": "Capítulo 18",
+      "seccion": "joints"
+    },
+    {
+      "mangaId": "heisei-haizanhei",
+      "title": "Heisei Haizanhei Sumire-chan",
+      "post_url": "/heisei-haizanhei/inicio",
+      "portada": "/assets/img/Heisei-cover.jpg",
+      "tags": [
+        "Comedia",
+        "Ecchi",
+        "Recuentos de la vida",
+        "Seinen"
+      ],
+      "latest": "Capítulo ?",
       "seccion": "joints"
     }
   ]
