@@ -42,6 +42,22 @@ collections:
   dream-jumbo-girl:
     output: true
     permalink: /dream-jumbo/:name/
+  heisei-haizanhei:
+    output: true
+    permalink: /heisei-haizanhei/:name
+  ore-no-ichizu-jama:
+    output: true
+    permalink: /ore-no-ichizu-jama/:name
+  shiori-experience:
+    output: true
+    permalink: /shiori-experience/:name
+  hatori-to-furuta:
+    output: true
+    permalink: /hatori-to-furuta/:name
+  idolatry:
+    output: true
+    permalink: /idolatry/:name
+
 #joints
   medalist:
     output: true
@@ -59,6 +75,9 @@ collections:
   oshi-no-ko:
     output: true
     permalink: /oshi-no-ko/:name/
+  nitamono-doushi:
+    output: true
+    permalink: /nitamono-doushi/:name
 
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:

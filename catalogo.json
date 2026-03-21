@@ -78,6 +78,104 @@
       "seccion": "activos"
     },
     {
+      "mangaId": "shiori-experience",
+      "title": "Shiori Experience: Jimi na Watashi to Hen na Ojisan",
+      "post_url": "/shiori-experience/inicio",
+      "portada": "/assets/img/shiori-experience-cover.jpg",
+      "tags": [
+        "Música",
+        "Comedia",
+        "Seinen",
+        "Sobrenatural"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "heisei-haizanhei",
+      "title": "Heisei Haizanhei Sumire-chan",
+      "post_url": "/heisei-haizanhei/inicio",
+      "portada": "/assets/img/heisei-haizanhei-cover.jpg",
+      "tags": [
+        "Comedia",
+        "Ecchi",
+        "Recuentos de la vida",
+        "Seinen"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "hatori-to-furuta",
+      "title": "Hatori to Furuta no Hijōjō Sahanshi",
+      "post_url": "/hatori-to-furuta/inicio",
+      "portada": "/assets/img/hatori-to-furuta-cover.jpg",
+      "tags": [
+        "Comedia",
+        "Sobrenatural",
+        "Recuentos de la vida",
+        "Shonen"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "ore-no-ichizu-jama",
+      "title": "Ore no Ichizu wo Jama Suru Aitsu",
+      "post_url": "/ore-no-ichizu-jama/inicio",
+      "portada": "/assets/img/ore-no-ichizu-jama-cover.jpg",
+      "tags": [
+        "Comedia",
+        "Romance",
+        "Escolar",
+        "Shonen"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "idolatry",
+      "title": "Idolatry",
+      "post_url": "/idolatry/inicio",
+      "portada": "/assets/img/idolatry-cover.jpg",
+      "tags": [
+        "Música",
+        "Acción",
+        "Ciencia ficción",
+        "Shonen"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "takagi-san",
+      "title": "Karakai Jōzu no Takagi-san (Spin-off)",
+      "post_url": "/takagi-san/inicio",
+      "portada": "/assets/img/takagi-san-cover.jpg",
+      "tags": [
+        "Comedia",
+        "Romance",
+        "Recuentos de la vida",
+        "Shonen"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "nitamono-doushi",
+      "title": "Nitamono Doushi ((Not) Same Blue Youth)",
+      "post_url": "/nitamono-doushi/inicio",
+      "portada": "/assets/img/nitamono-doushi-cover.jpg",
+      "tags": [
+        "Romance",
+        "Recuentos de la vida",
+        "Seinen",
+        "Drama"
+      ],
+      "latest": "Capítulo 1 (One-shot)",
+      "seccion": "terminados"
+    },
+    {
       "mangaId": "oshi-no-ko",
       "title": "Oshi no Ko",
       "post_url": "/oshi-no-ko/inicio",
