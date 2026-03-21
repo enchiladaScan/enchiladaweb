@@ -118,6 +118,10 @@ defaults:
       type: marchen-crown
     values:
       layout: caps
+  - scope:
+      type: heisei-haizanhei
+    values:
+      layout: caps
 # terminados
   - scope:
       type: saneka
