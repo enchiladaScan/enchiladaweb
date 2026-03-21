@@ -1,7 +1,7 @@
 ---
 layout: page
-title: APP Enchilada
-permalink: /app.html
+title: Redes
+permalink: /redes.html
 use_main_css: true
 header_kind: home
 ---
