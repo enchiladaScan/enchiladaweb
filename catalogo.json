@@ -5,7 +5,10 @@
       "title": "2.5 Dimensional Seduction (Ririsa)",
       "post_url": "/ririsa/inicio",
       "portada": "/assets/img/ririsa-cover.jpg",
-      "tags": ["romance", "comedia"],
+      "tags": [
+        "romance",
+        "comedia"
+      ],
       "latest": "Capítulo ?",
       "seccion": "activos"
     },
@@ -14,7 +17,10 @@
       "title": "Las 100 Novias",
       "post_url": "/100novias/inicio",
       "portada": "/assets/img/100n-cover.jpg",
-      "tags": ["comedia", "romance"],
+      "tags": [
+        "comedia",
+        "romance"
+      ],
       "latest": "Capítulo ?",
       "seccion": "activos"
     },
@@ -23,7 +29,11 @@
       "title": "Megami no cafe terrace",
       "post_url": "/megami-no-cafe/inicio",
       "portada": "/assets/img/megami-cover.jpg",
-      "tags": ["Comedia", "Romance", "Recuentos de la vida"],
+      "tags": [
+        "Comedia",
+        "Romance",
+        "Recuentos de la vida"
+      ],
       "latest": "Capítulo 208",
       "seccion": "activos"
     },
@@ -32,7 +42,11 @@
       "title": "Dream Jumbo Girl",
       "post_url": "/dream-jumbo/inicio",
       "portada": "/assets/img/dream-jumbo-cover.webp",
-      "tags": ["Comedia", "Romance", "Deportes"],
+      "tags": [
+        "Comedia",
+        "Romance",
+        "Deportes"
+      ],
       "latest": "Capítulo ?",
       "seccion": "activos"
     },
@@ -41,7 +55,11 @@
       "title": "Uma Musume: Pisupisu☆Supisupi Golshi-chan",
       "post_url": "/goldship/inicio",
       "portada": "/assets/img/goldship-cover.webp",
-      "tags": ["Comedia", "Slice of Life", "Spin-off"],
+      "tags": [
+        "Comedia",
+        "Slice of Life",
+        "Spin-off"
+      ],
       "latest": "Capítulo ?",
       "seccion": "activos"
     },
@@ -50,7 +68,12 @@
       "title": "Witchriv",
       "post_url": "/witchriv/inicio",
       "portada": "/assets/img/witchriv-cover.jpg",
-      "tags": ["Fantasía", "Magia", "Shonen", "Drama"],
+      "tags": [
+        "Fantasía",
+        "Magia",
+        "Shonen",
+        "Drama"
+      ],
       "latest": "Capítulo ?",
       "seccion": "activos"
     },
@@ -59,7 +82,11 @@
       "title": "Oshi no Ko",
       "post_url": "/oshi-no-ko/inicio",
       "portada": "/assets/img/oshi-no-ko-cover.jpg",
-      "tags": ["Seinen","Drama","Suspense"],
+      "tags": [
+        "Seinen",
+        "Drama",
+        "Suspense"
+      ],
       "latest": "Capítulo 166.5",
       "seccion": "terminados"
     },
@@ -67,8 +94,12 @@
       "mangaId": "komi",
       "title": "Komi Can't Communicate",
       "post_url": "/komi/inicio",
-      "portada": "/assets/img/komi-cover.png",
-      "tags": ["Comedia","Escolar","Slice of life"],
+      "portada": "/assets/img/komi-cover.jpg",
+      "tags": [
+        "Comedia",
+        "Escolar",
+        "Slice of life"
+      ],
       "latest": "Capítulo 500.10",
       "seccion": "terminados"
     },
@@ -76,8 +107,11 @@
       "mangaId": "saneka",
       "title": "My Marriage with Saneka",
       "post_url": "/saneka/inicio",
-      "portada": "/assets/img/saneka-cover.jpg",
-      "tags": ["romance", "comedia"],
+      "portada": "/assets/img/saneka-cover.webp",
+      "tags": [
+        "romance",
+        "comedia"
+      ],
       "latest": "Capítulo 18",
       "seccion": "terminados"
     },
@@ -86,7 +120,11 @@
       "title": "Medalist",
       "post_url": "/medalist/inicio",
       "portada": "/assets/img/medalist-cover.jpg",
-      "tags": ["Drama", "Deportes", "Psicológico"],
+      "tags": [
+        "Drama",
+        "Deportes",
+        "Psicológico"
+      ],
       "latest": "Capítulo ?",
       "seccion": "joints"
     },
@@ -95,7 +133,11 @@
       "title": "Marchen Crown",
       "post_url": "/marchen-crown/inicio",
       "portada": "/assets/img/marchen-crown-cover.jpg",
-      "tags": ["Aventura", "Fantasia", "Accion"],
+      "tags": [
+        "Aventura",
+        "Fantasia",
+        "Accion"
+      ],
       "latest": "Capítulo 18",
       "seccion": "joints"
     }
