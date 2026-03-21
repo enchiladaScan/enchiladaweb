@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - EnchiladaScan</title>
+    <style>
+        body {
+            background: #1a1a1a;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .panel {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #00acee;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #0084b4;
+        }
+
+        .log {
+            font-size: 12px;
+            color: #888;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="panel">
+        <h3>Admin Tweets (FIFO)</h3>
+        <input type="password" id="pass" placeholder="Contraseña de Admin">
+        <input type="text" id="tweetUrl" placeholder="URL del Tweet (x.com/...)">
+        <button onclick="enviarTweet()">Publicar en la Web</button>
+        <div class="log" id="log">Esperando acción...</div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getDatabase, ref, push, remove, query, limitToFirst, get } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+
+        // Tu configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyANA4nyzrsexoLj6NgDWBbbuI_Jchltznc",
+            authDomain: "enchilada-posts.firebaseapp.com",
+            databaseURL: "https://enchilada-posts-default-rtdb.firebaseio.com",
+            projectId: "enchilada-posts",
+            storageBucket: "enchilada-posts.firebasestorage.app",
+            messagingSenderId: "701192037095",
+            appId: "1:701192037095:web:043ddeb1ccb75862557842",
+            measurementId: "G-BGY8P2YNTQ"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const TWEET_LIMIT = 10;
+
+        window.enviarTweet = async () => {
+            const pass = document.getElementById('pass').value;
+            const url = document.getElementById('tweetUrl').value;
+            const log = document.getElementById('log');
+
+            // Configura aquí tu contraseña
+            if (pass !== "spypagameconmediopollo") {
+                alert("Contraseña incorrecta");
+                return;
+            }
+
+            if (!url.includes("status")) {
+                alert("La URL debe ser de un tweet válido");
+                return;
+            }
+
+            const tweetsRef = ref(db, 'tweets');
+            const snapshot = await get(tweetsRef);
+
+            // Lógica FIFO
+            if (snapshot.exists() && snapshot.size >= TWEET_LIMIT) {
+                const oldestQuery = query(tweetsRef, limitToFirst(1));
+                const oldestSnap = await get(oldestQuery);
+                oldestSnap.forEach(child => {
+                    remove(ref(db, `tweets/${child.key}`));
+                });
+            }
+
+            push(tweetsRef, url);
+            log.innerText = "¡Publicado! Se verá en la web ahora mismo.";
+            document.getElementById('tweetUrl').value = "";
+        };
+    </script>
+</body>
+
+</html>

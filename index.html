@@ -54,102 +54,117 @@ header_kind: home
       </div>
     </div>
 
-    <script>
-      // Jekyll extrae los datos de _data/tweets.yml
-      window.TWEET_DATA = [
-        {% if site.data.tweets %}
-      {% for url in site.data.tweets limit: 10 %}
-      "{{ url }}"{% unless forloop.last %}, {% endunless %}
-      {% endfor %}
-      {% endif %}
-      ];
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+      import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyANA4nyzrsexoLj6NgDWBbbuI_Jchltznc",
+        authDomain: "enchilada-posts.firebaseapp.com",
+        databaseURL: "https://enchilada-posts-default-rtdb.firebaseio.com",
+        projectId: "enchilada-posts",
+        storageBucket: "enchilada-posts.firebasestorage.app",
+        messagingSenderId: "701192037095",
+        appId: "1:701192037095:web:043ddeb1ccb75862557842",
+        measurementId: "G-BGY8P2YNTQ"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      onValue(ref(db, 'tweets'), (snapshot) => {
+        const data = snapshot.val();
+        window.TWEET_DATA = data ? Object.values(data) : [];
+        console.log("Tweets cargados de Firebase:", window.TWEET_DATA);
+
+        // Si la página ya cargó y app.js existe, esto asegura que se ejecute
+        if (window.iniciarMarquee) window.iniciarMarquee();
+      });
     </script>
 
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="{{ '/assets/tw/app.js' | relative_url }}"></script>
-  </main>
-</div>
 
-<script>
-  (async function () {
-    const BASE = '{{ site.baseurl }}';                         // usa baseurl
-    const CATALOG_URL = '{{ "/catalogo.json" | relative_url }}';
-    const PLACEHOLDER = '/assets/img/cargando_gato.gif';   // ruta del placeholder
+    <script>
+      (async function () {
+        const BASE = '{{ site.baseurl }}';                         // usa baseurl
+        const CATALOG_URL = '{{ "/catalogo.json" | relative_url }}';
+        const PLACEHOLDER = '/assets/img/cargando_gato.gif';   // ruta del placeholder
 
-    const SECTIONS = [
-      { key: 'activos', el: 'grid-activos', titleEmpty: 'No hay series activas por el momento.' },
-      { key: 'joints', el: 'grid-joints', titleEmpty: 'No hay JOINTS por el momento.' },
-      { key: 'terminados', el: 'grid-terminados', titleEmpty: 'No hay series terminadas por el momento.' }
-    ];
+        const SECTIONS = [
+          { key: 'activos', el: 'grid-activos', titleEmpty: 'No hay series activas por el momento.' },
+          { key: 'joints', el: 'grid-joints', titleEmpty: 'No hay JOINTS por el momento.' },
+          { key: 'terminados', el: 'grid-terminados', titleEmpty: 'No hay series terminadas por el momento.' }
+        ];
 
-    try {
-      const res = await fetch(CATALOG_URL, { cache: 'no-store' });
-      if (!res.ok) throw new Error('No se pudo cargar catalogo.json');
-      const data = await res.json();
+        try {
+          const res = await fetch(CATALOG_URL, { cache: 'no-store' });
+          if (!res.ok) throw new Error('No se pudo cargar catalogo.json');
+          const data = await res.json();
 
-      let items = [];
-      if (Array.isArray(data.items)) {
-        items = data.items.map(m => normalizeItem(m));
-      } else {
-        items = []
-          .concat((data.activos || []).map(m => normalizeItem(m, 'activos')))
-          .concat((data.joints || []).map(m => normalizeItem(m, 'joints')))
-          .concat((data.finalizados || []).map(m => normalizeItem(m, 'terminados'))); // finalizados -> terminados
-      }
+          let items = [];
+          if (Array.isArray(data.items)) {
+            items = data.items.map(m => normalizeItem(m));
+          } else {
+            items = []
+              .concat((data.activos || []).map(m => normalizeItem(m, 'activos')))
+              .concat((data.joints || []).map(m => normalizeItem(m, 'joints')))
+              .concat((data.finalizados || []).map(m => normalizeItem(m, 'terminados'))); // finalizados -> terminados
+          }
 
-      for (const sec of SECTIONS) {
-        const list = items.filter(m => m.seccion === sec.key);
-        renderSection(sec.el, list, sec.titleEmpty);
-      }
-    } catch (err) {
-      console.error(err);
-      for (const sec of SECTIONS) {
-        const el = document.getElementById(sec.el);
-        if (el) el.insertAdjacentHTML('beforebegin', `<p class="no-links">No se pudo cargar el catálogo.</p>`);
-      }
-    }
+          for (const sec of SECTIONS) {
+            const list = items.filter(m => m.seccion === sec.key);
+            renderSection(sec.el, list, sec.titleEmpty);
+          }
+        } catch (err) {
+          console.error(err);
+          for (const sec of SECTIONS) {
+            const el = document.getElementById(sec.el);
+            if (el) el.insertAdjacentHTML('beforebegin', `<p class="no-links">No se pudo cargar el catálogo.</p>`);
+          }
+        }
 
-    // --- helpers ---
-    function normalizeItem(m, fallbackSection) {
-      const portada = m.portada || m.cover || PLACEHOLDER;     // si viene vacío, ya cae al placeholder
-      const href = m.post_url || m.url || '#';
-      const seccion = (m.seccion || fallbackSection || '').toLowerCase();
-      return {
-        title: m.title || m.mangaId || '—',
-        href, portada, seccion,
-        tags: Array.isArray(m.tags) ? m.tags : [],
-        latest: m.latest || '—'
-      };
-    }
+        // --- helpers ---
+        function normalizeItem(m, fallbackSection) {
+          const portada = m.portada || m.cover || PLACEHOLDER;     // si viene vacío, ya cae al placeholder
+          const href = m.post_url || m.url || '#';
+          const seccion = (m.seccion || fallbackSection || '').toLowerCase();
+          return {
+            title: m.title || m.mangaId || '—',
+            href, portada, seccion,
+            tags: Array.isArray(m.tags) ? m.tags : [],
+            latest: m.latest || '—'
+          };
+        }
 
-    function withBase(u) {
-      if (!u) return '#';
-      if (/^https?:\/\//i.test(u)) return u; // absoluta
-      if (u[0] !== '/') u = '/' + u;
-      return (BASE || '') + u;
-    }
+        function withBase(u) {
+          if (!u) return '#';
+          if (/^https?:\/\//i.test(u)) return u; // absoluta
+          if (u[0] !== '/') u = '/' + u;
+          return (BASE || '') + u;
+        }
 
-    function renderSection(containerId, items, emptyMsg) {
-      const $grid = document.getElementById(containerId);
-      if (!$grid) return;
+        function renderSection(containerId, items, emptyMsg) {
+          const $grid = document.getElementById(containerId);
+          if (!$grid) return;
 
-      if (!items.length) {
-        $grid.insertAdjacentHTML('beforebegin', `<p class="no-links">${escapeHtml(emptyMsg)}</p>`);
-        return;
-      }
+          if (!items.length) {
+            $grid.insertAdjacentHTML('beforebegin', `<p class="no-links">${escapeHtml(emptyMsg)}</p>`);
+            return;
+          }
 
-      const fr = document.createDocumentFragment();
-      for (const m of items) {
-        const card = document.createElement('a');
-        card.className = 'card';
-        card.href = withBase(m.href);
-        card.setAttribute('data-title', m.title);
-        card.setAttribute('data-tags', (m.tags || []).join(' '));
+          const fr = document.createDocumentFragment();
+          for (const m of items) {
+            const card = document.createElement('a');
+            card.className = 'card';
+            card.href = withBase(m.href);
+            card.setAttribute('data-title', m.title);
+            card.setAttribute('data-tags', (m.tags || []).join(' '));
 
-        const imgSrc = withBase(m.portada);
-        const imgPh = withBase(PLACEHOLDER);
+            const imgSrc = withBase(m.portada);
+            const imgPh = withBase(PLACEHOLDER);
 
-        card.innerHTML = `
+            card.innerHTML = `
         <div class="card-cover">
           <img src="${imgSrc}" alt="${escapeHtml(m.title)}" loading="lazy">
         </div>
@@ -162,19 +177,19 @@ header_kind: home
         </div>
       `;
 
-        // si falla la imagen, reemplaza por el placeholder
-        const img = card.querySelector('img');
-        img.addEventListener('error', () => { img.src = imgPh; });
+            // si falla la imagen, reemplaza por el placeholder
+            const img = card.querySelector('img');
+            img.addEventListener('error', () => { img.src = imgPh; });
 
-        fr.appendChild(card);
-      }
-      $grid.appendChild(fr);
-    }
+            fr.appendChild(card);
+          }
+          $grid.appendChild(fr);
+        }
 
-    function escapeHtml(s) {
-      return String(s || '').replace(/[&<>"']/g, m => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-      }[m]));
-    }
-  })();
-</script>
+        function escapeHtml(s) {
+          return String(s || '').replace(/[&<>"']/g, m => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+          }[m]));
+        }
+      })();
+    </script>
