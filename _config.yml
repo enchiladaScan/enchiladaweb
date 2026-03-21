@@ -54,9 +54,6 @@ collections:
   idolatry:
     output: true
     permalink: /idolatry/:name
-  inori-no-nai:
-    output: true
-    permalink: /inori-no-nai/:name
 
 #joints
   medalist:
@@ -81,6 +78,9 @@ collections:
   nitamono-doushi:
     output: true
     permalink: /nitamono-doushi/:name
+  inori-no-nai:
+    output: true
+    permalink: /inori-no-nai/:name
 
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
