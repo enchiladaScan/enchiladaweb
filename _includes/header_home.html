@@ -1,43 +1,43 @@
 <header class="scan-header">
   <div class="scan-header__inner">
     <a class="scan-logo" href="{{ site.baseurl }}/">
-    <img src="{{ site.baseurl }}/assets/img/header_home.png" alt="Logo del scan en 2.5 Dimensiones">
-</a>
+      <img src="{{ site.baseurl }}/assets/img/header_home.png" alt="Logo del scan en 2.5 Dimensiones">
+    </a>
 
     <form class="scan-search" onsubmit="return false" role="search" aria-label="Buscar por título o tags">
       <input id="homeSearch" type="search" placeholder="Buscar título o tag…">
       <button type="button" id="homeSearchBtn">Buscar</button>
     </form>
 
-    <a class="scan-cta" href="{{ site.baseurl }}/app.html">Descarga la app</a>
+    <a class="scan-cta" href="{{ site.baseurl }}/app.html">¡Síguenos!</a>
   </div>
 </header>
 
 <script>
-(function () {
-  var q = document.getElementById('homeSearch');
-  var btn = document.getElementById('homeSearchBtn');
-  if (!q || !btn) return;
+  (function () {
+    var q = document.getElementById('homeSearch');
+    var btn = document.getElementById('homeSearchBtn');
+    if (!q || !btn) return;
 
-  function matches(card, needle){
-    needle = needle.toLowerCase();
-    var t = (card.dataset.title || '').toLowerCase();
-    var tags = (card.dataset.tags || '').toLowerCase();
-    return t.includes(needle) || tags.includes(needle);
-  }
+    function matches(card, needle) {
+      needle = needle.toLowerCase();
+      var t = (card.dataset.title || '').toLowerCase();
+      var tags = (card.dataset.tags || '').toLowerCase();
+      return t.includes(needle) || tags.includes(needle);
+    }
 
-  function apply(){
-    var needle = (q.value || '').trim();
-    var cards = document.querySelectorAll('.card[data-title][data-tags]');
-    if (!cards.length) return;
+    function apply() {
+      var needle = (q.value || '').trim();
+      var cards = document.querySelectorAll('.card[data-title][data-tags]');
+      if (!cards.length) return;
 
-    cards.forEach(function(card){
-      if (!needle) { card.style.display = ''; return; }
-      card.style.display = matches(card, needle) ? '' : 'none';
-    });
-  }
+      cards.forEach(function (card) {
+        if (!needle) { card.style.display = ''; return; }
+        card.style.display = matches(card, needle) ? '' : 'none';
+      });
+    }
 
-  q.addEventListener('input', apply);
-  btn.addEventListener('click', apply);
-})();
+    q.addEventListener('input', apply);
+    btn.addEventListener('click', apply);
+  })();
 </script>

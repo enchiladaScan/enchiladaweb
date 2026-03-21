@@ -1,45 +1,45 @@
 <header class="scan-header">
   <div class="scan-header__inner">
     <a class="scan-logo" href="{{ site.baseurl }}/">
-    <img src="{{ site.baseurl }}/assets/img/header_home.png" alt="Logo del scan en 2.5 Dimensiones">
-</a>
+      <img src="{{ site.baseurl }}/assets/img/header_home.png" alt="Logo del scan en 2.5 Dimensiones">
+    </a>
 
     <form class="scan-search" onsubmit="return false" role="search" aria-label="Buscar capítulos">
       <input id="capsSearch" type="search" placeholder="Buscar capítulo… ej. 12, 13.5">
       <button type="button" id="capsSearchBtn">Buscar</button>
     </form>
 
-    <a class="scan-cta" href="{{ site.baseurl }}/app.html">Descarga la app</a>
+    <a class="scan-cta" href="{{ site.baseurl }}/app.html">¡Síguenos!</a>
   </div>
 </header>
 
 <script>
-(function () {
-  var q = document.getElementById('capsSearch');
-  var btn = document.getElementById('capsSearchBtn');
-  if (!q || !btn) return;
+  (function () {
+    var q = document.getElementById('capsSearch');
+    var btn = document.getElementById('capsSearchBtn');
+    if (!q || !btn) return;
 
-  // Listas esperadas: #chaptersList y #downloadsList
-  function filterList(list){
-    if (!list) return;
-    var li = list.querySelectorAll('li');
-    var needle = (q.value || '').trim().toLowerCase();
+    // Listas esperadas: #chaptersList y #downloadsList
+    function filterList(list) {
+      if (!list) return;
+      var li = list.querySelectorAll('li');
+      var needle = (q.value || '').trim().toLowerCase();
 
-    li.forEach(function(item){
-      var txt = (item.textContent || '').toLowerCase();
-      // También soporta data-cap (capítulo) si lo agregas a <li data-cap="13.5">
-      var cap = (item.dataset.cap || '').toLowerCase();
-      var show = !needle || txt.includes(needle) || cap.includes(needle);
-      item.style.display = show ? '' : 'none';
-    });
-  }
+      li.forEach(function (item) {
+        var txt = (item.textContent || '').toLowerCase();
+        // También soporta data-cap (capítulo) si lo agregas a <li data-cap="13.5">
+        var cap = (item.dataset.cap || '').toLowerCase();
+        var show = !needle || txt.includes(needle) || cap.includes(needle);
+        item.style.display = show ? '' : 'none';
+      });
+    }
 
-  function apply(){
-    filterList(document.getElementById('chaptersList'));   // “Ver capítulos aquí”
-    filterList(document.getElementById('downloadsList'));  // “Links de descarga”
-  }
+    function apply() {
+      filterList(document.getElementById('chaptersList'));   // “Ver capítulos aquí”
+      filterList(document.getElementById('downloadsList'));  // “Links de descarga”
+    }
 
-  q.addEventListener('input', apply);
-  btn.addEventListener('click', apply);
-})();
+    q.addEventListener('input', apply);
+    btn.addEventListener('click', apply);
+  })();
 </script>
