@@ -39,20 +39,6 @@ header_kind: home
         <div class="tape" id="tapeB"></div>
       </div>
     </div>
-    <!-- ===== TWITTER WIDGET timeline ===== -->
-    <div class="section-title">
-      <span class="bar"></span>
-      <h2>Timeline Oficial (Widget)</h2>
-    </div>
-
-    <div style="display: flex; justify-content: center; padding: 20px 0;">
-      <div style="width: 100%; max-width: 500px; height: 600px; overflow-y: auto;">
-        <a class="twitter-timeline" data-height="600" data-theme="dark"
-          href="https://twitter.com/EnchiladaScan?ref_src=twsrc%5Etfw">
-          Cargando tweets de @EnchiladaScan...
-        </a>
-      </div>
-    </div>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
@@ -74,11 +60,15 @@ header_kind: home
 
       onValue(ref(db, 'tweets'), (snapshot) => {
         const data = snapshot.val();
+        // Guardamos los datos globalmente
         window.TWEET_DATA = data ? Object.values(data) : [];
-        console.log("Tweets cargados de Firebase:", window.TWEET_DATA);
 
-        // Si la página ya cargó y app.js existe, esto asegura que se ejecute
-        if (window.iniciarMarquee) window.iniciarMarquee();
+        console.log("Datos recibidos de Firebase:", window.TWEET_DATA);
+
+        // Sia la función ya existe en app.js, la ejecutamos para refrescar la cinta
+        if (typeof window.iniciarMarquee === 'function') {
+          window.iniciarMarquee();
+        }
       });
     </script>
 

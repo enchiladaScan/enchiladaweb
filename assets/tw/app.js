@@ -141,8 +141,26 @@ function startMarquee() {
   }, { passive: true });
 }
 
-/* 7) Init */
-(async () => {
-  await buildTapeA($("#tapeA"), TWEET_URLS); // espera a 'rendered' de todos los tweets
-  startMarquee();                             // arranca bucle infinito a la velocidad dada en "SPEED" px/s
-})();
+/* 7) Función para (re)iniciar la cinta */
+window.iniciarMarquee = async () => {
+  const tapeA = $("#tapeA");
+  const tapeB = $("#tapeB");
+
+  // 1. Limpiamos las cintas actuales para no duplicar contenido
+  tapeA.innerHTML = "";
+  tapeB.innerHTML = "";
+
+  // 2. Obtenemos los datos actuales de Firebase (guardados en window.TWEET_DATA)
+  const links = window.TWEET_DATA && window.TWEET_DATA.length > 0
+    ? window.TWEET_DATA
+    : ["https://x.com/EnchiladaScan/status/1959973771118256339"];
+
+  console.log("Iniciando renderizado de cinta con:", links);
+
+  // 3. la pista A y arrancamos el movimiento
+  await buildTapeA(tapeA, links);
+  startMarquee();
+};
+
+// Ejecución inicial al cargar por primera vez
+window.iniciarMarquee();
