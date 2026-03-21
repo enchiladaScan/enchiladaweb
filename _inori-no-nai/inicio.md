@@ -17,5 +17,5 @@ links_descarga:
 show_links_en_ficha: false
 use_theme: true
 redirect_from:
-  - /nada-de-rezar/
+  - /inori-no-nai/
 ---
