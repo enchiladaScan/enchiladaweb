@@ -148,6 +148,20 @@
       "seccion": "terminados"
     },
     {
+      "mangaId": "inori-no-nai",
+      "title": "Inori no nai Tokoro ni (Nada de rezar)",
+      "post_url": "/inori-no-nai/inicio",
+      "portada": "/assets/img/nada-de-rezar-cover.jpg",
+      "tags": [
+        "Yuri",
+        "Drama",
+        "Recuentos de la vida",
+        "Seinen"
+      ],
+      "latest": "Capítulo 1 (One-shot)",
+      "seccion": "terminados"
+    },
+    {
       "mangaId": "oshi-no-ko",
       "title": "Oshi no Ko",
       "post_url": "/oshi-no-ko/inicio",
