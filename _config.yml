@@ -81,6 +81,9 @@ collections:
   inori-no-nai:
     output: true
     permalink: /inori-no-nai/:name
+  umine:
+    output: true
+    permalink: /umine/:name
 
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
@@ -94,10 +97,6 @@ defaults:
     values:
       layout: caps
   - scope:
-      type: ririsa
-    values:
-      layout: caps
-  - scope:
       type: "100novias"
     values:
       layout: caps
@@ -107,6 +106,10 @@ defaults:
       layout: caps
   - scope:
       type: dream
+    values:
+      layout: caps
+  - scope:
+      type: umine
     values:
       layout: caps
 # joints
@@ -133,6 +136,10 @@ defaults:
       layout: caps
   - scope:
       type: oshi-no-ko
+    values:
+      layout: caps
+  - scope:
+      type: ririsa
     values:
       layout: caps
 

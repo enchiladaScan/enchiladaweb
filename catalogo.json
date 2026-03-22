@@ -9,7 +9,7 @@
         "romance",
         "comedia"
       ],
-      "latest": "Capítulo ?",
+      "latest": "Capítulo 201",
       "seccion": "terminados"
     },
     {
@@ -124,6 +124,20 @@
       "title": "Idolatry",
       "post_url": "/idolatry/inicio",
       "portada": "/assets/img/idolatry-cover.png",
+      "tags": [
+        "Música",
+        "Acción",
+        "Ciencia ficción",
+        "Shonen"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "umine",
+      "title": "La posada de Umine de aquella isla",
+      "post_url": "/umine/inicio",
+      "portada": "/assets/img/umine-cover.webp",
       "tags": [
         "Música",
         "Acción",
