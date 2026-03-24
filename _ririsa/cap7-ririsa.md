@@ -13,5 +13,5 @@ redirect_from:
   - /cap7-ririsa/
 use_main_css: true
 prev_href: /ririsa/cap6/
-next_href: /ririsa/cap8/
+next_href: /ririsa/cap22/
 ---
