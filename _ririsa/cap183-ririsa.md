@@ -1,7 +1,7 @@
 ---
 layout: reader
 title: "Capítulo 183"
-manga: "RIRISA"
+manga: "Ririsa"
 manga_slug: "ririsa"
 capitulo: 183
 es_primero: false
