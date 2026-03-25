@@ -1,8 +1,8 @@
 ---
 layout: reader
-title: "Capítulo 2"
-manga: "ore-no-ichizu-jama"
-manga_slug: "ore-no-ichizu-jama"
+title: "Capítulo 2: Tiempo de amor [2]."
+manga: "ore no ichizu jama"
+manga_slug: "ore no ichizujama"
 capitulo: 2
 es_primero: false
 es_ultimo: true
