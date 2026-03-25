@@ -11,10 +11,6 @@ generos: ["Música", "Comedia", "Drama", "Seinen", "Sobrenatural"]
 estado: "En publicación"
 anio: 2013
 editorial: "Monthly Big Gangan"
-links_descarga:
-  - { nombre: "Cap 1 (MEGA)", url: "#" }
-  - { nombre: "Cap 1 (Drive)", url: "#" }
-  - { nombre: "Vol 1 (MEGA)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:

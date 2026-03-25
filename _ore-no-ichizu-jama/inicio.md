@@ -11,10 +11,6 @@ generos: ["Comedia","Romance","Escolar","Shonen"]
 estado: "En publicación"
 anio: 2026
 editorial: "Comic REX"
-links_descarga:
-  - { nombre: "Cap 1 (MEGA)", url: "#" }
-  - { nombre: "Cap 1 (Drive)", url: "#" }
-  - { nombre: "Vol 1 (MEGA)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:

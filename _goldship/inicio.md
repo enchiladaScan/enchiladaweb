@@ -11,10 +11,6 @@ generos: ["Comedia", "Slice of Life", "Spin-off"]
 estado: "En publicación"
 anio: 2023
 editorial: "Shogakukan"
-links_descarga:
-  - { nombre: "Cap 1 (MEGA)", url: "#" }
-  - { nombre: "Cap 1 (Drive)", url: "#" }
-  - { nombre: "Pack 1–5 (MEGA)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:

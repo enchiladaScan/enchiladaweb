@@ -11,9 +11,6 @@ generos: ["Seinen","Drama","Suspense"]
 estado: "En publicación"
 anio: 2020
 editorial: "Shueisha"
-links_descarga:
-    - { nombre: "Cap 1 (MEGA)", url: "#" }
-    - { nombre: "Cap 1 (Drive)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:

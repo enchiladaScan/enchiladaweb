@@ -11,9 +11,6 @@ generos: ["Comedia","Romance","Harem"]
 estado: "En publicación"
 anio: 2019
 editorial: "Young Jump Comics"
-links_descarga:
-  - { nombre: "Pack Caps 001–005 (MEGA)",  url: "#" }
-  - { nombre: "Pack Caps 006–010 (Drive)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:

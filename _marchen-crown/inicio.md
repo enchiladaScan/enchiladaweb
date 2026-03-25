@@ -11,10 +11,6 @@ generos: ["Fantasía","Acción","Aventura","Drama"]
 estado: "Finalizado"
 anio: 2014
 editorial: "Dragon Age Pure"
-links_descarga:
-  - { nombre: "Cap 1 (MEGA)", url: "#" }
-  - { nombre: "Cap 1 (Drive)", url: "#" }
-  - { nombre: "Pack 1–5 (MEGA)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
 ---

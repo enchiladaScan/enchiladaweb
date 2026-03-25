@@ -11,10 +11,6 @@ generos: ["Comedia", "Ecchi", "Recuentos de la vida", "Seinen"]
 estado: "En publicación"
 anio: 2024
 editorial: "Weekly Young Magazine"
-links_descarga:
-  - { nombre: "Cap 1 (MEGA)", url: "#" }
-  - { nombre: "Cap 1 (Drive)", url: "#" }
-  - { nombre: "Vol 1 (MEGA)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:
