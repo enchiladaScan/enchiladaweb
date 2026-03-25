@@ -3,7 +3,7 @@ layout: reader
 title: "Capítulo 02"
 manga: "witchriv"
 manga_slug: "witchriv"
-capitulo: 02
+capitulo: 2
 es_primero: false
 es_ultimo: false
 permalink: /witchriv/cap2/
