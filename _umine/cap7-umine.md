@@ -3,7 +3,7 @@ layout: reader
 title: "Capítulo 07"
 manga: "Umine"
 manga_slug: "umine"
-capitulo: 07
+capitulo: 7
 es_primero: false
 es_ultimo: false
 permalink: /umine/cap7/
