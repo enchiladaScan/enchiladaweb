@@ -2,7 +2,7 @@
 layout: reader
 title: "Capítulo 0"
 manga: "ore-no-ichizu"
-manga_slug: "ore-no-ichizu"
+manga_slug: "ore-no-ichizu-jama"
 capitulo: 0
 es_primero: true
 es_ultimo: false
