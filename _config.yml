@@ -30,9 +30,6 @@ collections:
   goldship:
     output: true
     permalink: /goldship/:name/
-  ririsa:
-    output: true
-    permalink: /ririsa/:name/
   "100novias":            # clave entre comillas por empezar con número
     output: true
     permalink: /100novias/:name/
@@ -44,16 +41,19 @@ collections:
     permalink: /dream-jumbo/:name/
   ore-no-ichizu-jama:
     output: true
-    permalink: /ore-no-ichizu-jama/:name
+    permalink: /ore-no-ichizu-jama/:name/
   shiori-experience:
     output: true
-    permalink: /shiori-experience/:name
+    permalink: /shiori-experience/:name/
   hatori-to-furuta:
     output: true
-    permalink: /hatori-to-furuta/:name
+    permalink: /hatori-to-furuta/:name/
   idolatry:
     output: true
-    permalink: /idolatry/:name
+    permalink: /idolatry/:name/
+  umine:
+    output: true
+    permalink: /umine/:name/
 
 #joints
   medalist:
@@ -64,8 +64,11 @@ collections:
     permalink: /marchen-crown/:name/
   heisei-haizanhei:
     output: true
-    permalink: /heisei-haizanhei/:name
+    permalink: /heisei-haizanhei/:name/
 #terminados
+  ririsa:
+    output: true
+    permalink: /ririsa/:name/
   saneka:
     output: true
     permalink: /saneka/:name/
@@ -77,13 +80,11 @@ collections:
     permalink: /oshi-no-ko/:name/
   nitamono-doushi:
     output: true
-    permalink: /nitamono-doushi/:name
+    permalink: /nitamono-doushi/:name/
   inori-no-nai:
     output: true
-    permalink: /inori-no-nai/:name
-  umine:
-    output: true
-    permalink: /umine/:name
+    permalink: /inori-no-nai/:name/
+  
 
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
