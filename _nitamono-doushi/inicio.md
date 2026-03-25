@@ -11,9 +11,6 @@ generos: ["Romance", "Recuentos de la vida", "Seinen", "Drama"]
 estado: "Finalizado"
 anio: 2025
 editorial: "Big Gangan"
-links_descarga:
-  - { nombre: "One-shot (MEGA)", url: "#" }
-  - { nombre: "One-shot (Drive)", url: "#" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:
