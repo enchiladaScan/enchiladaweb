@@ -1,0 +1,17 @@
+---
+layout: reader
+title: "Capítulo 08"
+manga: "Umine"
+manga_slug: "umine"
+capitulo: 08
+es_primero: false
+es_ultimo: false
+permalink: /umine/cap8/
+return_to: /umine/
+images_json: assets/mangas/umine/cap08/images.json
+redirect_from:
+  - /cap8-umine/
+use_main_css: true
+prev_href: /umine/cap7/
+next_href: /umine/cap9/
+---

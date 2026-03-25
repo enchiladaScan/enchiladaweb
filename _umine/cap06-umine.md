@@ -1,0 +1,17 @@
+---
+layout: reader
+title: "Capítulo 06"
+manga: "Umine"
+manga_slug: "umine"
+capitulo: 06
+es_primero: false
+es_ultimo: false
+permalink: /umine/cap6/
+return_to: /umine/
+images_json: assets/mangas/umine/cap06/images.json
+redirect_from:
+  - /cap6-umine/
+use_main_css: true
+prev_href: /umine/cap5/
+next_href: /umine/cap7/
+---
