@@ -1,9 +1,9 @@
 ---
 layout: reader
-title: "Capítulo 01"
+title: "One Shot"
 manga: "nitamono"
 manga_slug: "nitamono"
-capitulo: 01
+capitulo: 1
 es_primero: true
 es_ultimo: true
 permalink: /nitamono-doushi/cap01/
