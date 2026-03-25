@@ -2,7 +2,7 @@
 layout: reader
 title: "One Shot"
 manga: "nitamono"
-manga_slug: "nitamono"
+manga_slug: "nitamono-doushi"
 capitulo: 1
 es_primero: true
 es_ultimo: true
