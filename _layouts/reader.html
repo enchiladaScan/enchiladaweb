@@ -5,379 +5,513 @@ use_theme: false
 
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ page.title | escape }}</title>
 
-    {% if page.use_main_css %}
-      <!-- Usa relative_url para respetar baseurl -->
-      <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
-    {% endif %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page.title | escape }}</title>
 
-    <!-- Mejora conexión con Google Drive -->
-    <link rel="preconnect" href="https://drive.usercontent.google.com">
-    <link rel="dns-prefetch" href="https://drive.usercontent.google.com">
-    <link rel="preconnect" href="https://lh3.googleusercontent.com">
-    <link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
+  {% if page.use_main_css %}
+  <!-- Usa relative_url para respetar baseurl -->
+  <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
+  {% endif %}
 
-    <style>
-      html, body { height:100%; margin:0; padding:0; background:#0e1220; }
+  <!-- Mejora conexión con Google Drive -->
+  <link rel="preconnect" href="https://drive.usercontent.google.com">
+  <link rel="dns-prefetch" href="https://drive.usercontent.google.com">
+  <link rel="preconnect" href="https://lh3.googleusercontent.com">
+  <link rel="dns-prefetch" href="https://lh3.googleusercontent.com">
 
-      .wrapper-masthead{display:none;}
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #0e1220;
+    }
 
-      :root{ --navH:56px; --pageW: 1400px; }
+    .wrapper-masthead {
+      display: none;
+    }
 
-      #main, .container{
-        max-width:none !important;
-        width:100% !important;
-        padding-left:0 !important;
-        padding-right:0 !important;
-      }
+    :root {
+      --navH: 56px;
+      --pageW: 1400px;
+    }
 
-      .reader-hero{ text-align:center; padding:24px 12px 8px; color:#e8eeff; }
-      .reader-title{ margin:0; font-weight:800; line-height:1.1; font-size:clamp(28px,4.5vw,48px); }
-      .reader-sub{ margin-top:6px; opacity:.85; font-size:clamp(16px,2.4vw,22px); }
+    #main,
+    .container {
+      max-width: none !important;
+      width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
 
-      #pager{
-        position:fixed; top:12px; right:16px; z-index:9999;
-        background:rgba(0,0,0,.6); color:#fff; padding:4px 8px; border-radius:6px; font-size:14px;
-      }
+    .reader-hero {
+      text-align: center;
+      padding: 24px 12px 8px;
+      color: #e8eeff;
+    }
 
-      .reader{ display:block; width:100%; margin:0 auto; padding:0;
-        transition: max-width 0.3s ease-in-out; overflow-x: auto; }
-      .reader .page{ width:100%; margin:0 auto; }
-      .reader .page img{ display:block; width:100%; height:auto; max-width:100%; }
+    .reader-title {
+      margin: 0;
+      font-weight: 800;
+      line-height: 1.1;
+      font-size: clamp(28px, 4.5vw, 48px);
+    }
 
-      .reader.zoom-100 { max-width: 100%; }
-      .reader.zoom-80 { max-width: 80%; }
-      .reader.zoom-60 { max-width: 60%; }
+    .reader-sub {
+      margin-top: 6px;
+      opacity: .85;
+      font-size: clamp(16px, 2.4vw, 22px);
+    }
 
-      .nav-fixed{
-        position:fixed; left:0; right:0; z-index:10000; height:var(--navH);
-        display:flex; gap:12px; justify-content:center; align-items:center;
-        padding:8px 12px; background:rgba(30,30,30,.75); backdrop-filter:blur(6px);
-      }
-      .nav-fixed.bottom{ bottom:0; }
-      body.has-nav-bottom{ padding-bottom:var(--navH); }
-      .nav-fixed.top{ top:0; }
-      body.has-nav-top{ padding-top:var(--navH); }
+    #pager {
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      z-index: 9999;
+      background: rgba(0, 0, 0, .6);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
 
-      .back{ display:none; }
-      .error{ color:#ffb3b3; font-weight:600; margin:8px 0; }
+    .reader {
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+      transition: max-width 0.3s ease-in-out;
+      overflow-x: auto;
+    }
 
-      .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;text-decoration:none;
-        border:1px solid #f0f0f0;background:#fff;color:#7f00ff;font-weight:600;cursor:pointer;user-select:none}
-      .btn.nav-zoom{background:#b8b8b8;color:#fff;border-color:#555}
-      .ico-btn .ico{width:22px;height:22px;display:block;object-fit:contain}
-      .ico-btn .label{display:none}
-      .ico-btn.no-icon .label{display:inline}
-      .ico-btn.no-icon .ico{display:none}
-    </style>
-  </head>
+    .reader .page {
+      width: 100%;
+      margin: 0 auto;
+    }
 
-  <!-- Usa has-nav-bottom (barra fija abajo) o has-nav-top (arriba) -->
-  <body class="has-nav-bottom{% if page.use_main_css %} theme{% endif %}">
+    .reader .page img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
 
-    <!-- Contenido del lector -->
-    <div id="main" role="main" class="container">
-      <header class="reader-hero">
-        <h1 class="reader-title">{{ page.manga | default: page.title | default: "Manga" }}</h1>
-        <div class="reader-sub">
-          Capítulo {{ page.capitulo_label | default: page.capitulo | default: "?" }}
-        </div>
-        <div id="pager" class="pager">Pag 0 / 0</div>
-      </header>
+    .reader.zoom-100 {
+      max-width: 100%;
+    }
 
-      <div id="reader" class="reader"></div>
+    .reader.zoom-80 {
+      max-width: 80%;
+    }
 
-      <!-- Link original oculto -->
-      <a class="back" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}">
-        <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
-            onerror="this.closest('.ico-btn').classList.add('no-icon')">
-        <span class="label">← Regresar al post</span>
-      </a>
-    </div>
+    .reader.zoom-60 {
+      max-width: 60%;
+    }
 
-    <!-- Footer del tema -->
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-        </footer>
+    .nav-fixed {
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      height: var(--navH);
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(30, 30, 30, .75);
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-fixed.bottom {
+      bottom: 0;
+    }
+
+    body.has-nav-bottom {
+      padding-bottom: var(--navH);
+    }
+
+    .nav-fixed.top {
+      top: 0;
+    }
+
+    body.has-nav-top {
+      padding-top: var(--navH);
+    }
+
+    .back {
+      display: none;
+    }
+
+    .error {
+      color: #ffb3b3;
+      font-weight: 600;
+      margin: 8px 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid #f0f0f0;
+      background: #fff;
+      color: #7f00ff;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none
+    }
+
+    .btn.nav-zoom {
+      background: #b8b8b8;
+      color: #fff;
+      border-color: #555
+    }
+
+    .ico-btn .ico {
+      width: 22px;
+      height: 22px;
+      display: block;
+      object-fit: contain
+    }
+
+    .ico-btn .label {
+      display: none
+    }
+
+    .ico-btn.no-icon .label {
+      display: inline
+    }
+
+    .ico-btn.no-icon .ico {
+      display: none
+    }
+  </style>
+</head>
+
+<!-- Usa has-nav-bottom (barra fija abajo) o has-nav-top (arriba) -->
+
+<body class="has-nav-bottom{% if page.use_main_css %} theme{% endif %}">
+
+  <!-- Contenido del lector -->
+  <div id="main" role="main" class="container">
+    <header class="reader-hero">
+      <h1 class="reader-title">{{ page.manga | default: page.title | default: "Manga" }}</h1>
+      <div class="reader-sub">
+        Capítulo {{ page.capitulo_label | default: page.capitulo | default: "?" }}
       </div>
+      <div id="pager" class="pager">Pag 0 / 0</div>
+    </header>
+
+    <div id="reader" class="reader"></div>
+
+    <!-- Link original oculto -->
+    <a class="back" href="{{ page.post_url | default: page.return_to | default: '/' | relative_url }}">
+      <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
+        onerror="this.closest('.ico-btn').classList.add('no-icon')">
+      <span class="label">← Regresar al post</span>
+    </a>
+  </div>
+
+  <!-- Footer del tema -->
+  <div class="wrapper-footer">
+    <div class="container">
+      <footer class="footer">
+        {% include svg-icons.html %}
+      </footer>
     </div>
+  </div>
 
-    <!-- ===== Barra de navegación fija (con fallback robusto) ===== -->
-    {% assign prev_num = page.capitulo | minus: 1 %}
-    {% assign next_num = page.capitulo | plus: 1 %}
-    {% assign fm = page.post_url | default: page.return_to %}
+  <!-- ===== Barra de navegación fija (con fallback robusto) ===== -->
+  {% assign prev_num = page.capitulo | minus: 1 %}
+  {% assign next_num = page.capitulo | plus: 1 %}
+  {% assign fm = page.post_url | default: page.return_to %}
 
-    <div class="nav-fixed bottom" id="navReader">
-      <!-- Botón Anterior -->
-      {%- unless page.es_primero -%}
-        {%- if page.prev_href -%}
-          <a class="btn nav-zoom ico-btn" href="{{ page.prev_href | relative_url }}">
-            <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
-                onerror="this.remove();this.closest('a').classList.add('no-icon')">
-            <span class="label">← Anterior</span>
-          </a>
-        {%- elsif page.capitulo and page.capitulo > 1 -%}
-          <a class="btn nav-zoom ico-btn" 
-            href="{{ '/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/' | relative_url }}">
-            <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
-                onerror="this.remove();this.closest('a').classList.add('no-icon')">
-            <span class="label">← Anterior</span>
-          </a>
-        {%- else -%}
-          <span></span>
-        {%- endif -%}
-      {%- endunless -%}
-      <!-- Botón Siguiente -->
-      {%- if page.next_href -%}
-        <a class="btn nav-zoom ico-btn" href="{{ page.next_href | relative_url }}">
-          <img class="ico" src="{{ '/assets/img/icons/siguiente.png' | relative_url }}" alt=""
-              onerror="this.remove();this.closest('a').classList.add('no-icon')">
-          <span class="label">Siguiente →</span>
-        </a>
-      {%- elsif page.es_ultimo != true and page.capitulo -%}
-        <a class="btn nav-zoom ico-btn" href="{{ '/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/' | relative_url }}">
-          <img class="ico" src="{{ '/assets/img/icons/siguiente.png' | relative_url }}" alt=""
-              onerror="this.remove();this.closest('a').classList.add('no-icon')">
-          <span class="label">Siguiente →</span>
-        </a>
-      {%- endif -%}
-      <!-- Botones de zoom -->
-      <a class="btn nav-zoom ico-btn" data-zoom="1.0">
-        <img class="ico" src="{{ '/assets/img/icons/fullscreen.png' | relative_url }}" alt=""
-            onerror="this.remove();this.closest('a').classList.add('no-icon')">
-        <span class="label">Pantalla Completa</span>
-      </a>
-      <a class="btn nav-zoom ico-btn" data-zoom="0.8">
-        <img class="ico" src="{{ '/assets/img/icons/zoom_in.png' | relative_url }}" alt=""
-            onerror="this.remove();this.closest('a').classList.add('no-icon')">
-        <span class="label">Zoom +</span>
-      </a>
-      <a class="btn nav-zoom ico-btn" data-zoom="0.6">
-        <img class="ico" src="{{ '/assets/img/icons/zoom_out.png' | relative_url }}" alt=""
-            onerror="this.remove();this.closest('a').classList.add('no-icon')">
-        <span class="label">Zoom -</span>
-      </a>
-      <!-- Botón Regresar robusto -->
-      <a class="btn ico-btn"
-        href="{% if page.manga_slug %}{{ '/' | append: page.manga_slug | append: '/inicio/' | relative_url }}{% else %}{{ '/' | append: page.collection | append: '/inicio/' | relative_url }}{% endif %}">
-        <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
-              onerror="this.remove();this.closest('a').classList.add('no-icon')">
-        <span class="label">← Regresar al post</span>
-      </a>  
-    </div>
-    <!-- ========================================================== -->
+  <div class="nav-fixed bottom" id="navReader">
+    <!-- Botón Anterior -->
+    {%- unless page.es_primero -%}
+    {%- if page.prev_href -%}
+    <a class="btn nav-zoom ico-btn" href="{{ page.prev_href | relative_url }}">
+      <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
+        onerror="this.remove();this.closest('a').classList.add('no-icon')">
+      <span class="label">← Anterior</span>
+    </a>
+    {%- elsif page.capitulo and page.capitulo > 1 -%}
+    <a class="btn nav-zoom ico-btn"
+      href="{{ '/' | append: page.manga_slug | append: '/cap' | append: prev_num | append: '/' | relative_url }}">
+      <img class="ico" src="{{ '/assets/img/icons/anterior.png' | relative_url }}" alt=""
+        onerror="this.remove();this.closest('a').classList.add('no-icon')">
+      <span class="label">← Anterior</span>
+    </a>
+    {%- else -%}
+    <span></span>
+    {%- endif -%}
+    {%- endunless -%}
+    <!-- Botón Siguiente -->
+    {%- if page.next_href -%}
+    <a class="btn nav-zoom ico-btn" href="{{ page.next_href | relative_url }}">
+      <img class="ico" src="{{ '/assets/img/icons/siguiente.png' | relative_url }}" alt=""
+        onerror="this.remove();this.closest('a').classList.add('no-icon')">
+      <span class="label">Siguiente →</span>
+    </a>
+    {%- elsif page.es_ultimo != true and page.capitulo -%}
+    <a class="btn nav-zoom ico-btn"
+      href="{{ '/' | append: page.manga_slug | append: '/cap' | append: next_num | append: '/' | relative_url }}">
+      <img class="ico" src="{{ '/assets/img/icons/siguiente.png' | relative_url }}" alt=""
+        onerror="this.remove();this.closest('a').classList.add('no-icon')">
+      <span class="label">Siguiente →</span>
+    </a>
+    {%- endif -%}
+    <!-- Botones de zoom -->
+    <a class="btn nav-zoom ico-btn" data-zoom="1.0">
+      <img class="ico" src="{{ '/assets/img/icons/fullscreen.png' | relative_url }}" alt=""
+        onerror="this.remove();this.closest('a').classList.add('no-icon')">
+      <span class="label">Pantalla Completa</span>
+    </a>
+    <a class="btn nav-zoom ico-btn" data-zoom="0.8">
+      <img class="ico" src="{{ '/assets/img/icons/zoom_in.png' | relative_url }}" alt=""
+        onerror="this.remove();this.closest('a').classList.add('no-icon')">
+      <span class="label">Zoom +</span>
+    </a>
+    <a class="btn nav-zoom ico-btn" data-zoom="0.6">
+      <img class="ico" src="{{ '/assets/img/icons/zoom_out.png' | relative_url }}" alt=""
+        onerror="this.remove();this.closest('a').classList.add('no-icon')">
+      <span class="label">Zoom -</span>
+    </a>
+    <!-- Botón Regresar robusto -->
+    <a class="btn ico-btn"
+      href="{% if page.manga_slug %}{{ '/' | append: page.manga_slug | append: '/inicio/' | relative_url }}{% else %}{{ '/' | append: page.collection | append: '/inicio/' | relative_url }}{% endif %}">
+      <img class="ico" src="{{ '/assets/img/icons/regresar.png' | relative_url }}" alt=""
+        onerror="this.remove();this.closest('a').classList.add('no-icon')">
+      <span class="label">← Regresar al post</span>
+    </a>
+  </div>
+  <!-- ========================================================== -->
 
-    {% include analytics.html %}
-    <!-- ===== JS para el cambio de zoom ===== -->
-    <script>
-      /* JS para el cambio de zoom */
-      (function () {
-        const reader = document.getElementById('reader');
-        if (!reader) return;
+  {% include analytics.html %}
+  <!-- ===== JS para el cambio de zoom ===== -->
+  <script>
+    (function () {
+      const reader = document.getElementById('reader');
+      if (!reader) return;
 
-        // Selecciona los botones correctos: llevan clase .nav-zoom y traen data-zoom
-        const zoomButtons = document.querySelectorAll('.nav-zoom[data-zoom]');
-        if (!zoomButtons.length) return;
+      const zoomButtons = document.querySelectorAll('.nav-zoom[data-zoom]');
+      if (!zoomButtons.length) return;
 
-        // Estado inicial
-        const classes = ['zoom-100','zoom-80','zoom-60'];
-        function setZoomClass(cls){
-          reader.classList.remove(...classes);
-          reader.classList.add(cls);
-        }
-        setZoomClass('zoom-60');
+      const classes = ['zoom-100', 'zoom-80', 'zoom-60'];
 
-        // Marca visual opcional
-        function setActive(btn){
-          zoomButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-        }
+      function setZoomClass(cls) {
+        reader.classList.remove(...classes);
+        reader.classList.add(cls);
+      }
 
-        zoomButtons.forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const zoomLevel = parseFloat(e.currentTarget.dataset.zoom);
+      function setActive(btn) {
+        zoomButtons.forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+      }
 
-            if (zoomLevel >= 1.0)       setZoomClass('zoom-100');
-            else if (zoomLevel >= 0.8)  setZoomClass('zoom-80');
-            else                        setZoomClass('zoom-60');
+      // 1. Leer la memoria del navegador o usar 0.6 por defecto
+      const savedZoom = localStorage.getItem('enchilada_zoom') || '0.6';
 
-            setActive(btn);
-          });
+      // 2. Aplicar el zoom guardado al entrar a la página
+      if (parseFloat(savedZoom) >= 1.0) setZoomClass('zoom-100');
+      else if (parseFloat(savedZoom) >= 0.8) setZoomClass('zoom-80');
+      else setZoomClass('zoom-60');
+
+      // Marcar el botón correcto como activo al iniciar
+      const initialBtn = document.querySelector(`.nav-zoom[data-zoom="${savedZoom}"]`);
+      if (initialBtn) setActive(initialBtn);
+
+      // 3. Evento al hacer clic en un botón
+      zoomButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const zoomStr = e.currentTarget.dataset.zoom;
+          const zoomLevel = parseFloat(zoomStr);
+
+          if (zoomLevel >= 1.0) setZoomClass('zoom-100');
+          else if (zoomLevel >= 0.8) setZoomClass('zoom-80');
+          else setZoomClass('zoom-60');
+
+          setActive(btn);
+
+          // Guardar la nueva preferencia en la memoria del navegador
+          localStorage.setItem('enchilada_zoom', zoomStr);
         });
-      })();
-      </script>
-    <!-- ======================================== -->
+      });
+    })();
+  </script>
 
-    <!-- ===== Lector de imágenes desde JSON ===== -->
-<script>
-(async () => {
-  const BASE = '{{ site.baseurl }}';
-  const RAW  = ('{{ page.images_json }}' || '').trim();
+  <!-- ===== Lector de imágenes desde JSON ===== -->
+  <script>
+    (async () => {
+      const BASE = '{{ site.baseurl }}';
+      const RAW = ('{{ page.images_json }}' || '').trim();
 
-  const JSON_URL = /^https?:\/\//i.test(RAW)
-    ? RAW
-    : (BASE + (RAW.startsWith('/') ? RAW : '/' + RAW));
+      const JSON_URL = /^https?:\/\//i.test(RAW)
+        ? RAW
+        : (BASE + (RAW.startsWith('/') ? RAW : '/' + RAW));
 
-  const mount   = document.getElementById('reader');
-  const pagerEl = document.getElementById('pager');
+      const mount = document.getElementById('reader');
+      const pagerEl = document.getElementById('pager');
 
-  const withBase = (u) => /^https?:\/\//i.test(u) ? u : (BASE + (u.startsWith('/') ? u : '/' + u));
+      const withBase = (u) => /^https?:\/\//i.test(u) ? u : (BASE + (u.startsWith('/') ? u : '/' + u));
 
-  function normalizeGoogleUrl(u){
-    if (!u) return '';
-    u = u.replace(
-      /^https:\/\/drive\.google\.com\/uc\?export=(?:view|download)&id=([^&]+).*$/i,
-      'https://drive.usercontent.google.com/uc?id=$1&export=download'
-    );
-    u = u.replace(/(drive\.usercontent\.google\.com\/uc\?[^#]*?)export=view/i, '$1export=download');
-    return u;
-  }
+      function normalizeGoogleUrl(u) {
+        if (!u) return '';
+        u = u.replace(
+          /^https:\/\/drive\.google\.com\/uc\?export=(?:view|download)&id=([^&]+).*$/i,
+          'https://drive.usercontent.google.com/uc?id=$1&export=download'
+        );
+        u = u.replace(/(drive\.usercontent\.google\.com\/uc\?[^#]*?)export=view/i, '$1export=download');
+        return u;
+      }
 
-  function extractDriveId(u){
-    if (!u) return '';
-    let m = u.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
-    if (m) return m[1];
-    m = u.match(/\/file\/d\/([a-zA-Z0-9_-]{10,})/);
-    if (m) return m[1];
-    m = u.match(/\/open\?id=([a-zA-Z0-9_-]{10,})/);
-    if (m) return m[1];
-    return '';
-  }
+      function extractDriveId(u) {
+        if (!u) return '';
+        let m = u.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+        if (m) return m[1];
+        m = u.match(/\/file\/d\/([a-zA-Z0-9_-]{10,})/);
+        if (m) return m[1];
+        m = u.match(/\/open\?id=([a-zA-Z0-9_-]{10,})/);
+        if (m) return m[1];
+        return '';
+      }
 
-  function candidatesFrom(p){
-    const tries = [];
-    const u0 = normalizeGoogleUrl(String(p.url || ''));
-    const id = p.id || extractDriveId(u0);
+      function candidatesFrom(p) {
+        const tries = [];
+        const u0 = normalizeGoogleUrl(String(p.url || ''));
+        const id = p.id || extractDriveId(u0);
 
-    if (id) {
-      // PRIORIDAD: thumbnail grande (redirige a lh3.googleusercontent.com)
-      tries.push(`https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w2560`);
-      // ÚLTIMO recurso: vista web
-      tries.push(`https://drive.google.com/uc?export=view&id=${encodeURIComponent(id)}`);
-    } else if (u0) {
-      // Si el JSON trae URL absoluta, úsala como último intento
-      tries.push(u0);
-    }
-    return [...new Set(tries)];
-  }
-
-  try {
-    const res = await fetch(JSON_URL, { cache: 'no-cache' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-
-    // ✅ Usar el orden exacto del JSON, sin sort
-    const pagesOrdered = Array.isArray(data)
-      ? data.map(u => ({ url: u }))
-      : (Array.isArray(data.pages) ? data.pages : []);
-
-    if (!pagesOrdered.length) throw new Error('JSON vacío o formato no soportado');
-
-    // Render
-    const items = pagesOrdered.map((p, i) => {
-      const fig = document.createElement('figure');
-      fig.className = 'page';
-
-      const img = document.createElement('img');
-      img.alt = `Página ${i + 1}`;
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.referrerPolicy = 'no-referrer';
-      img.sizes = '100vw';
-
-      fig.appendChild(img);
-      return { fig, img, tries: candidatesFrom(p), index: i };
-    });
-
-    const frag = document.createDocumentFragment();
-    items.forEach(it => frag.appendChild(it.fig));
-    mount.textContent = '';
-    mount.appendChild(frag);
-
-    pagerEl.textContent = `Pag ${items.length ? 1 : 0} / ${items.length}`;
-
-    // contador de páginas visible
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        const vis = entries.filter(e => e.isIntersecting)
-                           .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (vis) {
-          const idx = items.findIndex(x => x.fig === vis.target);
-          if (idx >= 0) pagerEl.textContent = `Pag ${idx + 1} / ${items.length}`;
+        if (id) {
+          // PRIORIDAD: thumbnail grande (redirige a lh3.googleusercontent.com)
+          tries.push(`https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w2560`);
+          // ÚLTIMO recurso: vista web
+          tries.push(`https://drive.google.com/uc?export=view&id=${encodeURIComponent(id)}`);
+        } else if (u0) {
+          // Si el JSON trae URL absoluta, úsala como último intento
+          tries.push(u0);
         }
-      }, { root: null, rootMargin: '0px 0px -40% 0px', threshold: [0.2, 0.4, 0.6] });
-      items.forEach(it => io.observe(it.fig));
-    }
+        return [...new Set(tries)];
+      }
 
-    const CONCURRENCY = 2;
-    const INTERVAL_MS = 120;
-    const RETRIES = 2;
+      try {
+        const res = await fetch(JSON_URL, { cache: 'no-cache' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
 
-    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
-    function jitter(ms){ return ms + Math.floor(Math.random()*80); }
+        // ✅ Usar el orden exacto del JSON, sin sort
+        const pagesOrdered = Array.isArray(data)
+          ? data.map(u => ({ url: u }))
+          : (Array.isArray(data.pages) ? data.pages : []);
 
-    async function trySetSrc(img, url){
-      for (let attempt = 0; attempt <= RETRIES; attempt++){
-        const ok = await new Promise(res => {
-          let done = false;
-          const onload = ()=>{ if(!done){ done = true; img.onload = img.onerror = null; res(true); } };
-          const onerror = ()=>{ if(!done){ done = true; img.onload = img.onerror = null; res(false); } };
-          img.onload = onload;
-          img.onerror = onerror;
-          img.src = url;
+        if (!pagesOrdered.length) throw new Error('JSON vacío o formato no soportado');
+
+        // Render
+        const items = pagesOrdered.map((p, i) => {
+          const fig = document.createElement('figure');
+          fig.className = 'page';
+
+          const img = document.createElement('img');
+          img.alt = `Página ${i + 1}`;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.referrerPolicy = 'no-referrer';
+          img.sizes = '100vw';
+
+          fig.appendChild(img);
+          return { fig, img, tries: candidatesFrom(p), index: i };
         });
-        if (ok) return true;
-        await sleep(jitter(200 * (attempt+1) * (attempt+1)));
+
+        const frag = document.createDocumentFragment();
+        items.forEach(it => frag.appendChild(it.fig));
+        mount.textContent = '';
+        mount.appendChild(frag);
+
+        pagerEl.textContent = `Pag ${items.length ? 1 : 0} / ${items.length}`;
+
+        // contador de páginas visible
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            const vis = entries.filter(e => e.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (vis) {
+              const idx = items.findIndex(x => x.fig === vis.target);
+              if (idx >= 0) pagerEl.textContent = `Pag ${idx + 1} / ${items.length}`;
+            }
+          }, { root: null, rootMargin: '0px 0px -40% 0px', threshold: [0.2, 0.4, 0.6] });
+          items.forEach(it => io.observe(it.fig));
+        }
+
+        const CONCURRENCY = 2;
+        const INTERVAL_MS = 120;
+        const RETRIES = 2;
+
+        function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+        function jitter(ms) { return ms + Math.floor(Math.random() * 80); }
+
+        async function trySetSrc(img, url) {
+          for (let attempt = 0; attempt <= RETRIES; attempt++) {
+            const ok = await new Promise(res => {
+              let done = false;
+              const onload = () => { if (!done) { done = true; img.onload = img.onerror = null; res(true); } };
+              const onerror = () => { if (!done) { done = true; img.onload = img.onerror = null; res(false); } };
+              img.onload = onload;
+              img.onerror = onerror;
+              img.src = url;
+            });
+            if (ok) return true;
+            await sleep(jitter(200 * (attempt + 1) * (attempt + 1)));
+          }
+          return false;
+        }
+
+        async function loadOne(it) {
+          const all = it.tries.slice();
+          if (!all.length) return;
+
+          const thumb = withBase(all.shift());
+          const thumbOK = await trySetSrc(it.img, thumb);
+          if (thumbOK) return;
+
+          while (all.length) {
+            const next = withBase(all.shift());
+            const ok = await trySetSrc(it.img, next);
+            if (ok) return;
+            await sleep(jitter(120));
+          }
+
+          const warn = document.createElement('div');
+          warn.className = 'error';
+          warn.textContent = `⚠️ No se pudo cargar la página ${it.index + 1}`;
+          it.fig.insertBefore(warn, it.fig.firstChild);
+        }
+
+        let cursor = 0;
+        async function worker() {
+          while (true) {
+            const i = cursor++;
+            if (i >= items.length) break;
+            await loadOne(items[i]);
+            if (INTERVAL_MS) await sleep(INTERVAL_MS);
+          }
+        }
+        await Promise.all(Array.from({ length: CONCURRENCY }, worker));
+
+      } catch (err) {
+        const mount = document.getElementById('reader');
+        const pagerEl = document.getElementById('pager');
+        if (mount) mount.innerHTML = `<p class="error">No se pudieron cargar las imágenes. ${err.message}</p>`;
+        if (pagerEl) pagerEl.textContent = 'Pag 0 / 0';
       }
-      return false;
-    }
+    })();
+  </script>
+</body>
 
-    async function loadOne(it){
-      const all = it.tries.slice();
-      if (!all.length) return;
-
-      const thumb = withBase(all.shift());
-      const thumbOK = await trySetSrc(it.img, thumb);
-      if (thumbOK) return;
-
-      while (all.length){
-        const next = withBase(all.shift());
-        const ok = await trySetSrc(it.img, next);
-        if (ok) return;
-        await sleep(jitter(120));
-      }
-
-      const warn = document.createElement('div');
-      warn.className = 'error';
-      warn.textContent = `⚠️ No se pudo cargar la página ${it.index + 1}`;
-      it.fig.insertBefore(warn, it.fig.firstChild);
-    }
-
-    let cursor = 0;
-    async function worker(){
-      while (true) {
-        const i = cursor++;
-        if (i >= items.length) break;
-        await loadOne(items[i]);
-        if (INTERVAL_MS) await sleep(INTERVAL_MS);
-      }
-    }
-    await Promise.all(Array.from({length: CONCURRENCY}, worker));
-
-  } catch (err) {
-    const mount = document.getElementById('reader');
-    const pagerEl = document.getElementById('pager');
-    if (mount) mount.innerHTML = `<p class="error">No se pudieron cargar las imágenes. ${err.message}</p>`;
-    if (pagerEl) pagerEl.textContent = 'Pag 0 / 0';
-  }
-})();
-</script>
-  </body>
 </html>
