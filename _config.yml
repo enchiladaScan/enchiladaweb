@@ -30,9 +30,9 @@ collections:
   goldship:
     output: true
     permalink: /goldship/:name/
-  "100novias":            # clave entre comillas por empezar con número
-    output: true
-    permalink: /100novias/:name/
+  #"100novias":            # clave entre comillas por empezar con número
+    #output: true
+    #permalink: /100novias/:name/
   megami:
     output: true
     permalink: /megami-no-cafe/:name/
