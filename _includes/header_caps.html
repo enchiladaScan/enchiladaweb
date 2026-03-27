@@ -9,37 +9,169 @@
       <button type="button" id="capsSearchBtn">Buscar</button>
     </form>
 
-    <a class="scan-cta" href="{{ site.baseurl }}/app.html">¡Síguenos!</a>
+    <div class="social-dropdown-wrapper">
+      <button id="btn-follow-caps" class="scan-cta">¡Síguenos!</button>
+
+      <div id="social-dropdown-caps" class="social-dropdown-panel">
+        <h4>Nuestras Redes</h4>
+        <div class="social-grid">
+          <a href="https://www.facebook.com/share/18Eh2jhSCq/?mibextid=wwXIfr" target="_blank" class="social-item">
+            <img src="{{ site.baseurl }}/assets/img/rs/icon-facebook.png" alt="Facebook">
+            <span>Facebook</span>
+          </a>
+          <a href="https://x.com/EnchiladaScan" target="_blank" class="social-item">
+            <img src="{{ site.baseurl }}/assets/img/rs/icon-x.png" alt="X (Twitter)">
+            <span>Twitter</span>
+          </a>
+          <a href="https://discord.gg/uZ6q23tmxg" target="_blank" class="social-item">
+            <img src="{{ site.baseurl }}/assets/img/rs/icon-discord.png" alt="Discord">
+            <span>Discord</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
+<style>
+  .social-dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  button.scan-cta {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  .social-dropdown-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    width: 260px;
+    padding: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  .social-dropdown-panel.show {
+    display: block;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .social-dropdown-panel h4 {
+    margin: 0 0 12px 0;
+    color: #fff;
+    text-align: center;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: #0d1117;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #c9d1d9;
+    font-size: 12px;
+    transition: 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .social-item:hover {
+    background: #1f242c;
+    border-color: #00acee;
+    color: #fff;
+  }
+
+  .social-item img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 6px;
+    object-fit: contain;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .social-dropdown-panel {
+      position: fixed;
+      top: 70px;
+      right: 10px;
+      left: 10px;
+      width: auto;
+    }
+
+    .social-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+
 <script>
   (function () {
+    /* Lógica de Búsqueda Original */
     var q = document.getElementById('capsSearch');
     var btn = document.getElementById('capsSearchBtn');
-    if (!q || !btn) return;
+    if (q && btn) {
+      function filterList(list) {
+        if (!list) return;
+        var li = list.querySelectorAll('li');
+        var needle = (q.value || '').trim().toLowerCase();
+        li.forEach(function (item) {
+          var txt = (item.textContent || '').toLowerCase();
+          var cap = (item.dataset.cap || '').toLowerCase();
+          var show = !needle || txt.includes(needle) || cap.includes(needle);
+          item.style.display = show ? '' : 'none';
+        });
+      }
+      function apply() {
+        filterList(document.getElementById('chaptersList'));
+        filterList(document.getElementById('downloadsList'));
+      }
+      btn.addEventListener('click', apply);
+      q.addEventListener('keydown', function (e) { if (e.key === 'Enter') apply(); });
+    }
 
-    // Listas esperadas: #chaptersList y #downloadsList
-    function filterList(list) {
-      if (!list) return;
-      var li = list.querySelectorAll('li');
-      var needle = (q.value || '').trim().toLowerCase();
-
-      li.forEach(function (item) {
-        var txt = (item.textContent || '').toLowerCase();
-        // También soporta data-cap (capítulo) si lo agregas a <li data-cap="13.5">
-        var cap = (item.dataset.cap || '').toLowerCase();
-        var show = !needle || txt.includes(needle) || cap.includes(needle);
-        item.style.display = show ? '' : 'none';
+    /* NUEVA Lógica del Desplegable */
+    var btnFollow = document.getElementById('btn-follow-caps');
+    var panel = document.getElementById('social-dropdown-caps');
+    if (btnFollow && panel) {
+      btnFollow.addEventListener('click', function (e) {
+        e.stopPropagation();
+        panel.classList.toggle('show');
+      });
+      document.addEventListener('click', function (e) {
+        if (!panel.contains(e.target) && e.target !== btnFollow) {
+          panel.classList.remove('show');
+        }
       });
     }
-
-    function apply() {
-      filterList(document.getElementById('chaptersList'));   // “Ver capítulos aquí”
-      filterList(document.getElementById('downloadsList'));  // “Links de descarga”
-    }
-
-    q.addEventListener('input', apply);
-    btn.addEventListener('click', apply);
   })();
 </script>
