@@ -540,140 +540,109 @@ body {
    Estilos para el Desplegable de Redes Sociales 
    ========================================== */
 
-/* 1. Contenedor principal: relativo para posicionar el panel */
-
+/* 1. Resetear y mejorar el botón Síguenos para que resalte (Sólido Morado) */
 button.scan-cta {
-  background: transparent;
+  /* Reseteo de estilos de navegador para <button> */
+  background: #5d2b78;
+  /* FONDO MORADO SÓLIDO (RECOMENDACIÓN PARA RESALTAR) */
+  border: 2px solid #5d2b78;
+  /* BORDE MORADO */
+  color: #fff;
+  /* TEXTO BLANCO */
+
+  /* Copia exacta de los estilos de theme.css para mantener la coherencia */
   cursor: pointer;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-block;
+  /* Mantener comportamiento de bloque */
+  margin: 0 10px;
+  /* Separación de la barra de búsqueda */
 }
 
+/* Efecto al pasar el mouse (Hover) */
+button.scan-cta:hover {
+  background: #6a3a8a;
+  /* MORADO LIGERAMENTE MÁS CLARO */
+  border-color: #6a3a8a;
+  transform: translateY(-1px);
+  /* PEQUEÑO MOVIMIENTO HACIA ARRIBA */
+  box-shadow: 0 4px 12px rgba(93, 43, 120, 0.3);
+  /* SOMBRA SUTIL */
+}
+
+/* 2. Estilos del Panel Desplegable (Mantener igual) */
 .social-dropdown-wrapper {
   position: relative;
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
 }
 
-/* 2. El panel desplegable (oculto por defecto) */
 .social-dropdown-panel {
   display: none;
-  /* Se activa con JS */
   position: absolute;
-  top: 100%;
-  /* Justo debajo de la cabecera */
+  top: calc(100% + 15px);
   right: 0;
-  /* Alineado a la derecha del botón en PC */
-  background-color: #1a1e26;
-  /* Fondo oscuro (combinando con header-top) */
-  border: 1px solid #2e3440;
-  /* Borde sutil */
+  background: #161b22;
+  border: 1px solid #30363d;
   border-radius: 8px;
-  width: 280px;
-  /* Ancho fijo en PC */
+  width: 260px;
   padding: 15px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  /* Sombra elegante */
   z-index: 1000;
-  /* Asegurar que esté por encima de todo */
-  margin-top: 5px;
-  /* Separación pequeña del header */
 }
 
-/* Clase que activa el desplegable (usada por JS) */
 .social-dropdown-panel.show {
   display: block;
-  animation: fadeInDown 0.2s ease;
-  /* Animación suave de entrada */
+  animation: fadeIn 0.2s ease;
 }
 
-/* Título dentro del panel */
 .social-dropdown-panel h4 {
+  margin: 0 0 12px 0;
   color: #fff;
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 1.1rem;
   text-align: center;
-  border-bottom: 1px solid #2e3440;
+  border-bottom: 1px solid #30363d;
   padding-bottom: 8px;
+  font-size: 14px;
 }
 
-/* Grid para organizar los iconos */
 .social-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* 2 columnas en PC */
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
-/* Estilo para cada item de red social */
 .social-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 12px 10px;
-  background-color: #11151c;
-  /* Fondo ligeramente diferente (combinando con header-nav) */
-  border: 1px solid transparent;
+  padding: 10px;
+  background: #0d1117;
   border-radius: 6px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  color: #c9d1d9;
+  font-size: 12px;
+  transition: 0.2s;
+  border: 1px solid transparent;
 }
 
 .social-item:hover {
+  background: #1f242c;
   border-color: #00acee;
-  /* Color de acento al pasar el mouse (blue Twitter) */
-  background-color: rgba(0, 172, 238, 0.05);
-  /* Fondo suave azul */
+  color: #fff;
 }
 
-/* Imagen/Icono pequeño */
 .social-item img {
-  width: 32px;
-  height: 32px;
-  margin-bottom: 8px;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 6px;
   object-fit: contain;
-  /* Asegurar que el icono no se deforme */
 }
 
-/* Texto debajo del icono */
-.social-item span {
-  color: #c9d1d9;
-  /* Color de texto suave */
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-align: center;
-}
-
-/* ===== RESPONSIVE (Celular) ===== */
-@media (max-width: 768px) {
-  .social-dropdown-panel {
-    position: fixed;
-    /* Posición fija para "modal" en mobile */
-    top: 60px;
-    /* Separación de la cabecera fija móvil (ajusta según tu header móvil) */
-    left: 10px;
-    /* Margen izquierdo */
-    right: 10px;
-    /* Margen derecho */
-    width: auto;
-    /* Ancho automático basado en márgenes */
-    max-height: 80vh;
-    /* No ocupar todo el alto de la pantalla */
-    overflow-y: auto;
-    /* Scroll si hay muchas redes */
-  }
-
-  .social-grid {
-    grid-template-columns: repeat(3, 1fr);
-    /* 3 columnas en mobile para aprovechar espacio */
-    gap: 15px;
-  }
-}
-
-/* Animación simple */
-@keyframes fadeInDown {
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(-10px);
@@ -682,6 +651,21 @@ button.scan-cta {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* En celular, se centra en la pantalla */
+@media (max-width: 600px) {
+  .social-dropdown-panel {
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+  }
+
+  .social-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
