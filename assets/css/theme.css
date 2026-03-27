@@ -541,6 +541,14 @@ body {
    ========================================== */
 
 /* 1. Contenedor principal: relativo para posicionar el panel */
+
+button.scan-cta {
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
 .social-dropdown-wrapper {
   position: relative;
   display: inline-flex;
