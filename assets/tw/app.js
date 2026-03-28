@@ -1,4 +1,4 @@
-/* 1) RECUPERAMOS LOS DATOS DESDE EL HTML */
+/* 1) RECUPERAMOS DATOS */
 const SPEED = 45;
 const THEME = "dark";
 const SHOW_REPLIES = false;
@@ -35,7 +35,7 @@ function showError(mount, url, msg) {
 /* 3) Renderiza pista A */
 async function buildTapeA(tapeEl, urls) {
   const mounts = [];
-  const TWEET_W = getCSSnum("--tweet-w", 290); // Lee el nuevo tamaño de 290px
+  const TWEET_W = getCSSnum("--tweet-w", 290);
 
   for (const url of urls) {
     const { card, mount } = makeCard();
@@ -50,12 +50,7 @@ async function buildTapeA(tapeEl, urls) {
     if (!id) { showError(mount, url, "URL inválida"); return resolve(); }
     try {
       const widget = await twttr.widgets.createTweet(id, mount, {
-        theme: THEME,
-        width: TWEET_W,
-        conversation: SHOW_REPLIES ? "all" : "none",
-        lang: "es",
-        dnt: true,
-        align: "center"
+        theme: THEME, width: TWEET_W, conversation: SHOW_REPLIES ? "all" : "none", lang: "es", dnt: true, align: "center"
       });
       let safety = setTimeout(resolve, 2000);
       function onRendered(ev) {
@@ -73,12 +68,15 @@ async function buildTapeA(tapeEl, urls) {
   })));
 }
 
-/* 4) Duplica A hasta overflow real y arma B */
+/* 4) Clonar para overflow seguro */
 function ensureOverflow(viewport, scroller, tapeA, tapeB) {
   tapeB.innerHTML = tapeA.innerHTML;
   const isDesktop = window.innerWidth >= 1024;
-  const target = isDesktop ? viewport.clientHeight * 1.6 : viewport.clientWidth * 1.6;
+
+  // MULTIPLICADOR GIGANTE (4x) PARA EVITAR QUE EL SCROLL SE CONGELE
+  const target = isDesktop ? viewport.clientHeight * 4 : viewport.clientWidth * 4;
   if (target === 0) return;
+
   const currentSize = () => isDesktop ? scroller.scrollHeight : scroller.scrollWidth;
 
   while (currentSize() <= target) {
@@ -88,10 +86,11 @@ function ensureOverflow(viewport, scroller, tapeA, tapeB) {
   }
 }
 
-/* 5) Motor Marquee Anti-Colisiones */
+/* 5) Motor Marquee Anti-Bloqueo */
 let isMarqueeRunning = false;
 let paused = false;
-let animationStart = performance.now();
+let currentDist = 0;
+let lastTime = null;
 
 function startMarquee() {
   if (isMarqueeRunning) return;
@@ -102,17 +101,28 @@ function startMarquee() {
   const GAP = getCSSnum("--gap", 24);
 
   function step(now) {
+    if (!lastTime) lastTime = now;
+    let dt = (now - lastTime) / 1000;
+    lastTime = now;
+
+    // Evitar saltos bruscos si el usuario cambia de pestaña
+    if (dt > 0.5) dt = 0.5;
+
     if (!paused && tapeA.children.length > 0) {
       const isDesktop = window.innerWidth >= 1024;
-      const segment = isDesktop ? (tapeA.scrollHeight + GAP) : (tapeA.scrollWidth + GAP);
+      const segment = (isDesktop ? tapeA.scrollHeight : tapeA.scrollWidth) + GAP;
 
       if (segment > 0) {
-        const dist = (SPEED * (now - animationStart) / 1000) % segment;
+        currentDist += SPEED * dt;
+        currentDist %= segment;
+
         if (isDesktop) {
-          viewport.scrollTop = dist;
+          // Cascada Invertida (Caída libre) para PC
+          viewport.scrollTop = segment - currentDist;
           viewport.scrollLeft = 0;
         } else {
-          viewport.scrollLeft = dist;
+          // De derecha a izquierda para Celular
+          viewport.scrollLeft = currentDist;
           viewport.scrollTop = 0;
         }
       }
@@ -123,29 +133,9 @@ function startMarquee() {
 
   viewport.addEventListener("mouseenter", () => paused = true);
   viewport.addEventListener("mouseleave", () => paused = false);
-
-  let to;
-  window.addEventListener("resize", () => {
-    clearTimeout(to);
-    to = setTimeout(() => {
-      const isDesktop = window.innerWidth >= 1024;
-      const currentPos = isDesktop ? viewport.scrollTop : viewport.scrollLeft;
-      const now = performance.now();
-      animationStart = now - (currentPos / SPEED) * 1000;
-
-      const scroller = $("#scroller");
-      const tapeB = $("#tapeB");
-      if (tapeA.children.length > 0) {
-        const originalCards = Array.from(tapeB.children);
-        tapeA.innerHTML = "";
-        tapeA.append(...originalCards.map(n => n.cloneNode(true)));
-        ensureOverflow(viewport, scroller, tapeA, tapeB);
-      }
-    }, 150);
-  }, { passive: true });
 }
 
-/* 6) Lógica de Firebase: Filtro y Orden */
+/* 6) Lógica de Firebase */
 window.iniciarMarquee = async () => {
   const tapeA = $("#tapeA");
   const tapeB = $("#tapeB");
@@ -156,13 +146,14 @@ window.iniciarMarquee = async () => {
   tapeB.innerHTML = "";
   viewport.scrollTop = 0;
   viewport.scrollLeft = 0;
-  animationStart = performance.now();
+  currentDist = 0;
+  lastTime = performance.now(); // Reset de reloj
 
   let rawLinks = window.TWEET_DATA && window.TWEET_DATA.length > 0
     ? window.TWEET_DATA
     : ["https://x.com/EnchiladaScan/status/1884405324548489679"];
 
-  // Filtramos duplicados, tomamos los últimos 5, y los invertimos (nuevo arriba)
+  // Filtro 5 últimos, orden natural
   let uniqueLinks = [...new Set(rawLinks)];
   let finalLinks = uniqueLinks.slice(-5);
 
