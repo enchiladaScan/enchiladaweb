@@ -806,7 +806,7 @@ button.scan-cta:hover {
   /* Texto principal */
   --gap: 24px;
   /* Separación entre tarjetas y filas */
-  --tweet-w: 360px;
+  --tweet-w: 320px;
   /* Ancho de cada tweet */
 }
 
@@ -956,53 +956,50 @@ button.scan-cta:hover {
 
 /* FLEXBOX INDEX.HTML*/
 
-/* 1. Layout Base (Móviles): Todo apilado hacia abajo */
+/* Contenedor más ancho para aprovechar los bordes de la pantalla */
+.ui-theme .container {
+  max-width: 1350px !important;
+}
+
 .home-layout {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  /* Separación vertical entre mangas y tweets en móvil */
 }
 
 .main-content {
   flex: 1;
   min-width: 0;
-  /* Evita que las tarjetas rompan el layout */
 }
 
 .sidebar {
   width: 100%;
 }
 
-/* 2. Pantallas Grandes (Tablets grandes y PC) */
+/* Pantallas Grandes */
 @media (min-width: 1024px) {
   .home-layout {
     flex-direction: row;
-    /* Uno al lado del otro */
     align-items: flex-start;
     gap: 30px;
-    /* Separación horizontal entre la zona de mangas y el sidebar */
   }
 
   .sidebar {
-    width: 380px;
-    /* Ancho fijo para que los tweets (360px) quepan perfectos */
+    width: 320px;
+    /* <-- REDUCIMOS EL ANCHO (antes 380px) */
     flex-shrink: 0;
-    /* Magia: Hace que la barra de tweets se quede fija al hacer scroll hacia abajo */
     position: sticky;
     top: 90px;
   }
 
-  /* Como el sidebar roba espacio, pasamos la grilla principal a 3 columnas para que las portadas no se vean aplastadas */
   .ui-theme .grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
-/* 3. Pantallas Súper Grandes (Monitores anchos) */
+/* 3. Pantallas Súper Grandes */
 @media (min-width: 1400px) {
   .ui-theme .grid {
     grid-template-columns: repeat(4, 1fr) !important;
-    /* Volvemos a 4 columnas si hay espacio de sobra */
   }
 }
