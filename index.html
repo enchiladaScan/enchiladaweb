@@ -5,156 +5,162 @@ header_kind: home
 ---
 
 <div class="ui-theme">
-  <main class="container">
+  <div class="ui-theme">
+    <main class="container">
 
-    <!-- ===== ACTIVOS ===== -->
-    <div class="section-title">
-      <span class="bar"></span>
-      <h2>Activos</h2>
-    </div>
-    <div class="grid" id="grid-activos"></div>
+      <div class="home-layout">
 
-    <!-- ===== JOINTS ===== -->
-    <div class="section-title">
-      <span class="bar"></span>
-      <h2>Joints</h2>
-    </div>
-    <div class="grid" id="grid-joints"></div>
+        <div class="main-content">
+          <div class="section-title">
+            <span class="bar"></span>
+            <h2>Activos</h2>
+          </div>
+          <div class="grid" id="grid-activos"></div>
 
-    <!-- ===== TERMINADOS ===== -->
-    <div class="section-title">
-      <span class="bar"></span>
-      <h2>Terminados</h2>
-    </div>
-    <div class="grid" id="grid-terminados"></div>
+          <div class="section-title">
+            <span class="bar"></span>
+            <h2>Joints</h2>
+          </div>
+          <div class="grid" id="grid-joints"></div>
 
-    <div class="section-title">
-      <span class="bar"></span>
-      <h2>Últimos tweets</h2>
-    </div>
+          <div class="section-title">
+            <span class="bar"></span>
+            <h2>Terminados</h2>
+          </div>
+          <div class="grid" id="grid-terminados"></div>
+        </div>
+        <aside class="sidebar">
+          <div class="section-title">
+            <span class="bar"></span>
+            <h2>Últimos tweets</h2>
+          </div>
 
-    <div class="viewport" id="viewport" title="Pasa el puntero para pausar">
-      <div class="scroller" id="scroller">
-        <div class="tape" id="tapeA"></div>
-        <div class="tape" id="tapeB"></div>
+          <div class="viewport" id="viewport" title="Pasa el puntero para pausar">
+            <div class="scroller" id="scroller">
+              <div class="tape" id="tapeA"></div>
+              <div class="tape" id="tapeB"></div>
+            </div>
+          </div>
+
+        </aside>
       </div>
-    </div>
 
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-      import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+      <!-- FIREBASE -->
+      <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyANA4nyzrsexoLj6NgDWBbbuI_Jchltznc",
-        authDomain: "enchilada-posts.firebaseapp.com",
-        databaseURL: "https://enchilada-posts-default-rtdb.firebaseio.com",
-        projectId: "enchilada-posts",
-        storageBucket: "enchilada-posts.firebasestorage.app",
-        messagingSenderId: "701192037095",
-        appId: "1:701192037095:web:043ddeb1ccb75862557842",
-        measurementId: "G-BGY8P2YNTQ"
-      };
+        const firebaseConfig = {
+          apiKey: "AIzaSyANA4nyzrsexoLj6NgDWBbbuI_Jchltznc",
+          authDomain: "enchilada-posts.firebaseapp.com",
+          databaseURL: "https://enchilada-posts-default-rtdb.firebaseio.com",
+          projectId: "enchilada-posts",
+          storageBucket: "enchilada-posts.firebasestorage.app",
+          messagingSenderId: "701192037095",
+          appId: "1:701192037095:web:043ddeb1ccb75862557842",
+          measurementId: "G-BGY8P2YNTQ"
+        };
 
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-      onValue(ref(db, 'tweets'), (snapshot) => {
-        const data = snapshot.val();
-        // Guardamos los datos globalmente
-        window.TWEET_DATA = data ? Object.values(data) : [];
+        onValue(ref(db, 'tweets'), (snapshot) => {
+          const data = snapshot.val();
+          // Guardamos los datos globalmente
+          window.TWEET_DATA = data ? Object.values(data) : [];
 
-        console.log("Datos recibidos de Firebase:", window.TWEET_DATA);
+          console.log("Datos recibidos de Firebase:", window.TWEET_DATA);
 
-        // Sia la función ya existe en app.js, la ejecutamos para refrescar la cinta
-        if (typeof window.iniciarMarquee === 'function') {
-          window.iniciarMarquee();
-        }
-      });
-    </script>
+          // Sia la función ya existe en app.js, la ejecutamos para refrescar la cinta
+          if (typeof window.iniciarMarquee === 'function') {
+            window.iniciarMarquee();
+          }
+        });
+      </script>
 
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <script src="{{ '/assets/tw/app.js' | relative_url }}"></script>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <script src="{{ '/assets/tw/app.js' | relative_url }}"></script>
 
-    <script>
-      (async function () {
-        const BASE = '{{ site.baseurl }}';                         // usa baseurl
-        const CATALOG_URL = '{{ "/catalogo.json" | relative_url }}';
-        const PLACEHOLDER = '/assets/img/cargando_gato.gif';   // ruta del placeholder
+      <script>
+        (async function () {
+          const BASE = '{{ site.baseurl }}';                         // usa baseurl
+          const CATALOG_URL = '{{ "/catalogo.json" | relative_url }}';
+          const PLACEHOLDER = '/assets/img/cargando_gato.gif';   // ruta del placeholder
 
-        const SECTIONS = [
-          { key: 'activos', el: 'grid-activos', titleEmpty: 'No hay series activas por el momento.' },
-          { key: 'joints', el: 'grid-joints', titleEmpty: 'No hay JOINTS por el momento.' },
-          { key: 'terminados', el: 'grid-terminados', titleEmpty: 'No hay series terminadas por el momento.' }
-        ];
+          const SECTIONS = [
+            { key: 'activos', el: 'grid-activos', titleEmpty: 'No hay series activas por el momento.' },
+            { key: 'joints', el: 'grid-joints', titleEmpty: 'No hay JOINTS por el momento.' },
+            { key: 'terminados', el: 'grid-terminados', titleEmpty: 'No hay series terminadas por el momento.' }
+          ];
 
-        try {
-          const res = await fetch(CATALOG_URL, { cache: 'no-store' });
-          if (!res.ok) throw new Error('No se pudo cargar catalogo.json');
-          const data = await res.json();
+          try {
+            const res = await fetch(CATALOG_URL, { cache: 'no-store' });
+            if (!res.ok) throw new Error('No se pudo cargar catalogo.json');
+            const data = await res.json();
 
-          let items = [];
-          if (Array.isArray(data.items)) {
-            items = data.items.map(m => normalizeItem(m));
-          } else {
-            items = []
-              .concat((data.activos || []).map(m => normalizeItem(m, 'activos')))
-              .concat((data.joints || []).map(m => normalizeItem(m, 'joints')))
-              .concat((data.finalizados || []).map(m => normalizeItem(m, 'terminados'))); // finalizados -> terminados
+            let items = [];
+            if (Array.isArray(data.items)) {
+              items = data.items.map(m => normalizeItem(m));
+            } else {
+              items = []
+                .concat((data.activos || []).map(m => normalizeItem(m, 'activos')))
+                .concat((data.joints || []).map(m => normalizeItem(m, 'joints')))
+                .concat((data.finalizados || []).map(m => normalizeItem(m, 'terminados'))); // finalizados -> terminados
+            }
+
+            for (const sec of SECTIONS) {
+              const list = items.filter(m => m.seccion === sec.key);
+              renderSection(sec.el, list, sec.titleEmpty);
+            }
+          } catch (err) {
+            console.error(err);
+            for (const sec of SECTIONS) {
+              const el = document.getElementById(sec.el);
+              if (el) el.insertAdjacentHTML('beforebegin', `<p class="no-links">No se pudo cargar el catálogo.</p>`);
+            }
           }
 
-          for (const sec of SECTIONS) {
-            const list = items.filter(m => m.seccion === sec.key);
-            renderSection(sec.el, list, sec.titleEmpty);
-          }
-        } catch (err) {
-          console.error(err);
-          for (const sec of SECTIONS) {
-            const el = document.getElementById(sec.el);
-            if (el) el.insertAdjacentHTML('beforebegin', `<p class="no-links">No se pudo cargar el catálogo.</p>`);
-          }
-        }
-
-        // --- helpers ---
-        function normalizeItem(m, fallbackSection) {
-          const portada = m.portada || m.cover || PLACEHOLDER;     // si viene vacío, ya cae al placeholder
-          const href = m.post_url || m.url || '#';
-          const seccion = (m.seccion || fallbackSection || '').toLowerCase();
-          return {
-            title: m.title || m.mangaId || '—',
-            href, portada, seccion,
-            tags: Array.isArray(m.tags) ? m.tags : [],
-            latest: m.latest || '—'
-          };
-        }
-
-        function withBase(u) {
-          if (!u) return '#';
-          if (/^https?:\/\//i.test(u)) return u; // absoluta
-          if (u[0] !== '/') u = '/' + u;
-          return (BASE || '') + u;
-        }
-
-        function renderSection(containerId, items, emptyMsg) {
-          const $grid = document.getElementById(containerId);
-          if (!$grid) return;
-
-          if (!items.length) {
-            $grid.insertAdjacentHTML('beforebegin', `<p class="no-links">${escapeHtml(emptyMsg)}</p>`);
-            return;
+          // --- helpers ---
+          function normalizeItem(m, fallbackSection) {
+            const portada = m.portada || m.cover || PLACEHOLDER;     // si viene vacío, ya cae al placeholder
+            const href = m.post_url || m.url || '#';
+            const seccion = (m.seccion || fallbackSection || '').toLowerCase();
+            return {
+              title: m.title || m.mangaId || '—',
+              href, portada, seccion,
+              tags: Array.isArray(m.tags) ? m.tags : [],
+              latest: m.latest || '—'
+            };
           }
 
-          const fr = document.createDocumentFragment();
-          for (const m of items) {
-            const card = document.createElement('a');
-            card.className = 'card';
-            card.href = withBase(m.href);
-            card.setAttribute('data-title', m.title);
-            card.setAttribute('data-tags', (m.tags || []).join(' '));
+          function withBase(u) {
+            if (!u) return '#';
+            if (/^https?:\/\//i.test(u)) return u; // absoluta
+            if (u[0] !== '/') u = '/' + u;
+            return (BASE || '') + u;
+          }
 
-            const imgSrc = withBase(m.portada);
-            const imgPh = withBase(PLACEHOLDER);
+          function renderSection(containerId, items, emptyMsg) {
+            const $grid = document.getElementById(containerId);
+            if (!$grid) return;
 
-            card.innerHTML = `
+            if (!items.length) {
+              $grid.insertAdjacentHTML('beforebegin', `<p class="no-links">${escapeHtml(emptyMsg)}</p>`);
+              return;
+            }
+
+            const fr = document.createDocumentFragment();
+            for (const m of items) {
+              const card = document.createElement('a');
+              card.className = 'card';
+              card.href = withBase(m.href);
+              card.setAttribute('data-title', m.title);
+              card.setAttribute('data-tags', (m.tags || []).join(' '));
+
+              const imgSrc = withBase(m.portada);
+              const imgPh = withBase(PLACEHOLDER);
+
+              card.innerHTML = `
         <div class="card-cover">
           <img src="${imgSrc}" alt="${escapeHtml(m.title)}" loading="lazy">
         </div>
@@ -167,19 +173,19 @@ header_kind: home
         </div>
       `;
 
-            // si falla la imagen, reemplaza por el placeholder
-            const img = card.querySelector('img');
-            img.addEventListener('error', () => { img.src = imgPh; });
+              // si falla la imagen, reemplaza por el placeholder
+              const img = card.querySelector('img');
+              img.addEventListener('error', () => { img.src = imgPh; });
 
-            fr.appendChild(card);
+              fr.appendChild(card);
+            }
+            $grid.appendChild(fr);
           }
-          $grid.appendChild(fr);
-        }
 
-        function escapeHtml(s) {
-          return String(s || '').replace(/[&<>"']/g, m => ({
-            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-          }[m]));
-        }
-      })();
-    </script>
+          function escapeHtml(s) {
+            return String(s || '').replace(/[&<>"']/g, m => ({
+              '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[m]));
+          }
+        })();
+      </script>
