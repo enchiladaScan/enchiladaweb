@@ -94,7 +94,7 @@ function startMarquee() {
         currentDist %= segment;
 
         if (isDesktop) {
-          // Cascada Invertida (Caída libre)
+          // Cascada (Caída libre)
           viewport.scrollTop = segment - currentDist;
           viewport.scrollLeft = 0;
         } else {
@@ -136,10 +136,13 @@ window.iniciarMarquee = async () => {
   let finalLinks = uniqueLinks.slice(-5);
 
   // 3. Construimos AMBAS cintas legítimamente 
-  // (10 peticiones en total: Súper ligero y seguro)
+  /* este modo hace que cargue todo antes y no se vea el efecto de cascada hasta tener todo listo
   await buildTape(tapeA, finalLinks);
   await buildTape(tapeB, finalLinks);
-
+  */
+  //este modo hace que cargue de a uno y se vea el efecto de cascada
+  buildTape(tapeA, finalLinks);
+  buildTape(tapeB, finalLinks);
   // 4. ¡A correr!
   startMarquee();
 };
