@@ -820,7 +820,7 @@ button.scan-cta:hover {
 .viewport {
   min-height: 50vh;
   overflow-x: hidden;
-  overflow-y: visible;
+  overflow-y: hidden;
   padding: 12px 0 18px;
 }
 
@@ -1012,7 +1012,59 @@ button.scan-cta:hover {
   }
 }
 
-/* 3. Pantallas Súper Grandes */
+/* ========================================= */
+/* MODO CASCADA PARA PANTALLAS GRANDES       */
+/* ========================================= */
+
+.home-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .ui-theme .container {
+    max-width: 1350px !important;
+  }
+
+  .home-layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 90px;
+  }
+
+  /* Convertir la cinta en columna (Cascada vertical) */
+  .sidebar .viewport {
+    height: calc(100vh - 160px);
+    min-height: auto;
+  }
+
+  .sidebar .scroller,
+  .sidebar .tape {
+    flex-direction: column !important;
+  }
+
+  .ui-theme .grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
 @media (min-width: 1400px) {
   .ui-theme .grid {
     grid-template-columns: repeat(4, 1fr) !important;

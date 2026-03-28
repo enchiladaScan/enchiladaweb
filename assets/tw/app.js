@@ -83,17 +83,23 @@ async function buildTapeA(tapeEl, urls) {
 
 /* 5) Duplica A hasta overflow real y arma B */
 function ensureOverflow(viewport, scroller, tapeA, tapeB) {
-  // espejo inicial
   tapeB.innerHTML = tapeA.innerHTML;
 
-  // objetivo: que (A + gap + B) sea claramente mayor al viewport
-  const target = viewport.clientWidth * 1.6;
+  // Detectamos si es PC o celular para saber si medimos el ALTO o el ANCHO
+  const isDesktop = window.innerWidth >= 1024;
+  const target = isDesktop ? viewport.clientHeight * 1.6 : viewport.clientWidth * 1.6;
 
-  // duplica A dentro de A hasta exceder el objetivo
-  while (scroller.scrollWidth <= target) {
+  // Evitamos que se trabe si la página está minimizada
+  if (target === 0) return;
+
+  // Función que checa el tamaño actual
+  const currentSize = () => isDesktop ? scroller.scrollHeight : scroller.scrollWidth;
+
+  // Clonamos hasta llenar la pantalla
+  while (currentSize() <= target) {
     const clones = Array.from(tapeA.children).map(n => n.cloneNode(true));
     tapeA.append(...clones);
-    tapeB.innerHTML = tapeA.innerHTML; // B siempre espejo de A
+    tapeB.innerHTML = tapeA.innerHTML;
   }
 }
 
