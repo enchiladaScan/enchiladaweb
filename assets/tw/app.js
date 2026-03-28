@@ -1,5 +1,5 @@
 /* 1) RECUPERAMOS DATOS */
-const SPEED = 45;
+const SPEED = 40; // Velocidad ajustada
 const THEME = "dark";
 const SHOW_REPLIES = false;
 
@@ -28,12 +28,8 @@ function makeCard() {
   return { card, mount };
 }
 
-function showError(mount, url, msg) {
-  mount.innerHTML = `<div class="err">❗ ${msg}<br><small>${url}</small></div>`;
-}
-
-/* 3) Renderiza pista A */
-async function buildTapeA(tapeEl, urls) {
+/* 3) Función para construir Tweets LEGÍTIMOS (Sin clones falsos) */
+async function buildTape(tapeEl, urls) {
   const mounts = [];
   const TWEET_W = getCSSnum("--tweet-w", 290);
 
@@ -47,7 +43,7 @@ async function buildTapeA(tapeEl, urls) {
 
   await Promise.all(mounts.map(({ mount, url }) => new Promise(async (resolve) => {
     const id = extractId(url);
-    if (!id) { showError(mount, url, "URL inválida"); return resolve(); }
+    if (!id) { mount.innerHTML = `<div class="err">URL inválida</div>`; return resolve(); }
     try {
       const widget = await twttr.widgets.createTweet(id, mount, {
         theme: THEME, width: TWEET_W, conversation: SHOW_REPLIES ? "all" : "none", lang: "es", dnt: true, align: "center"
@@ -62,31 +58,13 @@ async function buildTapeA(tapeEl, urls) {
       }
       twttr.events.bind("rendered", onRendered);
     } catch (e) {
-      showError(mount, url, "No se pudo embeber");
+      mount.innerHTML = `<div class="err">Error embebiendo</div>`;
       resolve();
     }
   })));
 }
 
-/* 4) Clonar para overflow seguro */
-function ensureOverflow(viewport, scroller, tapeA, tapeB) {
-  tapeB.innerHTML = tapeA.innerHTML;
-  const isDesktop = window.innerWidth >= 1024;
-
-  // MULTIPLICADOR GIGANTE (4x) PARA EVITAR QUE EL SCROLL SE CONGELE
-  const target = isDesktop ? viewport.clientHeight * 4 : viewport.clientWidth * 4;
-  if (target === 0) return;
-
-  const currentSize = () => isDesktop ? scroller.scrollHeight : scroller.scrollWidth;
-
-  while (currentSize() <= target) {
-    const clones = Array.from(tapeA.children).map(n => n.cloneNode(true));
-    tapeA.append(...clones);
-    tapeB.innerHTML = tapeA.innerHTML;
-  }
-}
-
-/* 5) Motor Marquee Anti-Bloqueo */
+/* 4) Motor Marquee Anti-Bloqueo */
 let isMarqueeRunning = false;
 let paused = false;
 let currentDist = 0;
@@ -105,8 +83,7 @@ function startMarquee() {
     let dt = (now - lastTime) / 1000;
     lastTime = now;
 
-    // Evitar saltos bruscos si el usuario cambia de pestaña
-    if (dt > 0.5) dt = 0.5;
+    if (dt > 0.5) dt = 0.5; // Limita saltos si minimizas la pestaña
 
     if (!paused && tapeA.children.length > 0) {
       const isDesktop = window.innerWidth >= 1024;
@@ -117,11 +94,11 @@ function startMarquee() {
         currentDist %= segment;
 
         if (isDesktop) {
-          // Cascada Invertida (Caída libre) para PC
+          // Cascada Invertida (Caída libre)
           viewport.scrollTop = segment - currentDist;
           viewport.scrollLeft = 0;
         } else {
-          // De derecha a izquierda para Celular
+          // Celular: Derecha a izquierda
           viewport.scrollLeft = currentDist;
           viewport.scrollTop = 0;
         }
@@ -135,29 +112,34 @@ function startMarquee() {
   viewport.addEventListener("mouseleave", () => paused = false);
 }
 
-/* 6) Lógica de Firebase */
+/* 5) Lógica Central de Firebase (Optimizada y Segura) */
 window.iniciarMarquee = async () => {
   const tapeA = $("#tapeA");
   const tapeB = $("#tapeB");
   const viewport = $("#viewport");
-  const scroller = $("#scroller");
 
   tapeA.innerHTML = "";
   tapeB.innerHTML = "";
   viewport.scrollTop = 0;
   viewport.scrollLeft = 0;
   currentDist = 0;
-  lastTime = performance.now(); // Reset de reloj
+  lastTime = null;
 
   let rawLinks = window.TWEET_DATA && window.TWEET_DATA.length > 0
     ? window.TWEET_DATA
     : ["https://x.com/EnchiladaScan/status/1884405324548489679"];
 
-  // Filtro 5 últimos, orden natural
+  // 1. Quitamos duplicados
   let uniqueLinks = [...new Set(rawLinks)];
+
+  // 2. Tomamos los 5 más recientes (Orden natural)
   let finalLinks = uniqueLinks.slice(-5);
 
-  await buildTapeA(tapeA, finalLinks);
-  ensureOverflow(viewport, scroller, tapeA, tapeB);
+  // 3. Construimos AMBAS cintas legítimamente 
+  // (10 peticiones en total: Súper ligero y seguro)
+  await buildTape(tapeA, finalLinks);
+  await buildTape(tapeB, finalLinks);
+
+  // 4. ¡A correr!
   startMarquee();
 };
