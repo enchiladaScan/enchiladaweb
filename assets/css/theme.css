@@ -995,8 +995,8 @@ button.scan-cta:hover {
   .sidebar .viewport {
     height: calc(100vh - 160px);
     /* Le da un límite de altura basado en tu pantalla */
-    overflow-y: hidden;
-    overflow-x: hidden;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
   }
 
   .sidebar .scroller,
