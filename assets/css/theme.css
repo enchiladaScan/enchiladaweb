@@ -1070,3 +1070,31 @@ button.scan-cta:hover {
     grid-template-columns: repeat(4, 1fr) !important;
   }
 }
+
+/* ============================================== */
+/* --- CORRECCIÓN VITAL PARA QUE NO SE CORTEN --- */
+/* ============================================== */
+
+/* 1. Forzamos al tweet a alinearse a la izquierda de la caja */
+.sidebar .twitter-tweet.twitter-tweet-rendered {
+  margin: 0 !important;
+  display: block !important;
+  position: static !important;
+  max-width: 100% !important;
+  /* Que nunca supere el ancho de .sidebar */
+  width: 320px !important;
+  /* Forzamos el ancho exacto */
+}
+
+/* 2. Forzamos al iframe interno de Twitter a no desbordarse */
+.sidebar .twitter-tweet iframe {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+}
+
+@media (min-width: 1400px) {
+  .ui-theme .grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
