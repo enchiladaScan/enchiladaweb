@@ -1,7 +1,7 @@
-/* 1) RECUPERAMOS LOS DATOS DESDE EL HTML (JEKYLL) */
-const SPEED = 45;            // px/s, velocidad
-const THEME = "dark";        // oscuro fijo
-const SHOW_REPLIES = false;  // conversation:"none" si false
+/* 1) RECUPERAMOS LOS DATOS DESDE EL HTML */
+const SPEED = 45;
+const THEME = "dark";
+const SHOW_REPLIES = false;
 
 /* 2) Helpers */
 const $ = (s) => document.querySelector(s);
@@ -32,10 +32,10 @@ function showError(mount, url, msg) {
   mount.innerHTML = `<div class="err">❗ ${msg}<br><small>${url}</small></div>`;
 }
 
-/* 3) Renderiza pista A y espera 'rendered' de cada widget */
+/* 3) Renderiza pista A */
 async function buildTapeA(tapeEl, urls) {
   const mounts = [];
-  const TWEET_W = getCSSnum("--tweet-w", 320);
+  const TWEET_W = getCSSnum("--tweet-w", 290); // Lee el nuevo tamaño de 290px
 
   for (const url of urls) {
     const { card, mount } = makeCard();
@@ -76,12 +76,9 @@ async function buildTapeA(tapeEl, urls) {
 /* 4) Duplica A hasta overflow real y arma B */
 function ensureOverflow(viewport, scroller, tapeA, tapeB) {
   tapeB.innerHTML = tapeA.innerHTML;
-
   const isDesktop = window.innerWidth >= 1024;
   const target = isDesktop ? viewport.clientHeight * 1.6 : viewport.clientWidth * 1.6;
-
   if (target === 0) return;
-
   const currentSize = () => isDesktop ? scroller.scrollHeight : scroller.scrollWidth;
 
   while (currentSize() <= target) {
@@ -91,13 +88,13 @@ function ensureOverflow(viewport, scroller, tapeA, tapeB) {
   }
 }
 
-/* 5) Motor Marquee Global (Se inicia una sola vez) */
+/* 5) Motor Marquee Anti-Colisiones */
 let isMarqueeRunning = false;
 let paused = false;
 let animationStart = performance.now();
 
 function startMarquee() {
-  if (isMarqueeRunning) return; // Evita colisiones de Firebase
+  if (isMarqueeRunning) return;
   isMarqueeRunning = true;
 
   const viewport = $("#viewport");
@@ -111,7 +108,6 @@ function startMarquee() {
 
       if (segment > 0) {
         const dist = (SPEED * (now - animationStart) / 1000) % segment;
-
         if (isDesktop) {
           viewport.scrollTop = dist;
           viewport.scrollLeft = 0;
@@ -149,14 +145,13 @@ function startMarquee() {
   }, { passive: true });
 }
 
-/* 6) Función para iniciar la cinta al recibir datos de Firebase */
+/* 6) Lógica de Firebase: Filtro y Orden */
 window.iniciarMarquee = async () => {
   const tapeA = $("#tapeA");
   const tapeB = $("#tapeB");
   const viewport = $("#viewport");
   const scroller = $("#scroller");
 
-  // Limpiamos todo visualmente
   tapeA.innerHTML = "";
   tapeB.innerHTML = "";
   viewport.scrollTop = 0;
@@ -167,11 +162,9 @@ window.iniciarMarquee = async () => {
     ? window.TWEET_DATA
     : ["https://x.com/EnchiladaScan/status/1884405324548489679"];
 
-  // ====== FILTRO Y LÍMITE DE 5 POSTS ======
-  let uniqueLinks = [...new Set(rawLinks)]; // Elimina repetidos de Firebase automáticamente
-  let finalLinks = uniqueLinks.slice(-5).reverse(); // Toma los últimos 5 y los invierte (Más nuevo primero)
-
-  console.log("Renderizando cinta sin duplicados y limitada a 5:", finalLinks);
+  // Filtramos duplicados, tomamos los últimos 5, y los invertimos (nuevo arriba)
+  let uniqueLinks = [...new Set(rawLinks)];
+  let finalLinks = uniqueLinks.slice(-5).reverse();
 
   await buildTapeA(tapeA, finalLinks);
   ensureOverflow(viewport, scroller, tapeA, tapeB);

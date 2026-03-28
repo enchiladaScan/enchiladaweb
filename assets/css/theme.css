@@ -806,7 +806,7 @@ button.scan-cta:hover {
   /* Texto principal */
   --gap: 24px;
   /* Separación entre tarjetas y filas */
-  --tweet-w: 320px;
+  --tweet-w: 290px;
   /* Ancho de cada tweet */
 }
 
