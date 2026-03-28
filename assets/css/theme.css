@@ -954,9 +954,10 @@ button.scan-cta:hover {
   /* El texto se vuelve blanco para que contraste */
 }
 
-/* FLEXBOX INDEX.HTML*/
+/* ========================================= */
+/* FLEXBOX INDEX.HTML Y MODO CASCADA         */
+/* ========================================= */
 
-/* Contenedor más ancho para aprovechar los bordes de la pantalla */
 .ui-theme .container {
   max-width: 1350px !important;
 }
@@ -991,68 +992,12 @@ button.scan-cta:hover {
     top: 90px;
   }
 
-  /* ====== NUEVO: MODO CASCADA ====== */
-  .sidebar .viewport {
-    height: calc(100vh - 160px);
-    /* Le da un límite de altura basado en tu pantalla */
-    overflow-y: hidden !important;
-    overflow-x: hidden !important;
-  }
-
-  .sidebar .scroller,
-  .sidebar .tape {
-    flex-direction: column;
-    /* Apila los tweets de arriba hacia abajo */
-  }
-
-  /* ================================= */
-
-  .ui-theme .grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-}
-
-/* ========================================= */
-/* MODO CASCADA PARA PANTALLAS GRANDES       */
-/* ========================================= */
-
-.home-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.main-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.sidebar {
-  width: 100%;
-}
-
-@media (min-width: 1024px) {
-  .ui-theme .container {
-    max-width: 1350px !important;
-  }
-
-  .home-layout {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 30px;
-  }
-
-  .sidebar {
-    width: 320px;
-    flex-shrink: 0;
-    position: sticky;
-    top: 90px;
-  }
-
   /* Convertir la cinta en columna (Cascada vertical) */
   .sidebar .viewport {
     height: calc(100vh - 160px);
     min-height: auto;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
   }
 
   .sidebar .scroller,
@@ -1063,35 +1008,23 @@ button.scan-cta:hover {
   .ui-theme .grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
-}
 
-@media (min-width: 1400px) {
-  .ui-theme .grid {
-    grid-template-columns: repeat(4, 1fr) !important;
+  /* Corrección para que los tweets no se corten */
+  .sidebar .twitter-tweet.twitter-tweet-rendered {
+    margin: 0 !important;
+    display: block !important;
+    position: static !important;
+    max-width: 100% !important;
+    width: 320px !important;
+  }
+
+  .sidebar .twitter-tweet iframe {
+    max-width: 100% !important;
+    width: 100% !important;
   }
 }
 
-/* ============================================== */
-/* --- CORRECCIÓN VITAL PARA QUE NO SE CORTEN --- */
-/* ============================================== */
-
-/* 1. Forzamos al tweet a alinearse a la izquierda de la caja */
-.sidebar .twitter-tweet.twitter-tweet-rendered {
-  margin: 0 !important;
-  display: block !important;
-  position: static !important;
-  max-width: 100% !important;
-  /* Que nunca supere el ancho de .sidebar */
-  width: 320px !important;
-  /* Forzamos el ancho exacto */
-}
-
-/* 2. Forzamos al iframe interno de Twitter a no desbordarse */
-.sidebar .twitter-tweet iframe {
-  max-width: 100% !important;
-  width: 100% !important;
-}
-
+/* Pantallas Súper Grandes */
 @media (min-width: 1400px) {
   .ui-theme .grid {
     grid-template-columns: repeat(4, 1fr) !important;
