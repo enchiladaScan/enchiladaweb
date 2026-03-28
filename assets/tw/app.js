@@ -1,24 +1,15 @@
 /* 1) RECUPERAMOS LOS DATOS DESDE EL HTML (JEKYLL) */
-// Si por alguna razón la lista falla, usamos una por defecto para que no de error
-const TWEET_URLS = window.TWEET_DATA && window.TWEET_DATA.length > 0
-  ? window.TWEET_DATA
-  : ["https://x.com/EnchiladaScan/status/1959973771118256339"];
-
-/* 2) Parámetros fijos (sin controles) */
 const SPEED = 45;            // px/s, velocidad
 const THEME = "dark";        // oscuro fijo
 const SHOW_REPLIES = false;  // conversation:"none" si false
 
-/* 3) Helpers */
+/* 2) Helpers */
 const $ = (s) => document.querySelector(s);
 const ROOT = document.documentElement;
 const getCSSnum = (name, fallback = 0) => {
   const v = parseFloat(getComputedStyle(ROOT).getPropertyValue(name));
   return Number.isFinite(v) ? v : fallback;
 };
-const GAP = getCSSnum("--gap", 24);
-const TWEET_W = getCSSnum("--tweet-w", 360);
-
 const normalize = (u) => String(u).replace(/^https?:\/\/x\.com/i, "https://twitter.com");
 const extractId = (u) => (normalize(u).match(/status\/(\d+)/) || [])[1] || null;
 
@@ -40,9 +31,11 @@ function showError(mount, url, msg) {
   mount.innerHTML = `<div class="err">❗ ${msg}<br><small>${url}</small></div>`;
 }
 
-/* 4) Renderiza pista A y espera 'rendered' de cada widget */
+/* 3) Renderiza pista A y espera 'rendered' de cada widget */
 async function buildTapeA(tapeEl, urls) {
   const mounts = [];
+  const TWEET_W = getCSSnum("--tweet-w", 360);
+
   for (const url of urls) {
     const { card, mount } = makeCard();
     tapeEl.appendChild(card);
@@ -63,7 +56,6 @@ async function buildTapeA(tapeEl, urls) {
         dnt: true,
         align: "center"
       });
-      // Espera a que ese widget termine de ajustar su altura
       let safety = setTimeout(resolve, 2000);
       function onRendered(ev) {
         if (ev.target === widget) {
@@ -74,28 +66,23 @@ async function buildTapeA(tapeEl, urls) {
       }
       twttr.events.bind("rendered", onRendered);
     } catch (e) {
-      showError(mount, url, "No se pudo embeber (¿borrado/privado?)");
-      console.error("Embed fail:", url, e);
+      showError(mount, url, "No se pudo embeber");
       resolve();
     }
   })));
 }
 
-/* 5) Duplica A hasta overflow real y arma B */
+/* 4) Duplica A hasta overflow real y arma B */
 function ensureOverflow(viewport, scroller, tapeA, tapeB) {
   tapeB.innerHTML = tapeA.innerHTML;
 
-  // Detectamos si es PC o celular para saber si medimos el ALTO o el ANCHO
   const isDesktop = window.innerWidth >= 1024;
   const target = isDesktop ? viewport.clientHeight * 1.6 : viewport.clientWidth * 1.6;
 
-  // Evitamos que se trabe si la página está minimizada
   if (target === 0) return;
 
-  // Función que checa el tamaño actual
   const currentSize = () => isDesktop ? scroller.scrollHeight : scroller.scrollWidth;
 
-  // Clonamos hasta llenar la pantalla
   while (currentSize() <= target) {
     const clones = Array.from(tapeA.children).map(n => n.cloneNode(true));
     tapeA.append(...clones);
@@ -103,79 +90,96 @@ function ensureOverflow(viewport, scroller, tapeA, tapeB) {
   }
 }
 
-/* 6) Marquee con desplazamiento modular por tiempo + pausa en hover */
+/* 5) Motor Marquee Global (Se inicia una sola vez) */
+let isMarqueeRunning = false;
+let paused = false;
+let animationStart = performance.now();
+
 function startMarquee() {
+  if (isMarqueeRunning) return; // Evita que se duplique el motor al actualizar Firebase
+  isMarqueeRunning = true;
+
   const viewport = $("#viewport");
-  const scroller = $("#scroller");
   const tapeA = $("#tapeA");
-  const tapeB = $("#tapeB");
-
-  ensureOverflow(viewport, scroller, tapeA, tapeB);
-
-  let paused = false;
-  let start = performance.now();
-  let segment = tapeA.scrollWidth + GAP;
+  const GAP = getCSSnum("--gap", 24);
 
   function step(now) {
-    if (!paused) {
-      // Detectamos si estamos en PC o en Celular
+    if (!paused && tapeA.children.length > 0) {
       const isDesktop = window.innerWidth >= 1024;
-
-      // Si es PC medimos la altura, si es celular medimos el ancho
       const segment = isDesktop ? (tapeA.scrollHeight + GAP) : (tapeA.scrollWidth + GAP);
-      const dist = (SPEED * (now - start) / 1000) % segment;
 
-      if (isDesktop) {
-        viewport.scrollTop = dist;  // Cascada vertical
-        viewport.scrollLeft = 0;    // Reseteo de seguridad
-      } else {
-        viewport.scrollLeft = dist; // Cinta horizontal
-        viewport.scrollTop = 0;     // Reseteo de seguridad
+      // Corrección de la matemática del scroll
+      if (segment > 0) {
+        const dist = (SPEED * (now - animationStart) / 1000) % segment;
+
+        if (isDesktop) {
+          viewport.scrollTop = dist;
+          viewport.scrollLeft = 0;
+        } else {
+          viewport.scrollLeft = dist;
+          viewport.scrollTop = 0;
+        }
       }
     }
     requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
 
-  // pausa en hover
   viewport.addEventListener("mouseenter", () => paused = true);
   viewport.addEventListener("mouseleave", () => paused = false);
 
-  // Si cambia el tamaño de ventana, ajusta los cálculos sin saltos
   let to;
   window.addEventListener("resize", () => {
     clearTimeout(to);
     to = setTimeout(() => {
       const isDesktop = window.innerWidth >= 1024;
       const currentPos = isDesktop ? viewport.scrollTop : viewport.scrollLeft;
-
-      // ancla el tiempo actual para evitar “saltos”
       const now = performance.now();
-      start = now - (currentPos / SPEED) * 1000;
+      animationStart = now - (currentPos / SPEED) * 1000;
+
+      // Si redimensionamos, ajustamos el overflow de nuevo
+      const scroller = $("#scroller");
+      const tapeB = $("#tapeB");
+      if (tapeA.children.length > 0) {
+        // Restauramos A a su estado original (sin clones) antes de recalcular
+        // Esto es vital para que no crezca infinitamente al girar el celular
+        const originalCards = Array.from(tapeB.children);
+        tapeA.innerHTML = "";
+        tapeA.append(...originalCards.map(n => n.cloneNode(true)));
+        ensureOverflow(viewport, scroller, tapeA, tapeB);
+      }
     }, 150);
   }, { passive: true });
 }
 
-/* 7) Función para (re)iniciar la cinta */
+/* 6) Función para (re)iniciar la cinta al recibir datos de Firebase */
 window.iniciarMarquee = async () => {
   const tapeA = $("#tapeA");
   const tapeB = $("#tapeB");
+  const viewport = $("#viewport");
+  const scroller = $("#scroller");
 
-  // 1. Limpiamos las cintas actuales para no duplicar contenido
+  // Limpiamos las cintas y reseteamos el scroll visual
   tapeA.innerHTML = "";
   tapeB.innerHTML = "";
+  viewport.scrollTop = 0;
+  viewport.scrollLeft = 0;
 
-  // 2. Obtenemos los datos actuales de Firebase (guardados en window.TWEET_DATA)
+  // Reiniciamos el reloj para que empiece desde cero
+  animationStart = performance.now();
+
   const links = window.TWEET_DATA && window.TWEET_DATA.length > 0
     ? window.TWEET_DATA
-    : ["https://x.com/EnchiladaScan/status/1959973771118256339"];
+    : ["https://x.com/EnchiladaScan/status/1874707806357709299?s=20"]; // Tweet por defecto si Firebase falla
 
-  console.log("Iniciando renderizado de cinta con:", links);
+  console.log("Renderizando cinta con:", links);
 
-  // 3. la pista A y arrancamos el movimiento
+  // Construimos A con los nuevos tweets de Firebase
   await buildTapeA(tapeA, links);
+
+  // Llenamos la pantalla con clones
+  ensureOverflow(viewport, scroller, tapeA, tapeB);
+
+  // Arrancamos el motor (si ya estaba corriendo, ignorará la orden gracias a isMarqueeRunning)
   startMarquee();
 };
-
-// Ejecución inicial al cargar por primera vez
-window.iniciarMarquee();
