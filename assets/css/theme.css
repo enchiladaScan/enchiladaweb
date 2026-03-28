@@ -819,8 +819,8 @@ button.scan-cta:hover {
 /* Vista principal donde corre el marquee */
 .viewport {
   min-height: 50vh;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
   padding: 12px 0 18px;
 }
 

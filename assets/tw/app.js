@@ -164,7 +164,7 @@ window.iniciarMarquee = async () => {
 
   // Filtramos duplicados, tomamos los últimos 5, y los invertimos (nuevo arriba)
   let uniqueLinks = [...new Set(rawLinks)];
-  let finalLinks = uniqueLinks.slice(-5).reverse();
+  let finalLinks = uniqueLinks.slice(-5);
 
   await buildTapeA(tapeA, finalLinks);
   ensureOverflow(viewport, scroller, tapeA, tapeB);
