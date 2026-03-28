@@ -111,13 +111,21 @@ function startMarquee() {
   let segment = tapeA.scrollWidth + GAP;
 
   function step(now) {
-    if (!paused && segment > 0) {
-      const t = (now - start) / 1000;      // segundos
-      const x = (SPEED * t) % segment;   // desplazamiento modular
-      viewport.scrollLeft = x;
-    } else if (paused) {
-      // reanudar sin salto
-      start = now - (viewport.scrollLeft / SPEED) * 1000;
+    if (!paused) {
+      // Detectamos si estamos en PC o en Celular
+      const isDesktop = window.innerWidth >= 1024;
+
+      // Si es PC medimos la altura, si es celular medimos el ancho
+      const segment = isDesktop ? (tapeA.scrollHeight + GAP) : (tapeA.scrollWidth + GAP);
+      const dist = (SPEED * (now - start) / 1000) % segment;
+
+      if (isDesktop) {
+        viewport.scrollTop = dist;  // Cascada vertical
+        viewport.scrollLeft = 0;    // Reseteo de seguridad
+      } else {
+        viewport.scrollLeft = dist; // Cinta horizontal
+        viewport.scrollTop = 0;     // Reseteo de seguridad
+      }
     }
     requestAnimationFrame(step);
   }
@@ -127,16 +135,17 @@ function startMarquee() {
   viewport.addEventListener("mouseenter", () => paused = true);
   viewport.addEventListener("mouseleave", () => paused = false);
 
-  // Si cambia el tamaño de ventana, reasegura overflow sin reiniciar todo
+  // Si cambia el tamaño de ventana, ajusta los cálculos sin saltos
   let to;
   window.addEventListener("resize", () => {
     clearTimeout(to);
     to = setTimeout(() => {
-      ensureOverflow(viewport, scroller, tapeA, tapeB);
-      segment = tapeA.scrollWidth + GAP;
+      const isDesktop = window.innerWidth >= 1024;
+      const currentPos = isDesktop ? viewport.scrollTop : viewport.scrollLeft;
+
       // ancla el tiempo actual para evitar “saltos”
       const now = performance.now();
-      start = now - (viewport.scrollLeft / SPEED) * 1000;
+      start = now - (currentPos / SPEED) * 1000;
     }, 150);
   }, { passive: true });
 }

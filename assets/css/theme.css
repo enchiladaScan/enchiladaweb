@@ -986,11 +986,26 @@ button.scan-cta:hover {
 
   .sidebar {
     width: 320px;
-    /* <-- REDUCIMOS EL ANCHO (antes 380px) */
     flex-shrink: 0;
     position: sticky;
     top: 90px;
   }
+
+  /* ====== NUEVO: MODO CASCADA ====== */
+  .sidebar .viewport {
+    height: calc(100vh - 160px);
+    /* Le da un límite de altura basado en tu pantalla */
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .sidebar .scroller,
+  .sidebar .tape {
+    flex-direction: column;
+    /* Apila los tweets de arriba hacia abajo */
+  }
+
+  /* ================================= */
 
   .ui-theme .grid {
     grid-template-columns: repeat(3, 1fr) !important;
