@@ -207,7 +207,7 @@ body.light-mode .scan-search input[type="search"] {
 
 /* Botón Buscar en Modo Día */
 body.light-mode .scan-search button {
-    color: #111;
+    color: #fff;
     border-color: #d1d5db;
 }
 
@@ -816,4 +816,36 @@ body.light-mode .theme-toggle-btn img {
     background-color: var(--color-rosa);
     color: #fff;
     box-shadow: var(--card-glow-base);
+}
+
+/* ========================================= */
+/* UNIFICACIÓN DE BOTONES PRINCIPALES        */
+/* (Síguenos, Volver al inicio, Orden)       */
+/* ========================================= */
+
+button.scan-cta,
+.ui-theme .btn-back,
+.sort-button {
+    background: var(--color-rosa) !important;
+    color: #ffffff !important;
+    border: 1px solid var(--color-rosa) !important;
+    border-radius: 999px !important;
+    /* Le da la forma redondeada de píldora */
+    padding: 8px 20px !important;
+    font-weight: 700 !important;
+    box-shadow: var(--card-glow-base) !important;
+    transition: var(--ease) !important;
+    text-decoration: none !important;
+}
+
+/* El Hover: Pasan de Rosa a Celeste */
+button.scan-cta:hover,
+.ui-theme .btn-back:hover,
+.sort-button:hover {
+    background: var(--color-celeste) !important;
+    border-color: var(--color-celeste) !important;
+    color: #ffffff !important;
+    box-shadow: var(--card-glow-hover) !important;
+    transform: translateY(-2px) !important;
+    /* Efecto de flotar un poquito */
 }
