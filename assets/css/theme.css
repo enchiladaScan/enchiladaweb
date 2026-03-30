@@ -1030,3 +1030,18 @@ button.scan-cta:hover {
     grid-template-columns: repeat(4, 1fr) !important;
   }
 }
+
+/* ========================================= */
+/* AJUSTE DE ETIQUETAS (CHIPS) EN CELULARES  */
+/* ========================================= */
+
+@media (max-width: 768px) {
+  .chips {
+    gap: 4px !important;
+  }
+
+  .chip {
+    font-size: 10px !important;
+    padding: 2px 6px !important;
+  }
+}
