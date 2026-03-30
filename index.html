@@ -4,6 +4,17 @@ title: Home
 header_kind: home
 ---
 
+<script>
+  (function () {
+    const storedTheme = localStorage.getItem('site_theme') || 'dark';
+    if (storedTheme === 'light') {
+      document.body.classList.add('light-mode');
+    } else {
+      document.body.classList.remove('light-mode');
+    }
+  })();
+</script>
+
 <div class="ui-theme">
   <div class="ui-theme">
     <main class="container">
@@ -18,20 +29,20 @@ header_kind: home
           <div class="grid" id="grid-activos"></div>
 
           <div class="section-title">
-            <span class="bar"></span>
+            <span class="bar" style="background: #3b82f6;"></span>
             <h2>Joints</h2>
           </div>
           <div class="grid" id="grid-joints"></div>
 
           <div class="section-title">
-            <span class="bar"></span>
+            <span class="bar" style="background: #10b981;"></span>
             <h2>Terminados</h2>
           </div>
           <div class="grid" id="grid-terminados"></div>
         </div>
         <aside class="sidebar">
           <div class="section-title">
-            <span class="bar"></span>
+            <span class="bar" style="background: #a855f7;"></span>
             <h2>Últimos tweets</h2>
           </div>
 
@@ -45,7 +56,10 @@ header_kind: home
         </aside>
       </div>
 
-      <!-- FIREBASE -->
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+        <img src="{{ site.baseurl }}/assets/img/foco.png" alt="Icono Foco" id="theme-icon">
+      </button>
+
       <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
@@ -71,7 +85,7 @@ header_kind: home
 
           console.log("Datos recibidos de Firebase:", window.TWEET_DATA);
 
-          // Sia la función ya existe en app.js, la ejecutamos para refrescar la cinta
+          // Si la función ya existe en app.js, la ejecutamos para refrescar la cinta
           if (typeof window.iniciarMarquee === 'function') {
             window.iniciarMarquee();
           }
@@ -83,9 +97,9 @@ header_kind: home
 
       <script>
         (async function () {
-          const BASE = '{{ site.baseurl }}';                         // usa baseurl
+          const BASE = '{{ site.baseurl }}';
           const CATALOG_URL = '{{ "/catalogo.json" | relative_url }}';
-          const PLACEHOLDER = '/assets/img/cargando_gato.gif';   // ruta del placeholder
+          const PLACEHOLDER = '/assets/img/cargando_gato.gif';
 
           const SECTIONS = [
             { key: 'activos', el: 'grid-activos', titleEmpty: 'No hay series activas por el momento.' },
@@ -105,7 +119,7 @@ header_kind: home
               items = []
                 .concat((data.activos || []).map(m => normalizeItem(m, 'activos')))
                 .concat((data.joints || []).map(m => normalizeItem(m, 'joints')))
-                .concat((data.finalizados || []).map(m => normalizeItem(m, 'terminados'))); // finalizados -> terminados
+                .concat((data.finalizados || []).map(m => normalizeItem(m, 'terminados')));
             }
 
             for (const sec of SECTIONS) {
@@ -122,7 +136,7 @@ header_kind: home
 
           // --- helpers ---
           function normalizeItem(m, fallbackSection) {
-            const portada = m.portada || m.cover || PLACEHOLDER;     // si viene vacío, ya cae al placeholder
+            const portada = m.portada || m.cover || PLACEHOLDER;
             const href = m.post_url || m.url || '#';
             const seccion = (m.seccion || fallbackSection || '').toLowerCase();
             return {
@@ -135,7 +149,7 @@ header_kind: home
 
           function withBase(u) {
             if (!u) return '#';
-            if (/^https?:\/\//i.test(u)) return u; // absoluta
+            if (/^https?:\/\//i.test(u)) return u;
             if (u[0] !== '/') u = '/' + u;
             return (BASE || '') + u;
           }
@@ -173,7 +187,6 @@ header_kind: home
         </div>
       `;
 
-              // si falla la imagen, reemplaza por el placeholder
               const img = card.querySelector('img');
               img.addEventListener('error', () => { img.src = imgPh; });
 
@@ -189,3 +202,31 @@ header_kind: home
           }
         })();
       </script>
+
+      <script>
+        const btnTheme = document.getElementById('theme-toggle');
+        const iconTheme = document.getElementById('theme-icon');
+        const baseurl = "{{ site.baseurl }}";
+
+        // Inicialización del Icono
+        if (document.body.classList.contains('light-mode')) {
+          iconTheme.src = baseurl + '/assets/img/foco.png';
+        } else {
+          iconTheme.src = baseurl + '/assets/img/foco-on.png';
+        }
+
+        // Lógica del clic
+        btnTheme.addEventListener('click', () => {
+          const isLight = document.body.classList.toggle('light-mode');
+          const theme = isLight ? 'light' : 'dark';
+
+          iconTheme.src = baseurl + '/assets/img/' + (isLight ? 'foco.png' : 'foco-on.png');
+          localStorage.setItem('site_theme', theme);
+
+          // Recargamos para que el widget de X aplique el tema correctamente
+          setTimeout(() => { window.location.reload(); }, 150);
+        });
+      </script>
+    </main>
+  </div>
+</div>

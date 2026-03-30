@@ -1,17 +1,30 @@
 ---
-layout: default 
+layout: default
 ---
+
+<script>
+  (function () {
+    const storedTheme = localStorage.getItem('site_theme') || 'dark';
+    if (storedTheme === 'light') {
+      document.body.classList.add('light-mode');
+    } else {
+      document.body.classList.remove('light-mode');
+    }
+  })();
+</script>
 
 {% include header_caps.html %}
 
 {% assign collection_name = page.series %}
-{% assign chapters = "" | split: "" %}  {% assign extras = "" | split: "" %}
+{% assign chapters = "" | split: "" %} {% assign extras = "" | split: "" %}
 {% if collection_name %}
-  {% assign all_items = site[collection_name] %}
-  {% if all_items %}
-    {% assign chapters = all_items | where_exp: "item", "item.type != 'extra'" | where_exp: "item", "item.capitulo" | sort: 'capitulo' %}
-    {% assign extras = all_items | where_exp: "item", "item.type == 'extra'" | where_exp: "item", "item.capitulo" | sort: 'capitulo' %}
-  {% endif %}
+{% assign all_items = site[collection_name] %}
+{% if all_items %}
+{% assign chapters = all_items | where_exp: "item", "item.type != 'extra'" | where_exp: "item", "item.capitulo" | sort:
+'capitulo' %}
+{% assign extras = all_items | where_exp: "item", "item.type == 'extra'" | where_exp: "item", "item.capitulo" | sort:
+'capitulo' %}
+{% endif %}
 {% endif %}
 {% assign min_items_to_sort = 10 %}
 
@@ -20,8 +33,7 @@ layout: default
 
     <div class="manga-hero ui-block">
       <div class="manga-cover">
-        <img
-          src="{{ page.portada | default: '/assets/img/placeholder-cover.png' | relative_url }}"
+        <img src="{{ page.portada | default: '/assets/img/placeholder-cover.png' | relative_url }}"
           alt="Portada de {{ page.title }}"
           onerror="this.onerror=null; this.src='{{ '/assets/img/placeholder-cover.png' | relative_url }}'">
         <a class="btn-back" href="{{ site.baseurl }}/">Volver al inicio</a>
@@ -32,39 +44,39 @@ layout: default
     <div class="list-header">
       <h2>Ver capítulos aquí:</h2>
       {% if chapters.size > min_items_to_sort %}
-        <button id="sortButton" class="sort-button">Orden: Descendente</button>
+      <button id="sortButton" class="sort-button">Orden: Descendente</button>
       {% endif %}
     </div>
-      <ul id="chaptersList">
-        {% if chapters.size > 0 %}
-          {% for c in chapters %}
-            <li>
-              <a href="{{ c.url | relative_url }}">
-                <span class="cap-title">{{ c.title }}</span>
-                <span class="cap-number">Cap. {{ c.capitulo }}</span>
-              </a>
-            </li>
-          {% endfor %}
-        {% else %}
-          <li class="no-links">Aún no hay capítulos de este manga.</li>
-        {% endif %}
-      </ul>
+    <ul id="chaptersList">
+      {% if chapters.size > 0 %}
+      {% for c in chapters %}
+      <li>
+        <a href="{{ c.url | relative_url }}">
+          <span class="cap-title">{{ c.title }}</span>
+          <span class="cap-number">Cap. {{ c.capitulo }}</span>
+        </a>
+      </li>
+      {% endfor %}
+      {% else %}
+      <li class="no-links">Aún no hay capítulos de este manga.</li>
+      {% endif %}
+    </ul>
     </section>
 
     <section id="links-de-descarga" class="ui-block">
       <h3>Links de descarga</h3>
       {% if page.links_descarga and page.links_descarga.size > 0 %}
-        <ul id="downloadsList" class="manga-dl">
-          {% for l in page.links_descarga %}
-            <li>
-              <a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">
-                <span class="cap-title">{{ l.nombre }}</span>
-                <span class="cap-number">{{ l.server }}</span> </a>
-            </li>
-          {% endfor %}
-        </ul>
+      <ul id="downloadsList" class="manga-dl">
+        {% for l in page.links_descarga %}
+        <li>
+          <a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">
+            <span class="cap-title">{{ l.nombre }}</span>
+            <span class="cap-number">{{ l.server }}</span> </a>
+        </li>
+        {% endfor %}
+      </ul>
       {% else %}
-        <p class="no-links">No hay descargas disponibles por el momento.</p>
+      <p class="no-links">No hay descargas disponibles por el momento.</p>
       {% endif %}
     </section>
 
@@ -73,49 +85,70 @@ layout: default
       <h3>Capítulos extras</h3>
       <ul id="extrasList" class="manga-extras">
         {% for e in extras %}
-          <li>
-            <a href="{{ e.url | relative_url }}">
-              <span class="cap-title">{{ e.title }}</span>
-              <span class="cap-number">Extra</span>
-            </a>
-          </li>
+        <li>
+          <a href="{{ e.url | relative_url }}">
+            <span class="cap-title">{{ e.title }}</span>
+            <span class="cap-number">Extra</span>
+          </a>
+        </li>
         {% endfor %}
       </ul>
     </section>
     {% endif %}
 
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+      <img src="{{ site.baseurl }}/assets/img/foco.png" alt="Icono Foco" id="theme-icon">
+    </button>
+
   </main>
 </div>
 
-
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  var sortBtn = document.getElementById('sortButton');
-  
-  // Lista de IDs de todas las listas que queremos invertir
-  var listIds = ['chaptersList', 'downloadsList', 'extrasList'];
-  var isReversed = false; // Estado inicial (Jekyll ordena A-Z)
+  const btnTheme = document.getElementById('theme-toggle');
+  const iconTheme = document.getElementById('theme-icon');
+  const baseurl = "{{ site.baseurl }}";
 
-  // Función para invertir una lista
-  function reverseList(listId) {
-    var list = document.getElementById(listId);
-    if (list) {
-      var items = Array.from(list.querySelectorAll('li'));
-      items.reverse();
-      list.innerHTML = ''; // Limpia la lista
-      items.forEach(function(item) {
-        list.appendChild(item); // Vuelve a añadir los items en el nuevo orden
-      });
-    }
+  // Inicialización del Icono
+  if (document.body.classList.contains('light-mode')) {
+    iconTheme.src = baseurl + '/assets/img/foco.png';
+  } else {
+    iconTheme.src = baseurl + '/assets/img/foco-on.png';
   }
 
-  sortBtn.addEventListener('click', function() {
-    // Invertimos todas las listas
-    listIds.forEach(reverseList);
-    
-    // Actualizamos el estado y el texto del botón
-    isReversed = !isReversed;
-    sortBtn.textContent = isReversed ? 'Orden: Ascendente' : 'Orden: Descendente';
+  // Lógica del clic
+  btnTheme.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light-mode');
+    const theme = isLight ? 'light' : 'dark';
+    iconTheme.src = baseurl + '/assets/img/' + (isLight ? 'foco.png' : 'foco-on.png');
+    localStorage.setItem('site_theme', theme);
   });
-});
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var sortBtn = document.getElementById('sortButton');
+
+    var listIds = ['chaptersList', 'downloadsList', 'extrasList'];
+    var isReversed = false;
+
+    function reverseList(listId) {
+      var list = document.getElementById(listId);
+      if (list) {
+        var items = Array.from(list.querySelectorAll('li'));
+        items.reverse();
+        list.innerHTML = '';
+        items.forEach(function (item) {
+          list.appendChild(item);
+        });
+      }
+    }
+
+    if (sortBtn) {
+      sortBtn.addEventListener('click', function () {
+        listIds.forEach(reverseList);
+        isReversed = !isReversed;
+        sortBtn.textContent = isReversed ? 'Orden: Ascendente' : 'Orden: Descendente';
+      });
+    }
+  });
 </script>

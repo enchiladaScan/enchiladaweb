@@ -1,6 +1,10 @@
 /* 1) RECUPERAMOS DATOS */
-const SPEED = 40; // Velocidad ajustada
-const THEME = "dark";
+const SPEED = 40;
+
+// NUEVO: Conectamos la elección del usuario (Persistencia Universal)
+// Lee si eligió modo claro, si no, usa oscuro por defecto.
+const THEME = localStorage.getItem('site_theme') === 'light' ? 'light' : 'dark';
+
 const SHOW_REPLIES = false;
 
 /* 2) Helpers */
@@ -21,14 +25,16 @@ function waitForTwttr() {
     });
 }
 
+// BUG FIX: Renombramos la clase a .card.twitter-wrap para no chocar con el shadow rosa de los mangas
 function makeCard() {
     const card = document.createElement("div");
-    card.className = "card twitter-wrap";
+    card.className = "card twitter-wrap"; // <--- AGREGAR CLASE AQUÍ
     const mount = document.createElement("div"); mount.className = "mount";
     card.appendChild(mount);
     return { card, mount };
 }
-/* 3) Función para construir Tweets LEGÍTIMOS (Sin clones falsos) */
+
+/* 3) Función para construir Tweets LEGÍTIMOS (Con el tema dinámico) */
 async function buildTape(tapeEl, urls) {
     const mounts = [];
     const TWEET_W = getCSSnum("--tweet-w", 290);
@@ -46,21 +52,15 @@ async function buildTape(tapeEl, urls) {
         if (!id) { mount.innerHTML = `<div class="err">URL inválida</div>`; return resolve(); }
         try {
             const widget = await twttr.widgets.createTweet(id, mount, {
-                theme: THEME, width: TWEET_W, conversation: SHOW_REPLIES ? "all" : "none", lang: "es", dnt: true, align: "center"
+                theme: THEME, // <--- USA LA VARIABLE DINÁMICA DE ARRIBA (localStorage)
+                width: TWEET_W,
+                conversation: SHOW_REPLIES ? "all" : "none",
+                lang: "es", dnt: true, align: "center"
             });
             let safety = setTimeout(resolve, 2000);
-            function onRendered(ev) {
-                if (ev.target === widget) {
-                    clearTimeout(safety);
-                    twttr.events.unbind("rendered", onRendered);
-                    resolve();
-                }
-            }
+            function onRendered(ev) { if (ev.target === widget) { clearTimeout(safety); twttr.events.unbind("rendered", onRendered); resolve(); } }
             twttr.events.bind("rendered", onRendered);
-        } catch (e) {
-            mount.innerHTML = `<div class="err">Error embebiendo</div>`;
-            resolve();
-        }
+        } catch (e) { mount.innerHTML = `<div class="err">Error embebiendo</div>`; resolve(); }
     })));
 }
 
@@ -94,7 +94,7 @@ function startMarquee() {
                 currentDist %= segment;
 
                 if (isDesktop) {
-                    // Cascada (Caída libre)
+                    // Cascada Invertida (Caída libre)
                     viewport.scrollTop = segment - currentDist;
                     viewport.scrollLeft = 0;
                 } else {
@@ -112,37 +112,25 @@ function startMarquee() {
     viewport.addEventListener("mouseleave", () => paused = false);
 }
 
-/* 5) Lógica Central de Firebase (Optimizada y Segura) */
+/* 5) Lógica Central de Firebase (Optimizada) */
 window.iniciarMarquee = async () => {
     const tapeA = $("#tapeA");
     const tapeB = $("#tapeB");
     const viewport = $("#viewport");
 
-    tapeA.innerHTML = "";
-    tapeB.innerHTML = "";
-    viewport.scrollTop = 0;
-    viewport.scrollLeft = 0;
-    currentDist = 0;
-    lastTime = null;
+    tapeA.innerHTML = ""; tapeB.innerHTML = ""; viewport.scrollTop = 0; viewport.scrollLeft = 0;
+    currentDist = 0; lastTime = null;
 
     let rawLinks = window.TWEET_DATA && window.TWEET_DATA.length > 0
         ? window.TWEET_DATA
         : ["https://x.com/EnchiladaScan/status/1884405324548489679"];
 
-    // 1. Quitamos duplicados
+    // Filtro 5 últimos, orden natural
     let uniqueLinks = [...new Set(rawLinks)];
-
-    // 2. Tomamos los 5 más recientes (Orden natural)
     let finalLinks = uniqueLinks.slice(-5);
 
-    // 3. Construimos AMBAS cintas legítimamente 
-    /* este modo hace que cargue todo antes y no se vea el efecto de cascada hasta tener todo listo
     await buildTape(tapeA, finalLinks);
     await buildTape(tapeB, finalLinks);
-    */
-    //este modo hace que cargue de a uno y se vea el efecto de cascada
-    buildTape(tapeA, finalLinks);
-    buildTape(tapeB, finalLinks);
-    // 4. ¡A correr!
+
     startMarquee();
 };

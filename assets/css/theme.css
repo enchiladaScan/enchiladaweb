@@ -1,36 +1,13 @@
-/* ========================================= */
-/* 1. RESET Y BASE DEL TEMA                  */
-/* ========================================= */
 html,
 body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background: #0e1220;
 }
 
 .ui-theme,
 .ui-theme .container {
     background: transparent;
-}
-
-/* Variables del Tema (No sangran al reader) */
-.ui-theme {
-    --bg: #0b0f14;
-    --surface: #0f172a;
-    --card: #0b1220;
-    --text: #e5e7eb;
-    --muted: #9aa4b2;
-    --line: #1f2937;
-    --brand: #00bcd4;
-    --brand-700: #0097a7;
-    --chip: #3c0d23;
-    --ring: 0 0 0 1px rgba(255, 255, 255, .06) inset, 0 10px 30px rgba(0, 0, 0, .35);
-    --radius-xl: 18px;
-
-    background: var(--bg);
-    color: var(--text);
-    font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
 
 .ui-theme * {
@@ -50,33 +27,105 @@ body {
 
 .ui-theme .container {
     max-width: 1350px !important;
-    /* Ajustado para acomodar la barra lateral */
     margin-inline: auto;
     padding: 24px 20px;
 }
 
 /* ========================================= */
-/* 2. HEADER DEL SCAN (Navegación Principal) */
+/*  VARIABLES DE COLOR (Tema Base: Noche)  */
 /* ========================================= */
+
+/* Variables estáticas (NO cambian entre modos) */
 :root {
-    --scan-bg: #0e1116;
-    --scan-fg: #e6e6f0;
-    --scan-muted: #aeb2c1;
-    --scan-ring: #8b5cf6;
-    --scan-ring-ghost: rgba(139, 92, 246, 0.35);
-    --scan-input-bg: #121722;
-    --scan-input-fg: #e8ecf3;
-    --scan-input-placeholder: #8791a6;
-    --scan-shadow: 0 6px 24px rgba(0, 0, 0, .28);
+    /* Header Fijo (colores oscuros y Rosa para resaltar logo Enchilada) */
+    --header-bg: #0e1116;
+    --header-fg: #f1f3f9;
+    --header-muted: #aeb2c1;
+
+    /* El motor X Marquee usa estas variables */
+    --tweet-w: 290px;
+    --gap: 24px;
 }
 
+/* Variables Dinámicas (Tema Base: Noche) */
+.ui-theme,
+body {
+    /* Fondo principal y elementos base */
+    --main-bg: #0b0f14;
+    --main-surface: #0f172a;
+    --main-card: #0e111b;
+    /* Fondo oscuro para el tweet wrap */
+
+    /* Texto */
+    --main-text: #f1f3f9;
+    --main-muted: #9aa4b2;
+    --main-line: #1f2937;
+
+    /* Botones y Highlights (General) */
+    --main-brand: #7c3aed;
+    --main-chip: #3c0d23;
+
+    /* === COLORES DE SOMBRA (GLOW) PEDIDOS === */
+    --color-rosa: #f078af;
+    /* Rosa Base */
+    --color-celeste: #00b9f0;
+    /* Celeste Hover */
+
+    /* === MATEMÁTICA DEL GLOW (Opacidad del ejemplo) === */
+    /* Glow Rosa Base (20% de opacidad) */
+    --card-glow-base: 0 6px 18px rgba(240, 120, 175, 0.20);
+    /* Glow Celeste Hover (45% de opacidad fuerte) */
+    --card-glow-hover: 0 10px 24px rgba(0, 185, 240, 0.45);
+
+    /* Borde de tarjeta base oscuro */
+    --card-border: 1px solid rgba(255, 255, 255, .06);
+    --ease: all 0.25s ease;
+
+    background: var(--main-bg);
+    color: var(--main-text);
+    font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ========================================= */
+/*  MODO DÍA (Puro White Background)      */
+/* ========================================= */
+body.light-mode,
+body.light-mode .ui-theme {
+    --main-bg: #ffffff;
+    /* !!! Fondo Puro Blanco !!! */
+    --main-surface: #f9fafb;
+    --main-card: #f9fafb;
+    /* Fondo ligero para tweet wrap */
+
+    --main-text: #111827;
+    /* Texto casi negro */
+    --main-muted: #6b7280;
+    --main-line: #d1d5db;
+    /* Líneas claras */
+
+    --main-chip: #fce7f3;
+    /* Rosa ultra-claro */
+
+    /* Adaptación del Glow para Modo Día (Respetando colores Rosa/Celeste) */
+    --card-glow-base: 0 4px 12px rgba(240, 120, 175, 0.12);
+    --card-glow-hover: 0 8px 20px rgba(0, 185, 240, 0.40);
+
+    --card-border: 1px solid #e5e7eb;
+    /* Borde de tarjeta claro */
+}
+
+/* ========================================= */
+/*  HEADER DEL SCAN (Navegación Fija)      */
+/* ========================================= */
 .scan-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: linear-gradient(180deg, var(--scan-bg) 0%, #0a0d12 100%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--header-bg);
+    /* Mantenemos Header Oscuro en ambos modos */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: saturate(140%) blur(6px);
+    color: var(--header-fg);
 }
 
 .scan-header__inner {
@@ -113,92 +162,58 @@ body {
 }
 
 .scan-search input[type="search"] {
-    background: var(--scan-input-bg);
-    color: var(--scan-input-fg);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #121722;
+    color: #e8ecf3;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 999px;
     padding: 12px 16px;
     outline: none;
-    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.02), var(--scan-shadow);
-    transition: border-color .2s ease, box-shadow .2s ease;
+    transition: var(--ease);
 }
 
 .scan-search input::placeholder {
-    color: var(--scan-input-placeholder);
+    color: #8791a6;
 }
 
+/* Focus Rosa */
 .scan-search input:focus {
-    border-color: var(--scan-ring);
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.16), inset 0 2px 0 rgba(255, 255, 255, 0.02), var(--scan-shadow);
+    border-color: var(--color-rosa);
+    box-shadow: 0 0 0 3px rgba(240, 120, 175, 0.15);
 }
 
-.scan-search button {
-    background: transparent;
-    color: var(--scan-fg);
-    border: 1px solid var(--scan-ring-ghost);
-    border-radius: 12px;
-    padding: 10px 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: border-color .2s ease, box-shadow .2s ease, transform .12s ease;
-}
-
-.scan-search button:hover {
-    border-color: var(--scan-ring);
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, .18);
-    transform: translateY(-1px);
-}
-
-@media (max-width: 900px) {
-    .scan-header__inner {
-        grid-template-columns: 1fr 1.2fr auto;
-        gap: 12px;
-    }
-}
-
-@media (max-width: 680px) {
-    .scan-header__inner {
-        grid-template-columns: 1fr auto;
-        grid-template-areas: "logo cta" "search search";
-        row-gap: 10px;
-    }
-
-    .scan-logo {
-        grid-area: logo;
-    }
-
-    .scan-cta {
-        grid-area: cta;
-    }
-
-    .scan-search {
-        grid-area: search;
-    }
+/* Adaptación del Buscador en Modo Día (para que no se pierda en el Header Oscuro) */
+body.light-mode .scan-search input[type="search"] {
+    border-color: rgba(240, 120, 175, 0.3);
 }
 
 /* ========================================= */
-/* 3. REDES SOCIALES (Botón y Menú)          */
+/*  REDES SOCIALES (Botón "Síguenos")     */
 /* ========================================= */
 button.scan-cta {
-    background: #5d2b78;
-    border: 2px solid #5d2b78;
+    background: var(--color-rosa);
+    /* Rosa Base */
+    border: 1px solid rgba(240, 120, 175, 0.5);
     color: #fff;
     cursor: pointer;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 700;
     padding: 10px 20px;
     border-radius: 6px;
-    transition: all 0.2s ease;
+    transition: var(--ease);
     display: inline-block;
     margin: 0 10px;
+    box-shadow: var(--card-glow-base);
+    /* Glow Rosa */
 }
 
+/* Hover Celeste para el botón */
 button.scan-cta:hover {
-    background: #6a3a8a;
-    border-color: #6a3a8a;
+    background: var(--color-celeste);
+    border-color: var(--color-celeste);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(93, 43, 120, 0.3);
+    box-shadow: var(--card-glow-hover);
+    /* Glow Celeste fuerte */
 }
 
 .social-dropdown-wrapper {
@@ -256,7 +271,7 @@ button.scan-cta:hover {
 
 .social-item:hover {
     background: #1f242c;
-    border-color: #00acee;
+    border-color: var(--color-celeste);
     color: #fff;
 }
 
@@ -279,22 +294,28 @@ button.scan-cta:hover {
     }
 }
 
-@media (max-width: 600px) {
-    .social-dropdown-panel {
-        position: fixed;
-        top: 70px;
-        right: 10px;
-        left: 10px;
-        width: auto;
+@media (max-width: 680px) {
+    .scan-header__inner {
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "logo cta" "search search";
+        row-gap: 10px;
     }
 
-    .social-grid {
-        grid-template-columns: repeat(3, 1fr);
+    .scan-logo {
+        grid-area: logo;
+    }
+
+    .scan-cta {
+        grid-area: cta;
+    }
+
+    .scan-search {
+        grid-area: search;
     }
 }
 
 /* ========================================= */
-/* 4. COMPONENTES PRINCIPALES (Tarjetas y Títulos) */
+/*  COMPONENTES PRINCIPALES (Manga Grids) */
 /* ========================================= */
 .ui-theme .section-title {
     display: flex;
@@ -306,7 +327,7 @@ button.scan-cta:hover {
 .ui-theme .section-title .bar {
     width: 6px;
     height: 26px;
-    background: var(--brand);
+    background: var(--color-rosa);
     border-radius: 6px;
 }
 
@@ -314,6 +335,7 @@ button.scan-cta:hover {
     margin: 0;
     font-size: 32px;
     letter-spacing: .2px;
+    color: var(--main-text);
 }
 
 /* Grid de Mangas */
@@ -321,37 +343,44 @@ button.scan-cta:hover {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 22px;
-}
-
-@media (max-width: 1100px) {
-    .ui-theme .grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+    margin-bottom: 30px;
 }
 
 @media (max-width: 780px) {
     .ui-theme .grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
     }
 }
 
 @media (max-width: 520px) {
     .ui-theme .grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
 }
 
-/* Tarjeta Individual */
+/* === TARJETA MANGA (El efecto Glow Rosa/Celeste) === */
 .ui-theme .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-xl);
+    background: var(--main-surface);
+    border: var(--card-border);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: var(--ring);
     display: flex;
     flex-direction: column;
     text-decoration: none;
     color: inherit;
+    transition: var(--ease);
+
+    box-shadow: var(--card-glow-base);
+}
+
+/* !!! EFECTO CELESTE HOVER strong !!! */
+.ui-theme .card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 185, 240, 0.4);
+    box-shadow: var(--card-glow-hover);
+    /* Sombra Celeste fuerte */
 }
 
 .ui-theme .card-cover {
@@ -365,7 +394,7 @@ button.scan-cta:hover {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform .35s ease;
+    transition: transform .3s ease;
 }
 
 .ui-theme .card:hover .card-cover img {
@@ -373,17 +402,18 @@ button.scan-cta:hover {
 }
 
 .ui-theme .card-body {
-    padding: 14px 14px 16px;
+    padding: 12px;
 }
 
 .ui-theme .card-title {
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 800;
-    margin: 0 0 8px;
+    margin: 0 0 6px;
+    color: var(--main-text);
 }
 
 .ui-theme .meta {
-    color: var(--muted);
+    color: var(--main-muted);
     font-size: 13px;
 }
 
@@ -392,16 +422,22 @@ button.scan-cta:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin: 0 0 10px;
+    margin: 0 0 8px;
 }
 
 .ui-theme .chip {
     font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: var(--chip);
-    color: #d1c4e9;
-    border: 1px solid rgba(192, 38, 211, .22);
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: var(--main-chip);
+    color: #fff;
+    border: 1px solid rgba(240, 120, 175, 0.3);
+}
+
+/* Estilo del chip para Modo Día (letra rosa y negrita) */
+body.light-mode .chip {
+    color: var(--color-rosa);
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {
@@ -416,214 +452,8 @@ button.scan-cta:hover {
 }
 
 /* ========================================= */
-/* 5. FICHA DEL MANGA (Página Individual)    */
+/*  MARQUEE DE TWITTER (El motor JS)       */
 /* ========================================= */
-.ui-theme .ui-block {
-    margin: 1.5rem 0;
-}
-
-.ui-theme .manga-hero {
-    display: grid;
-    grid-template-columns: minmax(220px, 320px) 1fr;
-    gap: 2rem;
-    align-items: start;
-}
-
-.ui-theme .manga-cover img {
-    width: 100%;
-    height: auto;
-    border-radius: .75rem;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, .35);
-    display: block;
-}
-
-.ui-theme .btn-back {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: .55rem .9rem;
-    border-radius: 999px;
-    text-decoration: none;
-    border: 1px solid rgba(175, 82, 222, .35);
-    background: transparent;
-    color: var(--brand);
-    font-size: 0.9em;
-    font-weight: 600;
-    transition: all 0.2s ease;
-}
-
-.ui-theme .btn-back:hover {
-    background-color: var(--brand);
-    border-color: var(--brand);
-    color: #fff;
-}
-
-.ui-theme .manga-title {
-    margin: 0 0 .5rem;
-    line-height: 1.2;
-}
-
-.ui-theme .manga-meta {
-    max-width: 70ch;
-}
-
-.ui-theme .manga-meta-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1rem;
-}
-
-.ui-theme .manga-meta-list li {
-    margin: .25rem 0;
-    opacity: .9;
-}
-
-.ui-theme .manga-sinopsis {
-    text-align: justify;
-}
-
-.ui-theme .manga-dl {
-    padding-left: 1.1rem;
-}
-
-.ui-theme .manga-dl li {
-    margin: .25rem 0;
-}
-
-@media (max-width:900px) {
-    .ui-theme .manga-hero {
-        grid-template-columns: 1fr;
-    }
-
-    .ui-theme .manga-meta {
-        max-width: none;
-    }
-}
-
-/* ========================================= */
-/* 6. LISTA DE CAPÍTULOS                     */
-/* ========================================= */
-#chaptersList,
-#extrasList,
-#downloadsList {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 16px;
-    border-top: 1px solid var(--line);
-}
-
-#chaptersList li,
-#extrasList li {
-    margin-bottom: 0;
-    padding-left: 0;
-}
-
-#chaptersList li a,
-#extrasList li a {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text);
-    text-decoration: none;
-    padding: 12px 8px;
-    border-bottom: 1px solid var(--line);
-}
-
-#chaptersList li a:hover,
-#extrasList li a:hover {
-    background-color: rgba(255, 255, 255, 0.03);
-    color: #fff;
-}
-
-.cap-title {
-    font-weight: 600;
-}
-
-.cap-number {
-    font-size: 0.9em;
-    color: var(--muted);
-    white-space: nowrap;
-    padding-left: 16px;
-}
-
-.list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.list-header h2,
-.list-header h3 {
-    margin: 0;
-}
-
-.sort-button {
-    background: transparent;
-    color: var(--brand);
-    border: 1px solid var(--brand-700, var(--brand));
-    padding: .55rem .9rem;
-    border-radius: 999px;
-    cursor: pointer;
-    font-size: 0.9em;
-    font-weight: 600;
-    transition: all 0.2s ease;
-}
-
-.sort-button:hover {
-    background-color: var(--brand);
-    border-color: var(--brand);
-    color: #fff;
-}
-
-/* Botones genéricos de navegación */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    text-decoration: none;
-    border: 1px solid #bbb;
-    background: #fff;
-    color: #111;
-    font-weight: 600;
-    cursor: pointer;
-    user-select: none;
-}
-
-.btn.nav-zoom {
-    background: #3a3a3a;
-    color: #fff;
-    border-color: #555;
-}
-
-.ico-btn .ico {
-    width: 22px;
-    height: 22px;
-    display: block;
-    object-fit: contain;
-}
-
-.ico-btn .label {
-    display: none;
-}
-
-.ico-btn.no-icon .label {
-    display: inline;
-}
-
-.ico-btn.no-icon .ico {
-    display: none;
-}
-
-/* ========================================= */
-/* 7. MARQUEE DE TWITTER (El motor JS)       */
-/* ========================================= */
-:root {
-    --tweet-w: 290px;
-    --gap: 24px;
-}
-
 .viewport {
     min-height: 50vh;
     overflow-x: hidden !important;
@@ -645,13 +475,19 @@ button.scan-cta:hover {
     flex: 0 0 auto;
 }
 
+/* Clase renombrada .twitter-wrap para que NO tome la sombra de los mangas */
 .card.twitter-wrap {
-    /* Clase renombrada para no chocar con la card de mangas */
-    background: #0f111b;
-    border: 1px solid #242634;
-    border-radius: 18px;
+    background: var(--main-card);
+    border: var(--card-border);
+    border-radius: 12px;
     padding: 10px;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, .25);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Borde rosa sutil al hover del tweet wrap */
+.card.twitter-wrap:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    border-color: rgba(240, 120, 175, 0.3);
 }
 
 .mount {
@@ -672,7 +508,7 @@ button.scan-cta:hover {
 }
 
 /* ========================================= */
-/* 8. LAYOUT CASCADA (Home & Barra Lateral)  */
+/*  LAYOUT CASCADA (Home & Barra Lateral)  */
 /* ========================================= */
 .home-layout {
     display: flex;
@@ -703,7 +539,6 @@ button.scan-cta:hover {
         top: 90px;
     }
 
-    /* Cascada Vertical Activa */
     .sidebar .viewport {
         height: calc(100vh - 160px);
         min-height: auto;
@@ -716,11 +551,13 @@ button.scan-cta:hover {
         flex-direction: column !important;
     }
 
+    /* Grids de Mangas en PC (con barra lateral activa) */
     .ui-theme .grid {
         grid-template-columns: repeat(3, 1fr) !important;
+        gap: 16px;
     }
 
-    /* Ajuste preciso para Iframe de Twitter */
+    /* Ajuste preciso para Iframe de X rendered */
     .sidebar .twitter-tweet.twitter-tweet-rendered {
         margin: 0 !important;
         display: block !important;
@@ -738,5 +575,168 @@ button.scan-cta:hover {
 @media (min-width: 1400px) {
     .ui-theme .grid {
         grid-template-columns: repeat(4, 1fr) !important;
+        gap: 20px;
     }
+}
+
+/* ========================================= */
+/*  BOTÓN FLOTANTE Y ADAPTACIONES           */
+/* ========================================= */
+
+/* El Botón Flotante (FAB) */
+.theme-toggle-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+    /* Usamos los colores Rosa base */
+    background: var(--main-surface);
+    border: 1px solid var(--color-rosa);
+    box-shadow: 0 4px 14px rgba(240, 120, 175, 0.25);
+
+    cursor: pointer;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--ease);
+    outline: none;
+}
+
+/* Hover celeste */
+.theme-toggle-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    background: var(--main-bg);
+    border-color: var(--color-celeste);
+    box-shadow: 0 8px 20px rgba(0, 185, 240, 0.40);
+}
+
+.theme-toggle-btn img {
+    width: 26px;
+    height: 26px;
+    filter: invert(1);
+    /* Si el icono es negro, esto lo vuelve blanco para modo noche */
+    transition: var(--ease);
+}
+
+/* Invertir el foco para que se vea negro en modo día */
+body.light-mode .theme-toggle-btn img {
+    filter: invert(0);
+}
+
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        bottom: 16px;
+        right: 16px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .theme-toggle-btn img {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* Resto del CSS (FICHA MANGA MANUEL ETC) consolidado para usar variables dinámicas */
+.ui-theme .ui-block {
+    margin: 1.5rem 0;
+}
+
+.ui-theme .manga-hero {
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.ui-theme .manga-cover img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    display: block;
+}
+
+.ui-theme .btn-back {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .55rem .9rem;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid rgba(240, 120, 175, 0.35);
+    background: transparent;
+    color: var(--color-rosa);
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: var(--ease);
+}
+
+.ui-theme .btn-back:hover {
+    background-color: var(--color-rosa);
+    border-color: var(--color-rosa);
+    color: #fff;
+    box-shadow: var(--card-glow-base);
+}
+
+.ui-theme .manga-title {
+    margin: 0 0 .5rem;
+    line-height: 1.2;
+    color: var(--main-text);
+}
+
+.ui-theme .manga-meta {
+    max-width: 70ch;
+}
+
+.ui-theme .manga-meta-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+}
+
+.ui-theme .manga-meta-list li {
+    margin: .25rem 0;
+    opacity: .9;
+}
+
+.ui-theme .manga-sinopsis {
+    text-align: justify;
+    color: var(--main-text);
+}
+
+.ui-theme .manga-dl li a {
+    color: var(--color-rosa);
+}
+
+#chaptersList li a,
+#extrasList li a {
+    color: var(--main-text);
+    border-bottom: 1px solid var(--main-line);
+}
+
+#chaptersList li a:hover,
+#extrasList li a:hover {
+    background-color: rgba(240, 120, 175, 0.05);
+}
+
+.cap-number {
+    color: var(--main-muted);
+}
+
+.sort-button {
+    border-color: rgba(240, 120, 175, 0.5);
+    background: transparent;
+    color: var(--color-rosa);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sort-button:hover {
+    background-color: var(--color-rosa);
+    color: #fff;
+    box-shadow: var(--card-glow-base);
 }
