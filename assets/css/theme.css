@@ -1,1047 +1,742 @@
-/* Reset básico y fondo global */
+/* ========================================= */
+/* 1. RESET Y BASE DEL TEMA                  */
+/* ========================================= */
 html,
 body {
-  height: 100%;
-  margin: 0;
-  /* <-- quita el “marco blanco” */
-  padding: 0;
-  background: #0e1220;
-  /* mismo tono oscuro del tema */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #0e1220;
 }
 
-/* Por si algún contenedor traía fondo claro */
 .ui-theme,
 .ui-theme .container {
-  background: transparent;
+    background: transparent;
 }
 
-/* Texto de error 404 y demás */
-.extra-page {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 60vh;
-}
-
-/* ===== Variables: se definen dentro de .ui-theme para que NO “sangren” al reader ===== */
+/* Variables del Tema (No sangran al reader) */
 .ui-theme {
-  --bg: #0b0f14;
-  --surface: #0f172a;
-  --card: #0b1220;
-  --text: #e5e7eb;
-  --muted: #9aa4b2;
-  --line: #1f2937;
+    --bg: #0b0f14;
+    --surface: #0f172a;
+    --card: #0b1220;
+    --text: #e5e7eb;
+    --muted: #9aa4b2;
+    --line: #1f2937;
+    --brand: #00bcd4;
+    --brand-700: #0097a7;
+    --chip: #3c0d23;
+    --ring: 0 0 0 1px rgba(255, 255, 255, .06) inset, 0 10px 30px rgba(0, 0, 0, .35);
+    --radius-xl: 18px;
 
-  --brand: #00bcd4;
-  --brand-700: #0097a7;
-  --chip: #3c0d23;
-
-  --ring: 0 0 0 1px rgba(255, 255, 255, .06) inset, 0 10px 30px rgba(0, 0, 0, .35);
-  --radius-xl: 18px;
-}
-
-/* Reseteos / base SOLO dentro del theme */
-.ui-theme {
-  background: var(--bg);
-  color: var(--text);
-  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
 
 .ui-theme * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-/* Contenedor */
+/* Utilizado para 404 y debug-collections.md */
+.extra-page {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60vh;
+}
+
 .ui-theme .container {
-  max-width: 1200px;
-  margin-inline: auto;
-  padding: 24px 20px;
+    max-width: 1350px !important;
+    /* Ajustado para acomodar la barra lateral */
+    margin-inline: auto;
+    padding: 24px 20px;
 }
 
-/* Header */
-.ui-theme .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  background: linear-gradient(180deg, rgba(11, 15, 20, .95), rgba(11, 15, 20, .65));
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
-}
-
-.ui-theme .site-header .bar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.ui-theme .brand {
-  font-weight: 800;
-  font-size: 20px;
-  color: #fff;
-}
-
-.ui-theme .search {
-  flex: 1;
-}
-
-.ui-theme .search input {
-  width: 100%;
-  padding: 10px 14px;
-  background: #0d1322;
-  border: 1px solid var(--line);
-  color: var(--text);
-  border-radius: 12px;
-}
-
-/* Títulos de sección */
-.ui-theme .section-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 24px 0 16px;
-}
-
-.ui-theme .section-title .bar {
-  width: 6px;
-  height: 26px;
-  background: var(--brand);
-  border-radius: 6px;
-}
-
-.ui-theme .section-title h2 {
-  margin: 0;
-  font-size: 32px;
-  letter-spacing: .2px;
-}
-
-/* Grilla y tarjetas MANEJA LA VISTA DE PANTALLA*/
-.ui-theme .grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-}
-
-@media (max-width: 1100px) {
-  .ui-theme .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 780px) {
-  .ui-theme .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 520px) {
-
-  /* VISTA TELEFONO*/
-  .ui-theme .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.ui-theme .card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--ring);
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-}
-
-.ui-theme .card-cover {
-  aspect-ratio: 3/4;
-  background: #0d1320;
-  overflow: hidden;
-}
-
-.ui-theme .card-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform .35s ease;
-}
-
-.ui-theme .card:hover .card-cover img {
-  transform: scale(1.04);
-}
-
-.ui-theme .card-body {
-  padding: 14px 14px 16px;
-}
-
-.ui-theme .card-title {
-  font-size: 20px;
-  font-weight: 800;
-  margin: 0 0 8px;
-}
-
-.ui-theme .chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 0 10px;
-}
-
-.ui-theme .chip {
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: var(--chip);
-  color: #d1c4e9;
-  border: 1px solid rgba(192, 38, 211, .22);
-}
-
-.ui-theme .meta {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* Noticias */
-.ui-theme .feed {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.ui-theme .post {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: var(--ring);
-}
-
-.ui-theme .post .meta {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.ui-theme .post .stats {
-  display: flex;
-  gap: 18px;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* Páginas estáticas (About) */
-.ui-theme .page-hero {
-  padding: 40px 0 8px;
-  background: linear-gradient(180deg, rgba(192, 38, 211, .12), rgba(192, 38, 211, 0) 55%);
-}
-
-.ui-theme .page-hero h1 {
-  font-size: 42px;
-  margin: 0;
-}
-
-.ui-theme .page-hero p {
-  max-width: 720px;
-  color: #c8cde0;
-}
-
-.ui-theme .page-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 22px;
-  box-shadow: var(--ring);
-}
-
-.ui-theme .page-card h2 {
-  margin-top: 0;
-}
-
-.ui-theme .page-card a {
-  color: #eab8f3;
-}
-
-.ui-theme .ui-block {
-  margin: 1.5rem 0;
-}
-
-.ui-theme .header-row {
-  display: grid;
-  grid-template-columns: 120px 1fr auto;
-  gap: 1rem;
-  align-items: center;
-  padding: 0.75rem 0;
-}
-
-.ui-theme .brand-scan {
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-block;
-  padding: .4rem .8rem;
-  border-radius: .75rem;
-  border: 1px solid rgba(175, 82, 222, .35);
-}
-
-.ui-theme .search-form {
-  display: flex;
-  gap: .5rem;
-  justify-content: center;
-}
-
-.ui-theme .search-form input {
-  padding: .5rem .75rem;
-  border-radius: .5rem;
-  border: 1px solid rgba(255, 255, 255, .1);
-}
-
-.ui-theme .btn-back {
-  background: transparent;
-  color: var(--brand);
-  border: 1px solid var(--brand-700, var(--brand));
-  padding: .55rem .9rem;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.9em;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-}
-
-.ui-theme .btn-back:hover {
-  background-color: var(--brand);
-  border-color: var(--brand);
-  color: #fff;
-}
-
-.ui-theme .manga-hero {
-  display: grid;
-  grid-template-columns: minmax(220px, 320px) 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-.ui-theme .manga-cover img {
-  width: 100%;
-  height: auto;
-  border-radius: .75rem;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, .35);
-  display: block;
-}
-
-.ui-theme .manga-title {
-  margin: 0 0 .5rem;
-  line-height: 1.2;
-}
-
-.ui-theme .manga-meta {
-  max-width: 70ch;
-}
-
-.ui-theme .manga-meta-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem;
-}
-
-.ui-theme .manga-meta-list li {
-  margin: .25rem 0;
-  opacity: .9;
-}
-
-.ui-theme .manga-sinopsis {
-  text-align: justify;
-}
-
-.ui-theme .manga-dl {
-  padding-left: 1.1rem;
-}
-
-.ui-theme .manga-dl li {
-  margin: .25rem 0;
-}
-
-@media (max-width: 900px) {
-  .ui-theme .header-row {
-    grid-template-columns: 1fr;
-    gap: .75rem;
-  }
-
-  .ui-theme .manga-hero {
-    grid-template-columns: 1fr;
-  }
-
-  .ui-theme .manga-meta {
-    max-width: none;
-  }
-}
-
-/* ===== Header SCAN ===== */
+/* ========================================= */
+/* 2. HEADER DEL SCAN (Navegación Principal) */
+/* ========================================= */
 :root {
-  --scan-bg: #0e1116;
-  /* Fondo del header */
-  --scan-fg: #e6e6f0;
-  /* Texto */
-  --scan-muted: #aeb2c1;
-  /* Texto suave */
-  --scan-ring: #8b5cf6;
-  /* Morado (anillos/bordes) */
-  --scan-ring-ghost: rgba(139, 92, 246, 0.35);
-  --scan-input-bg: #121722;
-  --scan-input-fg: #e8ecf3;
-  --scan-input-placeholder: #8791a6;
-  --scan-shadow: 0 6px 24px rgba(0, 0, 0, .28);
+    --scan-bg: #0e1116;
+    --scan-fg: #e6e6f0;
+    --scan-muted: #aeb2c1;
+    --scan-ring: #8b5cf6;
+    --scan-ring-ghost: rgba(139, 92, 246, 0.35);
+    --scan-input-bg: #121722;
+    --scan-input-fg: #e8ecf3;
+    --scan-input-placeholder: #8791a6;
+    --scan-shadow: 0 6px 24px rgba(0, 0, 0, .28);
 }
 
 .scan-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: linear-gradient(180deg, var(--scan-bg) 0%, #0a0d12 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  backdrop-filter: saturate(140%) blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(180deg, var(--scan-bg) 0%, #0a0d12 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: saturate(140%) blur(6px);
 }
 
 .scan-header__inner {
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: 1fr minmax(280px, 720px) 1fr;
-  align-items: center;
-  gap: 16px;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 1fr minmax(280px, 720px) 1fr;
+    align-items: center;
+    gap: 16px;
 }
 
 .scan-logo {
-  background: transparent !important;
-  /* Sin fondo */
-  border: none !important;
-  /* Sin borde */
-  box-shadow: none !important;
-  /* Sin sombra */
-  padding: 0 !important;
-  /* Sin espaciado interno */
-  border-radius: 0 !important;
-  /* Sin esquinas redondeadas */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
 }
 
 .scan-logo img {
-  height: 45px;
-  width: auto;
-  vertical-align: middle;
+    height: 45px;
+    width: auto;
+    vertical-align: middle;
 }
 
 /* Buscador centrado */
 .scan-search {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px;
-  justify-self: center;
-  width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    justify-self: center;
+    width: 100%;
 }
 
 .scan-search input[type="search"] {
-  background: var(--scan-input-bg);
-  color: var(--scan-input-fg);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 999px;
-  padding: 12px 16px;
-  outline: none;
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.02), var(--scan-shadow);
-  transition: border-color .2s ease, box-shadow .2s ease;
+    background: var(--scan-input-bg);
+    color: var(--scan-input-fg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+    padding: 12px 16px;
+    outline: none;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.02), var(--scan-shadow);
+    transition: border-color .2s ease, box-shadow .2s ease;
 }
 
 .scan-search input::placeholder {
-  color: var(--scan-input-placeholder);
+    color: var(--scan-input-placeholder);
 }
 
 .scan-search input:focus {
-  border-color: var(--scan-ring);
-  box-shadow:
-    0 0 0 4px rgba(139, 92, 246, 0.16),
-    inset 0 2px 0 rgba(255, 255, 255, 0.02),
-    var(--scan-shadow);
+    border-color: var(--scan-ring);
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.16), inset 0 2px 0 rgba(255, 255, 255, 0.02), var(--scan-shadow);
 }
 
-/* Botón Buscar */
 .scan-search button {
-  background: transparent;
-  color: var(--scan-fg);
-  border: 1px solid var(--scan-ring-ghost);
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color .2s ease, box-shadow .2s ease, transform .12s ease;
+    background: transparent;
+    color: var(--scan-fg);
+    border: 1px solid var(--scan-ring-ghost);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .12s ease;
 }
 
 .scan-search button:hover {
-  border-color: var(--scan-ring);
-  box-shadow: 0 0 0 4px rgba(139, 92, 246, .18);
-  transform: translateY(-1px);
+    border-color: var(--scan-ring);
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, .18);
+    transform: translateY(-1px);
 }
 
-/* CTA derecha */
-.scan-cta {
-  justify-self: end;
-  display: inline-block;
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 1px solid var(--scan-ring-ghost);
-  color: var(--scan-fg);
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-  transition: border-color .2s ease, box-shadow .2s ease, transform .12s ease;
-}
-
-.scan-cta:hover {
-  border-color: var(--scan-ring);
-  box-shadow: 0 0 0 4px rgba(139, 92, 246, .18);
-  transform: translateY(-1px);
-}
-
-/* Responsive */
 @media (max-width: 900px) {
-  .scan-header__inner {
-    grid-template-columns: 1fr 1.2fr auto;
-    gap: 12px;
-  }
+    .scan-header__inner {
+        grid-template-columns: 1fr 1.2fr auto;
+        gap: 12px;
+    }
 }
 
 @media (max-width: 680px) {
-  .scan-header__inner {
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "logo cta"
-      "search search";
-    row-gap: 10px;
-  }
+    .scan-header__inner {
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "logo cta" "search search";
+        row-gap: 10px;
+    }
 
-  .scan-logo {
-    grid-area: logo;
-  }
+    .scan-logo {
+        grid-area: logo;
+    }
 
-  .scan-cta {
-    grid-area: cta;
-  }
+    .scan-cta {
+        grid-area: cta;
+    }
 
-  .scan-search {
-    grid-area: search;
-  }
+    .scan-search {
+        grid-area: search;
+    }
 }
 
-/* ==========================================
-   Estilos para el Desplegable de Redes Sociales 
-   ========================================== */
-
-/* 1. Resetear y mejorar el botón Síguenos para que resalte (Sólido Morado) */
+/* ========================================= */
+/* 3. REDES SOCIALES (Botón y Menú)          */
+/* ========================================= */
 button.scan-cta {
-  /* Reseteo de estilos de navegador para <button> */
-  background: #5d2b78;
-  /* FONDO MORADO SÓLIDO (RECOMENDACIÓN PARA RESALTAR) */
-  border: 2px solid #5d2b78;
-  /* BORDE MORADO */
-  color: #fff;
-  /* TEXTO BLANCO */
-
-  /* Copia exacta de los estilos de theme.css para mantener la coherencia */
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 10px 20px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  display: inline-block;
-  /* Mantener comportamiento de bloque */
-  margin: 0 10px;
-  /* Separación de la barra de búsqueda */
+    background: #5d2b78;
+    border: 2px solid #5d2b78;
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: inline-block;
+    margin: 0 10px;
 }
 
-/* Efecto al pasar el mouse (Hover) */
 button.scan-cta:hover {
-  background: #6a3a8a;
-  /* MORADO LIGERAMENTE MÁS CLARO */
-  border-color: #6a3a8a;
-  transform: translateY(-1px);
-  /* PEQUEÑO MOVIMIENTO HACIA ARRIBA */
-  box-shadow: 0 4px 12px rgba(93, 43, 120, 0.3);
-  /* SOMBRA SUTIL */
+    background: #6a3a8a;
+    border-color: #6a3a8a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(93, 43, 120, 0.3);
 }
 
-/* 2. Estilos del Panel Desplegable (Mantener igual) */
 .social-dropdown-wrapper {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .social-dropdown-panel {
-  display: none;
-  position: absolute;
-  top: calc(100% + 15px);
-  right: 0;
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-  width: 260px;
-  padding: 15px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+    display: none;
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    width: 260px;
+    padding: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }
 
 .social-dropdown-panel.show {
-  display: block;
-  animation: fadeIn 0.2s ease;
+    display: block;
+    animation: fadeIn 0.2s ease;
 }
 
 .social-dropdown-panel h4 {
-  margin: 0 0 12px 0;
-  color: #fff;
-  text-align: center;
-  border-bottom: 1px solid #30363d;
-  padding-bottom: 8px;
-  font-size: 14px;
+    margin: 0 0 12px 0;
+    color: #fff;
+    text-align: center;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 8px;
+    font-size: 14px;
 }
 
 .social-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .social-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  background: #0d1117;
-  border-radius: 6px;
-  text-decoration: none;
-  color: #c9d1d9;
-  font-size: 12px;
-  transition: 0.2s;
-  border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: #0d1117;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #c9d1d9;
+    font-size: 12px;
+    transition: 0.2s;
+    border: 1px solid transparent;
 }
 
 .social-item:hover {
-  background: #1f242c;
-  border-color: #00acee;
-  color: #fff;
+    background: #1f242c;
+    border-color: #00acee;
+    color: #fff;
 }
 
 .social-item img {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 6px;
-  object-fit: contain;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 6px;
+    object-fit: contain;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* En celular, se centra en la pantalla */
 @media (max-width: 600px) {
-  .social-dropdown-panel {
-    position: fixed;
-    top: 70px;
-    right: 10px;
-    left: 10px;
-    width: auto;
-  }
+    .social-dropdown-panel {
+        position: fixed;
+        top: 70px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+    }
 
-  .social-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+    .social-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
+/* ========================================= */
+/* 4. COMPONENTES PRINCIPALES (Tarjetas y Títulos) */
+/* ========================================= */
+.ui-theme .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0 16px;
+}
 
-/* ====== Portada + ficha (si Home también muestra ficha en alguna vista) ====== */
+.ui-theme .section-title .bar {
+    width: 6px;
+    height: 26px;
+    background: var(--brand);
+    border-radius: 6px;
+}
+
+.ui-theme .section-title h2 {
+    margin: 0;
+    font-size: 32px;
+    letter-spacing: .2px;
+}
+
+/* Grid de Mangas */
+.ui-theme .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+@media (max-width: 1100px) {
+    .ui-theme .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 780px) {
+    .ui-theme .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .ui-theme .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tarjeta Individual */
+.ui-theme .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--ring);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+
+.ui-theme .card-cover {
+    aspect-ratio: 3/4;
+    background: #0d1320;
+    overflow: hidden;
+}
+
+.ui-theme .card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s ease;
+}
+
+.ui-theme .card:hover .card-cover img {
+    transform: scale(1.04);
+}
+
+.ui-theme .card-body {
+    padding: 14px 14px 16px;
+}
+
+.ui-theme .card-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 8px;
+}
+
+.ui-theme .meta {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* Etiquetas de Género (Chips) */
+.ui-theme .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 10px;
+}
+
+.ui-theme .chip {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--chip);
+    color: #d1c4e9;
+    border: 1px solid rgba(192, 38, 211, .22);
+}
+
+@media (max-width: 768px) {
+    .chips {
+        gap: 4px !important;
+    }
+
+    .chip {
+        font-size: 10px !important;
+        padding: 2px 6px !important;
+    }
+}
+
+/* ========================================= */
+/* 5. FICHA DEL MANGA (Página Individual)    */
+/* ========================================= */
 .ui-theme .ui-block {
-  margin: 1.5rem 0;
+    margin: 1.5rem 0;
 }
 
 .ui-theme .manga-hero {
-  display: grid;
-  grid-template-columns: minmax(220px, 320px) 1fr;
-  gap: 2rem;
-  align-items: start;
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: 2rem;
+    align-items: start;
 }
 
 .ui-theme .manga-cover img {
-  width: 100%;
-  height: auto;
-  border-radius: .75rem;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, .35);
-  display: block;
+    width: 100%;
+    height: auto;
+    border-radius: .75rem;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .35);
+    display: block;
 }
 
 .ui-theme .btn-back {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: .55rem .9rem;
-  border-radius: 999px;
-  text-decoration: none;
-  border: 1px solid rgba(175, 82, 222, .35);
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .55rem .9rem;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid rgba(175, 82, 222, .35);
+    background: transparent;
+    color: var(--brand);
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.ui-theme .btn-back:hover {
+    background-color: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
 }
 
 .ui-theme .manga-title {
-  margin: 0 0 .5rem;
-  line-height: 1.2;
+    margin: 0 0 .5rem;
+    line-height: 1.2;
 }
 
 .ui-theme .manga-meta {
-  max-width: 70ch;
+    max-width: 70ch;
 }
 
 .ui-theme .manga-meta-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
 }
 
 .ui-theme .manga-meta-list li {
-  margin: .25rem 0;
-  opacity: .9;
+    margin: .25rem 0;
+    opacity: .9;
 }
 
 .ui-theme .manga-sinopsis {
-  text-align: justify;
+    text-align: justify;
 }
 
 .ui-theme .manga-dl {
-  padding-left: 1.1rem;
+    padding-left: 1.1rem;
 }
 
 .ui-theme .manga-dl li {
-  margin: .25rem 0;
+    margin: .25rem 0;
 }
 
 @media (max-width:900px) {
-  .ui-theme .header-row {
-    grid-template-columns: 1fr;
-    gap: .75rem;
-  }
+    .ui-theme .manga-hero {
+        grid-template-columns: 1fr;
+    }
 
-  .ui-theme .manga-hero {
-    grid-template-columns: 1fr;
-  }
-
-  .ui-theme .manga-meta {
-    max-width: none;
-  }
+    .ui-theme .manga-meta {
+        max-width: none;
+    }
 }
 
-/* Botón base + cursor */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  text-decoration: none;
-  border: 1px solid #bbb;
-  background: #fff;
-  color: #111;
-  font-weight: 600;
-  cursor: pointer;
-  user-select: none;
-}
-
-.btn.nav-zoom {
-  background: #3a3a3a;
-  color: #fff;
-  border-color: #555;
-}
-
-/* Iconos: tamaño fijo y que no se estiren */
-.ico-btn .ico {
-  width: 22px;
-  height: 22px;
-  display: block;
-  object-fit: contain
-}
-
-/* Texto solo si NO hay icono */
-.ico-btn .label {
-  display: none
-}
-
-.ico-btn.no-icon .label {
-  display: inline
-}
-
-.ico-btn.no-icon .ico {
-  display: none
-}
-
-/* La versión oculta del back del tema sigue oculta */
-.back {
-  display: none
-}
-
-/* ========================================================= */
-/* ====== ESTILOS PROPIOS PARA EL MARQUEE DE TWITTER ======= */
-/* ========================================================= */
-
-/* Variables y colores base para el marquee */
-:root {
-  --bg: #0f0a13;
-  /* Fondo del marquee */
-  --fg: #e9e9ee;
-  /* Texto principal */
-  --gap: 24px;
-  /* Separación entre tarjetas y filas */
-  --tweet-w: 290px;
-  /* Ancho de cada tweet */
-}
-
-/* Ajuste general de caja */
-* {
-  box-sizing: border-box;
-}
-
-
-/* Vista principal donde corre el marquee */
-.viewport {
-  min-height: 50vh;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
-  padding: 12px 0 18px;
-}
-
-/* Contenedor de las pistas (A + B) */
-.scroller {
-  display: flex;
-  gap: var(--gap);
-  align-items: flex-start;
-  width: max-content;
-  /* Necesario para overflow real */
-}
-
-/* Cada pista (fila de tweets) */
-.tape {
-  display: flex;
-  gap: var(--gap);
-  align-items: flex-start;
-  flex: 0 0 auto;
-}
-
-/* Tarjeta que contiene cada tweet */
-.card {
-  background: #0f111b;
-  border: 1px solid #242634;
-  border-radius: 18px;
-  padding: 10px;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, .25);
-}
-
-/* Punto de montaje del embed de Twitter */
-.mount {
-  width: var(--tweet-w);
-  margin: 0 auto;
-}
-
-/* Mensajes de error en caso de fallo */
-.err {
-  color: #ffb4b4;
-  font: 13px/1.35 ui-monospace, monospace;
-}
-
-/* Ajustes responsivos para pantallas pequeñas */
-@media (max-width:600px) {
-  :root {
-    --tweet-w: 320px;
-    --gap: 16px;
-  }
-}
-
-/* == Estilo de Lista de Capítulos  == */
-
+/* ========================================= */
+/* 6. LISTA DE CAPÍTULOS                     */
+/* ========================================= */
 #chaptersList,
 #extrasList,
 #downloadsList {
-  list-style: none;
-  /* Sin viñetas */
-  padding-left: 0;
-  margin-top: 16px;
-  border-top: 1px solid var(--line);
-  /* Línea superior para empezar */
+    list-style: none;
+    padding-left: 0;
+    margin-top: 16px;
+    border-top: 1px solid var(--line);
 }
 
 #chaptersList li,
 #extrasList li {
-  margin-bottom: 0;
-  padding-left: 0;
+    margin-bottom: 0;
+    padding-left: 0;
 }
 
 #chaptersList li a,
 #extrasList li a {
-  display: flex;
-  justify-content: space-between;
-  /* Alinea un item a la izq y otro a la der */
-  align-items: center;
-  color: var(--text);
-  text-decoration: none;
-  padding: 12px 8px;
-  border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text);
+    text-decoration: none;
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--line);
 }
 
 #chaptersList li a:hover,
 #extrasList li a:hover {
-  background-color: rgba(255, 255, 255, 0.03);
-  color: #fff;
+    background-color: rgba(255, 255, 255, 0.03);
+    color: #fff;
 }
 
 .cap-title {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 .cap-number {
-  font-size: 0.9em;
-  color: var(--muted);
-  white-space: nowrap;
-  padding-left: 16px;
+    font-size: 0.9em;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-left: 16px;
 }
 
-/* == Estilo titulo y boton de orden (ascendente-descendente) == */
-/*para layouts/caps.html*/
 .list-header {
-  display: flex;
-  justify-content: space-between;
-  /* Pone el título a la izq y el botón a la der */
-  align-items: center;
-  margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
 .list-header h2,
 .list-header h3 {
-  margin: 0;
+    margin: 0;
 }
 
 .sort-button {
-  background: transparent;
-  color: var(--brand);
-  border: 1px solid var(--brand-700, var(--brand));
-  padding: .55rem .9rem;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.9em;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-  /* Transición suave */
+    background: transparent;
+    color: var(--brand);
+    border: 1px solid var(--brand-700, var(--brand));
+    padding: .55rem .9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 .sort-button:hover {
-  background-color: var(--brand);
-  border-color: var(--brand);
-  color: #fff;
-  /* El texto se vuelve blanco para que contraste */
+    background-color: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
+}
+
+/* Botones genéricos de navegación */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid #bbb;
+    background: #fff;
+    color: #111;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn.nav-zoom {
+    background: #3a3a3a;
+    color: #fff;
+    border-color: #555;
+}
+
+.ico-btn .ico {
+    width: 22px;
+    height: 22px;
+    display: block;
+    object-fit: contain;
+}
+
+.ico-btn .label {
+    display: none;
+}
+
+.ico-btn.no-icon .label {
+    display: inline;
+}
+
+.ico-btn.no-icon .ico {
+    display: none;
 }
 
 /* ========================================= */
-/* FLEXBOX INDEX.HTML Y MODO CASCADA         */
+/* 7. MARQUEE DE TWITTER (El motor JS)       */
 /* ========================================= */
-
-.ui-theme .container {
-  max-width: 1350px !important;
+:root {
+    --tweet-w: 290px;
+    --gap: 24px;
 }
 
+.viewport {
+    min-height: 50vh;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    padding: 12px 0 18px;
+}
+
+.scroller {
+    display: flex;
+    gap: var(--gap);
+    align-items: flex-start;
+    width: max-content;
+}
+
+.tape {
+    display: flex;
+    gap: var(--gap);
+    align-items: flex-start;
+    flex: 0 0 auto;
+}
+
+.card.twitter-wrap {
+    /* Clase renombrada para no chocar con la card de mangas */
+    background: #0f111b;
+    border: 1px solid #242634;
+    border-radius: 18px;
+    padding: 10px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, .25);
+}
+
+.mount {
+    width: var(--tweet-w);
+    margin: 0 auto;
+}
+
+.err {
+    color: #ffb4b4;
+    font: 13px/1.35 ui-monospace, monospace;
+}
+
+@media (max-width:600px) {
+    :root {
+        --tweet-w: 320px;
+        --gap: 16px;
+    }
+}
+
+/* ========================================= */
+/* 8. LAYOUT CASCADA (Home & Barra Lateral)  */
+/* ========================================= */
 .home-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
 .main-content {
-  flex: 1;
-  min-width: 0;
+    flex: 1;
+    min-width: 0;
 }
 
 .sidebar {
-  width: 100%;
+    width: 100%;
 }
 
-/* Pantallas Grandes */
 @media (min-width: 1024px) {
-  .home-layout {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 30px;
-  }
+    .home-layout {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 30px;
+    }
 
-  .sidebar {
-    width: 320px;
-    flex-shrink: 0;
-    position: sticky;
-    top: 90px;
-  }
+    .sidebar {
+        width: 320px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 90px;
+    }
 
-  /* Convertir la cinta en columna (Cascada vertical) */
-  .sidebar .viewport {
-    height: calc(100vh - 160px);
-    min-height: auto;
-    overflow-y: hidden !important;
-    overflow-x: hidden !important;
-  }
+    /* Cascada Vertical Activa */
+    .sidebar .viewport {
+        height: calc(100vh - 160px);
+        min-height: auto;
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+    }
 
-  .sidebar .scroller,
-  .sidebar .tape {
-    flex-direction: column !important;
-  }
+    .sidebar .scroller,
+    .sidebar .tape {
+        flex-direction: column !important;
+    }
 
-  .ui-theme .grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
+    .ui-theme .grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
 
-  /* Corrección para que los tweets no se corten */
-  .sidebar .twitter-tweet.twitter-tweet-rendered {
-    margin: 0 !important;
-    display: block !important;
-    position: static !important;
-    max-width: 100% !important;
-    width: 320px !important;
-  }
+    /* Ajuste preciso para Iframe de Twitter */
+    .sidebar .twitter-tweet.twitter-tweet-rendered {
+        margin: 0 !important;
+        display: block !important;
+        position: static !important;
+        max-width: 100% !important;
+        width: 320px !important;
+    }
 
-  .sidebar .twitter-tweet iframe {
-    max-width: 100% !important;
-    width: 100% !important;
-  }
+    .sidebar .twitter-tweet iframe {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
 }
 
-/* Pantallas Súper Grandes */
 @media (min-width: 1400px) {
-  .ui-theme .grid {
-    grid-template-columns: repeat(4, 1fr) !important;
-  }
-}
-
-/* ========================================= */
-/* AJUSTE DE ETIQUETAS (CHIPS) EN CELULARES  */
-/* ========================================= */
-
-@media (max-width: 768px) {
-  .chips {
-    gap: 4px !important;
-  }
-
-  .chip {
-    font-size: 10px !important;
-    padding: 2px 6px !important;
-  }
+    .ui-theme .grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
 }
