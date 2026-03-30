@@ -186,6 +186,35 @@ body.light-mode .scan-search input[type="search"] {
     border-color: rgba(240, 120, 175, 0.3);
 }
 
+/* Botón Buscar */
+.scan-search button {
+    background: transparent;
+    color: var(--header-fg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--ease);
+}
+
+.scan-search button:hover {
+    background: var(--color-rosa);
+    border-color: var(--color-rosa);
+    color: #fff;
+    box-shadow: var(--card-glow-base);
+}
+
+/* Botón Buscar en Modo Día */
+body.light-mode .scan-search button {
+    color: #111;
+    border-color: #d1d5db;
+}
+
+body.light-mode .scan-search button:hover {
+    color: #fff;
+}
+
 /* ========================================= */
 /*  REDES SOCIALES (Botón "Síguenos")     */
 /* ========================================= */
@@ -712,15 +741,63 @@ body.light-mode .theme-toggle-btn img {
     color: var(--color-rosa);
 }
 
+/* --- Estilos de la Lista de Capítulos Restaurados --- */
+#chaptersList,
+#extrasList,
+#downloadsList {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 16px;
+    border-top: 1px solid var(--main-line);
+}
+
+#chaptersList li,
+#extrasList li {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
 #chaptersList li a,
-#extrasList li a {
+#extrasList li a,
+#downloadsList li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: var(--main-text);
+    text-decoration: none;
+    padding: 14px 10px;
     border-bottom: 1px solid var(--main-line);
+    transition: var(--ease);
 }
 
 #chaptersList li a:hover,
-#extrasList li a:hover {
-    background-color: rgba(240, 120, 175, 0.05);
+#extrasList li a:hover,
+#downloadsList li a:hover {
+    background-color: rgba(240, 120, 175, 0.08);
+    color: var(--color-celeste);
+}
+
+.cap-title {
+    font-weight: 600;
+}
+
+.cap-number {
+    font-size: 0.9em;
+    color: var(--main-muted);
+    white-space: nowrap;
+    padding-left: 16px;
+}
+
+/* Botón de Invertir Orden */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.list-header h2 {
+    margin: 0;
 }
 
 .cap-number {
