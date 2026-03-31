@@ -9,34 +9,54 @@
       <button type="button" id="homeSearchBtn">Buscar</button>
     </form>
 
-    <div class="social-dropdown-wrapper">
-      <button id="btn-follow-home" class="scan-cta">¡Síguenos!</button>
+    <div class="header-actions">
 
-      <div id="social-dropdown-home" class="social-dropdown-panel">
-        <h4>Nuestras Redes</h4>
-        <div class="social-grid">
-          <a href="https://www.facebook.com/share/18Eh2jhSCq/?mibextid=wwXIfr" target="_blank" class="social-item">
-            <img src="{{ site.baseurl }}/assets/img/rs/icon-facebook.png" alt="Facebook">
-            <span>Facebook</span>
-          </a>
-          <a href="https://x.com/EnchiladaScan" target="_blank" class="social-item">
-            <img src="{{ site.baseurl }}/assets/img/rs/icon-x.png" alt="X (Twitter)">
-            <span>Twitter</span>
-          </a>
-          <a href="https://discord.gg/uZ6q23tmxg" target="_blank" class="social-item">
-            <img src="{{ site.baseurl }}/assets/img/rs/icon-discord.png" alt="Discord">
-            <span>Discord</span>
-          </a>
-          <a href="https://whatsapp.com/channel/0029VbBvhS317Emy4oKuqX1v" target="_blank" class="social-item">
-            <img src="{{ site.baseurl }}/assets/img/rs/icon-whatsapp.png" alt="WhatsApp">
-            <span>WhatsApp</span>
-          </a>
-          <a href="https://tmohentai.com/groups/5255" target="_blank" class="social-item">
-            <img src="{{ site.baseurl }}/assets/img/rs/icon-tmoh.png" alt="TMO-H">
-            <span>Hentailapeño</span>
-          </a>
+      <div class="social-dropdown-wrapper">
+        <button class="scan-cta">Donar</button>
+        <div class="social-dropdown-panel">
+          <h4>¡Apoya al Scan!</h4>
+          <div class="social-grid">
+            <a href="https://www.patreon.com/EnchiladasNoSekai" target="_blank" class="social-item">
+              <img src="{{ site.baseurl }}/assets/img/rs/icon-patreon.png" alt="Patreon">
+              <span>Patreon</span>
+            </a>
+            <a href="https://ko-fi.com/spyxkomi" target="_blank" class="social-item">
+              <img src="{{ site.baseurl }}/assets/img/rs/icon-kofi.png" alt="Ko-Fi">
+              <span>Ko-fi</span>
+            </a>
+          </div>
         </div>
       </div>
+
+      <div class="social-dropdown-wrapper">
+        <button class="scan-cta">¡Síguenos!</button>
+        <div class="social-dropdown-panel">
+          <h4>Nuestras Redes</h4>
+          <div class="social-grid">
+            <a href="https://www.facebook.com/share/18Eh2jhSCq/?mibextid=wwXIfr" target="_blank" class="social-item">
+              <img src="{{ site.baseurl }}/assets/img/rs/icon-facebook.png" alt="Facebook">
+              <span>Facebook</span>
+            </a>
+            <a href="https://x.com/EnchiladaScan" target="_blank" class="social-item">
+              <img src="{{ site.baseurl }}/assets/img/rs/icon-x.png" alt="X (Twitter)">
+              <span>Twitter</span>
+            </a>
+            <a href="https://discord.gg/uZ6q23tmxg" target="_blank" class="social-item">
+              <img src="{{ site.baseurl }}/assets/img/rs/icon-discord.png" alt="Discord">
+              <span>Discord</span>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbBvhS317Emy4oKuqX1v" target="_blank" class="social-item">
+              <img src="{{ site.baseurl }}/assets/img/rs/icon-whatsapp.png" alt="WhatsApp">
+              <span>WhatsApp</span>
+            </a>
+            <a href="https://tmohentai.com/groups/5255" target="_blank" class="social-item">
+              <img src="{{ site.baseurl }}/assets/img/rs/icon-tmoh.png" alt="TMO-H">
+              <span>Hentailapeño</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </header>
@@ -65,19 +85,37 @@
       q.addEventListener('keydown', function (e) { if (e.key === 'Enter') apply(); });
     }
 
-    /* NUEVA Lógica del Desplegable */
-    var btnFollow = document.getElementById('btn-follow-home');
-    var panel = document.getElementById('social-dropdown-home');
-    if (btnFollow && panel) {
-      btnFollow.addEventListener('click', function (e) {
-        e.stopPropagation();
-        panel.classList.toggle('show');
-      });
-      document.addEventListener('click', function (e) {
-        if (!panel.contains(e.target) && e.target !== btnFollow) {
+    /* NUEVA LÓGICA: Controla MÚLTIPLES botones desplegables sin chocar */
+    const wrappers = document.querySelectorAll('.social-dropdown-wrapper');
+
+    wrappers.forEach(wrapper => {
+      const btnAction = wrapper.querySelector('.scan-cta');
+      const panel = wrapper.querySelector('.social-dropdown-panel');
+
+      if (btnAction && panel) {
+        btnAction.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // Cierra cualquier otro panel que esté abierto
+          wrappers.forEach(w => {
+            const otherPanel = w.querySelector('.social-dropdown-panel');
+            if (otherPanel !== panel) otherPanel.classList.remove('show');
+          });
+          // Abre o cierra el panel al que le diste clic
+          panel.classList.toggle('show');
+        });
+      }
+    });
+
+    // Cierra los menús si haces clic en cualquier otra parte de la página
+    document.addEventListener('click', (e) => {
+      wrappers.forEach(wrapper => {
+        const panel = wrapper.querySelector('.social-dropdown-panel');
+        const btnAction = wrapper.querySelector('.scan-cta');
+        if (panel && !panel.contains(e.target) && e.target !== btnAction) {
           panel.classList.remove('show');
         }
       });
-    }
+    });
+
   })();
 </script>
