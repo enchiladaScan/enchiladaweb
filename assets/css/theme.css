@@ -859,9 +859,9 @@ button.scan-cta:hover,
     .ui-theme .manga-hero {
         display: flex !important;
         flex-direction: column;
+        gap: 0 !important;
     }
 
-    /* Extraemos los datos de su caja para poder reordenarlos libremente */
     .ui-theme .manga-meta {
         display: contents;
     }
@@ -870,31 +870,43 @@ button.scan-cta:hover,
     .ui-theme .manga-title {
         order: -2;
         text-align: center;
-        margin-top: 10px;
-        margin-bottom: 24px;
+        margin-top: 0;
+        margin-bottom: 20px;
         font-size: 26px !important;
     }
 
-    /* 2. Portada en medio (y limitada para que no ocupe toda la pantalla) */
+    /* 2. Portada en medio */
     .ui-theme .manga-cover {
         order: -1;
         width: 100%;
         max-width: 280px;
-        margin: 0 auto 30px auto;
-        /* La centra perfectamente */
+        margin: 0 auto 24px auto;
+        /* Reducimos el espacio de abajo */
         display: flex;
         flex-direction: column;
     }
 
-    /* Centramos el botón de volver al inicio debajo de la imagen */
+    /* Botón pegado a la imagen */
     .ui-theme .btn-back {
         width: 100%;
         text-align: center;
         box-sizing: border-box;
+        margin-top: 14px !important;
     }
 
-    /* 3. El resto de datos (Listas, Sinopsis, etc.) caen solos abajo con order: 0 */
+    /* 3. Datos, Sinopsis y Títulos compactos */
     .ui-theme .manga-meta-list {
-        margin-bottom: 24px;
+        margin-bottom: 16px !important;
+    }
+
+    .ui-theme .manga-meta h3 {
+        margin-top: 16px !important;
+        margin-bottom: 8px !important;
+        font-size: 1.25rem;
+    }
+
+    .ui-theme .manga-sinopsis {
+        margin-top: 0 !important;
+        margin-bottom: 16px !important;
     }
 }
