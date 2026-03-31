@@ -910,3 +910,42 @@ button.scan-cta:hover,
         margin-bottom: 16px !important;
     }
 }
+
+/* ========================================= */
+/* CONTENEDOR DE BOTONES DEL HEADER          */
+/* ========================================= */
+.header-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+}
+
+/* Quitamos márgenes viejos para que queden alineados perfectos */
+.header-actions .social-dropdown-wrapper {
+    margin: 0 !important;
+}
+
+.header-actions .scan-cta {
+    margin: 0 !important;
+}
+
+/* Ajuste para celulares para que no choquen con el logo */
+@media (max-width: 680px) {
+    .scan-header__inner {
+        grid-template-areas: "logo actions" "search search" !important;
+    }
+
+    .header-actions {
+        grid-area: actions;
+        gap: 6px !important;
+    }
+
+    .header-actions .scan-cta {
+        padding: 6px 10px !important;
+        font-size: 11px !important;
+        /* Más chicos en celular */
+    }
+}
