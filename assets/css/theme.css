@@ -849,3 +849,52 @@ button.scan-cta:hover,
     transform: translateY(-2px) !important;
     /* Efecto de flotar un poquito */
 }
+
+/* ========================================= */
+/* REPARACIÓN DE LA VISTA MÓVIL (Ficha)     */
+/* (Orden: Título -> Portada -> Datos)      */
+/* ========================================= */
+
+@media (max-width: 850px) {
+    .ui-theme .manga-hero {
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    /* Extraemos los datos de su caja para poder reordenarlos libremente */
+    .ui-theme .manga-meta {
+        display: contents;
+    }
+
+    /* 1. Título hasta arriba */
+    .ui-theme .manga-title {
+        order: -2;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 24px;
+        font-size: 26px !important;
+    }
+
+    /* 2. Portada en medio (y limitada para que no ocupe toda la pantalla) */
+    .ui-theme .manga-cover {
+        order: -1;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto 30px auto;
+        /* La centra perfectamente */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Centramos el botón de volver al inicio debajo de la imagen */
+    .ui-theme .btn-back {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    /* 3. El resto de datos (Listas, Sinopsis, etc.) caen solos abajo con order: 0 */
+    .ui-theme .manga-meta-list {
+        margin-bottom: 24px;
+    }
+}
