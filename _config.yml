@@ -1,8 +1,8 @@
 # --- Identidad del sitio ---
-title: "pruebaPAG"
-description: "Pagina de pruebas"
-url: "https://zotexd.github.io"
-baseurl: "/pruebaPAG.github.io"
+title: "EnchiladaWEB"
+description: "Pagina de EnchiladaNoSekai"
+url: "https://enchiladaScan.github.io"
+baseurl: "/enchiladaweb"
 
 # --- Build / Markdown ---
 markdown: kramdown
