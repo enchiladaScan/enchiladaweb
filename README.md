@@ -1,3 +1,5 @@
-# Pagina de pruebas en Github Pages
+# Pagina del scan EnchiladaNoSekai
 
-Simplemente estoy aprendiendo a usar esto.
+Página del scan, no hay más que decir.
+
+Hecha por fans para fans, salu2.
