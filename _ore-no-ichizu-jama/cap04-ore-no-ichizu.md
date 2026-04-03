@@ -6,7 +6,7 @@ manga_slug: "ore-no-ichizu"
 capitulo: 4
 es_primero: false
 es_ultimo: true
-permalink: /ore-no-ichizu/cap4/
+permalink: /ore-no-ichizu-jama/cap4/
 return_to: /ore-no-ichizu-jama/
 images_json: assets/mangas/ore-no-ichizu/cap04/images.json
 redirect_from:
