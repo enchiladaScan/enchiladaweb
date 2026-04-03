@@ -286,29 +286,63 @@ button.scan-cta:hover {
 
 .social-item {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    /* Centra el icono perfectamente al medio */
     align-items: center;
-    padding: 10px;
+    padding: 15px 10px;
+    /* Un poquito más de espacio para que respire */
     background: #0d1117;
     border-radius: 6px;
     text-decoration: none;
-    color: #c9d1d9;
-    font-size: 12px;
     transition: 0.2s;
     border: 1px solid transparent;
+    font-size: 0;
+    color: transparent;
 }
 
 .social-item:hover {
     background: #1f242c;
     border-color: var(--color-celeste);
-    color: #fff;
 }
 
 .social-item img {
-    width: 30px;
-    height: 30px;
-    margin-bottom: 6px;
+    width: 55px;
+    height: 55px;
+    margin-bottom: 0;
     object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.social-item:hover img {
+    transform: scale(1.15);
+}
+
+/* Estilo para el espacio de relleno */
+.social-item.social-dummy {
+    cursor: default;
+    /* El ratón no cambia a mano */
+    background: #0d1117;
+    /* Mantiene el fondo oscuro */
+    border-color: transparent;
+    /* Sin bordes brillantes */
+}
+
+/* Evitamos que el GIF/Imagen haga zoom al pasar el mouse */
+.social-item.social-dummy:hover img {
+    transform: none;
+}
+
+/* Evitamos que el fondo cambie de color en el dummy */
+.social-item.social-dummy:hover {
+    background: #0d1117;
+    border-color: transparent;
+}
+
+/* Ajuste opcional para el GIF que se vea más sutil */
+.social-item.social-dummy img {
+    opacity: 0.8;
+    width: 65px;
+    height: 65px;
 }
 
 @keyframes fadeIn {
