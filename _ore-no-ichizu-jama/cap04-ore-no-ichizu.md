@@ -1,0 +1,16 @@
+---
+layout: reader
+title: "Capítulo 4"
+manga: "ore-no-ichizu"
+manga_slug: "ore-no-ichizu"
+capitulo: 4
+es_primero: false
+es_ultimo: true
+permalink: /ore-no-ichizu/cap4/
+return_to: /ore-no-ichizu/
+images_json: assets/mangas/ore-no-ichizu/cap04/images.json
+redirect_from:
+  - /cap04-ore-no-ichizu/
+use_main_css: true
+prev_href: /ore-no-ichizu/cap3/
+---
