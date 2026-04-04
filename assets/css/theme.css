@@ -31,6 +31,31 @@ body {
     padding: 24px 20px;
 }
 
+/* Estilos para el banner de bienvenida (opcional) */
+.welcome-banner {
+  width: 100%;
+  margin-bottom: 25px; /* Espacio con lo de abajo */
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #30363d; /* Bordes como tus cards */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.welcome-banner img {
+  width: 100%;
+  height: 250px; /* Altura fija para que no sea gigante */
+  object-fit: cover; /* MÁGICO: No estira la imagen, la encuadra */
+  object-position: center; /* Centra el recorte */
+  display: block;
+}
+
+/* Ajuste para celulares */
+@media (max-width: 768px) {
+  .welcome-banner img {
+    height: 150px; /* Más bajito en móviles */
+  }
+}
+
 /* ========================================= */
 /*  VARIABLES DE COLOR (Tema Base: Noche)  */
 /* ========================================= */
