@@ -31,29 +31,42 @@ body {
     padding: 24px 20px;
 }
 
-/* Estilos para el banner de bienvenida (opcional) */
+/* ========================================= */
+/*  BANNER DE BIENVENIDA */
+/* ========================================= */
 .welcome-banner {
-  width: 100%;
-  margin-bottom: 25px; /* Espacio con lo de abajo */
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #30363d; /* Bordes como tus cards */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    width: 100%;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #30363d;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    background-color: #161b22;
+    /* Fondo por si tarda en cargar */
 }
 
 .welcome-banner img {
-  width: 100%;
-  height: 250px; /* Altura fija para que no sea gigante */
-  object-fit: cover; /* MÁGICO: No estira la imagen, la encuadra */
-  object-position: center; /* Centra el recorte */
-  display: block;
+    width: 100%;
+    display: block;
+    object-fit: cover;
 }
 
-/* Ajuste para celulares */
+/* --- ESTILO PARA PC --- */
+@media (min-width: 769px) {
+    .welcome-banner img {
+        height: 300px;
+        /* Altura fija para el banner panorámico */
+    }
+}
+
+/* --- ESTILO PARA CELULAR --- */
 @media (max-width: 768px) {
-  .welcome-banner img {
-    height: 150px; /* Más bajito en móviles */
-  }
+    .welcome-banner img {
+        height: auto;
+        /* Dejamos que la imagen vertical dicte su altura */
+        max-height: 450px;
+        /* Evitamos que sea excesivamente larga */
+    }
 }
 
 /* ========================================= */
