@@ -4,7 +4,7 @@ title: "Idolatry"
 date: 2025-09-09
 series: "idolatry"
 portada: "/assets/img/idolatry-cover.png"
-sinopsis: "En un futuro no muy lejano, la música es prohibida y los ídolos son considerados criminales. Nuestra protagonista, una chica que sueña con ser una ídolo, se une a un grupo de resistencia que lucha por la libertad a través de la música. Idolatry es una trepidante aventura de ciencia ficción, música y acción en la que un grupo de jóvenes desafía al sistema con sus canciones y su determinación."
+sinopsis: "La chica de preparatoria Junna Harumi tiene un único propósito en la vida: apoyar a la idol Fuwari Tsukishiro. Un día, el grupo idol al que pertenece Fuwari se disuelve. Sumida en la desesperación, Junna descubre que Fuwari participará en un programa de audiciones para idols. Habrá un total de 100 participantes. Decidida a llevar a su idol hasta la cima, Junna toma una determinación inesperada: entrar ella misma al programa para apoyarla desde las sombras."
 autor: "Ryo Shinohara"
 artista: "Ryo Shinohara"
 generos: ["Música","Acción","Ciencia ficción","Shonen"]
