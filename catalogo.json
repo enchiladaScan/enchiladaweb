@@ -228,6 +228,18 @@
       "seccion": "joints"
     },
     {
+      "mangaId": "mangaka",
+      "title": "Uchikirare Mangaka to Doujin Onna",
+      "post_url": "/mangaka/inicio",
+      "portada": "/assets/img/mangaka-cover.png",
+      "tags": [
+        "Comedia",
+        "Drama"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "joints"
+    },
+    {
       "mangaId": "heisei-haizanhei",
       "title": "Heisei Haizanhei Sumire-chan",
       "post_url": "/heisei-haizanhei/inicio",

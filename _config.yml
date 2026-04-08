@@ -65,6 +65,9 @@ collections:
   heisei-haizanhei:
     output: true
     permalink: /heisei-haizanhei/:name/
+  mangaka:
+    output: true
+    permalink: /mangaka/:name/
 #terminados
   ririsa:
     output: true
@@ -128,6 +131,10 @@ defaults:
       layout: caps
   - scope:
       type: heisei-haizanhei
+    values:
+      layout: caps
+  - scope:
+      type: mangaka
     values:
       layout: caps
 # terminados
