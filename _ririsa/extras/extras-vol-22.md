@@ -9,5 +9,5 @@ es_primero: true
 es_ultimo: true
 permalink: /ririsa/extra-vol-22/"
 return_to: /ririsa/
-images_json: assets/mangas/ririsa/extras/vol-22/images.json
+images_json: assets/mangas/ririsa/cap22/images.json
 ---
