@@ -3,6 +3,7 @@ layout: reader
 title: "Capítulo 3"
 manga: "Uchikirare Mangaka to Doujin Onna"
 manga_slug: "mangaka"
+use_main_css: true
 capitulo: 3
 es_ultimo: true
 permalink: /mangaka/cap3/
