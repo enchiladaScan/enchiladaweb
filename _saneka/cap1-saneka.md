@@ -4,6 +4,7 @@ title: "Capítulo 1"
 manga: "Saneka"
 manga_slug: "saneka"
 capitulo: 1
+use_main_css: true
 es_primero: true
 es_ultimo: false
 permalink: /saneka/cap1/

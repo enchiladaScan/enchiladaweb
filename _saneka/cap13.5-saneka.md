@@ -8,7 +8,7 @@ es_primero: false
 es_ultimo: false
 permalink: /saneka/cap13-5/
 return_to: /saneka/
-images_json: assets/mangas/saneka/cap13.5/images.json
+images_json: assets/mangas/saneka/cap13-5/images.json
 redirect_from:
   - /cap13-5-saneka/
 use_main_css: true
