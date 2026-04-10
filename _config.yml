@@ -54,6 +54,9 @@ collections:
   umine:
     output: true
     permalink: /umine/:name/
+  eleven:
+    output: true
+    permalink: /eleven/:name/
 
 #joints
   medalist:
@@ -95,7 +98,7 @@ defaults:
   - scope:
       type: ore-no-ichizu-jama
     values:
-       layout: caps
+      layout: caps
   - scope:
       type: witchriv
     values:
@@ -117,9 +120,18 @@ defaults:
     values:
       layout: caps
   - scope:
+      type: shiori-experience
+    values:
+      layout: caps
+  - scope:
       type: umine
     values:
       layout: caps
+  - scope:
+      type: eleven
+    values:
+      layout: caps
+  
 # joints
   - scope:
       type: medalist

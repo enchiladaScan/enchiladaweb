@@ -136,6 +136,20 @@
       "seccion": "activos"
     },
     {
+      "mangaId": "eleven",
+      "title": "Esa vez que reencarné en Winning Eleven.",
+      "post_url": "/eleven/inicio",
+      "portada": "/assets/img/eleven-cover.jpg",
+      "tags": [
+        "Comedia",
+        "Isekai",
+        "Videojuegos",
+        "Deportes"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
       "mangaId": "nitamono-doushi",
       "title": "Nitamono Doushi ((Not) Same Blue Youth)",
       "post_url": "/nitamono-doushi/inicio",
