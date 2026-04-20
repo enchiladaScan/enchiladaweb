@@ -186,7 +186,7 @@ defaults:
       type: inori-no-nai
     values:
       layout: caps
-    - scope:
+  - scope:
       type: nitamono-doushi
     values:
       layout: caps
