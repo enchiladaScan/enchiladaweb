@@ -266,6 +266,35 @@
       ],
       "latest": "Capítulo ?",
       "seccion": "joints"
+    },
+    {
+      "mangaId": "akumade",
+      "title": "Akumade Sukisugiru dake",
+      "post_url": "/akumade/inicio",
+      "portada": "/assets/img/akumade-cover.jpg",
+      "tags": [
+          "Acción", 
+          "Comedia", 
+          "Drama", 
+          "Psicologico", 
+          "Romance", 
+          "Suspenso"
+      ],
+      "latest": "Capítulo 1 (One-shot)",
+      "seccion": "joints"
+    },
+    {
+      "mangaId": "maou",
+      "title": "Maou no Musume wa, Shinitakunai",
+      "post_url": "/maou/inicio",
+      "portada": "/assets/img/maou-cover.jpg",
+      "tags": [
+        "Acción", 
+        "Comedia", 
+        "Fantasía"
+      ],
+      "latest": "Capítulo 1 (One-shot)",
+      "seccion": "joints"
     }
   ]
 }

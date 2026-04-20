@@ -71,6 +71,13 @@ collections:
   mangaka:
     output: true
     permalink: /mangaka/:name/
+  akumade:
+    output: true
+    permalink: /akumade/:name/
+  maou:
+    output: true
+    permalink: /maou/:name/
+
 #terminados
   ririsa:
     output: true
@@ -149,6 +156,15 @@ defaults:
       type: mangaka
     values:
       layout: caps
+  - scope:
+      type: akumade
+    values:
+      layout: caps
+  - scope:
+      type: maou
+    values:
+      layout: caps
+  
 # terminados
   - scope:
       type: saneka
@@ -164,6 +180,14 @@ defaults:
       layout: caps
   - scope:
       type: ririsa
+    values:
+      layout: caps
+  - scope:
+      type: inori-no-nai
+    values:
+      layout: caps
+    - scope:
+      type: nitamono-doushi
     values:
       layout: caps
 
