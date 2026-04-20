@@ -1,17 +1,14 @@
 ---
 layout: reader
-title: "Capítulo 07"
-manga: "Umine"
+title: "Extras Volumen 1"
+manga: "Ano Shima no Umineso (La posada de Umine de aquella isla)"
 manga_slug: "umine"
 capitulo: 7
 es_primero: false
-es_ultimo: false
+es_ultimo: true
 permalink: /umine/cap7/
 return_to: /umine/
-images_json: assets/mangas/umine/cap07/images.json
-redirect_from:
-  - /cap7-umine/
+images_json: assets/mangas/umine/cap7/images.json
+prev_href: /umine/cap8/
 use_main_css: true
-prev_href: /umine/cap6/
-next_href: /umine/cap8/
 ---
