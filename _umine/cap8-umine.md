@@ -13,5 +13,5 @@ redirect_from:
   - /cap8-umine/
 use_main_css: true
 prev_href: /umine/cap7/
-next_href: /umine/cap9/
+next_href: /umine/cap7/
 ---
