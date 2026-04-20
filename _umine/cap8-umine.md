@@ -12,6 +12,6 @@ images_json: assets/mangas/umine/cap08/images.json
 redirect_from:
   - /cap8-umine/
 use_main_css: true
-prev_href: /umine/cap7/
-next_href: /umine/cap7/
+prev_href: /umine/cap7-5/
+next_href: /umine/cap9/
 ---
