@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 65"
+title: "Club de manga en la playa"
 manga: "Ririsa"
 manga_slug: "ririsa"
 capitulo: 65
@@ -12,6 +12,6 @@ images_json: assets/mangas/ririsa/cap65/images.json
 redirect_from:
   - /cap65-ririsa/
 use_main_css: true
-prev_href: /ririsa/cap7/
+prev_href: /ririsa/cap64-5/
 next_href: /ririsa/cap66/
 ---
