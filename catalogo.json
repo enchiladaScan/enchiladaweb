@@ -295,6 +295,20 @@
       ],
       "latest": "Capítulo 1 (One-shot)",
       "seccion": "joints"
+    },
+    {
+      "mangaId": "dragemis",
+      "title": "Dragemis",
+      "post_url": "/dragemis/inicio",
+      "portada": "/assets/img/dragemis-cover.jpg",
+      "tags": [
+        "Acción", 
+        "Comedia", 
+        "Fantasía",
+        "Aventura"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "joints"
     }
   ]
 }
