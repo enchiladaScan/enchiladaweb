@@ -150,6 +150,19 @@
       "seccion": "activos"
     },
     {
+      "mangaId": "horizon",
+      "title": "Horizon.",
+      "post_url": "/horizon/inicio",
+      "portada": "/assets/img/horizon-cover.png",
+      "tags": [
+        "Drama", 
+        "Romance", 
+        "Slice of Life"
+      ],
+      "latest": "Capítulo 1",
+      "seccion": "activos"
+    },
+    {
       "mangaId": "nitamono-doushi",
       "title": "Nitamono Doushi ((Not) Same Blue Youth)",
       "post_url": "/nitamono-doushi/inicio",
@@ -185,7 +198,7 @@
       "tags": [
         "Seinen",
         "Drama",
-        "Suspense"
+        "Suspenso"
       ],
       "latest": "Capítulo 166.5",
       "seccion": "terminados"

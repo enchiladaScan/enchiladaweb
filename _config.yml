@@ -57,6 +57,9 @@ collections:
   eleven:
     output: true
     permalink: /eleven/:name/
+  horizon:
+    output: true
+    permalink: /horizon/:name/
 
 #joints
   medalist:
@@ -148,6 +151,10 @@ defaults:
       layout: caps
   - scope:
       type: eleven
+    values:
+      layout: caps
+  - scope:
+      type: horizon
     values:
       layout: caps
   
