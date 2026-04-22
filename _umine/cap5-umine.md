@@ -1,7 +1,7 @@
 ---
 layout: reader
 title: "La novia de Kazuma."
-manga: "Umine"
+manga: "Ano Shima no Umineso (La posada de Umine de aquella isla)"
 manga_slug: "umine"
 capitulo: 5
 es_primero: false

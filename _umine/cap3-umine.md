@@ -2,7 +2,7 @@
 layout: reader
 title: "Una cita junto al mar."
 manga: "Umine"
-manga_slug: "umine"
+manga_slug: "Ano Shima no Umineso (La posada de Umine de aquella isla)"
 capitulo: 3
 es_primero: false
 es_ultimo: false

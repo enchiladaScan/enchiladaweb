@@ -1,7 +1,7 @@
 ---
 layout: reader
 title: "El sake de Iori."
-manga: "Umine"
+manga: "Ano Shima no Umineso (La posada de Umine de aquella isla)"
 manga_slug: "umine"
 capitulo: 4
 es_primero: false

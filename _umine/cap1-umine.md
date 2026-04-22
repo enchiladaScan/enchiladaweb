@@ -1,7 +1,7 @@
 ---
 layout: reader
-title: "Capítulo 01"
-manga: "Umine"
+title: "La posada Umine."
+manga: "Ano Shima no Umineso (La posada de Umine de aquella isla)"
 manga_slug: "umine"
 capitulo: 1
 es_primero: true

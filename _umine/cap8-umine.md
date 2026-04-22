@@ -1,7 +1,7 @@
 ---
 layout: reader
 title: "Amor oculto."
-manga: "Umine"
+manga: "Ano Shima no Umineso (La posada de Umine de aquella isla)"
 manga_slug: "umine"
 capitulo: 8
 es_primero: false
