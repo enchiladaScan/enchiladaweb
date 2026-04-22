@@ -4,9 +4,9 @@
       <img src="{{ site.baseurl }}/assets/img/header_home.png" alt="Logo del scan en 2.5 Dimensiones">
     </a>
 
-    <form class="scan-search" onsubmit="return false" role="search" aria-label="Buscar por título o tags">
-      <input id="homeSearch" type="search" placeholder="Buscar título o tag…">
-      <button type="button" id="homeSearchBtn">Buscar</button>
+    <form class="scan-search" onsubmit="return false" role="search" aria-label="Buscar capítulos">
+      <input id="capsSearch" type="search" placeholder="Buscar capítulo… ej. 12, 13.5">
+      <button type="button" id="capsSearchBtn">Buscar</button>
     </form>
 
     <div class="header-actions">
@@ -62,22 +62,24 @@
 <script>
   (function () {
     /* Lógica de Búsqueda Original */
-    var q = document.getElementById('homeSearch');
-    var btn = document.getElementById('homeSearchBtn');
+    var q = document.getElementById('capsSearch');
+    var btn = document.getElementById('capsSearchBtn');
+    if (q && btn) 
     if (q && btn) {
-      function matches(card, needle) {
-        needle = needle.toLowerCase();
-        var t = (card.dataset.title || '').toLowerCase();
-        var tags = (card.dataset.tags || '').toLowerCase();
-        return t.includes(needle) || tags.includes(needle);
+      function filterList(list) {
+        if (!list) return;
+        var li = list.querySelectorAll('li');
+        var needle = (q.value || '').trim().toLowerCase();
+        li.forEach(function (item) {
+          var txt = (item.textContent || '').toLowerCase();
+          var cap = (item.dataset.cap || '').toLowerCase();
+          var show = !needle || txt.includes(needle) || cap.includes(needle);
+          item.style.display = show ? '' : 'none';
+        });
       }
       function apply() {
-        var needle = (q.value || '').trim();
-        var cards = document.querySelectorAll('.card[data-title][data-tags]');
-        if (!cards.length) return;
-        cards.forEach(function (c) {
-          c.style.display = matches(c, needle) ? '' : 'none';
-        });
+        filterList(document.getElementById('chaptersList'));
+        filterList(document.getElementById('downloadsList'));
       }
       btn.addEventListener('click', apply);
       q.addEventListener('keydown', function (e) { if (e.key === 'Enter') apply(); });
