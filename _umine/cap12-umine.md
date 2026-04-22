@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 12"
+title: "Realidad."
 manga: "Umine"
 manga_slug: "umine"
 capitulo: 12

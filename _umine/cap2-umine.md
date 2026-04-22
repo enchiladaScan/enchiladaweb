@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 02"
+title: "Un pasaje secreto."
 manga: "Umine"
 manga_slug: "umine"
 capitulo: 2

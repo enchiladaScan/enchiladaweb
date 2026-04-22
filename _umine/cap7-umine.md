@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capitulo 7"
+title: "Sakura Shindo."
 manga: "Ano Shima no Umineso (La posada de Umine de aquella isla)"
 manga_slug: "umine"
 capitulo: 7

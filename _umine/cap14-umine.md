@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 14"
+title: "Días color Sakura."
 manga: "Ano Shima no Umineso (La posada de Umine de aquella isla)"
 manga_slug: "umine"
 capitulo: 14

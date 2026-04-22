@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 05"
+title: "La novia de Kazuma."
 manga: "Umine"
 manga_slug: "umine"
 capitulo: 5

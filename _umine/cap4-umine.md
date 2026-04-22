@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 04"
+title: "El sake de Iori."
 manga: "Umine"
 manga_slug: "umine"
 capitulo: 4

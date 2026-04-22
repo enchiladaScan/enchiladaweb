@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 13"
+title: "¡Una gran cosecha de verano!."
 manga: "Ano Shima no Umineso (La posada de Umine de aquella isla)"
 manga_slug: "umine"
 capitulo: 13

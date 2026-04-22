@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 08"
+title: "Amor oculto."
 manga: "Umine"
 manga_slug: "umine"
 capitulo: 8

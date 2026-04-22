@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 06"
+title: "¡Qué empieze la búsqueda del tesoro!."
 manga: "Umine"
 manga_slug: "umine"
 capitulo: 6

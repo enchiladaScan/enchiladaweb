@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 03"
+title: "Una cita junto al mar."
 manga: "Umine"
 manga_slug: "umine"
 capitulo: 3
