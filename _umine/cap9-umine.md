@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Sereto."
+title: "Secreto."
 manga: "Umine"
 manga_slug: "umine"
 capitulo: 9
