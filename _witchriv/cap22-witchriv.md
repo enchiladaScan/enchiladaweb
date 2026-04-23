@@ -5,10 +5,12 @@ manga: "Witchriv"
 manga_slug: "witchriv"
 capitulo: 22
 es_primero: false
-es_ultimo: true
+es_ultimo: false
 permalink: /witchriv/cap22/
 return_to: /witchriv/
 images_json: assets/mangas/witchriv/cap22/images.json
 prev_href: /witchriv/cap21/
 use_main_css: true
+
+next_href: /witchriv/cap23/
 ---
