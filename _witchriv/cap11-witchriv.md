@@ -13,5 +13,5 @@ redirect_from:
   - /cap11-witchriv/
 use_main_css: true
 prev_href: /witchriv/cap10/
-next_href: /witchriv/cap12/
+next_href: /witchriv/cap11-5/
 ---
