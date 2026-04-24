@@ -229,16 +229,16 @@
       "seccion": "terminados"
     },
     {
-      "mangaId": "medalist",
-      "title": "Medalist",
-      "post_url": "/medalist/inicio",
-      "portada": "/assets/img/medalist-cover.jpg",
+      "mangaId": "no-se-si-es-amor-pero",
+      "title": "No se si es amor pero...",
+      "post_url": "/no-se-si-es-amor-pero/inicio",
+      "portada": "/assets/img/love-cover.jpg",
       "tags": [
-        "Drama",
-        "Deportes",
-        "Psicológico"
+        "Romance",
+        "Escolar",
+        "Slice of life"
       ],
-      "latest": "Capítulo ?",
+      "latest": "Capítulo 5",
       "seccion": "joints"
     },
     {
@@ -264,20 +264,6 @@
         "Drama"
       ],
       "latest": "Capítulo 5",
-      "seccion": "joints"
-    },
-    {
-      "mangaId": "heisei-haizanhei",
-      "title": "Heisei Haizanhei Sumire-chan",
-      "post_url": "/heisei-haizanhei/inicio",
-      "portada": "/assets/img/Heisei-cover.jpg",
-      "tags": [
-        "Comedia",
-        "Ecchi",
-        "Recuentos de la vida",
-        "Seinen"
-      ],
-      "latest": "Capítulo ?",
       "seccion": "joints"
     },
     {
@@ -321,6 +307,33 @@
         "Aventura"
       ],
       "latest": "Capítulo 2",
+      "seccion": "joints"
+    },
+    {
+      "mangaId": "medalist",
+      "title": "Medalist",
+      "post_url": "/medalist/inicio",
+      "portada": "/assets/img/medalist-cover.jpg",
+      "tags": [
+        "Drama",
+        "Deportes",
+        "Psicológico"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "joints"
+    },
+    {
+      "mangaId": "heisei-haizanhei",
+      "title": "Heisei Haizanhei Sumire-chan",
+      "post_url": "/heisei-haizanhei/inicio",
+      "portada": "/assets/img/Heisei-cover.jpg",
+      "tags": [
+        "Comedia",
+        "Ecchi",
+        "Recuentos de la vida",
+        "Seinen"
+      ],
+      "latest": "Capítulo ?",
       "seccion": "joints"
     }
   ]

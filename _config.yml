@@ -84,6 +84,9 @@ collections:
   dragemis:
     output: true
     permalink: /dragemis/:name/
+  no-se-si-es-amor-pero: # -> triple joint
+    output: true
+    permalink: /no-se-si-es-amor-pero/:name/
 
 #terminados
   ririsa:
@@ -188,6 +191,11 @@ defaults:
       type: dragemis
     values:
       layout: caps
+  #el de triple joint
+  - scope:
+      type: no-se-si-es-amor-pero
+    values:
+      layout: caps
   
 # terminados
   - scope:
@@ -220,9 +228,7 @@ exclude:
   - node_modules
   - vendor
   - README.md
-  - checklist.txt
-  - guia_rapida.txt
-  - faltantes.txt
+
 
 # --- Incluir explícitamente assets si lo necesita ---
 include:
