@@ -8,7 +8,7 @@ es_primero: false
 es_ultimo: false
 permalink: /ore-no-ichizu-jama/cap3/
 return_to: /ore-no-ichizu-jama/
-images_json: assets/mangas/ore-no-ichizu/cap3/images.json
+images_json: assets/mangas/ore-no-ichizu-jama/cap3/images.json
 redirect_from:
   - /cap3-ore-no-ichizu-jama/
 use_main_css: true
