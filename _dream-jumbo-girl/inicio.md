@@ -14,5 +14,5 @@ editorial: "Weekly Young Jump"
 show_links_en_ficha: false
 use_theme: true
 redirect_from:
-  - /dream-jumbo/
+  - /dream-jumbo-girl/
 ---
