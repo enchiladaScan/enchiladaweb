@@ -3,7 +3,7 @@ layout: caps
 title: "Nitamono Doushi ((Not) Same Blue Youth)"
 date: 2026-03-21
 series: "nitamono-doushi"
-portada: "/assets/img/nitamono-doushi-cover.webp"
+portada: "/assets/img/covers/nitamono-doushi-cover.webp"
 sinopsis: "Teru es un chico solitario que, atormentado por un trauma de la infancia, evita cualquier conexión humana y se refugia en los videojuegos. Su rutina se ve alterada tras un encuentro inesperado en su centro de juegos habitual con una chica misteriosa. Una historia conmovedora sobre dos almas torpes que se atraen mutuamente noche tras noche."
 autor: "Efu"
 artista: "Efu"

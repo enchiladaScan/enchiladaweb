@@ -3,12 +3,12 @@ layout: caps
 title: "Komi-san Can't Communicate"
 date: 2025-09-03
 series: "komi"                         # <- slug/colección
-portada: "/assets/img/komi-cover.jpg"
+portada: "/assets/img/covers/komi-cover.jpg"
 sinopsis: "Komi Shouko quiere hacer 100 amigos, pero su extrema timidez lo complica todo. Comedia escolar y slice-of-life con mucho encanto."
 autor: "Oda Tomohito"
 artista: "Oda Tomohito"
 generos: ["Comedia","Escolar","Slice of life"]
-estado: "—"
+estado: "Finalizado"
 anio: 2016
 editorial: "Shogakukan"
 links_descarga:

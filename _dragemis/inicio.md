@@ -3,7 +3,7 @@ layout: caps
 title: "Dragemis"
 date: 2026-04-20
 series: "dragemis"
-portada: "/assets/img/dragemis-cover.jpg"
+portada: "/assets/img/covers/dragemis-cover.jpg"
 sinopsis: "Kainu, un chico con un pasado misterioso. ¡Los dos aspirantes a aventureros continúan su desafío hacia la Torre Madara, donde yace el «tesoro de los confines más lejanos»! ¡Una comedia de aventuras en busca de compañeros de viaje de la mano de Mizuki Kuriyama, el referente de la comedia!."
 autor: "Mizuki Kuriyama"
 artista: "Mizuki Kuriyama"

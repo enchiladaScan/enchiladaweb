@@ -3,7 +3,7 @@ layout: caps
 title: "Witchriv"
 date: 2025-09-05
 series: "witchriv"
-portada: "/assets/img/witchriv-cover.jpg"
+portada: "/assets/img/covers/witchriv-cover.jpg"
 sinopsis: "Nona usa magia para reparar las gafas de su amiga Lovi, pero este simple acto de bondad atrae la atención de la Oficina de Vigilancia Mágica (Bureau of Magic Surveillance). Este hecho se convierte en el detonante que pone en marcha el destino de Nona en un mundo donde la magia está prohibida."
 autor: "Hakuri"
 artista: "Hakuri"

@@ -3,12 +3,12 @@ layout: caps
 title: "2.5 Jigen no Ririsa" 
 date: 2025-09-05 
 series: "ririsa" 
-portada: "/assets/img/ririsa-cover.jpg" 
+portada: "/assets/img/covers/ririsa-cover.jpg" 
 sinopsis: "Okumura Masamune, un estudiante de secundaria y el único miembro del club de investigación de manga, ve su vida cambiar cuando Ririsa Amaori, una apasionada del cosplay y fanática del personaje 'Liliel', se une al club. Juntos, exploran el mundo del cosplay y la fusión entre la vida real y la fantasía de los personajes de manga." 
 autor: "Yu Hashimoto" 
 artista: "Yu Hashimoto" 
 generos: ["Harem","Comedia Romántica","Ecchi"] 
-estado: "En publicación" 
+estado: "Finalizado" 
 anio: 2019 
 editorial: "Shonen Jump+" 
 show_links_en_ficha: false 

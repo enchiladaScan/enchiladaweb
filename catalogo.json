@@ -4,7 +4,7 @@
       "mangaId": "ririsa",
       "title": "2.5 Dimensional Seduction (Ririsa)",
       "post_url": "/ririsa/inicio",
-      "portada": "/assets/img/ririsa-cover.jpg",
+      "portada": "/assets/img/covers/ririsa-cover.jpg",
       "tags": [
         "romance",
         "comedia"
@@ -16,7 +16,7 @@
       "mangaId": "megami",
       "title": "Megami no cafe terrace",
       "post_url": "/megami-no-cafe/inicio",
-      "portada": "/assets/img/megami-cover.jpg",
+      "portada": "/assets/img/covers/megami-cover.jpg",
       "tags": [
         "Comedia",
         "Romance",
@@ -29,7 +29,7 @@
       "mangaId": "dream-jumbo-girl",
       "title": "Dream Jumbo Girl",
       "post_url": "/dream-jumbo/inicio",
-      "portada": "/assets/img/dream-jumbo-cover.webp",
+      "portada": "/assets/img/covers/dream-jumbo-cover.webp",
       "tags": [
         "Comedia",
         "Romance",
@@ -42,7 +42,7 @@
       "mangaId": "goldship",
       "title": "Uma Musume: Pisupisu☆Supisupi Golshi-chan",
       "post_url": "/goldship/inicio",
-      "portada": "/assets/img/goldship-cover.webp",
+      "portada": "/assets/img/covers/goldship-cover.webp",
       "tags": [
         "Comedia",
         "Slice of Life",
@@ -55,7 +55,7 @@
       "mangaId": "witchriv",
       "title": "Witchriv",
       "post_url": "/witchriv/inicio",
-      "portada": "/assets/img/witchriv-cover.jpg",
+      "portada": "/assets/img/covers/witchriv-cover.jpg",
       "tags": [
         "Fantasía",
         "Magia",
@@ -69,7 +69,7 @@
       "mangaId": "shiori-experience",
       "title": "Shiori Experience: Jimi na Watashi to Hen na Ojisan",
       "post_url": "/shiori-experience/inicio",
-      "portada": "/assets/img/shiori-cover.jpg",
+      "portada": "/assets/img/covers/shiori-cover.jpg",
       "tags": [
         "Música",
         "Comedia",
@@ -83,7 +83,7 @@
       "mangaId": "hatori-to-furuta",
       "title": "Hatori to Furuta no Hijōjō Sahanshi",
       "post_url": "/hatori-to-furuta/inicio",
-      "portada": "/assets/img/hatori-to-furuta-cover.webp",
+      "portada": "/assets/img/covers/hatori-to-furuta-cover.webp",
       "tags": [
         "Comedia",
         "Sobrenatural",
@@ -97,7 +97,7 @@
       "mangaId": "ore-no-ichizu-jama",
       "title": "Ore no Ichizu wo Jama Suru Aitsu",
       "post_url": "/ore-no-ichizu-jama/inicio",
-      "portada": "/assets/img/ichizu-cover.jpg",
+      "portada": "/assets/img/covers/ichizu-cover.jpg",
       "tags": [
         "Comedia",
         "Romance",
@@ -111,7 +111,7 @@
       "mangaId": "idolatry",
       "title": "Idolatry",
       "post_url": "/idolatry/inicio",
-      "portada": "/assets/img/idolatry-cover.png",
+      "portada": "/assets/img/covers/idolatry-cover.png",
       "tags": [
         "Música",
         "Acción",
@@ -125,7 +125,7 @@
       "mangaId": "umine",
       "title": "La posada de Umine de aquella isla",
       "post_url": "/umine/inicio",
-      "portada": "/assets/img/umine-cover.jpg",
+      "portada": "/assets/img/covers/umine-cover.jpg",
       "tags": [
         "Música",
         "Acción",
@@ -139,7 +139,7 @@
       "mangaId": "eleven",
       "title": "Esa vez que reencarné en Winning Eleven.",
       "post_url": "/eleven/inicio",
-      "portada": "/assets/img/eleven-cover.jpg",
+      "portada": "/assets/img/covers/eleven-cover.jpg",
       "tags": [
         "Comedia",
         "Isekai",
@@ -153,7 +153,7 @@
       "mangaId": "horizon",
       "title": "Horizon.",
       "post_url": "/horizon/inicio",
-      "portada": "/assets/img/horizon-cover.png",
+      "portada": "/assets/img/covers/horizon-cover.png",
       "tags": [
         "Drama",
         "Romance",
@@ -166,7 +166,7 @@
       "mangaId": "nitamono-doushi",
       "title": "Nitamono Doushi ((Not) Same Blue Youth)",
       "post_url": "/nitamono-doushi/inicio",
-      "portada": "/assets/img/nitamono-doushi-cover.webp",
+      "portada": "/assets/img/covers/nitamono-doushi-cover.webp",
       "tags": [
         "Romance",
         "Recuentos de la vida",
@@ -180,7 +180,7 @@
       "mangaId": "inori-no-nai",
       "title": "Inori no nai Tokoro ni (Nada de rezar)",
       "post_url": "/inori-no-nai/inicio",
-      "portada": "/assets/img/nada-de-rezar-cover.jpg",
+      "portada": "/assets/img/covers/nada-de-rezar-cover.jpg",
       "tags": [
         "Yuri",
         "Drama",
@@ -194,7 +194,7 @@
       "mangaId": "oshi-no-ko",
       "title": "Oshi no Ko",
       "post_url": "/oshi-no-ko/inicio",
-      "portada": "/assets/img/oshi-no-ko-cover.jpg",
+      "portada": "/assets/img/covers/oshi-no-ko-cover.jpg",
       "tags": [
         "Seinen",
         "Drama",
@@ -207,7 +207,7 @@
       "mangaId": "komi",
       "title": "Komi Can't Communicate",
       "post_url": "/komi/inicio",
-      "portada": "/assets/img/komi-cover.jpg",
+      "portada": "/assets/img/covers/komi-cover.jpg",
       "tags": [
         "Comedia",
         "Escolar",
@@ -220,7 +220,7 @@
       "mangaId": "saneka",
       "title": "My Marriage with Saneka",
       "post_url": "/saneka/inicio",
-      "portada": "/assets/img/saneka-cover.webp",
+      "portada": "/assets/img/covers/saneka-cover.webp",
       "tags": [
         "romance",
         "comedia"
@@ -232,7 +232,7 @@
       "mangaId": "no-se-si-es-amor-pero",
       "title": "No se si es amor pero...",
       "post_url": "/no-se-si-es-amor-pero/inicio",
-      "portada": "/assets/img/love-cover.jpg",
+      "portada": "/assets/img/covers/love-cover.jpg",
       "tags": [
         "Romance",
         "Escolar",
@@ -245,7 +245,7 @@
       "mangaId": "marchen-crown",
       "title": "Marchen Crown",
       "post_url": "/marchen-crown/inicio",
-      "portada": "/assets/img/marchen-crown-cover.jpg",
+      "portada": "/assets/img/covers/marchen-crown-cover.jpg",
       "tags": [
         "Aventura",
         "Fantasia",
@@ -258,7 +258,7 @@
       "mangaId": "mangaka",
       "title": "Uchikirare Mangaka to Doujin Onna",
       "post_url": "/mangaka/inicio",
-      "portada": "/assets/img/mangaka-cover.png",
+      "portada": "/assets/img/covers/mangaka-cover.png",
       "tags": [
         "Comedia",
         "Drama"
@@ -270,7 +270,7 @@
       "mangaId": "akumade",
       "title": "Akumade Sukisugiru dake",
       "post_url": "/akumade/inicio",
-      "portada": "/assets/img/akumade-cover.jpg",
+      "portada": "/assets/img/covers/akumade-cover.jpg",
       "tags": [
         "Acción",
         "Comedia",
@@ -286,7 +286,7 @@
       "mangaId": "maou",
       "title": "Maou no Musume wa, Shinitakunai",
       "post_url": "/maou/inicio",
-      "portada": "/assets/img/maou-cover.jpg",
+      "portada": "/assets/img/covers/maou-cover.jpg",
       "tags": [
         "Acción",
         "Comedia",
@@ -299,7 +299,7 @@
       "mangaId": "dragemis",
       "title": "Dragemis",
       "post_url": "/dragemis/inicio",
-      "portada": "/assets/img/dragemis-cover.jpg",
+      "portada": "/assets/img/covers/dragemis-cover.jpg",
       "tags": [
         "Acción",
         "Comedia",
@@ -313,7 +313,7 @@
       "mangaId": "medalist",
       "title": "Medalist",
       "post_url": "/medalist/inicio",
-      "portada": "/assets/img/medalist-cover.jpg",
+      "portada": "/assets/img/covers/medalist-cover.jpg",
       "tags": [
         "Drama",
         "Deportes",
@@ -326,7 +326,7 @@
       "mangaId": "heisei-haizanhei",
       "title": "Heisei Haizanhei Sumire-chan",
       "post_url": "/heisei-haizanhei/inicio",
-      "portada": "/assets/img/Heisei-cover.jpg",
+      "portada": "/assets/img/covers/Heisei-cover.jpg",
       "tags": [
         "Comedia",
         "Ecchi",

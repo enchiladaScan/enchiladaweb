@@ -3,7 +3,7 @@ layout: caps
 title: "Uma Musume: Pisupisu☆Supisupi Golshi-chan"
 date: 2025-09-05
 series: "goldship"
-portada: "/assets/img/goldship-cover.webp"
+portada: "/assets/img/covers/goldship-cover.webp"
 sinopsis: "Un manga cómico derivado (spin-off) de la franquicia Uma Musume: Pretty Derby, centrado en el personaje Gold Ship, aparentemente retratándola como una niña de jardín de infantes."
 autor: "Naoki Shibata (Historia), Cygames (Original)"
 artista: "Naoki Shibata (Arte)"
