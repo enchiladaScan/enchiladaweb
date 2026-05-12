@@ -26,6 +26,20 @@
       "seccion": "terminados"
     },
     {
+      "mangaId": "maid",
+      "title": "Mi maid se parece a la chica que me gusta en mi clase",
+      "post_url": "/maid/inicio",
+      "portada": "/assets/img/covers/maid-cover.png",
+      "tags": [
+        "Comedia",
+        "Slice of Life",
+        "Escolar",
+        "Romance"
+      ],
+      "latest": "Capítulo ¿?",
+      "seccion": "activos"
+    },
+    {
       "mangaId": "goldship",
       "title": "Uma Musume: Pisupisu☆Supisupi Golshi-chan",
       "post_url": "/goldship/inicio",

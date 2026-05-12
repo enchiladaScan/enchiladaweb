@@ -60,6 +60,9 @@ collections:
   horizon:
     output: true
     permalink: /horizon/:name/
+  maid:
+    output: true
+    permalink: /maid/:name/
 
 #joints
   medalist:
@@ -160,6 +163,10 @@ defaults:
       type: horizon
     values:
       layout: caps
+  - scope:
+      type: maid
+    values:
+      layout: caps
   
 # joints
   - scope:
@@ -222,6 +229,7 @@ defaults:
       type: nitamono-doushi
     values:
       layout: caps
+
 
 # --- Archivos/carpetas a excluir del build (se amplía si hace falta) ---
 exclude:
