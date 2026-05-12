@@ -38,7 +38,7 @@ collections:
     permalink: /megami-no-cafe/:name/
   dream-jumbo-girl:
     output: true
-    permalink: /dream-jumbo/:name/
+    permalink: /dream-jumbo-girl/:name/
   ore-no-ichizu-jama:
     output: true
     permalink: /ore-no-ichizu-jama/:name/
@@ -133,7 +133,7 @@ defaults:
     values:
       layout: caps
   - scope:
-      type: dream
+      type: dream-jumbo-girl
     values:
       layout: caps
   - scope:

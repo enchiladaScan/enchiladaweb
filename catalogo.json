@@ -26,19 +26,6 @@
       "seccion": "terminados"
     },
     {
-      "mangaId": "dream-jumbo-girl",
-      "title": "Dream Jumbo Girl",
-      "post_url": "/dream-jumbo/inicio",
-      "portada": "/assets/img/covers/dream-jumbo-cover.webp",
-      "tags": [
-        "Comedia",
-        "Romance",
-        "Deportes"
-      ],
-      "latest": "Capítulo ?",
-      "seccion": "activos"
-    },
-    {
       "mangaId": "goldship",
       "title": "Uma Musume: Pisupisu☆Supisupi Golshi-chan",
       "post_url": "/goldship/inicio",
@@ -158,6 +145,19 @@
         "Drama",
         "Romance",
         "Slice of Life"
+      ],
+      "latest": "Capítulo 7",
+      "seccion": "activos"
+    },
+    {
+      "mangaId": "dream-jumbo-girl",
+      "title": "Dream Jumbo Girl",
+      "post_url": "/dream-jumbo/inicio",
+      "portada": "/assets/img/covers/dream-jumbo-cover.webp",
+      "tags": [
+        "Comedia",
+        "Romance",
+        "Deportes"
       ],
       "latest": "Capítulo 7",
       "seccion": "activos"
