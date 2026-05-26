@@ -90,7 +90,7 @@ collections:
   no-se-si-es-amor-pero: # -> triple joint
     output: true
     permalink: /no-se-si-es-amor-pero/:name/
-  montaña-embrujada:
+  montana-embrujada:
     output: true
     permalink: /montana-embrujada/:name/
 
@@ -203,7 +203,7 @@ defaults:
       layout: caps
   #el de triple joint
   - scope:
-      type: montaña-embrujada
+      type: montana-embrujada
     values:
       layout: caps
   - scope:
