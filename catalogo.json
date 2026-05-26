@@ -243,6 +243,20 @@
       "seccion": "terminados"
     },
     {
+      "mangaId": "montaña-embrujada",
+      "title": "Montaña Embrujada",
+      "post_url": "/montaña-embrujada/inicio",
+      "portada": "/assets/img/covers/montaña-cover.jpg",
+      "tags": [
+        "Drama",
+        "Misterio",
+        "Psicologico",
+        "Seinen"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "joints"
+    },
+    {
       "mangaId": "no-se-si-es-amor-pero",
       "title": "No se si es amor pero...",
       "post_url": "/no-se-si-es-amor-pero/inicio",

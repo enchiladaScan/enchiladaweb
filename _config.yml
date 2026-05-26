@@ -90,6 +90,9 @@ collections:
   no-se-si-es-amor-pero: # -> triple joint
     output: true
     permalink: /no-se-si-es-amor-pero/:name/
+  montaña-embrujada:
+    output: true
+    permalink: /montaña-embrujada/:name/
 
 #terminados
   ririsa:
@@ -199,6 +202,10 @@ defaults:
     values:
       layout: caps
   #el de triple joint
+  - scope:
+      type: montaña-embrujada
+    values:
+      layout: caps
   - scope:
       type: no-se-si-es-amor-pero
     values:
