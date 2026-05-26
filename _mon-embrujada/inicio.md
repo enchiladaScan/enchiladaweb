@@ -14,5 +14,5 @@ editorial: "Shueisha"
 show_links_en_ficha: false
 use_theme: true
 redirect_from:
-  - /montaña-embrujada/
+  - /montana-embrujada/
 ---

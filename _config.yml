@@ -92,7 +92,7 @@ collections:
     permalink: /no-se-si-es-amor-pero/:name/
   montaña-embrujada:
     output: true
-    permalink: /montaña-embrujada/:name/
+    permalink: /montana-embrujada/:name/
 
 #terminados
   ririsa:
