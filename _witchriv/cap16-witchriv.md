@@ -4,6 +4,7 @@ title: "Capítulo 16"
 manga: "witchriv"
 manga_slug: "witchriv"
 capitulo: 16
+use_main_css: true
 es_primero: false
 es_ultimo: false
 permalink: /witchriv/cap16/
@@ -13,5 +14,5 @@ redirect_from:
   - /cap16-witchriv/
 use_main_css: true
 prev_href: /witchriv/cap15/
-next_href: /witchriv/cap19/
+next_href: /witchriv/cap17/
 ---
