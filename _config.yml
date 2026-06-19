@@ -63,9 +63,6 @@ collections:
   maid:
     output: true
     permalink: /maid/:name/
-  estamos-saliendo-verdad:
-    output: true
-    permalink: /estamos-saliendo-verdad/:name/
   estamos-saliendo:
     output: true
     permalink: /estamos-saliendo/:name/
@@ -174,10 +171,6 @@ defaults:
       layout: caps
   - scope:
       type: maid
-    values:
-      layout: caps
-  - scope:
-      type: estamos-saliendo-verdad
     values:
       layout: caps
   - scope:
