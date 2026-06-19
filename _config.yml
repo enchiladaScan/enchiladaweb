@@ -63,6 +63,9 @@ collections:
   maid:
     output: true
     permalink: /maid/:name/
+  estemos-saliendo-verdad:
+    output: true
+    permalink: /estemos-saliendo-verdad/:name/
 
 #joints
   medalist:
@@ -168,6 +171,10 @@ defaults:
       layout: caps
   - scope:
       type: maid
+    values:
+      layout: caps
+  - scope:
+      type: estemos-saliendo-verdad
     values:
       layout: caps
   
