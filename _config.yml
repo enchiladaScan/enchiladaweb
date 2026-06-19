@@ -66,6 +66,9 @@ collections:
   estamos-saliendo-verdad:
     output: true
     permalink: /estamos-saliendo-verdad/:name/
+  estamos-saliendo:
+    output: true
+    permalink: /estamos-saliendo/:name/
 
 #joints
   medalist:
@@ -175,6 +178,10 @@ defaults:
       layout: caps
   - scope:
       type: estamos-saliendo-verdad
+    values:
+      layout: caps
+  - scope:
+      type: estamos-saliendo
     values:
       layout: caps
   
