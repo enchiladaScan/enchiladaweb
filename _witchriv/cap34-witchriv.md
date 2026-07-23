@@ -9,6 +9,6 @@ es_ultimo: true
 permalink: /witchriv/cap34/
 return_to: /witchriv/
 images_json: assets/mangas/witchriv/cap34/images.json
-prev_href: /witchriv/cap33/
+prev_href: /witchriv/cap33.5/
 use_main_css: true
 ---

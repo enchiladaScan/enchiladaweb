@@ -12,5 +12,5 @@ images_json: assets/mangas/witchriv/cap33/images.json
 prev_href: /witchriv/cap32/
 use_main_css: true
 
-next_href: /witchriv/cap34/
+next_href: /witchriv/cap33.5/
 ---
