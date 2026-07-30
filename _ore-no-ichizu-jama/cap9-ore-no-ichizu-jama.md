@@ -12,5 +12,5 @@ images_json: assets/mangas/ore-no-ichizu-jama/cap9/images.json
 prev_href: /ore-no-ichizu-jama/cap8/
 use_main_css: true
 
-next_href: /ore-no-ichizu-jama/cap10/
+next_href: /ore-no-ichizu-jama/cap10-5/
 ---
