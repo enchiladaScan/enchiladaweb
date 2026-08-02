@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Capítulo 18"
+title: "La misma ciudad de siempre, la misma maldición, pt. 1"
 manga: "Hatori to Furuta no Hijōjō Sahanshi"
 manga_slug: "hatori-to-furuta"
 capitulo: 18
