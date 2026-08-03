@@ -11,8 +11,6 @@ generos: ["Romance", "Recuentos de la vida", "Seinen", "Drama"]
 estado: "Finalizado"
 anio: 2025
 editorial: "Big Gangan"
-links_descarga:
-  - { nombre: "One-shot (Drive)", url: "https://drive.google.com/drive/folders/1-NLsbJ1tufIbQZBYQZyfJKBL2IQiUrL_?usp=drive_link" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:
