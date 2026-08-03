@@ -11,8 +11,6 @@ generos: ["Yuri", "Drama", "Recuentos de la vida", "Seinen"]
 estado: "Finalizado"
 anio: 2026
 editorial: "Weekly Young Jump"
-links_descarga:
-  - { nombre: "One-shot (Drive)", url: "https://drive.google.com/drive/folders/1SDOgfcwF_EXEJmPyzTizADdDszRHfO_w?usp=drive_link" }
 show_links_en_ficha: false
 use_theme: true
 redirect_from:
