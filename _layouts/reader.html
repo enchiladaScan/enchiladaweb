@@ -123,6 +123,12 @@ use_theme: false
       padding: 8px 12px;
       background: rgba(30, 30, 30, .75);
       backdrop-filter: blur(6px);
+      transition: transform 0.3s ease-in-out; 
+    }
+
+    /*Empuja la barra hacia abajo fuera de la pantalla */
+    .nav-fixed.bottom.hidden {
+      transform: translateY(100%);
     }
 
     .nav-fixed.bottom {
@@ -193,7 +199,7 @@ use_theme: false
   </style>
 </head>
 
-<body class="has-nav-bottom{% if page.use_main_css %} theme{% endif %}">
+<body class="has-nav-bottom reader-layout {% if page.use_main_css %} theme{% endif %}">
 
   <script>
     (function () {
@@ -525,6 +531,40 @@ use_theme: false
         if (mount) mount.innerHTML = `<p class="error">No se pudieron cargar las imágenes. ${err.message}</p>`;
         if (pagerEl) pagerEl.textContent = 'Pag 0 / 0';
       }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const navReader = document.getElementById('navReader');
+      if (!navReader) return;
+
+      let lastScrollTop = 0;
+      //Valor (en píxeles) para decidir qué tan cerca del final debe estar el usuario para que la barra reaparezca automáticamente.
+      const offsetBottom = 150; 
+
+      window.addEventListener('scroll', function () {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight;
+        const clientHeight = document.documentElement.clientHeight;
+
+        // Comprueba si el usuario está llegando al final de la página
+        const isNearBottom = (scrollHeight - scrollTop - clientHeight) <= offsetBottom;
+
+        if (isNearBottom) {
+          //Si está al final, muestra la barra siempre (para poder dar clic en Siguiente)
+          navReader.classList.remove('hidden');
+        } else if (scrollTop > lastScrollTop && scrollTop > 50) {
+          //Si baja (y ha superado el tope superior), oculta la barra
+          navReader.classList.add('hidden');
+        } else {
+          //Si sube, muestra la barra
+          navReader.classList.remove('hidden');
+        }
+
+        // Evita valores negativos en navegadores móviles con efecto "rebote"
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      }, { passive: true }); // passive: true mejora el rendimiento del scroll
     })();
   </script>
 </body>
