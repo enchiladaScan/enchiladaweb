@@ -152,3 +152,36 @@ layout: default
     }
   });
 </script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, doc, setDoc, increment, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyCKB0CMfvdKsyVH7yD66liC0WqWb4E9QTE",
+  authDomain: "enchiladanossekai.firebaseapp.com",
+  projectId: "enchiladanossekai",
+  storageBucket: "enchiladanossekai.firebasestorage.app",
+  messagingSenderId: "92851491162",
+  appId: "1:92851491162:web:93ceb7ae8b35029950a363",
+  measurementId: "G-CCCR2V5VJH"
+};
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const pageId = "{{ page.url | slugify }}"; 
+  const docRef = doc(db, "vistas_mangas", pageId);
+
+  async function registrarVisita() {
+    try {
+      await setDoc(docRef, { contador: increment(1) }, { merge: true });
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        document.getElementById("contador-vistas").innerText = docSnap.data().contador;
+      }
+    } catch (error) {
+      document.getElementById("contador-vistas").innerText = "-";
+    }
+  }
+  registrarVisita();
+</script>
