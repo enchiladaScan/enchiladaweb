@@ -27,6 +27,18 @@ header_kind: home
       <div class="home-layout">
 
         <div class="main-content">
+          <!-- SECCIÓN TOP 5 -->
+          <div class="section-title">
+            <span class="bar" style="background: #f59e0b;"></span>
+            <h2>Los más visitados</h2>
+          </div>    
+          <!-- NUEVO CONTENEDOR MARQUEE -->
+          <div class="marquee-wrapper">
+            <div class="marquee-container">
+              <div class="marquee-track" id="track-top5"></div>
+            </div>
+          </div>
+          
           <div class="section-title">
             <span class="bar"></span>
             <h2>Activos</h2>
@@ -68,6 +80,7 @@ header_kind: home
       <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyCKB0CMfvdKsyVH7yD66liC0WqWb4E9QTE",
@@ -81,24 +94,30 @@ header_kind: home
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+        
+        // Inicializamos Firestore
+        const firestoreDB = getFirestore(app);
+        window.firestoreDB = firestoreDB;
+        window.getDocs = getDocs;
+        window.collection = collection;
+        window.query = query;
+        window.orderBy = orderBy;
+        window.limit = limit;
 
         onValue(ref(db, 'tweets'), (snapshot) => {
           const data = snapshot.val();
-          // Guardamos los datos globalmente
           window.TWEET_DATA = data ? Object.values(data) : [];
-
           console.log("Datos recibidos de Firebase:", window.TWEET_DATA);
-
-          // Si la función ya existe en app.js, la ejecutamos para refrescar la cinta
           if (typeof window.iniciarMarquee === 'function') {
             window.iniciarMarquee();
           }
         });
       </script>
 
-      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       <script src="{{ '/assets/tw/app.js' | relative_url }}"></script>
 
+      <!-- SCRIPT DE LÓGICA -->
       <script>
         (async function () {
           const BASE = '{{ site.baseurl }}';
@@ -130,15 +149,58 @@ header_kind: home
               const list = items.filter(m => m.seccion === sec.key);
               renderSection(sec.el, list, sec.titleEmpty);
             }
+            
+            // --- LÓGICA TOP 5 ---
+            try {
+              const querySnapshot = await window.getDocs(window.collection(window.firestoreDB, "vistas_mangas"));
+              
+              const vistasMap = {};
+              querySnapshot.forEach((doc) => {
+                vistasMap[doc.id] = doc.data().contador || 0;
+              });
+
+              items.forEach(m => {
+                const docId = m.href.replace(/^\/+|\/+$/g, '').replace(/\//g, '-'); 
+                m.vistas = vistasMap[docId] || 0;
+              });
+
+              const top5 = [...items].sort((a, b) => b.vistas - a.vistas).slice(0, 5);
+              
+              const track = document.getElementById('track-top5');
+              if (track && top5.length > 0) {
+                const buildMarqueeCard = (m, index) => {
+                  const imgSrc = withBase(m.portada);
+                  const imgPh = withBase(PLACEHOLDER);
+                  return `
+                    <a href="${withBase(m.href)}" class="manga-card-marquee">
+                      <img src="${imgSrc}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.src='${imgPh}'">
+                      <div class="card-info">
+                        <span class="rank">#${index + 1}</span>
+                        <p>${escapeHtml(m.title)}</p>
+                      </div>
+                    </a>
+                  `;
+                };
+
+                const cardsHTML = top5.map((m, i) => buildMarqueeCard(m, i)).join('');
+                track.innerHTML = cardsHTML + cardsHTML;
+              }
+
+            } catch (err) {
+              console.error("Error cargando el Top 5, error:", err);
+              const track = document.getElementById('track-top5');
+              if (track) track.innerHTML = '<p class="no-links" style="color:#fff;">No se pudieron cargar las métricas.</p>';
+            }
+
           } catch (err) {
-            console.error(err);
+            console.error("Error cargando el catálogo, error:", err);
             for (const sec of SECTIONS) {
               const el = document.getElementById(sec.el);
               if (el) el.insertAdjacentHTML('beforebegin', `<p class="no-links">No se pudo cargar el catálogo.</p>`);
             }
           }
 
-          // --- helpers ---
+          // helpers
           function normalizeItem(m, fallbackSection) {
             const portada = m.portada || m.cover || PLACEHOLDER;
             const href = m.post_url || m.url || '#';
@@ -212,14 +274,12 @@ header_kind: home
         const iconTheme = document.getElementById('theme-icon');
         const baseurl = "{{ site.baseurl }}";
 
-        // Inicialización del Icono
         if (document.body.classList.contains('light-mode')) {
           iconTheme.src = baseurl + '/assets/img/foco.png';
         } else {
           iconTheme.src = baseurl + '/assets/img/foco-on.png';
         }
 
-        // Lógica del clic
         btnTheme.addEventListener('click', () => {
           const isLight = document.body.classList.toggle('light-mode');
           const theme = isLight ? 'light' : 'dark';
@@ -227,7 +287,6 @@ header_kind: home
           iconTheme.src = baseurl + '/assets/img/' + (isLight ? 'foco.png' : 'foco-on.png');
           localStorage.setItem('site_theme', theme);
 
-          // Recargamos para que el widget de X aplique el tema correctamente
           setTimeout(() => { window.location.reload(); }, 150);
         });
       </script>

@@ -1021,3 +1021,97 @@ button.scan-cta:hover,
         /* Más chicos en celular */
     }
 }
+
+/* Contenedor del Marquee TOP 5*/
+.marquee-wrapper {
+    margin-bottom: 30px;
+    overflow: hidden; 
+    width: 100%;
+}
+
+.marquee-container {
+    width: 100%;
+    display: flex;
+}
+
+.marquee-track {
+    display: flex;
+    gap: 16px; 
+    width: max-content;
+  /* Animación de 25 segundos */
+    animation: scrollMarquee 25s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused; /* Pausa al poner el mouse encima */
+}
+
+/* Fichas individuales del Top 5 */
+.manga-card-marquee {
+    display: flex;
+    flex-direction: column;
+    width: 160px; /* Tamaño adaptado para encajar bien en móvil y escritorio */
+    background: rgba(30, 30, 30, 0.75);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #333;
+    transition: transform 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.manga-card-marquee:hover {
+    transform: translateY(-4px);
+    border-color: #f59e0b;
+}
+
+.manga-card-marquee img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.manga-card-marquee .card-info {
+    padding: 8px;
+    text-align: center;
+    background: #111;
+}
+
+.manga-card-marquee .rank {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #f59e0b; /* Color naranja acorde a tu section-title */
+    color: #fff;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.manga-card-marquee p {
+    margin: 4px 0;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.manga-card-marquee small {
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* Animación Infinita */
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { 
+        /* Se traslada la mitad exacta de la pista, más la mitad del gap (16px / 2 = 8px) */
+        transform: translateX(calc(-50% - 8px)); 
+    }
+}   
