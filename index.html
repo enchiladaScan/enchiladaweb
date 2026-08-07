@@ -27,6 +27,18 @@ header_kind: home
       <div class="home-layout">
 
         <div class="main-content">
+          <!-- SECCIÓN top 5 -->
+          <div class="section-title">
+            <span class="bar" style="background: #f59e0b;"></span>
+            <h2>Los más visitados</h2>
+          </div>    
+          <!-- CONTENEDOR MARQUEE top 5-->
+          <div class="marquee-wrapper">
+            <div class="marquee-container">
+              <div class="marquee-track" id="track-top5"></div>
+            </div>
+          </div>
+
           <div class="section-title">
             <span class="bar"></span>
             <h2>Activos</h2>
@@ -68,6 +80,7 @@ header_kind: home
       <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyANA4nyzrsexoLj6NgDWBbbuI_Jchltznc",
@@ -82,6 +95,15 @@ header_kind: home
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+        
+        // Inicializamos Firestore
+        const firestoreDB = getFirestore(app);
+        window.firestoreDB = firestoreDB;
+        window.getDocs = getDocs;
+        window.collection = collection;
+        window.query = query;
+        window.orderBy = orderBy;
+        window.limit = limit;
 
         onValue(ref(db, 'tweets'), (snapshot) => {
           const data = snapshot.val();
@@ -90,7 +112,6 @@ header_kind: home
 
           console.log("Datos recibidos de Firebase:", window.TWEET_DATA);
 
-          // Si la función ya existe en app.js, la ejecutamos para refrescar la cinta
           if (typeof window.iniciarMarquee === 'function') {
             window.iniciarMarquee();
           }
@@ -138,6 +159,48 @@ header_kind: home
               if (el) el.insertAdjacentHTML('beforebegin', `<p class="no-links">No se pudo cargar el catálogo.</p>`);
             }
           }
+
+           // --- LÓGICA TOP 5 ---
+            try {
+              const querySnapshot = await window.getDocs(window.collection(window.firestoreDB, "vistas_mangas"));
+              
+              const vistasMap = {};
+              querySnapshot.forEach((doc) => {
+                vistasMap[doc.id] = doc.data().contador || 0;
+              });
+
+              items.forEach(m => {
+                const docId = m.href.replace(/^\/+|\/+$/g, '').replace(/\//g, '-'); 
+                m.vistas = vistasMap[docId] || 0;
+              });
+
+              const top5 = [...items].sort((a, b) => b.vistas - a.vistas).slice(0, 5);
+              
+              const track = document.getElementById('track-top5');
+              if (track && top5.length > 0) {
+                const buildMarqueeCard = (m, index) => {
+                  const imgSrc = withBase(m.portada);
+                  const imgPh = withBase(PLACEHOLDER);
+                  return `
+                    <a href="${withBase(m.href)}" class="manga-card-marquee">
+                      <img src="${imgSrc}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.src='${imgPh}'">
+                      <div class="card-info">
+                        <span class="rank">#${index + 1}</span>
+                        <p>${escapeHtml(m.title)}</p>
+                      </div>
+                    </a>
+                  `;
+                };
+
+                const cardsHTML = top5.map((m, i) => buildMarqueeCard(m, i)).join('');
+                track.innerHTML = cardsHTML + cardsHTML;
+              }
+
+            } catch (err) {
+              console.error("Error cargando el Top 5, error:", err);
+              const track = document.getElementById('track-top5');
+              if (track) track.innerHTML = '<p class="no-links" style="color:#fff;">No se pudieron cargar las métricas.</p>';
+            }
 
           // --- helpers ---
           function normalizeItem(m, fallbackSection) {
