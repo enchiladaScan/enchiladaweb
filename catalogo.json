@@ -79,6 +79,21 @@
       "seccion": "activos"
     },
     {
+      "mangaId": "animal-signal",
+      "title": "Animal Signal",
+      "post_url": "/animal-signal/inicio",
+      "portada": "/assets/img/covers/animal-signal-cover.jpg",
+      "tags": [
+        "Fantasía",
+        "Crimen",
+        "Comedia",
+        "Romance",
+        "Misterio"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
+    },
+    {
       "mangaId": "shiori-experience",
       "title": "Shiori Experience: Jimi na Watashi to Hen na Ojisan",
       "post_url": "/shiori-experience/inicio",
@@ -375,21 +390,6 @@
       ],
       "latest": "Capítulo ?",
       "seccion": "joints"
-    },
-    {
-      "mangaId": "animal-signal",
-      "title": "Animal Signal",
-      "post_url": "/animal-signal/inicio",
-      "portada": "/assets/img/covers/animal-signal-cover.jpg",
-      "tags": [
-        "Fantasía",
-        "Crimen",
-        "Comedia",
-        "Romance",
-        "Misterio"
-      ],
-      "latest": "Capítulo ?",
-      "seccion": "activos"
     }
 
   ]
