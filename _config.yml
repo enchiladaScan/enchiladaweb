@@ -125,7 +125,7 @@ collections:
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
 # activos
-  -scope:
+  - scope:
       type: animal-signal
     values:
       layout: caps
