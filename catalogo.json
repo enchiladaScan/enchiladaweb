@@ -375,6 +375,22 @@
       ],
       "latest": "Capítulo ?",
       "seccion": "joints"
+    },
+    {
+      "mangaId": "animal-signal",
+      "title": "Animal Signal",
+      "post_url": "/animal-signal/inicio",
+      "portada": "/assets/img/covers/animal-signal-cover.jpg",
+      "tags": [
+        "Fantasía",
+        "Crimen",
+        "Comedia",
+        "Romance",
+        "Misterio"
+      ],
+      "latest": "Capítulo ?",
+      "seccion": "activos"
     }
+
   ]
 }

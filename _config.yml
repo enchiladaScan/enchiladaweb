@@ -24,6 +24,10 @@ plugins:
 # --- Collections para las carpetas de series ---
 collections:
 #activos
+
+  animal-signal:
+    output: true
+    permalink: /animal-signal/:name/
   witchriv:
     output: true
     permalink: /witchriv/:name/
@@ -121,6 +125,10 @@ collections:
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
 # activos
+  -scope:
+      type: animal-signal
+    values:
+      layout: caps
   - scope:
       type: ore-no-ichizu-jama
     values:
