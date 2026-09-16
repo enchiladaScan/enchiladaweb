@@ -293,29 +293,3 @@ header_kind: home
     </main>
   </div>
 </div>
-
-    <script>
-    (function() {
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-      });
-
-      document.addEventListener('keydown', function(e) {
-        // Bloquea F12 (Inspeccionar)
-        if (e.key === 'F12') e.preventDefault();
-        
-        if (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'S' || e.key === 'U')) {
-          e.preventDefault();
-        }
-
-        if (e.key === 'PrintScreen') {
-          navigator.clipboard.writeText('Las capturas de pantalla están deshabilitadas.');
-          e.preventDefault();
-        }
-      });
-
-      document.addEventListener('dragstart', function(e) {
-        e.preventDefault();
-      });
-    })();
-  </script>
