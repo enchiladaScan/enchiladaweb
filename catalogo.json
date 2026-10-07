@@ -164,17 +164,16 @@
       "seccion": "activos"
     },
     {
-      "mangaId": "eleven",
+      "mangaId": "100novias",
       "title": "Esa vez que reencarné en Winning Eleven.",
-      "post_url": "/eleven/inicio",
-      "portada": "/assets/img/covers/eleven-cover.jpg",
+      "post_url": "/100novias/inicio",
+      "portada": "/assets/img/covers/100novias-cover.jpg",
       "tags": [
         "Comedia",
-        "Isekai",
-        "Videojuegos",
-        "Deportes"
+        "Romance",
+        "Harem"
       ],
-      "latest": "Capítulo 1",
+      "latest": "Capítulo 255",
       "seccion": "activos"
     },
     {
