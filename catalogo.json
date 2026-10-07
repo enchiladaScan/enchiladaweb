@@ -82,7 +82,7 @@
       "mangaId": "animal-signal",
       "title": "Animal Signal",
       "post_url": "/animal-signal/inicio",
-      "portada": "/assets/img/covers/animal-signal-cover.jpg",
+      "portada": "/assets/img/covers/animal-signal-cover.png",
       "tags": [
         "Fantasía",
         "Crimen",
@@ -272,7 +272,7 @@
       "mangaId": "montana-embrujada",
       "title": "Montaña Embrujada",
       "post_url": "/montana-embrujada/inicio",
-      "portada": "/assets/img/covers/montaña-cover.jpg",
+      "portada": "/assets/img/covers/montaña-cover.png",
       "tags": [
         "Drama",
         "Misterio",
@@ -286,7 +286,7 @@
       "mangaId": "no-se-si-es-amor-pero",
       "title": "No se si es amor pero...",
       "post_url": "/no-se-si-es-amor-pero/inicio",
-      "portada": "/assets/img/covers/love-cover.jpg",
+      "portada": "/assets/img/covers/love-cover.png",
       "tags": [
         "Romance",
         "Escolar",

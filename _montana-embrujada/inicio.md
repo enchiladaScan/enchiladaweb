@@ -3,7 +3,7 @@ layout: caps
 title: "Montaña Embrujada"
 date: 2025-05-26
 series: "montana-embrujada"
-portada: "/assets/img/covers/montaña-cover.jpg"
+portada: "/assets/img/covers/montaña-cover.png"
 sinopsis: "Miko, un estudiante de secundaria que creía que heredaría la montaña de su abuelo, ha perdido a su amor platónico a manos de su amigo y se encuentra en lo más bajo de la jerarquía escolar. Su único consuelo era la montaña, pero ahora un misterioso hombre enmascarado está construyendo una pequeña cabaña allí..."
 autor: "Minenami Ryo"
 artista: "Minenami Ryo"
