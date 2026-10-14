@@ -5,11 +5,13 @@ manga: "Montaña Embrujada"
 manga_slug: "montana-embrujada"
 capitulo: 23
 es_primero: false
-es_ultimo: true
+es_ultimo: false
 permalink: /montana-embrujada/cap23/
 return_to: /montana-embrujada/
 images_json: assets/mangas/montana-embrujada/cap23/images.json
 prev_href: /montana-embrujada/cap22/
 
 use_main_css: true
+
+next_href: /montana-embrujada/cap24/
 ---
