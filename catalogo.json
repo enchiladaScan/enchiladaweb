@@ -389,6 +389,20 @@
       ],
       "latest": "Capítulo ?",
       "seccion": "joints"
+    },
+    {
+      "mangaId": "el-107-frente-de-caballeros-contra-bestias-magicas",
+      "title": "EL 107 FRENTE DE CABALLEROS CONTRA BESTIAS MAGICAS",
+      "post_url": "/el-107-frente-de-caballeros-contra-bestias-magicas/inicio",
+      "portada": "/assets/img/covers/el-107-frente-de-caballeros-contra-bestias-magicas-cover.jpg",
+      "tags": [
+        "Acción",
+        "Fantasía",
+        "Magía",
+        "Aventura"
+      ],
+      "seccion": "activos",
+      "latest": "Capítulo 0"
     }
   ]
 }

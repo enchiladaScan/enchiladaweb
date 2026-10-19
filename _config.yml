@@ -24,6 +24,10 @@ plugins:
 # --- Collections para las carpetas de series ---
 collections:
 #activos
+  el-107-frente-de-caballeros-contra-bestias-magicas:
+    output: true
+    permalink: /el-107-frente-de-caballeros-contra-bestias-magicas/:name/
+
 
   animal-signal:
     output: true
@@ -124,6 +128,11 @@ collections:
 
 # --- Defaults: aplica layout caps automáticamente dentro de cada colección ---
 defaults:
+
+  - scope:
+      type: el-107-frente-de-caballeros-contra-bestias-magicas
+    values:
+      layout: caps
 # activos
   - scope:
       type: animal-signal
