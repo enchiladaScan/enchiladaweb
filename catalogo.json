@@ -403,6 +403,19 @@
       ],
       "seccion": "activos",
       "latest": "Capítulo 1"
+    },
+    {
+      "mangaId": "novias-cambiantes",
+      "title": "Novias Cambiantes ",
+      "post_url": "/novias-cambiantes/inicio",
+      "portada": "/assets/img/covers/novias-cambiantes-cover.jpg",
+      "tags": [
+        "Romance",
+        "Comedia",
+        "Drama"
+      ],
+      "seccion": "activos",
+      "latest": "Capítulo 0"
     }
   ]
 }

@@ -24,6 +24,10 @@ plugins:
 # --- Collections para las carpetas de series ---
 collections:
 #activos
+  novias-cambiantes:
+    output: true
+    permalink: /novias-cambiantes/:name/
+
   el-107-frente-de-caballeros-contra-bestias-magicas:
     output: true
     permalink: /el-107-frente-de-caballeros-contra-bestias-magicas/:name/
@@ -131,6 +135,11 @@ defaults:
 
   - scope:
       type: el-107-frente-de-caballeros-contra-bestias-magicas
+    values:
+      layout: caps
+
+  - scope:
+      type: novias-cambiantes
     values:
       layout: caps
 # activos
