@@ -10,6 +10,6 @@ permalink: /ririsa/cap35/
 return_to: /ririsa/
 images_json: assets/mangas/ririsa/cap35/images.json
 prev_href: /ririsa/cap34/
-next_href: /ririsa/cap57/
+next_href: /ririsa/cap36/
 use_main_css: true
 ---
