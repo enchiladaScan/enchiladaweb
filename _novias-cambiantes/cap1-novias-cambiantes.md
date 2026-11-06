@@ -13,5 +13,4 @@ images_json: assets/mangas/novias-cambiantes/cap1/images.json
 
 use_main_css: true
 
-next_href: /novias-cambiantes/cap2/
 ---
