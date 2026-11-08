@@ -13,5 +13,5 @@ prev_href: /idolatry/cap30/
 
 use_main_css: true
 
-next_href: /idolatry/cap31-5/
+next_href: /idolatry/cap32/
 ---
