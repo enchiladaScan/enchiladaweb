@@ -4,6 +4,7 @@ title: "Capítulo 6"
 manga: "idolatry"
 manga_slug: "idolatry"
 capitulo: 6
+use_main_css: true
 es_primero: false
 es_ultimo: false
 permalink: /idolatry/cap6/
@@ -13,6 +14,5 @@ redirect_from:
   - /cap6-idolatry/
 use_main_css: true
 prev_href: /idolatry/cap5/
-
 next_href: /idolatry/cap7/
 ---

@@ -1,15 +1,17 @@
 ---
 layout: reader
-title: "Cuarta Etapa"
-manga: "Idolatry"
+title: "Capítulo 32"
+manga: "idolatry"
 manga_slug: "idolatry"
 capitulo: 32
+use_main_css: true
 es_primero: false
 es_ultimo: true
 permalink: /idolatry/cap32/
 return_to: /idolatry/
 images_json: assets/mangas/idolatry/cap32/images.json
-prev_href: /idolatry/cap31/
-
+redirect_from:
+  - /cap32-idolatry/
 use_main_css: true
+prev_href: /idolatry/cap31/
 ---

@@ -4,6 +4,7 @@ title: "Capítulo 3"
 manga: "idolatry"
 manga_slug: "idolatry"
 capitulo: 3
+use_main_css: true
 es_primero: false
 es_ultimo: false
 permalink: /idolatry/cap3/
