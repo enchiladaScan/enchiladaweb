@@ -24,6 +24,10 @@ plugins:
 # --- Collections para las carpetas de series ---
 collections:
 #activos
+  futari-wa-sekai-to-kamiawanai:
+    output: true
+    permalink: /futari-wa-sekai-to-kamiawanai/:name/
+
   novias-cambiantes:
     output: true
     permalink: /novias-cambiantes/:name/
@@ -140,6 +144,11 @@ defaults:
 
   - scope:
       type: novias-cambiantes
+    values:
+      layout: caps
+
+  - scope:
+      type: futari-wa-sekai-to-kamiawanai
     values:
       layout: caps
 # activos

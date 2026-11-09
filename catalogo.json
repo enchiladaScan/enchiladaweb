@@ -416,6 +416,19 @@
       ],
       "seccion": "activos",
       "latest": "Capítulo 2"
+    },
+    {
+      "mangaId": "futari-wa-sekai-to-kamiawanai",
+      "title": "Futari wa Sekai to Kamiawanai",
+      "post_url": "/futari-wa-sekai-to-kamiawanai/inicio",
+      "portada": "/assets/img/covers/futari-wa-sekai-to-kamiawanai-cover.webp",
+      "tags": [
+        "Romance",
+        "Drama",
+        "Oficinistas"
+      ],
+      "seccion": "activos",
+      "latest": "Capítulo 0"
     }
   ]
 }
