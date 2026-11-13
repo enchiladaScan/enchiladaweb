@@ -12,5 +12,5 @@ images_json: assets/mangas/estamos-saliendo/cap6/images.json
 prev_href: /estamos-saliendo/cap5/
 use_main_css: true
 
-next_href: /estamos-saliendo/cap8/
+next_href: /estamos-saliendo/cap7/
 ---
