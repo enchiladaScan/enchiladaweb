@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Sospechoso"
+title: "Capítulo 27"
 manga: "Montaña Embrujada"
 manga_slug: "montana-embrujada"
 capitulo: 27
