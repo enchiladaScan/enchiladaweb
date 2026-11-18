@@ -1,6 +1,6 @@
 ---
 layout: reader
-title: "Resentimiento"
+title: "Sospechoso"
 manga: "Montaña Embrujada"
 manga_slug: "montana-embrujada"
 capitulo: 27
